@@ -6,7 +6,7 @@ export default function About() {
 
   return (
     <section className="section-padding">
-      <div className="container-site max-w-3xl">
+      <div className="container-site max-w-5xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-4xl sm:text-5xl font-bold font-display mb-6">About <span className="text-gradient">Trackzio</span></h1>
           <p className="text-lg text-muted-foreground leading-relaxed mb-8">
@@ -19,17 +19,17 @@ export default function About() {
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
           <h2 className="text-2xl font-bold font-display mb-6">Our Team</h2>
-          <div className="card-glass p-8">
-            <div className="flex items-center gap-5">
-              <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center font-display text-2xl font-bold text-primary">A</div>
-              <div>
-                <h3 className="text-lg font-bold text-foreground">Ayushya</h3>
-                <p className="text-sm text-primary font-medium">Founder & CEO</p>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Passionate about building products at the intersection of AI and everyday life. Leading Trackzio's vision to empower millions through intelligent mobile experiences.
-                </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { initials: 'A', name: 'Ayushya', role: 'Founder & CEO', bio: 'Passionate about building products at the intersection of AI and everyday life. Leading Trackzio\'s vision to empower millions through intelligent mobile experiences.' },
+            ].map((member) => (
+              <div key={member.name} className="card-glass p-8 flex flex-col">
+                <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center font-display text-2xl font-bold text-primary mb-4 shrink-0">{member.initials}</div>
+                <h3 className="text-lg font-bold text-foreground">{member.name}</h3>
+                <p className="text-sm text-primary font-medium">{member.role}</p>
+                <p className="mt-2 text-sm text-muted-foreground flex-1">{member.bio}</p>
               </div>
-            </div>
+            ))}
           </div>
         </motion.div>
       </div>
