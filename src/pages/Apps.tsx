@@ -26,18 +26,19 @@ export default function Apps() {
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {apps.map((app, i) => (
               <motion.div
                 key={app.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08 }}
+                transition={{ delay: Math.min(i * 0.06, 0.4) }}
+                className="flex"
               >
                 <Link
                   to={`/apps/${app.id}`}
                   onClick={() => trackEvent(appEvents[app.id], { app_name: app.name, page_name: 'apps' })}
-                  className="card-glass p-8 flex flex-col h-full group hover:border-primary/40 transition-colors block"
+                  className="card-glass p-8 flex flex-col w-full group hover:border-primary/40 transition-colors"
                 >
                   <div className="text-5xl mb-4">{app.icon}</div>
                   <h2 className="text-2xl font-bold font-display text-foreground">{app.name}</h2>

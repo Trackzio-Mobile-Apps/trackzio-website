@@ -46,21 +46,19 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-10 items-center">
               <div>
                 <h2 className="text-sm font-semibold text-primary uppercase tracking-wider mb-4">Our Team</h2>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center font-display font-bold text-primary">A</div>
-                    <div>
-                      <div className="font-medium text-foreground">Ayushya</div>
-                      <div className="text-sm text-muted-foreground">Founder & CEO</div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {[
+                    { initials: 'A', name: 'Ayushya', role: 'Founder & CEO', bg: 'bg-primary/20' },
+                    { initials: 'T', name: 'Team Trackzio', role: 'Engineers, Designers & Dreamers', bg: 'bg-accent/40' },
+                  ].map((member) => (
+                    <div key={member.name} className="flex items-center gap-4">
+                      <div className={`w-12 h-12 rounded-full ${member.bg} flex items-center justify-center font-display font-bold text-primary shrink-0`}>{member.initials}</div>
+                      <div className="min-w-0">
+                        <div className="font-medium text-foreground truncate">{member.name}</div>
+                        <div className="text-sm text-muted-foreground truncate">{member.role}</div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-accent/40 flex items-center justify-center font-display font-bold text-primary">T</div>
-                    <div>
-                      <div className="font-medium text-foreground">Team Trackzio</div>
-                      <div className="text-sm text-muted-foreground">Engineers, Designers & Dreamers</div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
               <div>
@@ -80,14 +78,15 @@ export default function Home() {
           <motion.div {...fadeUp}>
             <h2 className="text-3xl font-bold font-display text-center mb-12">Our Apps</h2>
           </motion.div>
-          <div className="grid sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {apps.map((app, i) => (
               <motion.div
                 key={app.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                transition={{ delay: Math.min(i * 0.08, 0.4) }}
+                className="flex"
               >
                 <Link
                   to={`/apps/${app.id}`}
@@ -95,7 +94,7 @@ export default function Home() {
                     trackEvent('portfolio_tile_click', { app_name: app.name, page_name: 'home' });
                     trackEvent(appEvents[app.id], { app_name: app.name, page_name: 'home' });
                   }}
-                  className="card-glass p-6 sm:p-8 flex flex-col h-full group hover:border-primary/40 transition-colors block"
+                  className="card-glass p-6 sm:p-8 flex flex-col w-full group hover:border-primary/40 transition-colors"
                 >
                   <div className="text-4xl mb-4">{app.icon}</div>
                   <h3 className="text-xl font-bold font-display text-foreground">{app.name}</h3>
