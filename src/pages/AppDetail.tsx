@@ -5,6 +5,7 @@ import { trackEvent } from '@/lib/analytics';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import MetricsBar from '@/components/MetricsBar';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { QRCodeSVG } from 'qrcode.react';
 import {
   Accordion,
   AccordionContent,
@@ -35,7 +36,7 @@ const qrEvents: Record<string, string> = {
 
 const faqs = [
   { q: 'Is this app free to use?', a: 'Yes! The core features are completely free. Premium features may be available via in-app subscription.' },
-  { q: 'Which platforms are supported?', a: 'The app is available on both iOS (App Store) and Android (Google Play Store).' },
+  { q: 'Which platforms are supported?', a: 'The app is available on both iOS (App Store) and Android (Google Play Store) where listed.' },
   { q: 'How does the AI work?', a: 'We use advanced machine learning models trained on millions of data points to deliver accurate, real-time results.' },
   { q: 'Is my data safe?', a: 'Absolutely. We follow industry best practices for data security and never sell your personal information.' },
 ];
@@ -49,6 +50,11 @@ export default function AppDetail() {
 
   usePageAnalytics(app.id, pageViewEvents[app.id] || 'page_view');
 
+  const hasIos = !!app.iosUrl;
+  const hasAndroid = !!app.androidUrl;
+  // Use android URL as primary QR target, fallback to iOS
+  const qrTarget = app.androidUrl || app.iosUrl;
+
   return (
     <>
       {/* Hero */}
@@ -56,7 +62,7 @@ export default function AppDetail() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(174_72%_52%/0.06),transparent_60%)]" />
         <div className="container-site relative">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl mx-auto text-center">
-            <div className="text-6xl mb-6">{app.icon}</div>
+            <img src={app.logo} alt={`${app.name} logo`} className="w-24 h-24 rounded-2xl mx-auto mb-6 shadow-lg" />
             <h1 className="text-4xl sm:text-5xl font-bold font-display">{app.name}</h1>
             <p className="mt-4 text-lg text-muted-foreground">{app.description}</p>
           </motion.div>
@@ -85,52 +91,62 @@ export default function AppDetail() {
 
             {isMobile ? (
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href={app.iosUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackEvent(downloadEvents[app.id]?.ios, { app_name: app.name, page_name: app.id })}
-                  className="inline-flex h-12 px-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
-                >
-                  Download for iOS
-                </a>
-                <a
-                  href={app.androidUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackEvent(downloadEvents[app.id]?.android, { app_name: app.name, page_name: app.id })}
-                  className="inline-flex h-12 px-8 items-center justify-center rounded-lg bg-secondary text-secondary-foreground font-semibold hover:bg-secondary/80 transition-colors"
-                >
-                  Download for Android
-                </a>
+                {hasIos && (
+                  <a
+                    href={app.iosUrl!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackEvent(downloadEvents[app.id]?.ios, { app_name: app.name, page_name: app.id })}
+                    className="inline-flex h-12 px-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                  >
+                    Download for iOS
+                  </a>
+                )}
+                {hasAndroid && (
+                  <a
+                    href={app.androidUrl!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackEvent(downloadEvents[app.id]?.android, { app_name: app.name, page_name: app.id })}
+                    className="inline-flex h-12 px-8 items-center justify-center rounded-lg bg-secondary text-secondary-foreground font-semibold hover:bg-secondary/80 transition-colors"
+                  >
+                    Download for Android
+                  </a>
+                )}
               </div>
             ) : (
               <div className="flex items-center justify-center gap-8">
-                <a
-                  href={app.iosUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackEvent(downloadEvents[app.id]?.ios, { app_name: app.name, page_name: app.id })}
-                  className="inline-flex h-12 px-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
-                >
-                  Download for iOS
-                </a>
-                <button
-                  onClick={() => trackEvent(qrEvents[app.id], { app_name: app.name, page_name: app.id })}
-                  className="w-28 h-28 rounded-xl bg-secondary border border-border flex items-center justify-center text-xs text-muted-foreground hover:border-primary/40 transition-colors cursor-pointer"
-                  aria-label={`QR code to download ${app.name}`}
-                >
-                  QR Code
-                </button>
-                <a
-                  href={app.androidUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackEvent(downloadEvents[app.id]?.android, { app_name: app.name, page_name: app.id })}
-                  className="inline-flex h-12 px-8 items-center justify-center rounded-lg bg-secondary text-secondary-foreground font-semibold hover:bg-secondary/80 transition-colors"
-                >
-                  Download for Android
-                </a>
+                {hasIos && (
+                  <a
+                    href={app.iosUrl!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackEvent(downloadEvents[app.id]?.ios, { app_name: app.name, page_name: app.id })}
+                    className="inline-flex h-12 px-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                  >
+                    Download for iOS
+                  </a>
+                )}
+                {qrTarget && (
+                  <button
+                    onClick={() => trackEvent(qrEvents[app.id], { app_name: app.name, page_name: app.id })}
+                    className="p-3 rounded-xl bg-white border border-border hover:border-primary/40 transition-colors cursor-pointer"
+                    aria-label={`QR code to download ${app.name}`}
+                  >
+                    <QRCodeSVG value={qrTarget} size={100} level="M" />
+                  </button>
+                )}
+                {hasAndroid && (
+                  <a
+                    href={app.androidUrl!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackEvent(downloadEvents[app.id]?.android, { app_name: app.name, page_name: app.id })}
+                    className="inline-flex h-12 px-8 items-center justify-center rounded-lg bg-secondary text-secondary-foreground font-semibold hover:bg-secondary/80 transition-colors"
+                  >
+                    Download for Android
+                  </a>
+                )}
               </div>
             )}
           </motion.div>

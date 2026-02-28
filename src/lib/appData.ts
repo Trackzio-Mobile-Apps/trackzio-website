@@ -1,13 +1,18 @@
+import coinzyLogo from '@/assets/coinzy-logo.png';
+import banknotesLogo from '@/assets/banknotes-logo.png';
+import insectoLogo from '@/assets/insecto-logo.png';
+import habiteazyLogo from '@/assets/habiteazy-logo.png';
+
 export interface AppInfo {
   id: string;
   name: string;
   tagline: string;
   description: string;
   color: string;
-  iosUrl: string;
-  androidUrl: string;
-  qrUrl: string;
+  iosUrl: string | null;
+  androidUrl: string | null;
   icon: string;
+  logo: string;
 }
 
 export const apps: AppInfo[] = [
@@ -17,10 +22,10 @@ export const apps: AppInfo[] = [
     tagline: 'Smart expense tracking powered by AI',
     description: 'Coinzy helps you track expenses effortlessly with AI-powered categorization, insightful analytics, and smart budgeting tools. Take control of your finances with clarity.',
     color: 'hsl(45, 90%, 55%)',
-    iosUrl: 'TBD_IOS_URL_COINZY',
-    androidUrl: 'TBD_ANDROID_URL_COINZY',
-    qrUrl: 'TBD_QR_DYNAMIC_LINK_COINZY',
+    iosUrl: null,
+    androidUrl: 'https://play.google.com/store/apps/details?id=com.coinzy.trackzio',
     icon: '💰',
+    logo: coinzyLogo,
   },
   {
     id: 'banknotes',
@@ -28,10 +33,10 @@ export const apps: AppInfo[] = [
     tagline: 'Identify and learn about world currencies',
     description: 'Banknotes uses advanced image recognition to identify banknotes from around the world. Learn about currency history, security features, and exchange rates instantly.',
     color: 'hsl(140, 60%, 45%)',
-    iosUrl: 'TBD_IOS_URL_BANKNOTES',
-    androidUrl: 'TBD_ANDROID_URL_BANKNOTES',
-    qrUrl: 'TBD_QR_DYNAMIC_LINK_BANKNOTES',
+    iosUrl: 'https://apps.apple.com/in/app/banknote-identification-ai/id6747063766',
+    androidUrl: 'https://play.google.com/store/apps/details?id=com.trackzio.banknote',
     icon: '💵',
+    logo: banknotesLogo,
   },
   {
     id: 'insecto',
@@ -39,10 +44,10 @@ export const apps: AppInfo[] = [
     tagline: 'Discover the insect world with AI',
     description: 'Point your camera at any insect and Insecto will identify it instantly. Get detailed information about species, habitat, behavior, and whether they are beneficial or harmful.',
     color: 'hsl(90, 55%, 50%)',
-    iosUrl: 'TBD_IOS_URL_INSECTO',
-    androidUrl: 'TBD_ANDROID_URL_INSECTO',
-    qrUrl: 'TBD_QR_DYNAMIC_LINK_INSECTO',
+    iosUrl: null,
+    androidUrl: 'https://play.google.com/store/apps/details?id=com.insect.trackzio',
     icon: '🐛',
+    logo: insectoLogo,
   },
   {
     id: 'habiteazy',
@@ -50,10 +55,10 @@ export const apps: AppInfo[] = [
     tagline: 'Build better habits, one day at a time',
     description: 'Habiteazy makes habit building simple and rewarding. Track your streaks, set reminders, and visualize your progress with beautiful charts and motivational insights.',
     color: 'hsl(270, 60%, 55%)',
-    iosUrl: 'TBD_IOS_URL_HABITEAZY',
-    androidUrl: 'TBD_ANDROID_URL_HABITEAZY',
-    qrUrl: 'TBD_QR_DYNAMIC_LINK_HABITEAZY',
+    iosUrl: 'https://apps.apple.com/in/app/habit-eazy-habit-to-do-pal/id6738790392',
+    androidUrl: 'https://play.google.com/store/apps/details?id=com.progresspal',
     icon: '✅',
+    logo: habiteazyLogo,
   },
 ];
 
