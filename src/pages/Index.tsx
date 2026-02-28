@@ -96,7 +96,7 @@ export default function Home() {
                   }}
                   className="card-glass p-6 sm:p-8 flex flex-col w-full group hover:border-primary/40 transition-colors"
                 >
-                  <div className="text-4xl mb-4">{app.icon}</div>
+                  <img src={app.logo} alt={`${app.name} logo`} className="w-14 h-14 rounded-xl mb-4 shadow-md" />
                   <h3 className="text-xl font-bold font-display text-foreground">{app.name}</h3>
                   <p className="mt-2 text-sm text-muted-foreground flex-1">{app.tagline}</p>
                   <span className="mt-4 inline-flex text-sm font-semibold text-primary group-hover:underline">

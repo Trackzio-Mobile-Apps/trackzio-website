@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import { motion, AnimatePresence } from 'framer-motion';
+import trackzioLogo from '@/assets/trackzio-logo.jpg';
 
 const navItems = [
   { label: 'Home', to: '/', event: '' },
@@ -21,8 +22,8 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
       <div className="container-site flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="font-display text-xl font-bold tracking-tight text-foreground" aria-label="Trackzio Home">
-          <span className="text-gradient">Trackzio</span>
+        <Link to="/" className="flex items-center gap-2" aria-label="Trackzio Home">
+          <img src={trackzioLogo} alt="Trackzio" className="h-8 rounded" />
         </Link>
 
         {/* Desktop nav */}

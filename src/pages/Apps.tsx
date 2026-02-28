@@ -40,7 +40,7 @@ export default function Apps() {
                   onClick={() => trackEvent(appEvents[app.id], { app_name: app.name, page_name: 'apps' })}
                   className="card-glass p-8 flex flex-col w-full group hover:border-primary/40 transition-colors"
                 >
-                  <div className="text-5xl mb-4">{app.icon}</div>
+                  <img src={app.logo} alt={`${app.name} logo`} className="w-16 h-16 rounded-xl mb-4 shadow-md" />
                   <h2 className="text-2xl font-bold font-display text-foreground">{app.name}</h2>
                   <p className="mt-2 text-muted-foreground flex-1">{app.tagline}</p>
                   <span className="mt-6 inline-flex text-sm font-semibold text-primary group-hover:underline">
