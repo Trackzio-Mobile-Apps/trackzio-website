@@ -56,14 +56,14 @@ export default function AppDetail() {
   const qrTarget = app.androidUrl || app.iosUrl;
 
   return (
-    <>
+    <div style={{ '--app-accent': app.accentHsl } as React.CSSProperties}>
       {/* Hero */}
       <section className="section-padding relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(174_72%_52%/0.06),transparent_60%)]" />
+        <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at top, hsl(${app.accentHsl} / 0.1), transparent 60%)` }} />
         <div className="container-site relative">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl mx-auto text-center">
-            <img src={app.logo} alt={`${app.name} logo`} className="w-24 h-24 rounded-2xl mx-auto mb-6 shadow-lg" />
-            <h1 className="text-4xl sm:text-5xl font-bold font-display">{app.name}</h1>
+            <img src={app.logo} alt={`${app.name} logo`} className="w-24 h-24 rounded-2xl mx-auto mb-6 shadow-lg" style={{ boxShadow: `0 8px 30px -8px hsl(${app.accentHsl} / 0.4)` }} />
+            <h1 className="text-4xl sm:text-5xl font-bold font-display" style={{ color: `hsl(${app.accentHsl})` }}>{app.name}</h1>
             <p className="mt-4 text-lg text-muted-foreground">{app.description}</p>
           </motion.div>
 
@@ -97,7 +97,8 @@ export default function AppDetail() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => trackEvent(downloadEvents[app.id]?.ios, { app_name: app.name, page_name: app.id })}
-                    className="inline-flex h-12 px-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                    className="inline-flex h-12 px-8 items-center justify-center rounded-lg font-semibold hover:opacity-90 transition-opacity text-white"
+                    style={{ backgroundColor: `hsl(${app.accentHsl})` }}
                   >
                     Download for iOS
                   </a>
@@ -122,7 +123,8 @@ export default function AppDetail() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => trackEvent(downloadEvents[app.id]?.ios, { app_name: app.name, page_name: app.id })}
-                    className="inline-flex h-12 px-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                    className="inline-flex h-12 px-8 items-center justify-center rounded-lg font-semibold hover:opacity-90 transition-opacity text-white"
+                    style={{ backgroundColor: `hsl(${app.accentHsl})` }}
                   >
                     Download for iOS
                   </a>
@@ -130,7 +132,8 @@ export default function AppDetail() {
                 {qrTarget && (
                   <button
                     onClick={() => trackEvent(qrEvents[app.id], { app_name: app.name, page_name: app.id })}
-                    className="p-3 rounded-xl bg-white border border-border hover:border-primary/40 transition-colors cursor-pointer"
+                    className="p-3 rounded-xl bg-white border border-border transition-colors cursor-pointer"
+                    style={{ borderColor: `hsl(${app.accentHsl} / 0.3)` }}
                     aria-label={`QR code to download ${app.name}`}
                   >
                     <QRCodeSVG value={qrTarget} size={100} level="M" />
@@ -169,7 +172,7 @@ export default function AppDetail() {
                 transition={{ delay: i * 0.1 }}
                 className="card-glass p-6"
               >
-                <div className="flex gap-1 mb-3 text-primary">{'★★★★★'}</div>
+                <div className="flex gap-1 mb-3" style={{ color: `hsl(${app.accentHsl})` }}>{'★★★★★'}</div>
                 <p className="text-sm text-muted-foreground italic">"{review}"</p>
                 <p className="mt-3 text-xs font-medium text-foreground">— Happy User</p>
               </motion.div>
@@ -192,6 +195,6 @@ export default function AppDetail() {
           </Accordion>
         </div>
       </section>
-    </>
+    </div>
   );
 }

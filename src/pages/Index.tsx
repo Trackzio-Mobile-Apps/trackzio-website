@@ -94,12 +94,14 @@ export default function Home() {
                     trackEvent('portfolio_tile_click', { app_name: app.name, page_name: 'home' });
                     trackEvent(appEvents[app.id], { app_name: app.name, page_name: 'home' });
                   }}
-                  className="card-glass p-6 sm:p-8 flex flex-col w-full group hover:border-primary/40 transition-colors"
+                  className="card-glass p-6 sm:p-8 flex flex-col w-full group transition-colors"
+                  onMouseEnter={e => (e.currentTarget.style.borderColor = `hsl(${app.accentHsl} / 0.5)`)}
+                  onMouseLeave={e => (e.currentTarget.style.borderColor = '')}
                 >
                   <img src={app.logo} alt={`${app.name} logo`} className="w-14 h-14 rounded-xl mb-4 shadow-md" />
                   <h3 className="text-xl font-bold font-display text-foreground">{app.name}</h3>
                   <p className="mt-2 text-sm text-muted-foreground flex-1">{app.tagline}</p>
-                  <span className="mt-4 inline-flex text-sm font-semibold text-primary group-hover:underline">
+                  <span className="mt-4 inline-flex text-sm font-semibold group-hover:underline" style={{ color: `hsl(${app.accentHsl})` }}>
                     Explore →
                   </span>
                 </Link>

@@ -38,12 +38,15 @@ export default function Apps() {
                 <Link
                   to={`/apps/${app.id}`}
                   onClick={() => trackEvent(appEvents[app.id], { app_name: app.name, page_name: 'apps' })}
-                  className="card-glass p-8 flex flex-col w-full group hover:border-primary/40 transition-colors"
+                  className="card-glass p-8 flex flex-col w-full group transition-colors"
+                  style={{ '--hover-accent': app.accentHsl } as React.CSSProperties}
+                  onMouseEnter={e => (e.currentTarget.style.borderColor = `hsl(${app.accentHsl} / 0.5)`)}
+                  onMouseLeave={e => (e.currentTarget.style.borderColor = '')}
                 >
                   <img src={app.logo} alt={`${app.name} logo`} className="w-16 h-16 rounded-xl mb-4 shadow-md" />
                   <h2 className="text-2xl font-bold font-display text-foreground">{app.name}</h2>
                   <p className="mt-2 text-muted-foreground flex-1">{app.tagline}</p>
-                  <span className="mt-6 inline-flex text-sm font-semibold text-primary group-hover:underline">
+                  <span className="mt-6 inline-flex text-sm font-semibold group-hover:underline" style={{ color: `hsl(${app.accentHsl})` }}>
                     Learn More →
                   </span>
                 </Link>
