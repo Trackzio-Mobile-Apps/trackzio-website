@@ -5,7 +5,7 @@ export default function Privacy() {
 
   return (
     <section className="section-padding">
-      <div className="container-site max-w-3xl prose-invert">
+      <div className="container-site max-w-3xl">
         <h1 className="text-4xl font-bold font-display mb-8">Privacy Policy</h1>
         <div className="space-y-6 text-muted-foreground text-sm leading-relaxed">
           <p>Last updated: February 2026</p>
