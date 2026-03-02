@@ -75,7 +75,7 @@ export default function AppDetail() {
             className="mt-12 flex justify-center gap-4"
           >
             {[1, 2, 3].map(n => (
-              <div key={n} className="w-40 sm:w-52 h-72 sm:h-96 rounded-2xl bg-secondary border border-border flex items-center justify-center text-muted-foreground text-sm">
+              <div key={n} className="w-40 sm:w-52 h-72 sm:h-96 rounded-2xl bg-muted border border-border flex items-center justify-center text-muted-foreground text-sm">
                 Screenshot {n}
               </div>
             ))}
@@ -109,7 +109,8 @@ export default function AppDetail() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => trackEvent(downloadEvents[app.id]?.android, { app_name: app.name, page_name: app.id })}
-                    className="inline-flex h-12 px-8 items-center justify-center rounded-lg bg-secondary text-secondary-foreground font-semibold hover:bg-secondary/80 transition-colors"
+                    className="inline-flex h-12 px-8 items-center justify-center rounded-lg border-2 border-current font-semibold hover:opacity-80 transition-opacity"
+                    style={{ color: `hsl(${app.accentHsl})` }}
                   >
                     Download for Android
                   </a>
@@ -145,7 +146,8 @@ export default function AppDetail() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => trackEvent(downloadEvents[app.id]?.android, { app_name: app.name, page_name: app.id })}
-                    className="inline-flex h-12 px-8 items-center justify-center rounded-lg bg-secondary text-secondary-foreground font-semibold hover:bg-secondary/80 transition-colors"
+                    className="inline-flex h-12 px-8 items-center justify-center rounded-lg border-2 border-current font-semibold hover:opacity-80 transition-opacity"
+                    style={{ color: `hsl(${app.accentHsl})` }}
                   >
                     Download for Android
                   </a>
