@@ -19,7 +19,7 @@ export default function Header() {
   const location = useLocation();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/60 backdrop-blur-xl" style={{ backgroundColor: 'hsl(210 40% 98% / 0.85)' }}>
       <div className="container-site flex h-16 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2" aria-label="Trackzio Home">
@@ -49,7 +49,7 @@ export default function Header() {
           <Link
             to="/apps"
             onClick={() => trackEvent('header_explore_apps', { page_name: location.pathname })}
-            className="hidden sm:inline-flex h-9 px-4 items-center justify-center rounded-lg bg-primary text-primary-foreground text-sm font-semibold transition-all hover:opacity-90 glow"
+            className="hidden sm:inline-flex h-9 px-4 items-center justify-center rounded-xl bg-primary text-primary-foreground text-sm font-semibold transition-all hover:opacity-90 glow"
           >
             Explore Apps
           </Link>

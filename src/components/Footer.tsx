@@ -18,7 +18,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border bg-muted/40" role="contentinfo">
+    <footer className="border-t border-foreground/10" style={{ backgroundColor: 'hsl(222 47% 11%)' }} role="contentinfo">
       <div className="container-site py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Social */}
@@ -31,7 +31,10 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 aria-label={`Follow Trackzio on ${s.label}`}
                 onClick={() => s.event && trackEvent(s.event, { page_name: window.location.pathname })}
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="transition-colors"
+                style={{ color: 'hsl(210 40% 85%)' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'hsl(239 84% 67%)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'hsl(210 40% 85%)')}
               >
                 {s.icon}
               </a>
@@ -40,13 +43,22 @@ export default function Footer() {
 
           {/* Links */}
           <nav className="flex items-center gap-6 text-sm" aria-label="Footer navigation">
-            <Link to="/terms" className="text-muted-foreground hover:text-foreground transition-colors">Terms</Link>
-            <Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</Link>
-            <Link to="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</Link>
+            {['Terms', 'Privacy', 'Contact'].map(label => (
+              <Link
+                key={label}
+                to={`/${label.toLowerCase()}`}
+                className="transition-colors"
+                style={{ color: 'hsl(210 40% 85%)' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'hsl(0 0% 100%)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'hsl(210 40% 85%)')}
+              >
+                {label}
+              </Link>
+            ))}
           </nav>
         </div>
 
-        <div className="mt-8 text-center text-sm text-muted-foreground">
+        <div className="mt-8 text-center text-sm" style={{ color: 'hsl(215 16% 47%)' }}>
           © 2026 Trackzio. All rights reserved.
         </div>
       </div>
