@@ -18,7 +18,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-muted bg-background" role="contentinfo">
+    <footer style={{ backgroundColor: 'hsl(90 33% 15%)' }} role="contentinfo">
       <div className="container-site py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Social */}
@@ -31,7 +31,10 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 aria-label={`Follow Trackzio on ${s.label}`}
                 onClick={() => s.event && trackEvent(s.event, { page_name: window.location.pathname })}
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="transition-colors"
+                style={{ color: 'hsl(40 33% 92%)' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'hsl(27 66% 55%)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'hsl(40 33% 92%)')}
               >
                 {s.icon}
               </a>
@@ -44,7 +47,10 @@ export default function Footer() {
               <Link
                 key={label}
                 to={`/${label.toLowerCase()}`}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="transition-colors"
+                style={{ color: 'hsl(40 33% 85%)' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'hsl(40 33% 98%)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'hsl(40 33% 85%)')}
               >
                 {label}
               </Link>
@@ -52,7 +58,7 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className="mt-8 text-center text-sm text-muted-foreground">
+        <div className="mt-8 text-center text-sm" style={{ color: 'hsl(40 15% 55%)' }}>
           © 2026 Trackzio. All rights reserved.
         </div>
       </div>
