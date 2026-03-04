@@ -19,7 +19,7 @@ export default function Header() {
   const location = useLocation();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/20 backdrop-blur-xl bg-background/80">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/40">
       <div className="container-site flex h-16 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2" aria-label="Trackzio Home">
@@ -35,8 +35,8 @@ export default function Header() {
               onClick={() => item.event && trackEvent(item.event, { page_name: location.pathname })}
               className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                 location.pathname === item.to
-                  ? 'text-primary bg-primary/10'
-                  : 'text-foreground/70 hover:text-foreground hover:bg-muted'
+                  ? 'text-primary'
+                  : 'text-muted-foreground hover:text-primary'
               }`}
             >
               {item.label}
@@ -49,13 +49,13 @@ export default function Header() {
           <Link
             to="/apps"
             onClick={() => trackEvent('header_explore_apps', { page_name: location.pathname })}
-            className="hidden sm:inline-flex h-9 px-4 items-center justify-center rounded-xl bg-primary text-primary-foreground text-sm font-semibold transition-all hover:opacity-90 glow"
+            className="hidden sm:inline-flex h-9 px-4 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-semibold transition-all hover:opacity-90 glow"
           >
             Explore Apps
           </Link>
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden p-2 text-foreground/70 hover:text-foreground"
+            className="md:hidden p-2 text-muted-foreground hover:text-primary"
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
           >
@@ -72,7 +72,7 @@ export default function Header() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden overflow-hidden border-t border-border/20 bg-background"
+            className="md:hidden overflow-hidden border-t border-border/40 bg-background"
             aria-label="Mobile navigation"
           >
             <div className="container-site py-4 flex flex-col gap-1">
@@ -86,8 +86,8 @@ export default function Header() {
                   }}
                   className={`px-3 py-2.5 text-sm font-medium rounded-md transition-colors ${
                     location.pathname === item.to
-                      ? 'text-primary bg-primary/10'
-                      : 'text-foreground/70 hover:text-foreground hover:bg-muted'
+                      ? 'text-primary'
+                      : 'text-muted-foreground hover:text-primary'
                   }`}
                 >
                   {item.label}
@@ -96,7 +96,7 @@ export default function Header() {
               <Link
                 to="/apps"
                 onClick={() => { setOpen(false); trackEvent('header_explore_apps', { page_name: location.pathname }); }}
-                className="mt-2 flex h-10 items-center justify-center rounded-lg bg-primary text-primary-foreground text-sm font-semibold"
+                className="mt-2 flex h-10 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-semibold"
               >
                 Explore Apps
               </Link>

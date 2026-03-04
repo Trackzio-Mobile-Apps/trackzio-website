@@ -133,7 +133,7 @@ export default function AppDetail() {
                 {qrTarget && (
                   <button
                     onClick={() => trackEvent(qrEvents[app.id], { app_name: app.name, page_name: app.id })}
-                    className="p-3 rounded-xl bg-foreground/95 border border-border/30 transition-colors cursor-pointer"
+                    className="p-3 rounded-xl bg-card border border-border/40 transition-colors cursor-pointer"
                     style={{ borderColor: `hsl(${app.accentHsl} / 0.3)` }}
                     aria-label={`QR code to download ${app.name}`}
                   >
