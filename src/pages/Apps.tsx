@@ -24,8 +24,8 @@ export default function Apps() {
 
   return (
     <div className="snap-y snap-mandatory">
-      {/* Intro */}
-      <section className="min-h-[70vh] flex items-center justify-center snap-start">
+      {/* Intro (compact) */}
+      <section className="min-h-[45vh] flex items-center justify-center pt-8 pb-12 snap-start">
         <div className="container-site">
           <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Our Ecosystem</p>
@@ -91,7 +91,7 @@ export default function Apps() {
       </section>
 
       {/* Stats */}
-      <section className="min-h-[70vh] flex items-center snap-start">
+      <section className="min-h-[60vh] flex items-center snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">By the Numbers</p>

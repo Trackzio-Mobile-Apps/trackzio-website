@@ -83,28 +83,6 @@ const appFaqs: Record<string, { q: string; a: string }[]> = {
   ],
 };
 
-// iPhone frame component
-function IPhoneFrame({ children, accentHsl }: { children: React.ReactNode; accentHsl: string }) {
-  return (
-    <div className="relative mx-auto" style={{ width: '100%', maxWidth: 240 }}>
-      {/* Phone bezel */}
-      <div
-        className="relative rounded-[2.5rem] p-2 bg-foreground/90"
-        style={{ boxShadow: `0 20px 60px -12px hsl(${accentHsl} / 0.25), 0 0 0 1px hsl(0 0% 0% / 0.1)` }}
-      >
-        {/* Notch */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-foreground/90 rounded-b-2xl z-10" />
-        {/* Screen */}
-        <div className="rounded-[2rem] overflow-hidden bg-background aspect-[9/19.5]">
-          {children}
-        </div>
-        {/* Bottom bar */}
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-28 h-1 rounded-full bg-background/30" />
-      </div>
-    </div>
-  );
-}
-
 export default function AppDetail() {
   const { appId } = useParams<{ appId: string }>();
   const app = getApp(appId || '');
@@ -121,31 +99,31 @@ export default function AppDetail() {
 
   return (
     <div style={{ '--app-accent': app.accentHsl } as React.CSSProperties}>
-      {/* ── 1. Hero ── */}
-      <section className="min-h-screen flex items-center relative overflow-hidden snap-start">
+      {/* ── 1. Hero (compact) ── */}
+      <section className="min-h-[50vh] flex items-center pt-12 pb-16 snap-start">
         <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at top, hsl(${app.accentHsl} / 0.08), transparent 60%)` }} />
         <div className="container-site relative">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
             <img
               src={app.logo}
               alt={`${app.name} logo`}
-              className="w-24 h-24 rounded-2xl mx-auto mb-6"
+              className="w-20 h-20 rounded-2xl mx-auto mb-5"
               style={{ boxShadow: `0 8px 30px -8px hsl(${app.accentHsl} / 0.35)` }}
             />
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display" style={{ color: `hsl(${app.accentHsl})` }}>
+            <h1 className="text-4xl sm:text-5xl font-bold font-display" style={{ color: `hsl(${app.accentHsl})` }}>
               {app.name}
             </h1>
-            <p className="mt-3 text-lg font-medium text-foreground">{app.tagline}</p>
-            <p className="mt-4 text-muted-foreground max-w-xl mx-auto leading-relaxed">{app.description}</p>
+            <p className="mt-2 text-lg font-medium text-foreground">{app.tagline}</p>
+            <p className="mt-3 text-muted-foreground max-w-xl mx-auto leading-relaxed">{app.description}</p>
 
-            <div className="mt-8 flex flex-wrap gap-4 justify-center">
+            <div className="mt-6 flex flex-wrap gap-4 justify-center">
               {hasIos && (
                 <a
                   href={app.iosUrl!}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackEvent(downloadEvents[app.id]?.ios, { app_name: app.name })}
-                  className="inline-flex h-12 px-8 items-center justify-center rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity text-white"
+                  className="inline-flex h-11 px-7 items-center justify-center rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity text-white"
                   style={{ backgroundColor: `hsl(${app.accentHsl})` }}
                 >
                   Download for iOS
@@ -157,7 +135,7 @@ export default function AppDetail() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackEvent(downloadEvents[app.id]?.android, { app_name: app.name })}
-                  className="inline-flex h-12 px-8 items-center justify-center rounded-xl border-2 font-semibold text-sm hover:opacity-80 transition-opacity"
+                  className="inline-flex h-11 px-7 items-center justify-center rounded-xl border-2 font-semibold text-sm hover:opacity-80 transition-opacity"
                   style={{ color: `hsl(${app.accentHsl})`, borderColor: `hsl(${app.accentHsl} / 0.4)` }}
                 >
                   Download for Android
@@ -165,7 +143,7 @@ export default function AppDetail() {
               )}
               {!isMobile && qrTarget && (
                 <div className="p-2 rounded-xl bg-card border border-border/40" style={{ borderColor: `hsl(${app.accentHsl} / 0.2)` }}>
-                  <QRCodeSVG value={qrTarget} size={80} level="M" />
+                  <QRCodeSVG value={qrTarget} size={72} level="M" />
                 </div>
               )}
             </div>
@@ -173,7 +151,7 @@ export default function AppDetail() {
         </div>
       </section>
 
-      {/* ── 2. Screenshots with iPhone frames ── */}
+      {/* ── 2. Screenshots — SaaS-style rounded cards ── */}
       <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
@@ -181,48 +159,71 @@ export default function AppDetail() {
             <h2 className="text-3xl sm:text-4xl font-bold font-display">See it in action</h2>
           </motion.div>
 
-          <div className="flex gap-8 sm:gap-12 justify-center overflow-x-auto pb-4 -mx-4 px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
             {app.screenshots.map((src, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-                className="shrink-0 w-[200px] sm:w-[240px]"
+                transition={{ delay: i * 0.12 }}
+                className="rounded-2xl overflow-hidden bg-card"
+                style={{ boxShadow: '0 8px 32px -8px hsl(0 0% 0% / 0.1)' }}
               >
-                <IPhoneFrame accentHsl={app.accentHsl}>
-                  <img src={src} alt={`${app.name} screenshot ${i + 1}`} className="w-full h-full object-cover" />
-                </IPhoneFrame>
+                <img
+                  src={src}
+                  alt={`${app.name} screenshot ${i + 1}`}
+                  className="w-full h-auto object-cover"
+                />
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── 3. Key Features ── */}
-      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
+      {/* ── 3. Key Features — Alternating layout ── */}
+      <section className="py-24 sm:py-32 snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-20">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Features</p>
             <h2 className="text-3xl sm:text-4xl font-bold font-display">What makes it special</h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 max-w-5xl mx-auto">
-            {app.features.map((feat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="text-center"
-              >
-                <div className="text-4xl mb-5">{feat.icon}</div>
-                <h3 className="font-display font-bold text-foreground mb-2">{feat.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{feat.description}</p>
-              </motion.div>
-            ))}
+          <div className="space-y-32 max-w-5xl mx-auto">
+            {app.features.map((feat, i) => {
+              const isReversed = i % 2 === 1;
+              const screenshot = app.screenshots[i % app.screenshots.length];
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{ duration: 0.7 }}
+                  className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-12 lg:gap-20`}
+                >
+                  {/* Text side */}
+                  <div className="flex-1 text-center md:text-left">
+                    <div className="text-5xl mb-5">{feat.icon}</div>
+                    <h3 className="text-2xl sm:text-3xl font-bold font-display text-foreground mb-4">{feat.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed text-lg">{feat.description}</p>
+                  </div>
+                  {/* Screenshot side */}
+                  <div className="flex-1 w-full">
+                    <div
+                      className="rounded-2xl overflow-hidden bg-card"
+                      style={{ boxShadow: '0 8px 32px -8px hsl(0 0% 0% / 0.1)' }}
+                    >
+                      <img
+                        src={screenshot}
+                        alt={feat.title}
+                        className="w-full h-auto object-cover"
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -270,7 +271,7 @@ export default function AppDetail() {
       </section>
 
       {/* ── 5. App Stats ── */}
-      <section className="min-h-[70vh] flex items-center py-24 sm:py-32 snap-start">
+      <section className="min-h-[60vh] flex items-center py-24 sm:py-32 snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-20">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">By the Numbers</p>
@@ -299,31 +300,33 @@ export default function AppDetail() {
         </div>
       </section>
 
-      {/* ── 6. FAQs ── */}
+      {/* ── 6. FAQs — 50% width centered ── */}
       {faqs.length > 0 && (
-        <section className="min-h-[70vh] flex items-center py-24 sm:py-32 snap-start">
-          <div className="container-site max-w-3xl w-full">
-            <motion.div {...fadeUp} className="text-center mb-16">
-              <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">FAQ</p>
-              <h2 className="text-3xl sm:text-4xl font-bold font-display">Frequently asked questions</h2>
-            </motion.div>
+        <section className="min-h-[60vh] flex items-center py-24 sm:py-32 snap-start">
+          <div className="container-site w-full flex justify-center">
+            <div className="w-full max-w-xl">
+              <motion.div {...fadeUp} className="text-center mb-16">
+                <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">FAQ</p>
+                <h2 className="text-3xl sm:text-4xl font-bold font-display">Frequently asked questions</h2>
+              </motion.div>
 
-            <Accordion type="single" collapsible className="space-y-3">
-              {faqs.map((faq, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: Math.min(i * 0.06, 0.3) }}
-                >
-                  <AccordionItem value={`faq-${i}`} className="rounded-2xl bg-card px-6" style={{ boxShadow: 'var(--shadow-card)' }}>
-                    <AccordionTrigger className="text-foreground font-medium text-left text-sm">{faq.q}</AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground text-sm leading-relaxed">{faq.a}</AccordionContent>
-                  </AccordionItem>
-                </motion.div>
-              ))}
-            </Accordion>
+              <Accordion type="single" collapsible className="space-y-3">
+                {faqs.map((faq, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: Math.min(i * 0.06, 0.3) }}
+                  >
+                    <AccordionItem value={`faq-${i}`} className="rounded-2xl bg-card px-6" style={{ boxShadow: 'var(--shadow-card)' }}>
+                      <AccordionTrigger className="text-foreground font-medium text-left text-sm">{faq.q}</AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground text-sm leading-relaxed">{faq.a}</AccordionContent>
+                    </AccordionItem>
+                  </motion.div>
+                ))}
+              </Accordion>
+            </div>
           </div>
         </section>
       )}

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
-import { Lightbulb, Rocket, Users, TrendingUp, Search, Linkedin } from 'lucide-react';
+import { Linkedin } from 'lucide-react';
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -9,12 +9,27 @@ const fadeUp = {
   transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] as const },
 };
 
-const journeyStages = [
-  { icon: Search, title: 'Problem', description: 'We recognised a problem in everyday life.' },
-  { icon: Lightbulb, title: 'Idea', description: 'We started working on a meaningful solution.' },
-  { icon: Rocket, title: 'Beta', description: 'We built the beta version of our first products.' },
-  { icon: Users, title: 'Early Users', description: 'People started using our apps and sharing feedback.' },
-  { icon: TrendingUp, title: 'Growing Ecosystem', description: "We continue building products that make people's lives easier." },
+const journeyBlocks = [
+  {
+    emoji: '🔍',
+    title: 'Recognising the Problem',
+    description: 'We noticed everyday tasks — identifying coins, learning about insects, building habits — lacked simple, intelligent tools. That gap became our starting point.',
+  },
+  {
+    emoji: '🛠️',
+    title: 'Building the First Beta',
+    description: 'With a small team and big ambitions, we built our first AI-powered prototypes. Fast iterations, late nights, and a relentless focus on getting the experience right.',
+  },
+  {
+    emoji: '🌱',
+    title: 'Early Users Discover the Apps',
+    description: 'Real people started using our apps and sharing them with friends. Their feedback shaped every feature, every update, every decision we made next.',
+  },
+  {
+    emoji: '🚀',
+    title: 'Growing the Trackzio Ecosystem',
+    description: 'What started as one app became a connected ecosystem. Four apps, millions of downloads, and a vision to keep building tools that make lives easier.',
+  },
 ];
 
 const teamMembers = [
@@ -36,8 +51,8 @@ export default function About() {
 
   return (
     <div className="snap-y snap-mandatory">
-      {/* ── Section 1: Intro ── */}
-      <section className="min-h-[90vh] flex items-center justify-center snap-start">
+      {/* ── Section 1: Intro (compact hero) ── */}
+      <section className="min-h-[50vh] flex items-center justify-center pt-8 pb-12 snap-start">
         <div className="container-site">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-6">About Us</motion.p>
@@ -74,28 +89,41 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── Section 3: Journey ── */}
-      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
+      {/* ── Section 3: Journey — Story Blocks with Graphics ── */}
+      <section className="py-24 sm:py-32 snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-20">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Our Journey</p>
             <h2 className="text-3xl sm:text-4xl font-bold font-display">From problem to <span className="text-gradient">ecosystem</span></h2>
           </motion.div>
-          <div className="overflow-x-auto pb-4 -mx-4 px-4">
-            <div className="relative flex items-start gap-0 min-w-[800px]">
-              <div className="absolute top-8 left-8 right-8 h-px bg-border" />
-              {journeyStages.map((stage, i) => (
-                <motion.div key={stage.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="flex-1 relative group cursor-default">
-                  <div className="flex flex-col items-center text-center px-3">
-                    <div className="w-16 h-16 rounded-2xl bg-card flex items-center justify-center relative z-10 transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1" style={{ boxShadow: 'var(--shadow-card)' }}>
-                      <stage.icon size={22} className="text-primary" />
+
+          <div className="space-y-28 max-w-5xl mx-auto">
+            {journeyBlocks.map((block, i) => {
+              const isReversed = i % 2 === 1;
+              return (
+                <motion.div
+                  key={block.title}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{ duration: 0.7 }}
+                  className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-12 lg:gap-20`}
+                >
+                  {/* Graphic */}
+                  <div className="flex-1 flex items-center justify-center">
+                    <div className="w-40 h-40 sm:w-52 sm:h-52 rounded-3xl bg-primary/5 flex items-center justify-center">
+                      <span className="text-7xl sm:text-8xl">{block.emoji}</span>
                     </div>
-                    <h3 className="font-display font-bold text-sm mt-5 mb-2 text-foreground">{stage.title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed max-w-[160px]">{stage.description}</p>
+                  </div>
+                  {/* Text */}
+                  <div className="flex-1 text-center md:text-left">
+                    <p className="text-xs font-semibold tracking-[0.2em] uppercase text-primary/60 mb-3">Step {i + 1}</p>
+                    <h3 className="text-2xl sm:text-3xl font-bold font-display text-foreground mb-4">{block.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed text-lg">{block.description}</p>
                   </div>
                 </motion.div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>

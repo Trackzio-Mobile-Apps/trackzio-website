@@ -38,8 +38,8 @@ export default function Blog() {
 
   return (
     <div className="snap-y snap-mandatory">
-      {/* Hero */}
-      <section className="min-h-[60vh] flex items-center justify-center snap-start">
+      {/* Hero (compact) */}
+      <section className="min-h-[40vh] flex items-center justify-center pt-8 pb-12 snap-start">
         <div className="container-site">
           <motion.div {...fadeUp} className="text-center max-w-2xl mx-auto">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Blog</p>
