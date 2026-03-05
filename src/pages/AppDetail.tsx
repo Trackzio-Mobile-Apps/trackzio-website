@@ -151,35 +151,6 @@ export default function AppDetail() {
         </div>
       </section>
 
-      {/* ── 2. Screenshots — SaaS-style rounded cards ── */}
-      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
-        <div className="container-site w-full">
-          <motion.div {...fadeUp} className="text-center mb-16">
-            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">App Preview</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display">See it in action</h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
-            {app.screenshots.map((src, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.12 }}
-                className="rounded-2xl overflow-hidden bg-card"
-                style={{ boxShadow: '0 8px 32px -8px hsl(0 0% 0% / 0.1)' }}
-              >
-                <img
-                  src={src}
-                  alt={`${app.name} screenshot ${i + 1}`}
-                  className="w-full h-auto object-cover"
-                />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ── 3. Key Features — Alternating layout ── */}
       <section className="py-24 sm:py-32 snap-start">
