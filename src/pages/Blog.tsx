@@ -37,50 +37,58 @@ export default function Blog() {
   usePageAnalytics('blog', 'blog_page_view');
 
   return (
-    <section className="py-16 sm:py-24">
-      <div className="container-site max-w-4xl">
-        <motion.div {...fadeUp} className="text-center mb-16">
-          <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Blog</p>
-          <h1 className="text-4xl sm:text-5xl font-bold font-display mb-4">Insights & Stories</h1>
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            Updates, ideas, and stories from the Trackzio team.
-          </p>
-        </motion.div>
-
-        <div className="space-y-0 divide-y divide-border">
-          {articles.map((article, i) => (
-            <motion.article
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="py-10 first:pt-0 last:pb-0 group cursor-pointer"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <span className="text-xs font-semibold tracking-wider uppercase text-primary">{article.category}</span>
-                <span className="text-xs text-muted-foreground/60">·</span>
-                <span className="text-xs text-muted-foreground flex items-center gap-1">
-                  <Clock size={12} /> {article.readTime}
-                </span>
-              </div>
-
-              <h2 className="text-xl sm:text-2xl font-bold font-display text-foreground mb-3 leading-snug group-hover:text-primary transition-colors">
-                {article.title}
-              </h2>
-
-              <p className="text-muted-foreground leading-relaxed mb-4">{article.excerpt}</p>
-
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-muted-foreground">{article.date}</span>
-                <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                  Read more <ArrowRight size={14} />
-                </span>
-              </div>
-            </motion.article>
-          ))}
+    <div className="snap-y snap-mandatory">
+      {/* Hero */}
+      <section className="min-h-[60vh] flex items-center justify-center snap-start">
+        <div className="container-site">
+          <motion.div {...fadeUp} className="text-center max-w-2xl mx-auto">
+            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Blog</p>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display mb-4">Insights & Stories</h1>
+            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+              Updates, ideas, and stories from the Trackzio team.
+            </p>
+          </motion.div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Articles */}
+      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
+        <div className="container-site max-w-4xl w-full">
+          <div className="space-y-0 divide-y divide-border">
+            {articles.map((article, i) => (
+              <motion.article
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="py-12 first:pt-0 last:pb-0 group cursor-pointer"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-xs font-semibold tracking-wider uppercase text-primary">{article.category}</span>
+                  <span className="text-xs text-muted-foreground/60">·</span>
+                  <span className="text-xs text-muted-foreground flex items-center gap-1">
+                    <Clock size={12} /> {article.readTime}
+                  </span>
+                </div>
+
+                <h2 className="text-xl sm:text-2xl font-bold font-display text-foreground mb-4 leading-snug group-hover:text-primary transition-colors">
+                  {article.title}
+                </h2>
+
+                <p className="text-muted-foreground leading-relaxed mb-5">{article.excerpt}</p>
+
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-muted-foreground">{article.date}</span>
+                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    Read more <ArrowRight size={14} />
+                  </span>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

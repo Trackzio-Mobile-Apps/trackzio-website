@@ -24,6 +24,11 @@ const teamMembers = [
   { initials: 'S', name: 'Sanjay Nair', role: 'AI/ML Engineer', linkedin: '#' },
   { initials: 'D', name: 'Divya Sharma', role: 'Marketing Lead', linkedin: '#' },
   { initials: 'K', name: 'Karthik Reddy', role: 'Backend Developer', linkedin: '#' },
+  { initials: 'N', name: 'Neha Gupta', role: 'Frontend Developer', linkedin: '#' },
+  { initials: 'V', name: 'Vikram Singh', role: 'Data Scientist', linkedin: '#' },
+  { initials: 'P', name: 'Pooja Menon', role: 'UX Researcher', linkedin: '#' },
+  { initials: 'A', name: 'Arjun Das', role: 'DevOps Engineer', linkedin: '#' },
+  { initials: 'T', name: 'Tanvi Joshi', role: 'Content Strategist', linkedin: '#' },
 ];
 
 export default function About() {
@@ -32,7 +37,7 @@ export default function About() {
   return (
     <div className="snap-y snap-mandatory">
       {/* ── Section 1: Intro ── */}
-      <section className="min-h-[80vh] flex items-center justify-center snap-start">
+      <section className="min-h-[90vh] flex items-center justify-center snap-start">
         <div className="container-site">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-6">About Us</motion.p>
@@ -49,7 +54,7 @@ export default function About() {
       </section>
 
       {/* ── Section 2: Vision & Mission ── */}
-      <section className="min-h-[60vh] flex items-center py-24 sm:py-32 snap-start">
+      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
@@ -70,9 +75,9 @@ export default function About() {
       </section>
 
       {/* ── Section 3: Journey ── */}
-      <section className="min-h-[60vh] flex items-center py-24 sm:py-32 snap-start">
+      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
         <div className="container-site w-full">
-          <motion.div {...fadeUp} className="text-center mb-16">
+          <motion.div {...fadeUp} className="text-center mb-20">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Our Journey</p>
             <h2 className="text-3xl sm:text-4xl font-bold font-display">From problem to <span className="text-gradient">ecosystem</span></h2>
           </motion.div>
@@ -96,24 +101,24 @@ export default function About() {
       </section>
 
       {/* ── Section 4: Team ── */}
-      <section className="min-h-[60vh] flex items-center py-24 sm:py-32 snap-start">
+      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
         <div className="container-site w-full">
-          <motion.div {...fadeUp} className="text-center mb-16">
+          <motion.div {...fadeUp} className="text-center mb-20">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Our Team</p>
             <h2 className="text-3xl sm:text-4xl font-bold font-display">The people behind <span className="text-gradient">Trackzio</span></h2>
           </motion.div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-10 max-w-5xl mx-auto justify-items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-12 max-w-5xl mx-auto justify-items-center">
             {teamMembers.map((member, i) => (
               <motion.div
                 key={member.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
+                transition={{ duration: 0.5, delay: i * 0.06 }}
                 className="group text-center"
               >
-                <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center font-display text-3xl font-bold text-primary mx-auto mb-4 transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1">
+                <div className="w-28 h-28 rounded-full bg-primary/10 flex items-center justify-center font-display text-3xl font-bold text-primary mx-auto mb-4 transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1">
                   {member.initials}
                 </div>
                 <h3 className="font-display font-bold text-sm text-foreground">{member.name}</h3>

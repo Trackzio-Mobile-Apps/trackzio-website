@@ -35,31 +35,30 @@ export default function Help() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Showcase only
   };
 
   return (
     <div className="snap-y snap-mandatory">
       {/* Hero */}
-      <section className="min-h-[40vh] flex items-center snap-start">
+      <section className="min-h-[60vh] flex items-center justify-center snap-start">
         <div className="container-site">
           <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Support</p>
-            <h1 className="text-4xl sm:text-5xl font-bold font-display mb-4">Help Center</h1>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display mb-4">Help Center</h1>
             <p className="text-lg text-muted-foreground">Find answers to your questions and get support.</p>
           </motion.div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-16 sm:py-24 snap-start">
-        <div className="container-site max-w-3xl">
-          <motion.div {...fadeUp} className="text-center mb-12">
+      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
+        <div className="container-site max-w-3xl w-full">
+          <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">FAQ</p>
             <h2 className="text-3xl sm:text-4xl font-bold font-display">Frequently asked questions</h2>
           </motion.div>
 
-          <Accordion type="single" collapsible className="space-y-2">
+          <Accordion type="single" collapsible className="space-y-3">
             {faqs.map((faq, i) => (
               <motion.div
                 key={i}
@@ -70,7 +69,7 @@ export default function Help() {
               >
                 <AccordionItem value={`faq-${i}`} className="rounded-2xl bg-card px-6" style={{ boxShadow: 'var(--shadow-card)' }}>
                   <AccordionTrigger className="text-foreground font-medium text-left text-sm">{faq.q}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground text-sm">{faq.a}</AccordionContent>
+                  <AccordionContent className="text-muted-foreground text-sm leading-relaxed">{faq.a}</AccordionContent>
                 </AccordionItem>
               </motion.div>
             ))}
@@ -79,9 +78,9 @@ export default function Help() {
       </section>
 
       {/* Support Form + Contact */}
-      <section className="py-16 sm:py-24 snap-start">
-        <div className="container-site max-w-4xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
+        <div className="container-site max-w-4xl w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
             {/* Form */}
             <motion.div {...fadeUp}>
               <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Get in Touch</p>
