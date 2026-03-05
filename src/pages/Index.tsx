@@ -83,7 +83,7 @@ export default function Home() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="text-5xl sm:text-6xl lg:text-7xl font-bold font-display leading-[1.1] tracking-tight"
             >
-              Making Lives Easier —
+              Making Lives Easier
               <br />
               <span className="text-gradient">Every App, Every Day.</span>
             </motion.h1>
