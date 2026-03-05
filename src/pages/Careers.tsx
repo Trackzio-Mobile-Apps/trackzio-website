@@ -22,8 +22,8 @@ export default function Careers() {
 
   return (
     <div className="snap-y snap-mandatory">
-      {/* Hero */}
-      <section className="min-h-[80vh] flex items-center justify-center snap-start">
+      {/* Hero (compact) */}
+      <section className="min-h-[45vh] flex items-center justify-center pt-8 pb-12 snap-start">
         <div className="container-site">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Careers</p>
@@ -100,7 +100,7 @@ export default function Careers() {
       </section>
 
       {/* Open Role */}
-      <section className="min-h-[80vh] flex items-center py-24 sm:py-32 snap-start">
+      <section className="min-h-[70vh] flex items-center py-24 sm:py-32 snap-start">
         <div className="container-site max-w-3xl w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Open Positions</p>

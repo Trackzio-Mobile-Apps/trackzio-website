@@ -39,8 +39,8 @@ export default function Help() {
 
   return (
     <div className="snap-y snap-mandatory">
-      {/* Hero */}
-      <section className="min-h-[60vh] flex items-center justify-center snap-start">
+      {/* Hero (compact) */}
+      <section className="min-h-[40vh] flex items-center justify-center pt-8 pb-12 snap-start">
         <div className="container-site">
           <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Support</p>
@@ -50,30 +50,32 @@ export default function Help() {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* FAQ — 50% width centered */}
       <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
-        <div className="container-site max-w-3xl w-full">
-          <motion.div {...fadeUp} className="text-center mb-16">
-            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">FAQ</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display">Frequently asked questions</h2>
-          </motion.div>
+        <div className="container-site w-full flex justify-center">
+          <div className="w-full max-w-xl">
+            <motion.div {...fadeUp} className="text-center mb-16">
+              <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">FAQ</p>
+              <h2 className="text-3xl sm:text-4xl font-bold font-display">Frequently asked questions</h2>
+            </motion.div>
 
-          <Accordion type="single" collapsible className="space-y-3">
-            {faqs.map((faq, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: Math.min(i * 0.04, 0.3) }}
-              >
-                <AccordionItem value={`faq-${i}`} className="rounded-2xl bg-card px-6" style={{ boxShadow: 'var(--shadow-card)' }}>
-                  <AccordionTrigger className="text-foreground font-medium text-left text-sm">{faq.q}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground text-sm leading-relaxed">{faq.a}</AccordionContent>
-                </AccordionItem>
-              </motion.div>
-            ))}
-          </Accordion>
+            <Accordion type="single" collapsible className="space-y-3">
+              {faqs.map((faq, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: Math.min(i * 0.04, 0.3) }}
+                >
+                  <AccordionItem value={`faq-${i}`} className="rounded-2xl bg-card px-6" style={{ boxShadow: 'var(--shadow-card)' }}>
+                    <AccordionTrigger className="text-foreground font-medium text-left text-sm">{faq.q}</AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground text-sm leading-relaxed">{faq.a}</AccordionContent>
+                  </AccordionItem>
+                </motion.div>
+              ))}
+            </Accordion>
+          </div>
         </div>
       </section>
 
@@ -81,7 +83,6 @@ export default function Help() {
       <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
         <div className="container-site max-w-4xl w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
-            {/* Form */}
             <motion.div {...fadeUp}>
               <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Get in Touch</p>
               <h2 className="text-2xl sm:text-3xl font-bold font-display mb-8">Send us a message</h2>
@@ -126,7 +127,6 @@ export default function Help() {
               </form>
             </motion.div>
 
-            {/* Contact details */}
             <motion.div {...fadeUp} className="flex flex-col justify-center">
               <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Contact</p>
               <h2 className="text-2xl sm:text-3xl font-bold font-display mb-8">Reach us directly</h2>
