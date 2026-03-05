@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { apps } from '@/lib/appData';
 import { trackEvent } from '@/lib/analytics';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
-import { ArrowRight, Star, Quote } from 'lucide-react';
+import { ArrowRight, Quote } from 'lucide-react';
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -55,18 +56,19 @@ const appEvents: Record<string, string> = {
 
 export default function Home() {
   usePageAnalytics('home', 'page_view_home');
+  const [activeApp, setActiveApp] = useState(0);
+  const selected = apps[activeApp];
 
   return (
     <div className="snap-y snap-mandatory">
       {/* ── Section 1: Hero ── */}
       <section className="min-h-[90vh] flex items-center justify-center relative overflow-hidden snap-start">
-        {/* Subtle radial accent */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.06),transparent_50%)]" />
         <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--secondary)/0.04),transparent_60%)]" />
-        
+
         <div className="container-site relative z-10">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -74,27 +76,27 @@ export default function Home() {
             >
               AI-Powered Mobile Apps
             </motion.p>
-            
-            <motion.h1 
+
+            <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
               className="text-5xl sm:text-6xl lg:text-7xl font-bold font-display leading-[1.1] tracking-tight"
             >
-              Bridging Curiosity
+              Making Lives Easier —
               <br />
-              <span className="text-gradient">and Clarity</span>
+              <span className="text-gradient">Every App, Every Day.</span>
             </motion.h1>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="mt-8 text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed"
             >
-              We build intelligent apps that transform everyday moments into opportunities for discovery.
+              Trackzio builds apps that fit into your life, whether you're exploring a hobby, taking care of your health, or looking to the stars. Thoughtfully made, deeply researched, and always built with you in mind.
             </motion.p>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -114,7 +116,7 @@ export default function Home() {
         </div>
 
         {/* Scroll indicator */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
@@ -142,76 +144,125 @@ export default function Home() {
             </h2>
           </motion.div>
 
-          <div className="space-y-24 sm:space-y-32">
-            {apps.map((app, i) => (
-              <motion.div
-                key={app.id}
-                {...stagger}
-                transition={{ duration: 0.7, delay: 0.1 }}
-                className={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-20`}
-              >
-                {/* Visual block */}
-                <div className="flex-1 w-full">
-                  <div 
-                    className="relative rounded-3xl overflow-hidden p-12 sm:p-16 flex items-center justify-center aspect-[4/3]"
-                    style={{ 
-                      background: `linear-gradient(135deg, hsl(${app.accentHsl} / 0.08), hsl(${app.accentHsl} / 0.03))`,
+          {/* Interactive list + preview */}
+          <motion.div
+            {...stagger}
+            transition={{ duration: 0.7 }}
+            className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start"
+          >
+            {/* Left: App list */}
+            <div className="lg:w-[280px] w-full shrink-0 flex flex-row lg:flex-col gap-1 overflow-x-auto lg:overflow-visible">
+              {apps.map((app, i) => (
+                <button
+                  key={app.id}
+                  onClick={() => setActiveApp(i)}
+                  onMouseEnter={() => setActiveApp(i)}
+                  className={`flex items-center gap-4 px-5 py-4 rounded-2xl text-left transition-all duration-300 w-full min-w-[180px] lg:min-w-0 ${
+                    activeApp === i
+                      ? 'bg-primary/10'
+                      : 'hover:bg-muted/60'
+                  }`}
+                >
+                  <img
+                    src={app.logo}
+                    alt={app.name}
+                    className="w-10 h-10 rounded-xl shrink-0"
+                  />
+                  <div className="overflow-hidden">
+                    <div
+                      className={`font-semibold text-sm transition-colors duration-300 ${
+                        activeApp === i ? 'text-primary' : 'text-foreground'
+                      }`}
+                    >
+                      {app.name}
+                    </div>
+                    <div className="text-xs text-muted-foreground truncate">
+                      {app.tagline}
+                    </div>
+                  </div>
+                  {activeApp === i && (
+                    <motion.div
+                      layoutId="app-indicator"
+                      className="hidden lg:block ml-auto w-1 h-8 rounded-full bg-primary shrink-0"
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
+
+            {/* Right: Preview panel */}
+            <div className="flex-1 w-full min-h-[420px] relative">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={selected.id}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                  className="flex flex-col sm:flex-row items-center gap-10 lg:gap-14"
+                >
+                  {/* Preview visual */}
+                  <div
+                    className="w-full sm:w-1/2 aspect-square max-w-[360px] rounded-3xl flex items-center justify-center relative overflow-hidden"
+                    style={{
+                      background: `linear-gradient(160deg, hsl(${selected.accentHsl} / 0.1), hsl(${selected.accentHsl} / 0.03))`,
                     }}
                   >
-                    <motion.img 
-                      src={app.logo} 
-                      alt={`${app.name} logo`} 
-                      className="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl shadow-lg"
-                      whileHover={{ scale: 1.05, rotate: 2 }}
-                      transition={{ type: "spring", stiffness: 300 }}
+                    <motion.img
+                      src={selected.logo}
+                      alt={`${selected.name} logo`}
+                      className="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl"
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.5, ease: 'easeOut' }}
+                      style={{
+                        boxShadow: `0 20px 60px -12px hsl(${selected.accentHsl} / 0.25)`,
+                      }}
                     />
-                    {/* Decorative circles */}
-                    <div 
-                      className="absolute -top-8 -right-8 w-32 h-32 rounded-full opacity-[0.07]"
-                      style={{ background: `hsl(${app.accentHsl})` }}
+                    <div
+                      className="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-[0.06]"
+                      style={{ background: `hsl(${selected.accentHsl})` }}
                     />
-                    <div 
-                      className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full opacity-[0.05]"
-                      style={{ background: `hsl(${app.accentHsl})` }}
+                    <div
+                      className="absolute -bottom-8 -left-8 w-28 h-28 rounded-full opacity-[0.04]"
+                      style={{ background: `hsl(${selected.accentHsl})` }}
                     />
                   </div>
-                </div>
 
-                {/* Text block */}
-                <div className="flex-1 w-full">
-                  <div className="max-w-md">
-                    <span 
+                  {/* Preview text */}
+                  <div className="flex-1 w-full sm:w-1/2">
+                    <span
                       className="inline-block text-xs font-semibold tracking-wider uppercase px-3 py-1 rounded-full mb-4"
-                      style={{ 
-                        color: `hsl(${app.accentHsl})`,
-                        background: `hsl(${app.accentHsl} / 0.1)`,
+                      style={{
+                        color: `hsl(${selected.accentHsl})`,
+                        background: `hsl(${selected.accentHsl} / 0.1)`,
                       }}
                     >
-                      {app.icon} {app.name}
+                      {selected.icon} {selected.name}
                     </span>
                     <h3 className="text-2xl sm:text-3xl font-bold font-display leading-snug mb-4">
-                      {app.tagline}
+                      {selected.tagline}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed mb-6">
-                      {app.description}
+                      {selected.description}
                     </p>
                     <Link
-                      to={`/apps/${app.id}`}
+                      to={`/apps/${selected.id}`}
                       onClick={() => {
-                        trackEvent('portfolio_tile_click', { app_name: app.name, page_name: 'home' });
-                        trackEvent(appEvents[app.id] || '', { app_name: app.name, page_name: 'home' });
+                        trackEvent('portfolio_tile_click', { app_name: selected.name, page_name: 'home' });
+                        trackEvent(appEvents[selected.id] || '', { app_name: selected.name, page_name: 'home' });
                       }}
                       className="inline-flex items-center gap-2 text-sm font-semibold transition-all group"
-                      style={{ color: `hsl(${app.accentHsl})` }}
+                      style={{ color: `hsl(${selected.accentHsl})` }}
                     >
                       Learn more
                       <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                     </Link>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </motion.div>
         </div>
       </section>
 
