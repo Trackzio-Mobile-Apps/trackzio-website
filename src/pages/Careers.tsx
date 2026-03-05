@@ -14,7 +14,7 @@ const benefits = [
   { icon: Rocket, title: 'Flexible Work Culture', description: 'Work from anywhere, on your own schedule. We trust our team to deliver great results.' },
   { icon: BookOpen, title: 'Learning Opportunities', description: 'Access courses, conferences, and mentorship. Grow your skills every day.' },
   { icon: Lightbulb, title: 'Ownership of Ideas', description: 'Your ideas matter. Pitch features, lead projects, and shape the product roadmap.' },
-  { icon: Heart, title: 'Meaningful Work', description: 'Build apps used by millions. Every line of code makes a real difference in people\'s lives.' },
+  { icon: Heart, title: 'Meaningful Work', description: "Build apps used by millions. Every line of code makes a real difference in people's lives." },
 ];
 
 export default function Careers() {
@@ -23,7 +23,7 @@ export default function Careers() {
   return (
     <div className="snap-y snap-mandatory">
       {/* Hero */}
-      <section className="min-h-[60vh] flex items-center snap-start">
+      <section className="min-h-[80vh] flex items-center justify-center snap-start">
         <div className="container-site">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Careers</p>
@@ -40,14 +40,14 @@ export default function Careers() {
       </section>
 
       {/* Our Culture */}
-      <section className="py-16 sm:py-24 snap-start">
-        <div className="container-site max-w-4xl">
-          <motion.div {...fadeUp} className="text-center mb-12">
+      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
+        <div className="container-site max-w-4xl w-full">
+          <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Our Culture</p>
             <h2 className="text-3xl sm:text-4xl font-bold font-display mb-8">Curiosity-driven innovation</h2>
           </motion.div>
 
-          <motion.div {...fadeUp} className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+          <motion.div {...fadeUp} className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-20">
             <div>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 At Trackzio, we believe the best products come from genuine curiosity. Our team is driven by the desire to understand real problems and build solutions that actually work — not just look good on paper.
@@ -69,14 +69,14 @@ export default function Careers() {
       </section>
 
       {/* Benefits */}
-      <section className="py-16 sm:py-24 snap-start">
-        <div className="container-site max-w-4xl">
-          <motion.div {...fadeUp} className="text-center mb-16">
+      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
+        <div className="container-site max-w-4xl w-full">
+          <motion.div {...fadeUp} className="text-center mb-20">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Benefits</p>
             <h2 className="text-3xl sm:text-4xl font-bold font-display">Why you'll love working here</h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-14">
             {benefits.map((b, i) => (
               <motion.div
                 key={i}
@@ -100,9 +100,9 @@ export default function Careers() {
       </section>
 
       {/* Open Role */}
-      <section className="py-16 sm:py-24 snap-start">
-        <div className="container-site max-w-3xl">
-          <motion.div {...fadeUp} className="text-center mb-12">
+      <section className="min-h-[80vh] flex items-center py-24 sm:py-32 snap-start">
+        <div className="container-site max-w-3xl w-full">
+          <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Open Positions</p>
             <h2 className="text-3xl sm:text-4xl font-bold font-display">Join our team</h2>
           </motion.div>
