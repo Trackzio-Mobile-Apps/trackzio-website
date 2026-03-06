@@ -1,7 +1,14 @@
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { trackEvent } from '@/lib/analytics';
-import { Lightbulb, Rocket, Heart, BookOpen, ArrowRight, MapPin, Briefcase, Users, Zap, Palette, Globe } from 'lucide-react';
+import { ArrowRight, MapPin, Users, Zap, Globe, Palette, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+
+import founderPhoto from '@/assets/founder-ayushya.jpg';
+import cultureTeamCollab from '@/assets/culture/team-collab.jpg';
+import cultureInnovation from '@/assets/culture/innovation.jpg';
+import cultureRemoteWork from '@/assets/culture/remote-work.jpg';
+import cultureTeamFun from '@/assets/culture/team-fun.jpg';
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -10,18 +17,18 @@ const fadeUp = {
   transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] as const },
 };
 
-const benefits = [
-  { icon: Rocket, title: 'Flexible Work Culture', description: 'Work from anywhere, on your own schedule. We trust our team to deliver great results.' },
-  { icon: BookOpen, title: 'Learning Opportunities', description: 'Access courses, conferences, and mentorship. Grow your skills every day.' },
-  { icon: Lightbulb, title: 'Ownership of Ideas', description: 'Your ideas matter. Pitch features, lead projects, and shape the product roadmap.' },
-  { icon: Heart, title: 'Meaningful Work', description: "Build apps used by millions. Every line of code makes a real difference in people's lives." },
-];
-
-const cultureBlocks = [
+const cultureValues = [
   { icon: Users, title: 'Team Collaboration', description: 'We believe the best ideas emerge from diverse perspectives working together seamlessly.' },
   { icon: Zap, title: 'Innovation First', description: 'We experiment freely, embrace new technologies, and push boundaries every day.' },
   { icon: Globe, title: 'Remote-First Culture', description: 'Work from anywhere in the world. Our team spans cities, time zones, and backgrounds.' },
   { icon: Palette, title: 'Creative Freedom', description: 'Every team member has the space to explore ideas and turn them into reality.' },
+];
+
+const cultureImages = [
+  { src: cultureTeamCollab, alt: 'Team collaborating in office' },
+  { src: cultureInnovation, alt: 'Brainstorming and innovation session' },
+  { src: cultureRemoteWork, alt: 'Remote work setup' },
+  { src: cultureTeamFun, alt: 'Team fun outing' },
 ];
 
 const openRoles = [
@@ -57,10 +64,25 @@ const openRoles = [
 
 export default function Careers() {
   usePageAnalytics('careers', 'Career_page_view');
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlide(prev => (prev + 1) % cultureImages.length);
+  }, []);
+
+  const prevSlide = () => {
+    setCurrentSlide(prev => (prev - 1 + cultureImages.length) % cultureImages.length);
+  };
+
+  // Auto-advance carousel
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 4000);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
 
   return (
     <div className="snap-y snap-mandatory">
-      {/* Hero (compact) */}
+      {/* Hero */}
       <section className="min-h-[45vh] flex items-center justify-center pt-8 pb-12 snap-start">
         <div className="container-site">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
@@ -77,9 +99,9 @@ export default function Careers() {
         </div>
       </section>
 
-      {/* Culture — Illustration Blocks */}
+      {/* Culture — Two Column: Values + Photo Carousel */}
       <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
-        <div className="container-site max-w-5xl w-full">
+        <div className="container-site max-w-6xl w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Our Culture</p>
             <h2 className="text-3xl sm:text-4xl font-bold font-display mb-4">Curiosity-driven innovation</h2>
@@ -88,60 +110,80 @@ export default function Careers() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {cultureBlocks.map((block, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="rounded-3xl bg-card p-8 sm:p-10 flex flex-col items-center text-center"
-                style={{ boxShadow: 'var(--shadow-card)' }}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
+            {/* Left: Culture value cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {cultureValues.map((block, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="rounded-2xl bg-card p-6 flex flex-col"
+                  style={{ boxShadow: 'var(--shadow-card)' }}
+                >
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                    <block.icon size={20} className="text-primary" />
+                  </div>
+                  <h3 className="font-display font-bold text-sm text-foreground mb-2">{block.title}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{block.description}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Right: Photo carousel */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative rounded-3xl overflow-hidden aspect-[4/3]"
+              style={{ boxShadow: 'var(--shadow-card)' }}
+            >
+              {cultureImages.map((img, i) => (
+                <img
+                  key={i}
+                  src={img.src}
+                  alt={img.alt}
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+                    i === currentSlide ? 'opacity-100' : 'opacity-0'
+                  }`}
+                />
+              ))}
+
+              {/* Navigation */}
+              <button
+                onClick={prevSlide}
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-background/70 backdrop-blur flex items-center justify-center text-foreground hover:bg-background/90 transition-colors"
               >
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
-                  <block.icon size={28} className="text-primary" />
-                </div>
-                <h3 className="font-display font-bold text-lg text-foreground mb-3">{block.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{block.description}</p>
-              </motion.div>
-            ))}
+                <ChevronLeft size={16} />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-background/70 backdrop-blur flex items-center justify-center text-foreground hover:bg-background/90 transition-colors"
+              >
+                <ChevronRight size={16} />
+              </button>
+
+              {/* Dots */}
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                {cultureImages.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentSlide(i)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      i === currentSlide ? 'bg-primary w-5' : 'bg-background/60'
+                    }`}
+                  />
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Benefits */}
-      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
-        <div className="container-site max-w-4xl w-full">
-          <motion.div {...fadeUp} className="text-center mb-20">
-            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Benefits</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display">Why you'll love working here</h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-14">
-            {benefits.map((b, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="flex gap-5"
-              >
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
-                  <b.icon size={20} className="text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-display font-bold text-foreground mb-2">{b.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{b.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Open Roles — Job Listing Grid */}
+      {/* Open Roles */}
       <section className="min-h-[80vh] flex items-center py-24 sm:py-32 snap-start">
         <div className="container-site max-w-5xl w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
@@ -186,6 +228,53 @@ export default function Careers() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Founder Section */}
+      <section className="py-24 sm:py-32 snap-start">
+        <div className="container-site max-w-5xl w-full">
+          <motion.div {...fadeUp} className="text-center mb-16">
+            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">From the Founder</p>
+            <h2 className="text-3xl sm:text-4xl font-bold font-display">
+              What Our Founder Thinks
+              <br />
+              <span className="text-gradient">About His People</span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="flex flex-col md:flex-row items-center gap-10 lg:gap-16 rounded-3xl bg-card p-8 sm:p-12 lg:p-16"
+            style={{ boxShadow: 'var(--shadow-card)' }}
+          >
+            {/* Founder photo */}
+            <div className="shrink-0">
+              <div className="w-40 h-40 sm:w-52 sm:h-52 rounded-3xl overflow-hidden ring-4 ring-primary/10">
+                <img
+                  src={founderPhoto}
+                  alt="Ayushya, Founder of Trackzio"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="text-center mt-4">
+                <div className="font-display font-bold text-foreground">Ayushya</div>
+                <div className="text-xs text-muted-foreground">Founder, Trackzio</div>
+              </div>
+            </div>
+
+            {/* Quote */}
+            <div className="flex-1">
+              <Quote size={36} className="text-primary/20 mb-4" />
+              <blockquote className="text-xl sm:text-2xl lg:text-3xl font-display font-bold leading-snug text-foreground italic">
+                "Great teams are not built by control. They are built by trust, ownership, and freedom to grow."
+              </blockquote>
+              <div className="mt-6 h-1 w-16 rounded-full bg-primary/20" />
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>
