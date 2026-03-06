@@ -275,7 +275,7 @@ export default function AppDetail() {
                     )}
                   </div>
                   {/* Screenshot side */}
-                  <div className="flex-1 w-full max-w-xs mx-auto md:mx-0">
+                  <div className="flex-1 w-full max-w-[220px] mx-auto md:mx-0">
                     <div
                       className="rounded-2xl overflow-hidden bg-card"
                       style={{ boxShadow: '0 8px 32px -8px hsl(0 0% 0% / 0.1)' }}
