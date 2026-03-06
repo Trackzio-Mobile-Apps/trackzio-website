@@ -235,8 +235,8 @@ export default function AppDetail() {
 
       {/* ── 3. Key Features — Z-Pattern Alternating Layout ── */}
       <section className="snap-start">
-        <div className="container-site w-full py-20 sm:py-24">
-          <motion.div {...fadeUp} className="text-center mb-16">
+        <div className="container-site w-full pt-20 sm:pt-24 pb-8">
+          <motion.div {...fadeUp} className="text-center mb-4">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Features</p>
             <h2 className="text-3xl sm:text-4xl font-bold font-display">What makes it special</h2>
           </motion.div>
@@ -250,33 +250,19 @@ export default function AppDetail() {
 
           return (
             <div key={i} className={bgClass}>
-              <div className="container-site w-full">
+              <div className="max-w-5xl mx-auto px-5 sm:px-8">
                 <motion.div
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-80px' }}
                   transition={{ duration: 0.7 }}
-                  className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-16 py-16 sm:py-20`}
+                  className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 md:gap-12 py-14 sm:py-16`}
                 >
-                  {/* Screenshot side */}
-                  <div className="flex-1 flex justify-center">
-                    <div
-                      className="w-full max-w-[220px] rounded-2xl overflow-hidden bg-card"
-                      style={{ boxShadow: '0 12px 40px -10px hsl(0 0% 0% / 0.12)' }}
-                    >
-                      <img
-                        src={screenshot}
-                        alt={feat.title}
-                        className="w-full h-auto object-cover"
-                      />
-                    </div>
-                  </div>
-
                   {/* Text side */}
-                  <div className="flex-1 text-center md:text-left">
-                    <div className="text-4xl mb-3">{feat.icon}</div>
-                    <h3 className="text-xl sm:text-2xl font-bold font-display text-foreground mb-3">{feat.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed mb-4">{feat.description}</p>
+                  <div className="flex-1 text-center md:text-left order-2 md:order-none">
+                    <div className="text-3xl mb-2">{feat.icon}</div>
+                    <h3 className="text-xl sm:text-2xl font-bold font-display text-foreground mb-2">{feat.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed mb-4 text-[15px]">{feat.description}</p>
                     {featBullets.length > 0 && (
                       <ul className="space-y-2">
                         {featBullets.map((bullet, bi) => (
@@ -287,6 +273,20 @@ export default function AppDetail() {
                         ))}
                       </ul>
                     )}
+                  </div>
+
+                  {/* Screenshot side */}
+                  <div className="flex-1 flex justify-center order-1 md:order-none">
+                    <div
+                      className="w-full max-w-[200px] rounded-2xl overflow-hidden bg-card"
+                      style={{ boxShadow: '0 10px 36px -8px hsl(0 0% 0% / 0.1)' }}
+                    >
+                      <img
+                        src={screenshot}
+                        alt={feat.title}
+                        className="w-full h-auto object-cover"
+                      />
+                    </div>
                   </div>
                 </motion.div>
               </div>
