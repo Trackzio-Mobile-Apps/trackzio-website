@@ -256,7 +256,7 @@ export default function AppDetail() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-80px' }}
                   transition={{ duration: 0.7 }}
-                  className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 md:gap-12 py-14 sm:py-16`}
+                  className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-6 md:gap-8 py-14 sm:py-16`}
                 >
                   {/* Text side */}
                   <div className="flex-1 text-center md:text-left order-2 md:order-none">
