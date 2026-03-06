@@ -57,7 +57,7 @@ export default function About() {
           <motion.div {...fadeUp} className="max-w-5xl mx-auto text-center">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">About Us</p>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-display leading-[1.1] tracking-tight mb-4 whitespace-nowrap">
-<span className="text-gradient">feel like magic</span>
+              Designing better <span className="text-gradient">living</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               AI-powered apps transforming curiosity into everyday clarity.
