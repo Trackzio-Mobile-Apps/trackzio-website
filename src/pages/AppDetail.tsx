@@ -57,6 +57,26 @@ const reviews = [
     author: "Karthik R.",
     role: "Software Engineer",
   },
+  {
+    quote: "A must-have app for anyone passionate about collecting. The AI recognition blew my mind.",
+    author: "Amit S.",
+    role: "Hobbyist Collector",
+  },
+  {
+    quote: "Super smooth experience from start to finish. The interface is clean and very intuitive.",
+    author: "Neha P.",
+    role: "Product Manager",
+  },
+  {
+    quote: "I love how it keeps getting better with updates. The team really listens to feedback.",
+    author: "Vikram J.",
+    role: "App Reviewer",
+  },
+  {
+    quote: "Finally an app that delivers on its promises. Accurate, fast, and beautifully crafted.",
+    author: "Deepa R.",
+    role: "Digital Marketer",
+  },
 ];
 
 const appFaqs: Record<string, { q: string; a: string }[]> = {
