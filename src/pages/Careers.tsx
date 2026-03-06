@@ -74,7 +74,6 @@ export default function Careers() {
     setCurrentSlide(prev => (prev - 1 + cultureImages.length) % cultureImages.length);
   };
 
-  // Auto-advance carousel
   useEffect(() => {
     const timer = setInterval(nextSlide, 4000);
     return () => clearInterval(timer);
@@ -83,14 +82,12 @@ export default function Careers() {
   return (
     <div className="snap-y snap-mandatory">
       {/* Hero */}
-      <section className="min-h-[45vh] flex items-center justify-center pt-8 pb-12 snap-start">
+      <section className="min-h-[40vh] flex items-center justify-center pt-8 pb-12 snap-start">
         <div className="container-site">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Careers</p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display mb-6">
-              Build the future
-              <br />
-              <span className="text-gradient">with us</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display mb-4">
+              Build the future <span className="text-gradient">with us</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto">
               Join the team building the next generation of AI-powered apps.
@@ -99,7 +96,7 @@ export default function Careers() {
         </div>
       </section>
 
-      {/* Culture — Two Column: Values + Photo Carousel */}
+      {/* Culture */}
       <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
         <div className="container-site max-w-6xl w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
@@ -111,7 +108,6 @@ export default function Careers() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
-            {/* Left: Culture value cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {cultureValues.map((block, i) => (
                 <motion.div
@@ -132,7 +128,6 @@ export default function Careers() {
               ))}
             </div>
 
-            {/* Right: Photo carousel */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -152,7 +147,6 @@ export default function Careers() {
                 />
               ))}
 
-              {/* Navigation */}
               <button
                 onClick={prevSlide}
                 className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-background/70 backdrop-blur flex items-center justify-center text-foreground hover:bg-background/90 transition-colors"
@@ -166,7 +160,6 @@ export default function Careers() {
                 <ChevronRight size={16} />
               </button>
 
-              {/* Dots */}
               <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
                 {cultureImages.map((_, i) => (
                   <button
@@ -251,7 +244,6 @@ export default function Careers() {
             className="flex flex-col md:flex-row items-center gap-10 lg:gap-16 rounded-3xl bg-card p-8 sm:p-12 lg:p-16"
             style={{ boxShadow: 'var(--shadow-card)' }}
           >
-            {/* Founder photo */}
             <div className="shrink-0">
               <div className="w-40 h-40 sm:w-52 sm:h-52 rounded-3xl overflow-hidden ring-4 ring-primary/10">
                 <img
@@ -266,7 +258,6 @@ export default function Careers() {
               </div>
             </div>
 
-            {/* Quote */}
             <div className="flex-1">
               <Quote size={36} className="text-primary/20 mb-4" />
               <blockquote className="text-xl sm:text-2xl lg:text-3xl font-display font-bold leading-snug text-foreground italic">

@@ -139,46 +139,27 @@ export default function Home() {
   return (
     <div className="snap-y snap-mandatory">
       {/* ── Section 1: Hero ── */}
-      <section className="min-h-[90vh] flex items-center justify-center relative overflow-hidden snap-start">
+      <section className="min-h-[40vh] flex items-center justify-center pt-8 pb-12 relative overflow-hidden snap-start">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.06),transparent_50%)]" />
         <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--secondary)/0.04),transparent_60%)]" />
 
         <div className="container-site relative z-10">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-6"
-            >
-              AI-Powered Mobile Apps
-            </motion.p>
+            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">AI-Powered Mobile Apps</p>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold font-display leading-[1.1] tracking-tight"
-            >
-              Making Lives Easier
-              <br />
-              <span className="text-gradient">Every App, Every Day.</span>
-            </motion.h1>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display leading-[1.1] tracking-tight mb-4">
+              Making Lives Easier <span className="text-gradient">Every App, Every Day.</span>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-8 text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed"
-            >
-              Trackzio builds apps that fit into your life, whether you're exploring a hobby, taking care of your health, or looking to the stars. Thoughtfully made, deeply researched, and always built with you in mind.
-            </motion.p>
+            <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
+              Trackzio builds apps that fit into your life — thoughtfully made, deeply researched, and always built with you in mind.
+            </p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="mt-10 flex items-center justify-center gap-4 flex-wrap"
+              className="mt-8 flex items-center justify-center gap-4 flex-wrap"
             >
               <a
                 href="#apps"
@@ -195,22 +176,6 @@ export default function Home() {
             </motion.div>
           </motion.div>
         </div>
-
-        {/* Scroll indicator — black arrow with "Scroll" text */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <ChevronDown size={32} className="text-foreground" />
-          </motion.div>
-          <span className="text-xs font-medium text-muted-foreground tracking-wide">Scroll</span>
-        </motion.div>
       </section>
 
       {/* ── Section 2: Our Applications ── */}
@@ -434,43 +399,14 @@ export default function Home() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.08 }}
-                  className="min-w-[calc(25%-15px)] max-w-[calc(25%-15px)] flex-shrink-0 snap-start hidden lg:block"
-                  style={{ minWidth: 'calc(25% - 15px)', maxWidth: 'calc(25% - 15px)' }}
+                  transition={{ delay: Math.min(i * 0.08, 0.4) }}
+                  className="flex-shrink-0 snap-start"
+                  style={{ width: 'calc(25% - 15px)', minWidth: '260px' }}
                 >
-                  <div className="p-7 rounded-3xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
-                    <Quote size={24} className="text-primary/20 mb-4" />
-                    <p className="text-sm leading-relaxed text-foreground flex-1 font-medium">
-                      "{t.quote}"
-                    </p>
-                    <div className="mt-6 flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-display font-bold text-primary text-sm">
-                        {t.author.charAt(0)}
-                      </div>
-                      <div>
-                        <div className="font-semibold text-foreground text-sm">{t.author}</div>
-                        <div className="text-xs text-muted-foreground">{t.role} · {t.app}</div>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-              {/* Mobile/tablet: wider cards */}
-              {testimonials.map((t, i) => (
-                <motion.div
-                  key={`mobile-${i}`}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.08 }}
-                  className="min-w-[300px] sm:min-w-[340px] max-w-[380px] flex-shrink-0 snap-start lg:hidden"
-                >
-                  <div className="p-7 rounded-3xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
-                    <Quote size={24} className="text-primary/20 mb-4" />
-                    <p className="text-sm leading-relaxed text-foreground flex-1 font-medium">
-                      "{t.quote}"
-                    </p>
-                    <div className="mt-6 flex items-center gap-3">
+                  <div className="p-6 rounded-3xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
+                    <Quote size={22} className="text-primary/25 mb-3" />
+                    <p className="text-sm leading-relaxed text-foreground flex-1 font-medium">"{t.quote}"</p>
+                    <div className="mt-5 flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-display font-bold text-primary text-sm">
                         {t.author.charAt(0)}
                       </div>

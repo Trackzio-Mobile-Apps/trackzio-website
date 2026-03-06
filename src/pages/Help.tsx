@@ -53,8 +53,8 @@ export default function Help() {
         </div>
       </section>
 
-      {/* Get in Touch — NOW FIRST */}
-      <section id="contact-form" className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
+      {/* Get in Touch */}
+      <section id="contact-form" className="min-h-screen flex items-center py-16 sm:py-20 snap-start">
         <div className="container-site max-w-4xl w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
             <motion.div {...fadeUp}>
@@ -135,8 +135,8 @@ export default function Help() {
         </div>
       </section>
 
-      {/* FAQ — 50% width centered, show first 3 with toggle */}
-      <section className="flex items-center py-16 sm:py-20 snap-start">
+      {/* FAQ */}
+      <section className="flex items-center py-12 sm:py-16 snap-start">
         <div className="container-site w-full flex justify-center">
           <div className="w-full max-w-xl">
             <motion.div {...fadeUp} className="text-center mb-16">

@@ -52,18 +52,16 @@ export default function About() {
   return (
     <div className="snap-y snap-mandatory">
       {/* ── Section 1: Intro (compact hero) ── */}
-      <section className="min-h-[50vh] flex items-center justify-center pt-8 pb-12 snap-start">
+      <section className="min-h-[40vh] flex items-center justify-center pt-8 pb-12 snap-start">
         <div className="container-site">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-6">About Us</motion.p>
-            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="text-5xl sm:text-6xl lg:text-7xl font-bold font-display leading-[1.1] tracking-tight mb-8">
-              Building apps that
-              <br />
-              <span className="text-gradient">feel like magic</span>
-            </motion.h1>
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed">
-              Trackzio is a product studio building AI-powered mobile applications that turn curiosity into clarity. Founded in Bengaluru, India, we're passionate about creating tools that are not only smart but also delightful to use.
-            </motion.p>
+            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">About Us</p>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display leading-[1.1] tracking-tight mb-4">
+              Building apps that <span className="text-gradient">feel like magic</span>
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
+              Trackzio is a product studio building AI-powered mobile applications that turn curiosity into clarity.
+            </p>
           </motion.div>
         </div>
       </section>
@@ -109,13 +107,11 @@ export default function About() {
                   transition={{ duration: 0.7 }}
                   className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-12 lg:gap-20`}
                 >
-                  {/* Graphic */}
                   <div className="flex-1 flex items-center justify-center">
                     <div className="w-40 h-40 sm:w-52 sm:h-52 rounded-3xl bg-primary/5 flex items-center justify-center">
                       <span className="text-7xl sm:text-8xl">{block.emoji}</span>
                     </div>
                   </div>
-                  {/* Text */}
                   <div className="flex-1 text-center md:text-left">
                     <p className="text-xs font-semibold tracking-[0.2em] uppercase text-primary/60 mb-3">Step {i + 1}</p>
                     <h3 className="text-2xl sm:text-3xl font-bold font-display text-foreground mb-4">{block.title}</h3>
