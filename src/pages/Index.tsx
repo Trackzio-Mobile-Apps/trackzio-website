@@ -327,7 +327,7 @@ export default function Home() {
       </section>
 
       {/* ── Section 3: Stats ── */}
-      <section className="min-h-[70vh] flex items-center snap-start">
+      <section className="min-h-screen flex items-center snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">By the Numbers</p>
