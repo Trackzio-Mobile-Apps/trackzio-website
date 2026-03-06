@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
-import { ArrowRight, Clock, Search, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
