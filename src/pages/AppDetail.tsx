@@ -256,10 +256,11 @@ export default function AppDetail() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-80px' }}
                   transition={{ duration: 0.7 }}
-                  className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-6 md:gap-8 py-14 sm:py-16`}
+                  className="grid grid-cols-1 md:grid-cols-2 items-center py-14 sm:py-16"
+                  style={{ columnGap: '40px', rowGap: '24px' }}
                 >
                   {/* Text side */}
-                  <div className="flex-1 text-center md:text-left order-2 md:order-none">
+                  <div className={`text-center md:text-left ${isReversed ? 'md:order-2' : 'md:order-1'} order-2`}>
                     <div className="text-3xl mb-2">{feat.icon}</div>
                     <h3 className="text-xl sm:text-2xl font-bold font-display text-foreground mb-2">{feat.title}</h3>
                     <p className="text-muted-foreground leading-relaxed mb-4 text-[15px]">{feat.description}</p>
@@ -276,7 +277,7 @@ export default function AppDetail() {
                   </div>
 
                   {/* Screenshot side */}
-                  <div className="flex-1 flex justify-center order-1 md:order-none">
+                  <div className={`flex justify-center ${isReversed ? 'md:order-1' : 'md:order-2'} order-1`}>
                     <div
                       className="w-full max-w-[200px] rounded-2xl overflow-hidden bg-card"
                       style={{ boxShadow: '0 10px 36px -8px hsl(0 0% 0% / 0.1)' }}
