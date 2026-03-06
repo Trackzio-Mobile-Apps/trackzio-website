@@ -359,7 +359,7 @@ export default function Home() {
       </section>
 
       {/* ── Section 4: Testimonials Carousel — 4 cards visible ── */}
-      <section className="min-h-[80vh] flex items-center py-24 sm:py-32 snap-start">
+      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">What People Say</p>
