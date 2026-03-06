@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
-import { ArrowRight, Clock, Search, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -67,7 +67,6 @@ const ITEMS_PER_PAGE = 6;
 
 export default function Blog() {
   usePageAnalytics('blog', 'blog_page_view');
-  const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -76,14 +75,8 @@ export default function Blog() {
     if (activeCategory !== 'All') {
       result = result.filter(a => a.category === activeCategory);
     }
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      result = result.filter(a =>
-        a.title.toLowerCase().includes(q) || a.excerpt.toLowerCase().includes(q)
-      );
-    }
     return result;
-  }, [searchQuery, activeCategory]);
+  }, [activeCategory]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / ITEMS_PER_PAGE));
   const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
@@ -112,19 +105,7 @@ export default function Blog() {
       <section className="min-h-screen py-24 sm:py-32 snap-start">
         <div className="container-site max-w-5xl w-full">
           {/* Search + Category filters */}
-          <motion.div {...fadeUp} className="mb-12 space-y-6">
-            {/* Search bar */}
-            <div className="relative max-w-md mx-auto">
-              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/60" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={e => { setSearchQuery(e.target.value); setCurrentPage(1); }}
-                placeholder="Search articles..."
-                className="w-full h-11 pl-11 pr-4 rounded-xl bg-muted border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-              />
-            </div>
-
+          <motion.div {...fadeUp} className="mb-12">
             {/* Category filters */}
             <div className="flex flex-wrap justify-center gap-2">
               {categories.map(cat => (

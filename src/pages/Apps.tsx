@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { apps } from '@/lib/appData';
 import { trackEvent } from '@/lib/analytics';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -21,10 +22,11 @@ const metrics = [
 
 export default function Apps() {
   usePageAnalytics('apps', 'page_view_apps');
+  const [expandedApp, setExpandedApp] = useState<string | null>(null);
 
   return (
     <div className="snap-y snap-mandatory">
-      {/* Intro (compact) */}
+      {/* Intro */}
       <section className="min-h-[45vh] flex items-center justify-center pt-8 pb-12 snap-start">
         <div className="container-site">
           <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center">
@@ -50,42 +52,61 @@ export default function Apps() {
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto">
-            {apps.map((app, i) => (
-              <motion.div
-                key={app.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-              >
-                <Link
-                  to={`/apps/${app.id}`}
-                  onClick={() => trackEvent(`apps_${app.id}_explore_click`, { app_name: app.name })}
-                  className="block p-8 sm:p-10 rounded-3xl bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group h-full"
-                  style={{ boxShadow: 'var(--shadow-card)' }}
+            {apps.map((app, i) => {
+              const isExpanded = expandedApp === app.id;
+              return (
+                <motion.div
+                  key={app.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
                 >
-                  <div className="flex items-start gap-5 mb-5">
-                    <img
-                      src={app.logo}
-                      alt={app.name}
-                      className="w-16 h-16 rounded-2xl shrink-0"
-                      style={{ boxShadow: `0 4px 16px -4px hsl(${app.accentHsl} / 0.25)` }}
-                    />
-                    <div className="min-w-0">
-                      <h3 className="font-display font-bold text-lg text-foreground mb-1">{app.name}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{app.tagline}</p>
+                  <div
+                    className="block p-8 sm:p-10 rounded-3xl bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group h-full"
+                    style={{ boxShadow: 'var(--shadow-card)' }}
+                  >
+                    <div className="flex items-start gap-5 mb-5">
+                      <img
+                        src={app.logo}
+                        alt={app.name}
+                        className="w-16 h-16 rounded-2xl shrink-0"
+                        style={{ boxShadow: `0 4px 16px -4px hsl(${app.accentHsl} / 0.25)` }}
+                      />
+                      <div className="min-w-0">
+                        <h3 className="font-display font-bold text-lg text-foreground mb-1">{app.name}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{app.tagline}</p>
+                      </div>
+                    </div>
+
+                    <p className={`text-sm text-muted-foreground leading-relaxed mb-2 ${isExpanded ? '' : 'line-clamp-2'}`}>
+                      {app.description}
+                    </p>
+
+                    {app.description.length > 100 && (
+                      <button
+                        onClick={() => setExpandedApp(isExpanded ? null : app.id)}
+                        className="inline-flex items-center gap-1 text-xs font-medium text-primary mb-5 hover:opacity-80 transition-opacity"
+                      >
+                        {isExpanded ? 'Show less' : 'View More'}
+                        <ChevronDown size={13} className={`transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                      </button>
+                    )}
+
+                    <div className="mt-auto">
+                      <Link
+                        to={`/apps/${app.id}`}
+                        onClick={() => trackEvent(`apps_${app.id}_explore_click`, { app_name: app.name })}
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors group-hover:gap-2.5"
+                        style={{ color: `hsl(${app.accentHsl})` }}
+                      >
+                        Explore Now <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                      </Link>
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-6 line-clamp-2">{app.description}</p>
-                  <span
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors group-hover:gap-2.5"
-                    style={{ color: `hsl(${app.accentHsl})` }}
-                  >
-                    View App <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-                  </span>
-                </Link>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
