@@ -1,13 +1,14 @@
-import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import { motion, AnimatePresence } from 'framer-motion';
 import trackzioLogo from '@/assets/trackzio-logo.jpg';
+import { apps } from '@/lib/appData';
 
 const navItems = [
   { label: 'Home', to: '/', event: '' },
-  { label: 'Apps', to: '/apps', event: 'header_explore_apps' },
+  { label: 'Our Apps', to: '/#apps', event: 'header_explore_apps', hasDropdown: true },
   { label: 'About Us', to: '/about', event: 'header_About us_apps' },
   { label: 'Blog', to: '/blog', event: 'header_blog_apps' },
   { label: 'Careers', to: '/careers', event: 'header_career_apps' },
@@ -16,7 +17,33 @@ const navItems = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownTimer = useRef<ReturnType<typeof setTimeout>>();
+
+  const handleAppsClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname === '/') {
+      document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/#apps');
+    }
+  };
+
+  const handleDropdownEnter = () => {
+    clearTimeout(dropdownTimer.current);
+    setDropdownOpen(true);
+  };
+
+  const handleDropdownLeave = () => {
+    dropdownTimer.current = setTimeout(() => setDropdownOpen(false), 200);
+  };
+
+  useEffect(() => {
+    return () => clearTimeout(dropdownTimer.current);
+  }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/40">
@@ -29,30 +56,97 @@ export default function Header() {
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
           {navItems.map(item => (
-            <Link
+            <div
               key={item.to}
-              to={item.to}
-              onClick={() => item.event && trackEvent(item.event, { page_name: location.pathname })}
-              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                location.pathname === item.to
-                  ? 'text-primary'
-                  : 'text-muted-foreground hover:text-primary'
-              }`}
+              className="relative"
+              onMouseEnter={item.hasDropdown ? handleDropdownEnter : undefined}
+              onMouseLeave={item.hasDropdown ? handleDropdownLeave : undefined}
             >
-              {item.label}
-            </Link>
+              {item.hasDropdown ? (
+                <a
+                  href="/#apps"
+                  onClick={(e) => {
+                    handleAppsClick(e);
+                    item.event && trackEvent(item.event, { page_name: location.pathname });
+                  }}
+                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                    location.pathname === '/apps'
+                      ? 'text-primary'
+                      : 'text-muted-foreground hover:text-primary'
+                  }`}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  to={item.to}
+                  onClick={() => item.event && trackEvent(item.event, { page_name: location.pathname })}
+                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                    location.pathname === item.to
+                      ? 'text-primary'
+                      : 'text-muted-foreground hover:text-primary'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              )}
+
+              {/* Dropdown for Our Apps */}
+              {item.hasDropdown && (
+                <AnimatePresence>
+                  {dropdownOpen && (
+                    <motion.div
+                      ref={dropdownRef}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-72 rounded-2xl bg-card border border-border/40 p-3 z-50"
+                      style={{ boxShadow: 'var(--shadow-card)' }}
+                      onMouseEnter={handleDropdownEnter}
+                      onMouseLeave={handleDropdownLeave}
+                    >
+                      {apps.map(app => (
+                        <Link
+                          key={app.id}
+                          to={`/apps/${app.id}`}
+                          onClick={() => setDropdownOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-muted/60 transition-colors group"
+                        >
+                          <img src={app.logo} alt={app.name} className="w-9 h-9 rounded-lg shrink-0" />
+                          <div className="flex-1 min-w-0">
+                            <div className="text-sm font-semibold text-foreground">{app.name}</div>
+                            <div className="text-xs text-muted-foreground truncate">{app.tagline}</div>
+                          </div>
+                          <ArrowRight size={14} className="text-muted-foreground/40 group-hover:text-primary transition-colors shrink-0" />
+                        </Link>
+                      ))}
+                      <div className="mt-2 pt-2 border-t border-border/40">
+                        <a
+                          href="/#apps"
+                          onClick={(e) => { handleAppsClick(e); setDropdownOpen(false); }}
+                          className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-semibold hover:opacity-90 transition-opacity"
+                        >
+                          Explore Now <ArrowRight size={12} />
+                        </a>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              )}
+            </div>
           ))}
         </nav>
 
         {/* CTA + Mobile toggle */}
         <div className="flex items-center gap-3">
-          <Link
-            to="/apps"
-            onClick={() => trackEvent('header_explore_apps', { page_name: location.pathname })}
+          <a
+            href="/#apps"
+            onClick={(e) => { handleAppsClick(e); trackEvent('header_explore_apps', { page_name: location.pathname }); }}
             className="hidden sm:inline-flex h-9 px-4 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-semibold transition-all hover:opacity-90 glow"
           >
             Explore Apps
-          </Link>
+          </a>
           <button
             onClick={() => setOpen(!open)}
             className="md:hidden p-2 text-muted-foreground hover:text-primary"
@@ -77,29 +171,58 @@ export default function Header() {
           >
             <div className="container-site py-4 flex flex-col gap-1">
               {navItems.map(item => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  onClick={() => {
-                    setOpen(false);
-                    item.event && trackEvent(item.event, { page_name: location.pathname });
-                  }}
-                  className={`px-3 py-2.5 text-sm font-medium rounded-md transition-colors ${
-                    location.pathname === item.to
-                      ? 'text-primary'
-                      : 'text-muted-foreground hover:text-primary'
-                  }`}
-                >
-                  {item.label}
-                </Link>
+                item.hasDropdown ? (
+                  <a
+                    key={item.to}
+                    href="/#apps"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOpen(false);
+                      if (location.pathname === '/') {
+                        document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' });
+                      } else {
+                        navigate('/#apps');
+                      }
+                      item.event && trackEvent(item.event, { page_name: location.pathname });
+                    }}
+                    className="px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-muted-foreground hover:text-primary"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    onClick={() => {
+                      setOpen(false);
+                      item.event && trackEvent(item.event, { page_name: location.pathname });
+                    }}
+                    className={`px-3 py-2.5 text-sm font-medium rounded-md transition-colors ${
+                      location.pathname === item.to
+                        ? 'text-primary'
+                        : 'text-muted-foreground hover:text-primary'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                )
               ))}
-              <Link
-                to="/apps"
-                onClick={() => { setOpen(false); trackEvent('header_explore_apps', { page_name: location.pathname }); }}
+              <a
+                href="/#apps"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpen(false);
+                  if (location.pathname === '/') {
+                    document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    navigate('/#apps');
+                  }
+                  trackEvent('header_explore_apps', { page_name: location.pathname });
+                }}
                 className="mt-2 flex h-10 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-semibold"
               >
                 Explore Apps
-              </Link>
+              </a>
             </div>
           </motion.nav>
         )}

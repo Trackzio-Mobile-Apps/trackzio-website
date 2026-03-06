@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
-import { Mail, Phone, Send } from 'lucide-react';
+import { Mail, Phone, Send, ChevronDown } from 'lucide-react';
 import {
   Accordion,
   AccordionContent,
@@ -32,6 +32,9 @@ const faqs = [
 export default function Help() {
   usePageAnalytics('help', 'help_page_view');
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [showAllFaqs, setShowAllFaqs] = useState(false);
+
+  const visibleFaqs = showAllFaqs ? faqs : faqs.slice(0, 3);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -132,7 +135,7 @@ export default function Help() {
         </div>
       </section>
 
-      {/* FAQ — 50% width centered */}
+      {/* FAQ — 50% width centered, show first 3 with toggle */}
       <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
         <div className="container-site w-full flex justify-center">
           <div className="w-full max-w-xl">
@@ -142,7 +145,7 @@ export default function Help() {
             </motion.div>
 
             <Accordion type="single" collapsible className="space-y-3">
-              {faqs.map((faq, i) => (
+              {visibleFaqs.map((faq, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 12 }}
@@ -157,6 +160,18 @@ export default function Help() {
                 </motion.div>
               ))}
             </Accordion>
+
+            {faqs.length > 3 && (
+              <div className="text-center mt-6">
+                <button
+                  onClick={() => setShowAllFaqs(!showAllFaqs)}
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:opacity-80 transition-opacity"
+                >
+                  {showAllFaqs ? 'Show Less' : 'More'}
+                  <ChevronDown size={16} className={`transition-transform ${showAllFaqs ? 'rotate-180' : ''}`} />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>
