@@ -101,34 +101,27 @@ export default function Header() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-72 rounded-2xl bg-card border border-border/40 p-3 z-50"
-                      style={{ boxShadow: 'var(--shadow-card)' }}
+                      className="fixed top-16 left-1/2 -translate-x-1/2 mt-1 rounded-2xl bg-card border border-border/40 p-4 z-50"
+                      style={{ boxShadow: 'var(--shadow-card)', width: 'min(90vw, 780px)' }}
                       onMouseEnter={handleDropdownEnter}
                       onMouseLeave={handleDropdownLeave}
                     >
-                      {apps.map(app => (
-                        <Link
-                          key={app.id}
-                          to={`/apps/${app.id}`}
-                          onClick={() => setDropdownOpen(false)}
-                          className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-muted/60 transition-colors group"
-                        >
-                          <img src={app.logo} alt={app.name} className="w-9 h-9 rounded-lg shrink-0" />
-                          <div className="flex-1 min-w-0">
-                            <div className="text-sm font-semibold text-foreground">{app.name}</div>
-                            <div className="text-xs text-muted-foreground truncate">{app.tagline}</div>
-                          </div>
-                          <ArrowRight size={14} className="text-muted-foreground/40 group-hover:text-primary transition-colors shrink-0" />
-                        </Link>
-                      ))}
-                      <div className="mt-2 pt-2 border-t border-border/40">
-                        <a
-                          href="/#apps"
-                          onClick={(e) => { handleAppsClick(e); setDropdownOpen(false); }}
-                          className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-semibold hover:opacity-90 transition-opacity"
-                        >
-                          Explore Now <ArrowRight size={12} />
-                        </a>
+                      <div className="grid grid-cols-4 gap-3">
+                        {apps.map(app => (
+                          <Link
+                            key={app.id}
+                            to={`/apps/${app.id}`}
+                            onClick={() => setDropdownOpen(false)}
+                            className="flex flex-col items-center text-center p-4 rounded-xl hover:bg-muted/60 transition-colors group"
+                          >
+                            <img src={app.logo} alt={app.name} className="w-12 h-12 rounded-xl mb-3 shrink-0" />
+                            <div className="text-sm font-semibold text-foreground mb-1">{app.name}</div>
+                            <p className="text-xs text-muted-foreground leading-relaxed mb-3">{app.tagline}</p>
+                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:underline">
+                              Explore <ArrowRight size={11} />
+                            </span>
+                          </Link>
+                        ))}
                       </div>
                     </motion.div>
                   )}

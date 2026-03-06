@@ -333,26 +333,26 @@ export default function AppDetail() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
+                  transition={{ delay: Math.min(i * 0.08, 0.4) }}
                   className="flex-shrink-0 snap-start"
-                  style={{ width: 'calc(25% - 15px)', minWidth: '240px' }}
+                  style={{ width: 'calc(25% - 15px)', minWidth: '260px' }}
                 >
-                  <div className="p-6 sm:p-8 rounded-3xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
-                    <Quote size={20} className="text-primary/20 mb-4" />
+                  <div className="p-6 rounded-3xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
+                    <Quote size={22} className="mb-3" style={{ color: `hsl(${app.accentHsl} / 0.25)` }} />
                     <div className="flex gap-0.5 mb-3 text-sm" style={{ color: `hsl(${app.accentHsl})` }}>
                       {'★★★★★'}
                     </div>
                     <p className="text-sm leading-relaxed text-foreground flex-1 font-medium">"{r.quote}"</p>
                     <div className="mt-5 flex items-center gap-3">
                       <div
-                        className="w-9 h-9 rounded-full flex items-center justify-center font-display font-bold text-xs"
+                        className="w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm"
                         style={{ color: `hsl(${app.accentHsl})`, background: `hsl(${app.accentHsl} / 0.1)` }}
                       >
                         {r.author.charAt(0)}
                       </div>
                       <div>
-                        <div className="font-semibold text-foreground text-xs">{r.author}</div>
-                        <div className="text-[11px] text-muted-foreground">{r.role}</div>
+                        <div className="font-semibold text-foreground text-sm">{r.author}</div>
+                        <div className="text-xs text-muted-foreground">{r.role} · {app.name}</div>
                       </div>
                     </div>
                   </div>
