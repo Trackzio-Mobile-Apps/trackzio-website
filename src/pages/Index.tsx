@@ -139,7 +139,7 @@ export default function Home() {
   return (
     <div className="snap-y snap-mandatory">
       {/* ── Section 1: Hero ── */}
-      <section className="min-h-[40vh] flex items-center justify-center pt-8 pb-12 relative overflow-hidden snap-start">
+      <section className="min-h-screen flex items-center justify-center pt-8 pb-12 relative overflow-hidden snap-start">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.06),transparent_50%)]" />
         <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--secondary)/0.04),transparent_60%)]" />
 
@@ -327,7 +327,7 @@ export default function Home() {
       </section>
 
       {/* ── Section 3: Stats ── */}
-      <section className="min-h-[70vh] flex items-center snap-start">
+      <section className="min-h-screen flex items-center snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">By the Numbers</p>
@@ -359,7 +359,7 @@ export default function Home() {
       </section>
 
       {/* ── Section 4: Testimonials Carousel — 4 cards visible ── */}
-      <section className="min-h-[80vh] flex items-center py-24 sm:py-32 snap-start">
+      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">What People Say</p>
