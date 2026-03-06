@@ -233,49 +233,36 @@ export default function AppDetail() {
         </div>
       </section>
 
-      {/* ── 3. Key Features — Alternating layout with bullet points ── */}
-      <section className="py-20 sm:py-24 snap-start">
-        <div className="container-site w-full">
+      {/* ── 3. Key Features — Z-Pattern Alternating Layout ── */}
+      <section className="snap-start">
+        <div className="container-site w-full py-20 sm:py-24">
           <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Features</p>
             <h2 className="text-3xl sm:text-4xl font-bold font-display">What makes it special</h2>
           </motion.div>
+        </div>
 
-          <div className="space-y-16 max-w-4xl mx-auto">
-            {app.features.map((feat, i) => {
-              const isReversed = i % 2 === 1;
-              const screenshot = app.screenshots[i % app.screenshots.length];
-              const featBullets = bullets[feat.title] || [];
-              return (
+        {app.features.map((feat, i) => {
+          const isReversed = i % 2 === 1;
+          const screenshot = app.screenshots[i % app.screenshots.length];
+          const featBullets = bullets[feat.title] || [];
+          const bgClass = i % 2 === 0 ? 'bg-background' : 'bg-muted/40';
+
+          return (
+            <div key={i} className={bgClass}>
+              <div className="container-site w-full">
                 <motion.div
-                  key={i}
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-80px' }}
                   transition={{ duration: 0.7 }}
-                  className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8`}
+                  className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-16 py-16 sm:py-20`}
                 >
-                  {/* Text side */}
-                  <div className="flex-1 text-center md:text-left">
-                    <div className="text-4xl mb-3">{feat.icon}</div>
-                    <h3 className="text-xl sm:text-2xl font-bold font-display text-foreground mb-3">{feat.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed mb-4">{feat.description}</p>
-                    {featBullets.length > 0 && (
-                      <ul className="space-y-2">
-                        {featBullets.map((bullet, bi) => (
-                          <li key={bi} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: `hsl(${app.accentHsl})` }} />
-                            {bullet}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
                   {/* Screenshot side */}
-                  <div className="flex-1 w-full max-w-[180px] mx-auto md:mx-0">
+                  <div className="flex-1 flex justify-center">
                     <div
-                      className="rounded-2xl overflow-hidden bg-card"
-                      style={{ boxShadow: '0 8px 32px -8px hsl(0 0% 0% / 0.1)' }}
+                      className="w-full max-w-[220px] rounded-2xl overflow-hidden bg-card"
+                      style={{ boxShadow: '0 12px 40px -10px hsl(0 0% 0% / 0.12)' }}
                     >
                       <img
                         src={screenshot}
@@ -284,12 +271,28 @@ export default function AppDetail() {
                       />
                     </div>
                   </div>
+
+                  {/* Text side */}
+                  <div className="flex-1 text-center md:text-left">
+                    <div className="text-4xl mb-3">{feat.icon}</div>
+                    <h3 className="text-xl sm:text-2xl font-bold font-display text-foreground mb-3">{feat.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed mb-4">{feat.description}</p>
+                    {featBullets.length > 0 && (
+                      <ul className="space-y-2">
+                        {featBullets.map((bullet, bi) => (
+                          <li key={bi} className="flex items-start gap-2 text-sm text-muted-foreground md:justify-start justify-center">
+                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: `hsl(${app.accentHsl})` }} />
+                            {bullet}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
                 </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+              </div>
+            </div>
+          );
+        })}
 
       {/* ── 4. Reviews — Horizontal Carousel with 4 cards ── */}
       <section className="py-20 sm:py-24 snap-start">
