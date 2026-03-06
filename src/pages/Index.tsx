@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { apps } from '@/lib/appData';
 import { trackEvent } from '@/lib/analytics';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
-import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { getPlatform, getDownloadUrl } from '@/lib/platformUtils';
+import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight, Download } from 'lucide-react';
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -57,6 +59,24 @@ const testimonials = [
     role: "Tech Enthusiast",
     app: "Trackzio",
   },
+  {
+    quote: "I use Habiteazy daily — the streaks keep me accountable. Best habit app I've tried.",
+    author: "Anil V.",
+    role: "Entrepreneur",
+    app: "Habiteazy",
+  },
+  {
+    quote: "Coinzy's marketplace is so convenient. I found rare coins I'd been searching for years.",
+    author: "Deepa R.",
+    role: "Coin Collector",
+    app: "Coinzy",
+  },
+  {
+    quote: "Banknotes taught my daughter about different currencies. It's both fun and educational.",
+    author: "Sunita P.",
+    role: "Teacher",
+    app: "Banknotes",
+  },
 ];
 
 const appEvents: Record<string, string> = {
@@ -68,11 +88,22 @@ const appEvents: Record<string, string> = {
 
 export default function Home() {
   usePageAnalytics('home', 'page_view_home');
+  const location = useLocation();
   const [activeApp, setActiveApp] = useState(0);
   const selected = apps[activeApp];
+  const isMobile = useIsMobile();
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+
+  // Handle hash scroll on mount
+  useEffect(() => {
+    if (location.hash === '#apps') {
+      setTimeout(() => {
+        document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, [location]);
 
   const updateScrollButtons = () => {
     const el = carouselRef.current;
@@ -94,6 +125,15 @@ export default function Home() {
     if (!el) return;
     const amount = el.clientWidth * 0.8;
     el.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
+  };
+
+  const handleDownload = (app: typeof selected) => {
+    const url = getDownloadUrl(app.iosUrl, app.androidUrl);
+    if (url) {
+      const platform = getPlatform();
+      trackEvent(`home_${app.id}_download`, { platform, app_name: app.name });
+      window.open(url, '_blank');
+    }
   };
 
   return (
@@ -140,36 +180,41 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="mt-10 flex items-center justify-center gap-4 flex-wrap"
             >
-              <Link
-                to="/apps"
-                onClick={() => trackEvent('hero_explore_apps', { page_name: 'home' })}
+              <a
+                href="#apps"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' });
+                  trackEvent('hero_explore_apps', { page_name: 'home' });
+                }}
                 className="inline-flex items-center gap-2 h-12 px-8 rounded-2xl bg-primary text-primary-foreground font-semibold text-base transition-all hover:opacity-90 glow group"
               >
                 Explore Our Apps
                 <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-              </Link>
+              </a>
             </motion.div>
           </motion.div>
         </div>
 
-        {/* Scroll indicator — small bouncing arrow */}
+        {/* Scroll indicator — black arrow with "Scroll" text */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
         >
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           >
-            <ChevronDown size={32} className="text-muted-foreground/40" />
+            <ChevronDown size={32} className="text-foreground" />
           </motion.div>
+          <span className="text-xs font-medium text-muted-foreground tracking-wide">Scroll</span>
         </motion.div>
       </section>
 
       {/* ── Section 2: Our Applications ── */}
-      <section className="min-h-screen py-24 sm:py-32 snap-start">
+      <section id="apps" className="min-h-screen py-24 sm:py-32 snap-start">
         <div className="container-site">
           <motion.div {...fadeUp} className="max-w-2xl mb-20">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Our Applications</p>
@@ -282,18 +327,32 @@ export default function Home() {
                     <p className="text-muted-foreground leading-relaxed mb-6">
                       {selected.description}
                     </p>
-                    <Link
-                      to={`/apps/${selected.id}`}
-                      onClick={() => {
-                        trackEvent('portfolio_tile_click', { app_name: selected.name, page_name: 'home' });
-                        trackEvent(appEvents[selected.id] || '', { app_name: selected.name, page_name: 'home' });
-                      }}
-                      className="inline-flex items-center gap-2 h-10 px-6 rounded-xl text-sm font-semibold transition-all group text-primary-foreground"
-                      style={{ backgroundColor: `hsl(${selected.accentHsl})` }}
-                    >
-                      Explore Now
-                      <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                    </Link>
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <Link
+                        to={`/apps/${selected.id}`}
+                        onClick={() => {
+                          trackEvent('portfolio_tile_click', { app_name: selected.name, page_name: 'home' });
+                          trackEvent(appEvents[selected.id] || '', { app_name: selected.name, page_name: 'home' });
+                        }}
+                        className="inline-flex items-center gap-2 h-10 px-6 rounded-xl text-sm font-semibold transition-all group text-primary-foreground"
+                        style={{ backgroundColor: `hsl(${selected.accentHsl})` }}
+                      >
+                        Explore Now
+                        <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                      </Link>
+                      {isMobile && (selected.iosUrl || selected.androidUrl) && (
+                        <button
+                          onClick={() => handleDownload(selected)}
+                          className="inline-flex items-center gap-2 h-10 px-6 rounded-xl text-sm font-semibold border-2 transition-all hover:opacity-80"
+                          style={{
+                            color: `hsl(${selected.accentHsl})`,
+                            borderColor: `hsl(${selected.accentHsl} / 0.4)`,
+                          }}
+                        >
+                          <Download size={15} /> Download
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -334,7 +393,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Section 4: Testimonials Carousel ── */}
+      {/* ── Section 4: Testimonials Carousel — 4 cards visible ── */}
       <section className="min-h-[80vh] flex items-center py-24 sm:py-32 snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
@@ -345,7 +404,6 @@ export default function Home() {
           </motion.div>
 
           <div className="relative">
-            {/* Carousel scroll buttons */}
             {canScrollLeft && (
               <button
                 onClick={() => scrollCarousel('left')}
@@ -367,7 +425,7 @@ export default function Home() {
 
             <div
               ref={carouselRef}
-              className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
+              className="flex gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {testimonials.map((t, i) => (
@@ -376,16 +434,44 @@ export default function Home() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.1 }}
-                  className="min-w-[320px] sm:min-w-[380px] max-w-[400px] flex-shrink-0 snap-start"
+                  transition={{ duration: 0.6, delay: i * 0.08 }}
+                  className="min-w-[calc(25%-15px)] max-w-[calc(25%-15px)] flex-shrink-0 snap-start hidden lg:block"
+                  style={{ minWidth: 'calc(25% - 15px)', maxWidth: 'calc(25% - 15px)' }}
                 >
-                  <div className="p-8 sm:p-10 rounded-3xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
-                    <Quote size={28} className="text-primary/20 mb-6" />
-                    <p className="text-base sm:text-lg leading-relaxed text-foreground flex-1 font-medium">
+                  <div className="p-7 rounded-3xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
+                    <Quote size={24} className="text-primary/20 mb-4" />
+                    <p className="text-sm leading-relaxed text-foreground flex-1 font-medium">
                       "{t.quote}"
                     </p>
-                    <div className="mt-8 flex items-center gap-4">
-                      <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center font-display font-bold text-primary text-sm">
+                    <div className="mt-6 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-display font-bold text-primary text-sm">
+                        {t.author.charAt(0)}
+                      </div>
+                      <div>
+                        <div className="font-semibold text-foreground text-sm">{t.author}</div>
+                        <div className="text-xs text-muted-foreground">{t.role} · {t.app}</div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+              {/* Mobile/tablet: wider cards */}
+              {testimonials.map((t, i) => (
+                <motion.div
+                  key={`mobile-${i}`}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.08 }}
+                  className="min-w-[300px] sm:min-w-[340px] max-w-[380px] flex-shrink-0 snap-start lg:hidden"
+                >
+                  <div className="p-7 rounded-3xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
+                    <Quote size={24} className="text-primary/20 mb-4" />
+                    <p className="text-sm leading-relaxed text-foreground flex-1 font-medium">
+                      "{t.quote}"
+                    </p>
+                    <div className="mt-6 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-display font-bold text-primary text-sm">
                         {t.author.charAt(0)}
                       </div>
                       <div>
