@@ -67,7 +67,7 @@ export default function About() {
       </section>
 
       {/* ── Section 2: Vision & Mission ── */}
-      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
+      <section className="py-24 sm:py-32 snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
