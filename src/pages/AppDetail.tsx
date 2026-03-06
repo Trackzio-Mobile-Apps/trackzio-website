@@ -293,6 +293,7 @@ export default function AppDetail() {
             </div>
           );
         })}
+      </section>
 
       {/* ── 4. Reviews — Horizontal Carousel with 4 cards ── */}
       <section className="py-20 sm:py-24 snap-start">
