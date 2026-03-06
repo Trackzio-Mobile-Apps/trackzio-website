@@ -57,6 +57,26 @@ const reviews = [
     author: "Karthik R.",
     role: "Software Engineer",
   },
+  {
+    quote: "A must-have app for anyone passionate about collecting. The AI recognition blew my mind.",
+    author: "Amit S.",
+    role: "Hobbyist Collector",
+  },
+  {
+    quote: "Super smooth experience from start to finish. The interface is clean and very intuitive.",
+    author: "Neha P.",
+    role: "Product Manager",
+  },
+  {
+    quote: "I love how it keeps getting better with updates. The team really listens to feedback.",
+    author: "Vikram J.",
+    role: "App Reviewer",
+  },
+  {
+    quote: "Finally an app that delivers on its promises. Accurate, fast, and beautifully crafted.",
+    author: "Deepa R.",
+    role: "Digital Marketer",
+  },
 ];
 
 const appFaqs: Record<string, { q: string; a: string }[]> = {
@@ -255,7 +275,7 @@ export default function AppDetail() {
                     )}
                   </div>
                   {/* Screenshot side */}
-                  <div className="flex-1 w-full max-w-xs mx-auto md:mx-0">
+                  <div className="flex-1 w-full max-w-[220px] mx-auto md:mx-0">
                     <div
                       className="rounded-2xl overflow-hidden bg-card"
                       style={{ boxShadow: '0 8px 32px -8px hsl(0 0% 0% / 0.1)' }}
@@ -313,26 +333,26 @@ export default function AppDetail() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
+                  transition={{ delay: Math.min(i * 0.08, 0.4) }}
                   className="flex-shrink-0 snap-start"
-                  style={{ width: 'calc(25% - 15px)', minWidth: '240px' }}
+                  style={{ width: 'calc(25% - 15px)', minWidth: '260px' }}
                 >
-                  <div className="p-6 sm:p-8 rounded-3xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
-                    <Quote size={20} className="text-primary/20 mb-4" />
+                  <div className="p-6 rounded-3xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
+                    <Quote size={22} className="mb-3" style={{ color: `hsl(${app.accentHsl} / 0.25)` }} />
                     <div className="flex gap-0.5 mb-3 text-sm" style={{ color: `hsl(${app.accentHsl})` }}>
                       {'★★★★★'}
                     </div>
                     <p className="text-sm leading-relaxed text-foreground flex-1 font-medium">"{r.quote}"</p>
                     <div className="mt-5 flex items-center gap-3">
                       <div
-                        className="w-9 h-9 rounded-full flex items-center justify-center font-display font-bold text-xs"
+                        className="w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm"
                         style={{ color: `hsl(${app.accentHsl})`, background: `hsl(${app.accentHsl} / 0.1)` }}
                       >
                         {r.author.charAt(0)}
                       </div>
                       <div>
-                        <div className="font-semibold text-foreground text-xs">{r.author}</div>
-                        <div className="text-[11px] text-muted-foreground">{r.role}</div>
+                        <div className="font-semibold text-foreground text-sm">{r.author}</div>
+                        <div className="text-xs text-muted-foreground">{r.role} · {app.name}</div>
                       </div>
                     </div>
                   </div>

@@ -136,7 +136,7 @@ export default function Help() {
       </section>
 
       {/* FAQ — 50% width centered, show first 3 with toggle */}
-      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
+      <section className="flex items-center py-16 sm:py-20 snap-start">
         <div className="container-site w-full flex justify-center">
           <div className="w-full max-w-xl">
             <motion.div {...fadeUp} className="text-center mb-16">
