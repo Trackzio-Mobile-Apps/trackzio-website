@@ -67,7 +67,6 @@ const ITEMS_PER_PAGE = 6;
 
 export default function Blog() {
   usePageAnalytics('blog', 'blog_page_view');
-  const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -76,14 +75,8 @@ export default function Blog() {
     if (activeCategory !== 'All') {
       result = result.filter(a => a.category === activeCategory);
     }
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      result = result.filter(a =>
-        a.title.toLowerCase().includes(q) || a.excerpt.toLowerCase().includes(q)
-      );
-    }
     return result;
-  }, [searchQuery, activeCategory]);
+  }, [activeCategory]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / ITEMS_PER_PAGE));
   const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
