@@ -218,7 +218,7 @@ export default function Home() {
                     >
                       {app.name}
                     </div>
-                    <div className="text-xs text-muted-foreground truncate">
+                    <div className="text-xs text-muted-foreground leading-snug">
                       {app.tagline}
                     </div>
                   </div>

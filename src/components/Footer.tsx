@@ -41,7 +41,7 @@ export default function Footer() {
             ))}
           </div>
 
-          {/* Links */}
+          {/* Links + Get in Touch */}
           <nav className="flex items-center gap-6 text-sm" aria-label="Footer navigation">
             {['Terms', 'Privacy', 'Contact'].map(label => (
               <Link
@@ -55,6 +55,12 @@ export default function Footer() {
                 {label}
               </Link>
             ))}
+            <Link
+              to="/help"
+              className="inline-flex items-center h-9 px-5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold transition-opacity hover:opacity-90"
+            >
+              Get in Touch
+            </Link>
           </nav>
         </div>
 
