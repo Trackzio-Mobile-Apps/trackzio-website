@@ -54,12 +54,12 @@ export default function About() {
       {/* ── Section 1: Intro (compact hero) ── */}
       <section className="min-h-[40vh] flex items-center justify-center pt-8 pb-12 snap-start">
         <div className="container-site">
-          <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
-            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">About Us</p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display leading-[1.1] tracking-tight mb-4">
+          <motion.div {...fadeUp} className="max-w-5xl mx-auto text-center">
+            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-6">About Us</p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-display leading-[1.1] tracking-tight mb-5 whitespace-nowrap">
               Building apps that <span className="text-gradient">feel like magic</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               AI-powered apps transforming curiosity into everyday clarity.
             </p>
           </motion.div>
