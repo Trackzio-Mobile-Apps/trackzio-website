@@ -149,6 +149,22 @@ export default function AppDetail() {
   const visibleFaqs = showAllFaqs ? faqs : faqs.slice(0, 3);
   const bullets = featureBullets[app.id] || {};
 
+  const handleDownload = () => {
+    const url = getDownloadUrl(app.iosUrl, app.androidUrl);
+    if (url) {
+      const p = getPlatform();
+      const eventKey = p === 'ios' ? 'ios' : 'android';
+      trackEvent(downloadEvents[app.id]?.[eventKey], { app_name: app.name });
+      window.open(url, '_blank');
+    }
+  };
+
+  const qrUrl = (() => {
+    if (platform === 'ios' && app.iosUrl) return app.iosUrl;
+    if (platform === 'android' && app.androidUrl) return app.androidUrl;
+    return app.androidUrl || app.iosUrl;
+  })();
+
   const scrollReviews = (dir: 'left' | 'right') => {
     const el = reviewsRef.current;
     if (!el) return;
