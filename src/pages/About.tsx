@@ -60,7 +60,7 @@ export default function About() {
               Building apps that <span className="text-gradient">feel like magic</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
-              Trackzio is a product studio building AI-powered mobile applications that turn curiosity into clarity.
+              AI-powered apps transforming curiosity into everyday clarity.
             </p>
           </motion.div>
         </div>
