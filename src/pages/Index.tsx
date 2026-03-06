@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { apps } from '@/lib/appData';
 import { trackEvent } from '@/lib/analytics';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
-import { ArrowRight, Quote } from 'lucide-react';
+import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -45,6 +45,18 @@ const testimonials = [
     role: "Marketing Professional",
     app: "Habiteazy",
   },
+  {
+    quote: "Banknotes is fascinating! I travel a lot and love scanning currencies from different countries. The history section is amazing.",
+    author: "Arjun D.",
+    role: "Travel Blogger",
+    app: "Banknotes",
+  },
+  {
+    quote: "The AI accuracy across all Trackzio apps is impressive. You can tell the team really cares about getting it right.",
+    author: "Meera S.",
+    role: "Tech Enthusiast",
+    app: "Trackzio",
+  },
 ];
 
 const appEvents: Record<string, string> = {
@@ -58,6 +70,31 @@ export default function Home() {
   usePageAnalytics('home', 'page_view_home');
   const [activeApp, setActiveApp] = useState(0);
   const selected = apps[activeApp];
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const updateScrollButtons = () => {
+    const el = carouselRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 10);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+  };
+
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    updateScrollButtons();
+    el.addEventListener('scroll', updateScrollButtons);
+    return () => el.removeEventListener('scroll', updateScrollButtons);
+  }, []);
+
+  const scrollCarousel = (dir: 'left' | 'right') => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const amount = el.clientWidth * 0.8;
+    el.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
+  };
 
   return (
     <div className="snap-y snap-mandatory">
@@ -101,7 +138,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="mt-10"
+              className="mt-10 flex items-center justify-center gap-4 flex-wrap"
             >
               <Link
                 to="/apps"
@@ -111,23 +148,31 @@ export default function Home() {
                 Explore Our Apps
                 <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
               </Link>
+              <Link
+                to="/help"
+                className="inline-flex items-center gap-2 h-12 px-8 rounded-2xl border border-border bg-card text-foreground font-semibold text-base transition-all hover:bg-muted group"
+              >
+                Get in Touch
+              </Link>
             </motion.div>
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator — larger with text */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
+          <span className="text-xs font-medium tracking-wider uppercase text-muted-foreground/60">
+            Scroll to Explore
+          </span>
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-5 h-8 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center pt-1.5"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
           >
-            <div className="w-1 h-1.5 rounded-full bg-muted-foreground/50" />
+            <ChevronDown size={28} className="text-muted-foreground/50" />
           </motion.div>
         </motion.div>
       </section>
@@ -151,13 +196,13 @@ export default function Home() {
             className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start"
           >
             {/* Left: App list */}
-            <div className="lg:w-[280px] w-full shrink-0 flex flex-row lg:flex-col gap-1 overflow-x-auto lg:overflow-visible">
+            <div className="lg:w-[300px] w-full shrink-0 flex flex-row lg:flex-col gap-1 overflow-x-auto lg:overflow-visible">
               {apps.map((app, i) => (
                 <button
                   key={app.id}
                   onClick={() => setActiveApp(i)}
                   onMouseEnter={() => setActiveApp(i)}
-                  className={`flex items-center gap-4 px-5 py-4 rounded-2xl text-left transition-all duration-300 w-full min-w-[180px] lg:min-w-0 ${
+                  className={`flex items-center gap-4 px-5 py-4 rounded-2xl text-left transition-all duration-300 w-full min-w-[200px] lg:min-w-0 ${
                     activeApp === i
                       ? 'bg-primary/10'
                       : 'hover:bg-muted/60'
@@ -168,7 +213,7 @@ export default function Home() {
                     alt={app.name}
                     className="w-10 h-10 rounded-xl shrink-0"
                   />
-                  <div className="overflow-hidden">
+                  <div className="overflow-hidden flex-1">
                     <div
                       className={`font-semibold text-sm transition-colors duration-300 ${
                         activeApp === i ? 'text-primary' : 'text-foreground'
@@ -252,10 +297,10 @@ export default function Home() {
                         trackEvent('portfolio_tile_click', { app_name: selected.name, page_name: 'home' });
                         trackEvent(appEvents[selected.id] || '', { app_name: selected.name, page_name: 'home' });
                       }}
-                      className="inline-flex items-center gap-2 text-sm font-semibold transition-all group"
-                      style={{ color: `hsl(${selected.accentHsl})` }}
+                      className="inline-flex items-center gap-2 h-10 px-6 rounded-xl text-sm font-semibold transition-all group text-primary-foreground"
+                      style={{ backgroundColor: `hsl(${selected.accentHsl})` }}
                     >
-                      Learn more
+                      Explore Now
                       <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                     </Link>
                   </div>
@@ -298,7 +343,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Section 4: Testimonials ── */}
+      {/* ── Section 4: Testimonials Carousel ── */}
       <section className="min-h-[80vh] flex items-center py-24 sm:py-32 snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
@@ -308,33 +353,59 @@ export default function Home() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-            {testimonials.map((t, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="relative"
+          <div className="relative">
+            {/* Carousel scroll buttons */}
+            {canScrollLeft && (
+              <button
+                onClick={() => scrollCarousel('left')}
+                className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                style={{ boxShadow: 'var(--shadow-card)' }}
               >
-                <div className="p-8 sm:p-10 rounded-3xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
-                  <Quote size={28} className="text-primary/20 mb-6" />
-                  <p className="text-lg sm:text-xl leading-relaxed text-foreground flex-1 font-medium">
-                    "{t.quote}"
-                  </p>
-                  <div className="mt-8 flex items-center gap-4">
-                    <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center font-display font-bold text-primary text-sm">
-                      {t.author.charAt(0)}
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground text-sm">{t.author}</div>
-                      <div className="text-xs text-muted-foreground">{t.role} · {t.app}</div>
+                <ChevronLeft size={18} />
+              </button>
+            )}
+            {canScrollRight && (
+              <button
+                onClick={() => scrollCarousel('right')}
+                className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                style={{ boxShadow: 'var(--shadow-card)' }}
+              >
+                <ChevronRight size={18} />
+              </button>
+            )}
+
+            <div
+              ref={carouselRef}
+              className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {testimonials.map((t, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.1 }}
+                  className="min-w-[320px] sm:min-w-[380px] max-w-[400px] flex-shrink-0 snap-start"
+                >
+                  <div className="p-8 sm:p-10 rounded-3xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
+                    <Quote size={28} className="text-primary/20 mb-6" />
+                    <p className="text-base sm:text-lg leading-relaxed text-foreground flex-1 font-medium">
+                      "{t.quote}"
+                    </p>
+                    <div className="mt-8 flex items-center gap-4">
+                      <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center font-display font-bold text-primary text-sm">
+                        {t.author.charAt(0)}
+                      </div>
+                      <div>
+                        <div className="font-semibold text-foreground text-sm">{t.author}</div>
+                        <div className="text-xs text-muted-foreground">{t.role} · {t.app}</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
