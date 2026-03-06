@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import { motion, AnimatePresence } from 'framer-motion';
 import trackzioLogo from '@/assets/trackzio-logo.jpg';
@@ -69,13 +69,14 @@ export default function Header() {
                     handleAppsClick(e);
                     item.event && trackEvent(item.event, { page_name: location.pathname });
                   }}
-                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                  className={`inline-flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                     location.pathname === '/apps'
                       ? 'text-primary'
                       : 'text-muted-foreground hover:text-primary'
                   }`}
                 >
                   {item.label}
+                  <ChevronDown size={14} className={`transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
                 </a>
               ) : (
                 <Link
@@ -101,7 +102,7 @@ export default function Header() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-1 rounded-2xl bg-card border border-border/40 p-4 z-50"
+                      className="absolute top-full left-1/2 -translate-x-[35%] mt-1 rounded-2xl bg-card border border-border/40 p-4 z-50"
                       style={{ boxShadow: 'var(--shadow-card)', width: 'min(90vw, 780px)' }}
                       onMouseEnter={handleDropdownEnter}
                       onMouseLeave={handleDropdownLeave}
@@ -116,8 +117,8 @@ export default function Header() {
                           >
                             <img src={app.logo} alt={app.name} className="w-12 h-12 rounded-xl mb-3 shrink-0" />
                             <div className="text-sm font-semibold text-foreground mb-1">{app.name}</div>
-                            <p className="text-xs text-muted-foreground leading-relaxed mb-3">{app.tagline}</p>
-                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:underline">
+                            <p className="text-xs text-muted-foreground leading-relaxed mb-auto line-clamp-2 min-h-[2.5rem]">{app.tagline}</p>
+                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:underline mt-3">
                               Explore <ArrowRight size={11} />
                             </span>
                           </Link>

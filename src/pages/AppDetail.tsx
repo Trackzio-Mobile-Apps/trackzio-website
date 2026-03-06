@@ -195,7 +195,7 @@ export default function AppDetail() {
   return (
     <div style={{ '--app-accent': app.accentHsl } as React.CSSProperties}>
       {/* ── 1. Hero ── */}
-      <section className="min-h-[50vh] flex items-center pt-12 pb-16 snap-start">
+      <section className="min-h-[40vh] flex items-center justify-center pt-8 pb-12 snap-start">
         <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at top, hsl(${app.accentHsl} / 0.08), transparent 60%)` }} />
         <div className="container-site relative">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
@@ -208,12 +208,10 @@ export default function AppDetail() {
             <h1 className="text-4xl sm:text-5xl font-bold font-display" style={{ color: `hsl(${app.accentHsl})` }}>
               {app.name}
             </h1>
-            <p className="mt-2 text-lg font-medium text-foreground">{app.tagline}</p>
-            <p className="mt-3 text-muted-foreground max-w-xl mx-auto leading-relaxed">{app.description}</p>
+            <p className="mt-3 text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">{app.description}</p>
 
             {/* Download section */}
             <div className="mt-6 flex flex-col items-center gap-4">
-              {/* Download button */}
               <button
                 onClick={handleDownload}
                 className="inline-flex items-center gap-2 h-11 px-7 rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity text-white"
@@ -222,7 +220,6 @@ export default function AppDetail() {
                 <Download size={16} /> Download Now
               </button>
 
-              {/* QR code — desktop only, below button */}
               {!isMobile && qrUrl && (
                 <div className="flex flex-col items-center gap-2">
                   <div className="p-3 rounded-xl bg-card border border-border/40" style={{ borderColor: `hsl(${app.accentHsl} / 0.2)` }}>
@@ -244,7 +241,7 @@ export default function AppDetail() {
             <h2 className="text-3xl sm:text-4xl font-bold font-display">What makes it special</h2>
           </motion.div>
 
-          <div className="space-y-20 max-w-5xl mx-auto">
+          <div className="space-y-16 max-w-4xl mx-auto">
             {app.features.map((feat, i) => {
               const isReversed = i % 2 === 1;
               const screenshot = app.screenshots[i % app.screenshots.length];
@@ -256,7 +253,7 @@ export default function AppDetail() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-80px' }}
                   transition={{ duration: 0.7 }}
-                  className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 lg:gap-14`}
+                  className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8`}
                 >
                   {/* Text side */}
                   <div className="flex-1 text-center md:text-left">
@@ -275,7 +272,7 @@ export default function AppDetail() {
                     )}
                   </div>
                   {/* Screenshot side */}
-                  <div className="flex-1 w-full max-w-[220px] mx-auto md:mx-0">
+                  <div className="flex-1 w-full max-w-[180px] mx-auto md:mx-0">
                     <div
                       className="rounded-2xl overflow-hidden bg-card"
                       style={{ boxShadow: '0 8px 32px -8px hsl(0 0% 0% / 0.1)' }}
