@@ -127,47 +127,27 @@ export default function AppDetail() {
   const [canScrollReviewLeft, setCanScrollReviewLeft] = useState(false);
   const [canScrollReviewRight, setCanScrollReviewRight] = useState(true);
 
-  if (!app) return <Navigate to="/" replace />;
+  const appId2 = app?.id || '';
+  usePageAnalytics(appId2, pageViewEvents[appId2] || 'page_view');
 
-  usePageAnalytics(app.id, pageViewEvents[app.id] || 'page_view');
+  useEffect(() => {
+    const el = reviewsRef.current;
+    if (!el) return;
+    const update = () => {
+      setCanScrollReviewLeft(el.scrollLeft > 10);
+      setCanScrollReviewRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+    };
+    update();
+    el.addEventListener('scroll', update);
+    return () => el.removeEventListener('scroll', update);
+  }, []);
+
+  if (!app) return <Navigate to="/" replace />;
 
   const platform = getPlatform();
   const faqs = appFaqs[app.id] || [];
   const visibleFaqs = showAllFaqs ? faqs : faqs.slice(0, 3);
   const bullets = featureBullets[app.id] || {};
-
-  const handleDownload = () => {
-    const url = getDownloadUrl(app.iosUrl, app.androidUrl);
-    if (url) {
-      const p = getPlatform();
-      const eventKey = p === 'ios' ? 'ios' : 'android';
-      trackEvent(downloadEvents[app.id]?.[eventKey], { app_name: app.name });
-      window.open(url, '_blank');
-    }
-  };
-
-  // QR target based on platform
-  const getQrUrl = () => {
-    if (platform === 'ios' && app.iosUrl) return app.iosUrl;
-    if (platform === 'android' && app.androidUrl) return app.androidUrl;
-    return app.androidUrl || app.iosUrl;
-  };
-  const qrUrl = getQrUrl();
-
-  const updateReviewScroll = () => {
-    const el = reviewsRef.current;
-    if (!el) return;
-    setCanScrollReviewLeft(el.scrollLeft > 10);
-    setCanScrollReviewRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
-  };
-
-  useEffect(() => {
-    const el = reviewsRef.current;
-    if (!el) return;
-    updateReviewScroll();
-    el.addEventListener('scroll', updateReviewScroll);
-    return () => el.removeEventListener('scroll', updateReviewScroll);
-  }, []);
 
   const scrollReviews = (dir: 'left' | 'right') => {
     const el = reviewsRef.current;
