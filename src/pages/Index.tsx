@@ -163,7 +163,7 @@ export default function Home() {
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           >
-            <ChevronDown size={24} className="text-muted-foreground/40" />
+            <ChevronDown size={32} className="text-muted-foreground/40" />
           </motion.div>
         </motion.div>
       </section>
