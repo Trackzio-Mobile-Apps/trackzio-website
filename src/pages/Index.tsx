@@ -148,12 +148,6 @@ export default function Home() {
                 Explore Our Apps
                 <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
               </Link>
-              <Link
-                to="/help"
-                className="inline-flex items-center gap-2 h-12 px-8 rounded-2xl border border-border bg-card text-foreground font-semibold text-base transition-all hover:bg-muted group"
-              >
-                Get in Touch
-              </Link>
             </motion.div>
           </motion.div>
         </div>
@@ -169,7 +163,7 @@ export default function Home() {
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           >
-            <ChevronDown size={24} className="text-muted-foreground/40" />
+            <ChevronDown size={32} className="text-muted-foreground/40" />
           </motion.div>
         </motion.div>
       </section>
