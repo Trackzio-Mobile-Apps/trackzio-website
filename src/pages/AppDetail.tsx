@@ -258,7 +258,7 @@ export default function AppDetail() {
                 className="rounded-2xl bg-card overflow-hidden"
                 style={{ boxShadow: '0 4px 24px -4px rgba(40, 54, 24, 0.08)' }}
               >
-                <div className="grid grid-cols-1 md:grid-cols-[7fr_3fr] items-center" style={{ gap: '0px' }}>
+                <div className={`grid grid-cols-1 ${isReversed ? 'md:grid-cols-[3fr_7fr]' : 'md:grid-cols-[7fr_3fr]'} items-center`} style={{ gap: '0px' }}>
                   {/* Text side */}
                   <div className={`p-8 sm:p-10 text-center md:text-left ${isReversed ? 'md:order-2' : 'md:order-1'} order-2`}>
                     <div className="max-w-sm mx-auto md:mx-0">
