@@ -181,7 +181,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.8 }}
-          className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer"
+          className="absolute bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer"
           onClick={() => document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' })}
         >
           <span className="text-xs tracking-[0.15em] uppercase text-muted-foreground/50">Scroll</span>
