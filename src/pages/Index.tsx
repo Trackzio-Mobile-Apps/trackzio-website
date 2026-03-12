@@ -176,6 +176,22 @@ export default function Home() {
             </motion.div>
           </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer"
+          onClick={() => document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          <span className="text-xs tracking-[0.15em] uppercase text-muted-foreground/50">Scroll</span>
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
+          >
+            <ChevronDown size={20} className="text-muted-foreground/40" />
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* ── Section 2: Our Applications ── */}
