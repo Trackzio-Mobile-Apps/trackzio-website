@@ -138,10 +138,10 @@ export default function Home() {
 
   return (
     <div className="snap-y snap-mandatory">
-      {/* ── Section 1: Hero ── */}
+      {/* ── Section 1: Hero — Light background ── */}
       <section className="min-h-screen flex items-center justify-center pt-8 pb-12 relative overflow-hidden snap-start">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.06),transparent_50%)]" />
-        <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--secondary)/0.04),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.05),transparent_50%)]" />
+        <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--primary)/0.03),transparent_60%)]" />
 
         <div className="container-site relative z-10">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
@@ -168,7 +168,7 @@ export default function Home() {
                   document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' });
                   trackEvent('hero_explore_apps', { page_name: 'home' });
                 }}
-                className="inline-flex items-center gap-2 h-12 px-8 rounded-2xl bg-primary text-primary-foreground font-semibold text-base transition-all hover:opacity-90 glow group"
+                className="inline-flex items-center gap-2 h-12 px-8 rounded-xl bg-primary text-primary-foreground font-semibold text-base transition-all hover:opacity-90 glow group"
               >
                 Explore Our Apps
                 <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
@@ -194,8 +194,8 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ── Section 2: Our Applications ── */}
-      <section id="apps" className="min-h-screen py-24 sm:py-32 snap-start">
+      {/* ── Section 2: Our Applications — Tinted background ── */}
+      <section id="apps" className="min-h-screen py-24 sm:py-32 snap-start bg-section-tinted">
         <div className="container-site">
           <motion.div {...fadeUp} className="max-w-2xl mb-20">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Our Applications</p>
@@ -221,8 +221,8 @@ export default function Home() {
                   onMouseEnter={() => setActiveApp(i)}
                   className={`flex items-center gap-4 px-5 py-4 rounded-2xl text-left transition-all duration-300 w-full min-w-[200px] lg:min-w-0 ${
                     activeApp === i
-                      ? 'bg-primary/10'
-                      : 'hover:bg-muted/60'
+                      ? 'bg-card shadow-sm'
+                      : 'hover:bg-card/60'
                   }`}
                 >
                   <img
@@ -265,7 +265,7 @@ export default function Home() {
                 >
                   {/* Preview visual */}
                   <div
-                    className="w-full sm:w-1/2 aspect-square max-w-[360px] rounded-3xl flex items-center justify-center relative overflow-hidden"
+                    className="w-full sm:w-1/2 aspect-square max-w-[360px] rounded-3xl flex items-center justify-center relative overflow-hidden bg-card"
                     style={{
                       background: `linear-gradient(160deg, hsl(${selected.accentHsl} / 0.1), hsl(${selected.accentHsl} / 0.03))`,
                     }}
@@ -315,8 +315,7 @@ export default function Home() {
                           trackEvent('portfolio_tile_click', { app_name: selected.name, page_name: 'home' });
                           trackEvent(appEvents[selected.id] || '', { app_name: selected.name, page_name: 'home' });
                         }}
-                        className="inline-flex items-center gap-2 h-10 px-6 rounded-xl text-sm font-semibold transition-all group text-primary-foreground"
-                        style={{ backgroundColor: `hsl(${selected.accentHsl})` }}
+                        className="inline-flex items-center gap-2 h-10 px-6 rounded-xl text-sm font-semibold transition-all group bg-primary text-primary-foreground hover:opacity-90 glow"
                       >
                         Explore Now
                         <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -324,11 +323,7 @@ export default function Home() {
                       {isMobile && (selected.iosUrl || selected.androidUrl) && (
                         <button
                           onClick={() => handleDownload(selected)}
-                          className="inline-flex items-center gap-2 h-10 px-6 rounded-xl text-sm font-semibold border-2 transition-all hover:opacity-80"
-                          style={{
-                            color: `hsl(${selected.accentHsl})`,
-                            borderColor: `hsl(${selected.accentHsl} / 0.4)`,
-                          }}
+                          className="inline-flex items-center gap-2 h-10 px-6 rounded-xl text-sm font-semibold border-2 border-primary/30 text-primary transition-all hover:bg-primary/5"
                         >
                           <Download size={15} /> Download
                         </button>
@@ -342,7 +337,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Section 3: Stats ── */}
+      {/* ── Section 3: Stats — Light background ── */}
       <section className="min-h-screen flex items-center snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
@@ -362,7 +357,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="text-center py-8"
               >
-                <div className="text-5xl sm:text-6xl lg:text-7xl font-bold font-display text-gradient mb-3">
+                <div className="text-5xl sm:text-6xl lg:text-7xl font-bold font-display text-primary mb-3">
                   {m.value}
                 </div>
                 <div className="text-sm sm:text-base text-muted-foreground tracking-wide">
@@ -374,8 +369,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Section 4: Testimonials Carousel — 4 cards visible ── */}
-      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
+      {/* ── Section 4: Testimonials — Tinted background ── */}
+      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start bg-section-tinted">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">What People Say</p>
@@ -388,7 +383,7 @@ export default function Home() {
             {canScrollLeft && (
               <button
                 onClick={() => scrollCarousel('left')}
-                className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border/40 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
                 style={{ boxShadow: 'var(--shadow-card)' }}
               >
                 <ChevronLeft size={18} />
@@ -397,7 +392,7 @@ export default function Home() {
             {canScrollRight && (
               <button
                 onClick={() => scrollCarousel('right')}
-                className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border/40 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
                 style={{ boxShadow: 'var(--shadow-card)' }}
               >
                 <ChevronRight size={18} />
@@ -419,11 +414,11 @@ export default function Home() {
                   className="flex-shrink-0 snap-start"
                   style={{ width: 'calc(25% - 15px)', minWidth: '260px' }}
                 >
-                  <div className="p-6 rounded-3xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
+                  <div className="p-6 rounded-2xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
                     <Quote size={22} className="text-primary/25 mb-3" />
                     <p className="text-sm leading-relaxed text-foreground flex-1 font-medium">"{t.quote}"</p>
                     <div className="mt-5 flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-display font-bold text-primary text-sm">
+                      <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center font-display font-bold text-primary text-sm">
                         {t.author.charAt(0)}
                       </div>
                       <div>
