@@ -21,7 +21,7 @@ export default function MetricsBar() {
               transition={{ delay: i * 0.1 }}
               className="text-center"
             >
-              <div className="text-2xl sm:text-3xl font-bold font-display text-gradient">{m.value}</div>
+              <div className="text-2xl sm:text-3xl font-bold font-display text-primary">{m.value}</div>
               <div className="mt-1 text-sm text-muted-foreground">{m.label}</div>
             </motion.div>
           ))}

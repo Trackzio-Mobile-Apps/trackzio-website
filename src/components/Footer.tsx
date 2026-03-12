@@ -18,7 +18,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: 'hsl(90 33% 15%)' }} role="contentinfo">
+    <footer className="bg-primary" role="contentinfo">
       <div className="container-site py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Social */}
@@ -31,10 +31,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 aria-label={`Follow Trackzio on ${s.label}`}
                 onClick={() => s.event && trackEvent(s.event, { page_name: window.location.pathname })}
-                className="transition-colors"
-                style={{ color: 'hsl(40 33% 92%)' }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'hsl(27 66% 55%)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'hsl(40 33% 92%)')}
+                className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
               >
                 {s.icon}
               </a>
@@ -47,24 +44,21 @@ export default function Footer() {
               <Link
                 key={label}
                 to={`/${label.toLowerCase()}`}
-                className="transition-colors"
-                style={{ color: 'hsl(40 33% 85%)' }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'hsl(40 33% 98%)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'hsl(40 33% 85%)')}
+                className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
               >
                 {label}
               </Link>
             ))}
             <Link
               to="/help"
-              className="inline-flex items-center h-9 px-5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold transition-opacity hover:opacity-90"
+              className="inline-flex items-center h-9 px-5 rounded-xl bg-primary-foreground text-primary text-sm font-semibold transition-opacity hover:opacity-90"
             >
               Get in Touch
             </Link>
           </nav>
         </div>
 
-        <div className="mt-8 text-center text-sm" style={{ color: 'hsl(40 15% 55%)' }}>
+        <div className="mt-8 text-center text-sm text-primary-foreground/50">
           © 2026 Trackzio. All rights reserved.
         </div>
       </div>
