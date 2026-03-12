@@ -184,12 +184,12 @@ export default function Home() {
           className="absolute bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer"
           onClick={() => document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' })}
         >
-          <span className="text-xs tracking-[0.15em] uppercase text-muted-foreground/50">Scroll</span>
+          <span className="text-xs tracking-[0.15em] uppercase text-foreground/50">Scroll</span>
           <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
           >
-            <ChevronDown size={20} className="text-muted-foreground/40" />
+            <ChevronDown size={20} className="text-foreground/50" />
           </motion.div>
         </motion.div>
       </section>

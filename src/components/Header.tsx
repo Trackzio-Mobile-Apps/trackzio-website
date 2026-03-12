@@ -69,10 +69,10 @@ export default function Header() {
                     handleAppsClick(e);
                     item.event && trackEvent(item.event, { page_name: location.pathname });
                   }}
-                  className={`inline-flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                  className={`inline-flex items-center gap-1 px-3 py-2 text-sm rounded-md transition-colors ${
                     location.pathname === '/apps'
-                      ? 'text-primary'
-                      : 'text-muted-foreground hover:text-primary'
+                      ? 'text-primary font-bold'
+                      : 'text-muted-foreground font-medium hover:text-primary'
                   }`}
                 >
                   {item.label}
@@ -82,10 +82,10 @@ export default function Header() {
                 <Link
                   to={item.to}
                   onClick={() => item.event && trackEvent(item.event, { page_name: location.pathname })}
-                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                  className={`px-3 py-2 text-sm rounded-md transition-colors ${
                     location.pathname === item.to
-                      ? 'text-primary'
-                      : 'text-muted-foreground hover:text-primary'
+                      ? 'text-primary font-bold'
+                      : 'text-muted-foreground font-medium hover:text-primary'
                   }`}
                 >
                   {item.label}
@@ -102,7 +102,7 @@ export default function Header() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute top-full left-1/2 -translate-x-[35%] mt-1 rounded-2xl bg-card border border-border/40 p-4 z-50"
+                      className="absolute top-full left-1/2 -translate-x-[65%] mt-1 rounded-2xl bg-card border border-border/40 p-4 z-50"
                       style={{ boxShadow: 'var(--shadow-card)', width: 'min(90vw, 780px)' }}
                       onMouseEnter={handleDropdownEnter}
                       onMouseLeave={handleDropdownLeave}
@@ -191,10 +191,10 @@ export default function Header() {
                       setOpen(false);
                       item.event && trackEvent(item.event, { page_name: location.pathname });
                     }}
-                    className={`px-3 py-2.5 text-sm font-medium rounded-md transition-colors ${
+                    className={`px-3 py-2.5 text-sm rounded-md transition-colors ${
                       location.pathname === item.to
-                        ? 'text-primary'
-                        : 'text-muted-foreground hover:text-primary'
+                        ? 'text-primary font-bold'
+                        : 'text-muted-foreground font-medium hover:text-primary'
                     }`}
                   >
                     {item.label}
