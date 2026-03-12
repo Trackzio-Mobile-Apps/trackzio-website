@@ -69,10 +69,10 @@ export default function Header() {
                     handleAppsClick(e);
                     item.event && trackEvent(item.event, { page_name: location.pathname });
                   }}
-                  className={`inline-flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                  className={`inline-flex items-center gap-1 px-3 py-2 text-sm rounded-md transition-colors ${
                     location.pathname === '/apps'
-                      ? 'text-primary'
-                      : 'text-muted-foreground hover:text-primary'
+                      ? 'text-primary font-bold'
+                      : 'text-muted-foreground font-medium hover:text-primary'
                   }`}
                 >
                   {item.label}
