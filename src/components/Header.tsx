@@ -82,10 +82,10 @@ export default function Header() {
                 <Link
                   to={item.to}
                   onClick={() => item.event && trackEvent(item.event, { page_name: location.pathname })}
-                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                  className={`px-3 py-2 text-sm rounded-md transition-colors ${
                     location.pathname === item.to
-                      ? 'text-primary'
-                      : 'text-muted-foreground hover:text-primary'
+                      ? 'text-primary font-bold'
+                      : 'text-muted-foreground font-medium hover:text-primary'
                   }`}
                 >
                   {item.label}
