@@ -47,7 +47,7 @@ export default function Help() {
         <div className="container-site">
           <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">HOW CAN WE HELP?</p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display mb-4">Help Center</h1>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display mb-4">Help <span className="text-primary">Center</span></h1>
             <p className="text-lg text-muted-foreground">Find answers to your questions and get support.</p>
           </motion.div>
         </div>
