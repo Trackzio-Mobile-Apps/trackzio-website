@@ -93,7 +93,7 @@ export default function Blog() {
         <div className="container-site">
           <motion.div {...fadeUp} className="text-center max-w-2xl mx-auto">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Blog</p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display mb-4">Insights & Stories</h1>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display mb-4">Insights & <span className="text-primary">Stories</span></h1>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto">
               Updates, ideas, and stories from the Trackzio team.
             </p>
