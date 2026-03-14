@@ -33,17 +33,15 @@ const journeyBlocks = [
 
 
 const teamMembers = [
-{ initials: 'A', name: 'Ayushya', role: 'Founder & CEO', linkedin: '#' },
-{ initials: 'R', name: 'Ravi Kumar', role: 'Head of Engineering', linkedin: '#' },
-{ initials: 'M', name: 'Meera Patel', role: 'Product Designer', linkedin: '#' },
-{ initials: 'S', name: 'Sanjay Nair', role: 'AI/ML Engineer', linkedin: '#' },
-{ initials: 'D', name: 'Divya Sharma', role: 'Marketing Lead', linkedin: '#' },
-{ initials: 'K', name: 'Karthik Reddy', role: 'Backend Developer', linkedin: '#' },
-{ initials: 'N', name: 'Neha Gupta', role: 'Frontend Developer', linkedin: '#' },
-{ initials: 'V', name: 'Vikram Singh', role: 'Data Scientist', linkedin: '#' },
-{ initials: 'P', name: 'Pooja Menon', role: 'UX Researcher', linkedin: '#' },
-{ initials: 'A', name: 'Arjun Das', role: 'DevOps Engineer', linkedin: '#' },
-{ initials: 'T', name: 'Tanvi Joshi', role: 'Content Strategist', linkedin: '#' }];
+  { initials: 'A', name: 'Ayushya', role: 'Founder & CEO', linkedin: '#', color: 'from-emerald-800 to-teal-600' },
+  { initials: 'R', name: 'Ravi Kumar', role: 'Head of Engineering', linkedin: '#', color: 'from-slate-700 to-slate-500' },
+  { initials: 'M', name: 'Meera Patel', role: 'Product Designer', linkedin: '#', color: 'from-teal-700 to-cyan-500' },
+  { initials: 'S', name: 'Sanjay Nair', role: 'AI/ML Engineer', linkedin: '#', color: 'from-green-800 to-emerald-500' },
+  { initials: 'D', name: 'Divya Sharma', role: 'Marketing Lead', linkedin: '#', color: 'from-slate-800 to-gray-500' },
+  { initials: 'K', name: 'Karthik Reddy', role: 'Backend Developer', linkedin: '#', color: 'from-teal-800 to-teal-500' },
+  { initials: 'N', name: 'Neha Gupta', role: 'Frontend Developer', linkedin: '#', color: 'from-emerald-700 to-green-500' },
+  { initials: 'V', name: 'Vikram Singh', role: 'Data Scientist', linkedin: '#', color: 'from-cyan-800 to-teal-500' },
+];
 
 
 export default function About() {
