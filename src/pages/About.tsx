@@ -125,36 +125,39 @@ export default function About() {
       </section>
 
       {/* ── Section 4: Team ── */}
-      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
+      <section className="py-24 sm:py-32 snap-start">
         <div className="container-site w-full">
-          <motion.div {...fadeUp} className="text-center mb-20">
+          <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Our Team</p>
             <h2 className="text-3xl sm:text-4xl font-bold font-display">The people behind <span className="text-gradient">Trackzio</span></h2>
           </motion.div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-12 max-w-5xl mx-auto justify-items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
             {teamMembers.map((member, i) =>
             <motion.div
               key={member.name}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="group text-center">
+              transition={{ duration: 0.5, delay: i * 0.07 }}
+              className="group text-center rounded-2xl bg-card p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg">
               
-                <div className="w-28 h-28 rounded-full bg-primary/10 flex items-center justify-center font-display text-3xl font-bold text-primary mx-auto mb-4 transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1">
-                  {member.initials}
+                {/* Profile photo with LinkedIn overlay */}
+                <div className="relative w-32 h-32 mx-auto mb-5">
+                  <div className="w-full h-full rounded-full bg-primary/10 flex items-center justify-center font-display text-4xl font-bold text-primary overflow-hidden">
+                    {member.initials}
+                  </div>
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground shadow-md transition-transform duration-200 hover:scale-110">
+                    <Linkedin size={14} />
+                  </a>
                 </div>
-                <h3 className="font-display font-bold text-sm text-foreground">{member.name}</h3>
-                <p className="text-xs text-muted-foreground mt-0.5 mb-2">{member.role}</p>
-                <a
-                href={member.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex text-muted-foreground/40 transition-colors duration-300 group-hover:text-primary">
-                
-                  <Linkedin size={16} />
-                </a>
+
+                <h3 className="font-display font-bold text-base text-foreground">{member.name}</h3>
+                <p className="text-sm text-muted-foreground mt-1">{member.role}</p>
               </motion.div>
             )}
           </div>
