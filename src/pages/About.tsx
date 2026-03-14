@@ -33,17 +33,15 @@ const journeyBlocks = [
 
 
 const teamMembers = [
-{ initials: 'A', name: 'Ayushya', role: 'Founder & CEO', linkedin: '#' },
-{ initials: 'R', name: 'Ravi Kumar', role: 'Head of Engineering', linkedin: '#' },
-{ initials: 'M', name: 'Meera Patel', role: 'Product Designer', linkedin: '#' },
-{ initials: 'S', name: 'Sanjay Nair', role: 'AI/ML Engineer', linkedin: '#' },
-{ initials: 'D', name: 'Divya Sharma', role: 'Marketing Lead', linkedin: '#' },
-{ initials: 'K', name: 'Karthik Reddy', role: 'Backend Developer', linkedin: '#' },
-{ initials: 'N', name: 'Neha Gupta', role: 'Frontend Developer', linkedin: '#' },
-{ initials: 'V', name: 'Vikram Singh', role: 'Data Scientist', linkedin: '#' },
-{ initials: 'P', name: 'Pooja Menon', role: 'UX Researcher', linkedin: '#' },
-{ initials: 'A', name: 'Arjun Das', role: 'DevOps Engineer', linkedin: '#' },
-{ initials: 'T', name: 'Tanvi Joshi', role: 'Content Strategist', linkedin: '#' }];
+  { initials: 'A', name: 'Ayushya', role: 'Founder & CEO', linkedin: '#', color: 'from-emerald-800 to-teal-600' },
+  { initials: 'R', name: 'Ravi Kumar', role: 'Head of Engineering', linkedin: '#', color: 'from-slate-700 to-slate-500' },
+  { initials: 'M', name: 'Meera Patel', role: 'Product Designer', linkedin: '#', color: 'from-teal-700 to-cyan-500' },
+  { initials: 'S', name: 'Sanjay Nair', role: 'AI/ML Engineer', linkedin: '#', color: 'from-green-800 to-emerald-500' },
+  { initials: 'D', name: 'Divya Sharma', role: 'Marketing Lead', linkedin: '#', color: 'from-slate-800 to-gray-500' },
+  { initials: 'K', name: 'Karthik Reddy', role: 'Backend Developer', linkedin: '#', color: 'from-teal-800 to-teal-500' },
+  { initials: 'N', name: 'Neha Gupta', role: 'Frontend Developer', linkedin: '#', color: 'from-emerald-700 to-green-500' },
+  { initials: 'V', name: 'Vikram Singh', role: 'Data Scientist', linkedin: '#', color: 'from-cyan-800 to-teal-500' },
+];
 
 
 export default function About() {
@@ -132,34 +130,49 @@ export default function About() {
             <h2 className="text-3xl sm:text-4xl font-bold font-display">The people behind <span className="text-gradient">Trackzio</span></h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
-            {teamMembers.map((member, i) =>
-            <motion.div
-              key={member.name}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.07 }}
-              className="group text-center rounded-2xl bg-card p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg">
-              
-                {/* Profile photo with LinkedIn overlay */}
-                <div className="relative w-32 h-32 mx-auto mb-5">
-                  <div className="w-full h-full rounded-full bg-primary/10 flex items-center justify-center font-display text-4xl font-bold text-primary overflow-hidden">
-                    {member.initials}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+            {teamMembers.map((member, i) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.07 }}
+                className="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer transition-shadow duration-300 hover:shadow-xl"
+              >
+                {/* Background with gradient (placeholder for real photos) */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${member.color} transition-transform duration-500 group-hover:scale-105`}>
+                  {/* Large centered initial as photo placeholder */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="font-display text-[8rem] font-bold text-white/15 select-none leading-none">
+                      {member.initials}
+                    </span>
                   </div>
-                  <a
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground shadow-md transition-transform duration-200 hover:scale-110">
-                    <Linkedin size={14} />
-                  </a>
                 </div>
 
-                <h3 className="font-display font-bold text-base text-foreground">{member.name}</h3>
-                <p className="text-sm text-muted-foreground mt-1">{member.role}</p>
+                {/* Dark gradient overlay at bottom for text */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 group-hover:from-black/90" />
+
+                {/* Name & Role overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <h3 className="font-display font-bold text-lg text-white uppercase tracking-wide leading-tight">
+                    {member.name}
+                  </h3>
+                  <p className="text-white/70 text-sm mt-1">{member.role}</p>
+                </div>
+
+                {/* LinkedIn icon - bottom right */}
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white border border-white/20 transition-all duration-200 hover:scale-110 hover:bg-white/30 z-10"
+                >
+                  <Linkedin size={16} />
+                </a>
               </motion.div>
-            )}
+            ))}
           </div>
         </div>
       </section>
