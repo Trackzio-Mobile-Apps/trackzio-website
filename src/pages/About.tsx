@@ -126,6 +126,42 @@ export default function About() {
         </div>
       </section>
 
+      {/* ── Section: About Us Card ── */}
+      <section className="py-24 sm:py-32 snap-start bg-section-tinted">
+        <div className="container-site w-full">
+          <motion.div {...fadeUp} className="max-w-6xl mx-auto">
+            <div className="rounded-2xl bg-card overflow-hidden" style={{ boxShadow: '0 4px 24px -4px rgba(40, 54, 24, 0.08)' }}>
+              <div className="grid grid-cols-1 lg:grid-cols-2">
+                {/* Left: Text Content */}
+                <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
+                  <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">About Us</p>
+                  <h2 className="text-2xl sm:text-3xl font-bold font-display mb-5 leading-snug">
+                    Who we <span className="text-gradient">are</span>
+                  </h2>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    Trackzio is a product studio building AI-powered apps for collectors, enthusiasts, and curious minds. From identifying coins and insects to tracking habits and managing finances — our apps are designed to make everyday life smarter and more organized.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    We're a small, passionate team that believes great software should feel invisible. Our products are used by hundreds of thousands of people across the globe, and we're just getting started.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    We foster a culture of innovation, remote collaboration, and continuous learning — where every team member has the freedom to experiment, grow, and make an impact.
+                  </p>
+                </div>
+
+                {/* Right: Culture Images Grid */}
+                <div className="p-4 sm:p-6 lg:p-8 grid grid-cols-2 gap-3">
+                  <img src={innovationImg} alt="Innovation at Trackzio" className="w-full h-full object-cover rounded-xl aspect-square" />
+                  <img src={remoteWorkImg} alt="Remote work culture" className="w-full h-full object-cover rounded-xl aspect-square" />
+                  <img src={teamCollabImg} alt="Team collaboration" className="w-full h-full object-cover rounded-xl aspect-square" />
+                  <img src={teamFunImg} alt="Team fun moments" className="w-full h-full object-cover rounded-xl aspect-square" />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── Section 4: Team ── */}
       <section className="py-24 sm:py-32 snap-start">
         <div className="container-site w-full">
