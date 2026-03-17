@@ -76,7 +76,7 @@ export const apps: AppInfo[] = [
       { icon: '📊', title: 'Rarity & Value', description: 'Discover rarity, estimated price, and circulation status.' },
       { icon: '🏛️', title: 'History & Design', description: 'Explore detailed history, design elements, and materials.' },
     ],
-    stats: { downloads: '600K+', rating: '4.7', dau: '12K+' },
+    stats: { downloads: '40K+', rating: '4.3+', dau: '7K+' },
   },
   {
     id: 'insecto',
