@@ -314,7 +314,7 @@ export default function Home() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-4">
             {metrics.map((m, i) => (
               <motion.div
                 key={m.label}
