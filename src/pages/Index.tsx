@@ -29,52 +29,20 @@ const metrics = [
 
 const testimonials = [
   {
-    quote: "Coinzy completely changed how I manage my finances. The AI categorization is incredibly accurate and saves me hours every month.",
-    author: "Priya M.",
-    role: "Freelance Designer",
-    app: "Coinzy",
+    quote: "I've used a lot of habit trackers and games, and I really like this one. It's easy to add tasks and habits and configure them to meet my needs. It doesn't have a ton of ads, and right now the premium is only about $2/month so it's affordable. I work a flexible schedule of 50hr/week with my schedule changing with less than a day's notice, regularly. This app makes it much easier to organize my life despite the chaos and lack of time.",
+    author: "Amanda",
   },
   {
-    quote: "Insecto is a game-changer for nature enthusiasts. My kids love pointing the camera at bugs and learning about them instantly.",
-    author: "Rahul K.",
-    role: "Parent & Nature Lover",
-    app: "Insecto",
+    quote: "I make money in various currencies and this app is very very helpful in identifying the money that I have made in the different currencies. Good community 🥳🥳",
+    author: "Kirti",
   },
   {
-    quote: "Habiteazy helped me build a consistent morning routine. The streak tracking keeps me motivated every single day.",
-    author: "Sneha T.",
-    role: "Marketing Professional",
-    app: "Habiteazy",
+    quote: "As an avid collector of US coins and currency for over 20 years, I can say I love the concept of the app and the fact that there's an included community within the app that allows us to interact amongst each other.",
+    author: "Jaylin",
   },
   {
-    quote: "Banknotes is fascinating! I travel a lot and love scanning currencies from different countries. The history section is amazing.",
-    author: "Arjun D.",
-    role: "Travel Blogger",
-    app: "Banknotes",
-  },
-  {
-    quote: "The AI accuracy across all Trackzio apps is impressive. You can tell the team really cares about getting it right.",
-    author: "Meera S.",
-    role: "Tech Enthusiast",
-    app: "Trackzio",
-  },
-  {
-    quote: "I use Habiteazy daily — the streaks keep me accountable. Best habit app I've tried.",
-    author: "Anil V.",
-    role: "Entrepreneur",
-    app: "Habiteazy",
-  },
-  {
-    quote: "Coinzy's marketplace is so convenient. I found rare coins I'd been searching for years.",
-    author: "Deepa R.",
-    role: "Coin Collector",
-    app: "Coinzy",
-  },
-  {
-    quote: "Banknotes taught my daughter about different currencies. It's both fun and educational.",
-    author: "Sunita P.",
-    role: "Teacher",
-    app: "Banknotes",
+    quote: "This is a great app for coin collectors. It's helpful in cataloging the collection virtually. Also, it provides visibility on the coins that have not been collected by me yet.",
+    author: "Ankit",
   },
 ];
 
