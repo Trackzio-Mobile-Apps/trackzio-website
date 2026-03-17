@@ -1,6 +1,7 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { Linkedin } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import innovationImg from '@/assets/culture/innovation.jpg';
 import remoteWorkImg from '@/assets/culture/remote-work.jpg';
 import teamCollabImg from '@/assets/culture/team-collab.jpg';
@@ -12,6 +13,13 @@ const fadeUp = {
   viewport: { once: true, margin: '-100px' },
   transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] as const }
 };
+
+const cultureImages = [
+  { src: innovationImg, alt: 'Innovation at Trackzio' },
+  { src: remoteWorkImg, alt: 'Remote work culture' },
+  { src: teamCollabImg, alt: 'Team collaboration' },
+  { src: teamFunImg, alt: 'Team fun moments' },
+];
 
 const journeyBlocks = [
 {
@@ -51,6 +59,15 @@ const teamMembers = [
 export default function About() {
   usePageAnalytics('about', 'about us_page_view');
 
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % cultureImages.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="snap-y snap-mandatory">
       {/* ── Section 1: Intro (compact hero) ── */}
@@ -68,7 +85,110 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── Section 2: Vision & Mission ── */}
+      {/* ── Section 2: About Us Card ── */}
+      <section className="py-24 sm:py-32 snap-start bg-section-tinted">
+        <div className="container-site w-full">
+          <motion.div {...fadeUp} className="max-w-6xl mx-auto">
+            <div className="rounded-2xl bg-card overflow-hidden" style={{ boxShadow: '0 4px 24px -4px rgba(40, 54, 24, 0.08)' }}>
+              <div className="grid grid-cols-1 lg:grid-cols-2">
+                {/* Left: Text Content */}
+                <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
+                  <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">About Us</p>
+                  <h2 className="text-2xl sm:text-3xl font-bold font-display mb-5 leading-snug">
+                    Who we <span className="text-gradient">are</span>
+                  </h2>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    Trackzio is a product studio building AI-powered apps for collectors, enthusiasts, and curious minds. From identifying coins and insects to tracking habits and managing finances — our apps are designed to make everyday life smarter and more organized.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    We're a small, passionate team that believes great software should feel invisible. Our products are used by hundreds of thousands of people across the globe, and we're just getting started.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    We foster a culture of innovation, remote collaboration, and continuous learning — where every team member has the freedom to experiment, grow, and make an impact.
+                  </p>
+                </div>
+
+                {/* Right: Auto-changing Image Slider */}
+                <div className="p-4 sm:p-6 lg:p-8 flex items-center justify-center">
+                  <div className="relative w-full aspect-square rounded-xl overflow-hidden">
+                    <AnimatePresence mode="wait">
+                      <motion.img
+                        key={currentImage}
+                        src={cultureImages[currentImage].src}
+                        alt={cultureImages[currentImage].alt}
+                        className="absolute inset-0 w-full h-full object-cover rounded-xl"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.6 }}
+                      />
+                    </AnimatePresence>
+                    {/* Dots indicator */}
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                      {cultureImages.map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setCurrentImage(i)}
+                          className={`w-2 h-2 rounded-full transition-all duration-300 ${i === currentImage ? 'bg-white w-5' : 'bg-white/50'}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Section 3: Team ── */}
+      <section className="py-24 sm:py-32 snap-start">
+        <div className="container-site w-full">
+          <motion.div {...fadeUp} className="text-center mb-16">
+            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Our Team</p>
+            <h2 className="text-3xl sm:text-4xl font-bold font-display">The people behind <span className="text-gradient">Trackzio</span></h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+            {teamMembers.map((member, i) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.07 }}
+                className="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer transition-shadow duration-300 hover:shadow-xl"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${member.color} transition-transform duration-500 group-hover:scale-105`}>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="font-display text-[8rem] font-bold text-white/15 select-none leading-none">
+                      {member.initials}
+                    </span>
+                  </div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 group-hover:from-black/90" />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <h3 className="font-display font-bold text-lg text-white uppercase tracking-wide leading-tight">
+                    {member.name}
+                  </h3>
+                  <p className="text-white/70 text-sm mt-1">{member.role}</p>
+                </div>
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white border border-white/20 transition-all duration-200 hover:scale-110 hover:bg-white/30 z-10"
+                >
+                  <Linkedin size={16} />
+                </a>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 4: Vision & Mission ── */}
       <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="max-w-5xl mx-auto">
@@ -89,7 +209,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── Section 3: Journey — Story Blocks with Graphics ── */}
+      {/* ── Section 5: Journey ── */}
       <section className="py-24 sm:py-32 snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-20">
@@ -120,99 +240,7 @@ export default function About() {
                     <p className="text-muted-foreground leading-relaxed text-lg">{block.description}</p>
                   </div>
                 </motion.div>);
-
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Section: About Us Card ── */}
-      <section className="py-24 sm:py-32 snap-start bg-section-tinted">
-        <div className="container-site w-full">
-          <motion.div {...fadeUp} className="max-w-6xl mx-auto">
-            <div className="rounded-2xl bg-card overflow-hidden" style={{ boxShadow: '0 4px 24px -4px rgba(40, 54, 24, 0.08)' }}>
-              <div className="grid grid-cols-1 lg:grid-cols-2">
-                {/* Left: Text Content */}
-                <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
-                  <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">About Us</p>
-                  <h2 className="text-2xl sm:text-3xl font-bold font-display mb-5 leading-snug">
-                    Who we <span className="text-gradient">are</span>
-                  </h2>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    Trackzio is a product studio building AI-powered apps for collectors, enthusiasts, and curious minds. From identifying coins and insects to tracking habits and managing finances — our apps are designed to make everyday life smarter and more organized.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    We're a small, passionate team that believes great software should feel invisible. Our products are used by hundreds of thousands of people across the globe, and we're just getting started.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    We foster a culture of innovation, remote collaboration, and continuous learning — where every team member has the freedom to experiment, grow, and make an impact.
-                  </p>
-                </div>
-
-                {/* Right: Culture Images Grid */}
-                <div className="p-4 sm:p-6 lg:p-8 grid grid-cols-2 gap-3">
-                  <img src={innovationImg} alt="Innovation at Trackzio" className="w-full h-full object-cover rounded-xl aspect-square" />
-                  <img src={remoteWorkImg} alt="Remote work culture" className="w-full h-full object-cover rounded-xl aspect-square" />
-                  <img src={teamCollabImg} alt="Team collaboration" className="w-full h-full object-cover rounded-xl aspect-square" />
-                  <img src={teamFunImg} alt="Team fun moments" className="w-full h-full object-cover rounded-xl aspect-square" />
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Section 4: Team ── */}
-      <section className="py-24 sm:py-32 snap-start">
-        <div className="container-site w-full">
-          <motion.div {...fadeUp} className="text-center mb-16">
-            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Our Team</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display">The people behind <span className="text-gradient">Trackzio</span></h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
-            {teamMembers.map((member, i) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.07 }}
-                className="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer transition-shadow duration-300 hover:shadow-xl"
-              >
-                {/* Background with gradient (placeholder for real photos) */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${member.color} transition-transform duration-500 group-hover:scale-105`}>
-                  {/* Large centered initial as photo placeholder */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="font-display text-[8rem] font-bold text-white/15 select-none leading-none">
-                      {member.initials}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Dark gradient overlay at bottom for text */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 group-hover:from-black/90" />
-
-                {/* Name & Role overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <h3 className="font-display font-bold text-lg text-white uppercase tracking-wide leading-tight">
-                    {member.name}
-                  </h3>
-                  <p className="text-white/70 text-sm mt-1">{member.role}</p>
-                </div>
-
-                {/* LinkedIn icon - bottom right */}
-                <a
-                  href={member.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white border border-white/20 transition-all duration-200 hover:scale-110 hover:bg-white/30 z-10"
-                >
-                  <Linkedin size={16} />
-                </a>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
