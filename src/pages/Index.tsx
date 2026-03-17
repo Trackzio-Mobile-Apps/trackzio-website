@@ -371,7 +371,31 @@ export default function Home() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="relative">
+            {canScrollLeft && (
+              <button
+                onClick={() => scrollCarousel('left')}
+                className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                style={{ boxShadow: 'var(--shadow-card)' }}
+              >
+                <ChevronLeft size={18} />
+              </button>
+            )}
+            {canScrollRight && (
+              <button
+                onClick={() => scrollCarousel('right')}
+                className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                style={{ boxShadow: 'var(--shadow-card)' }}
+              >
+                <ChevronRight size={18} />
+              </button>
+            )}
+
+            <div
+              ref={carouselRef}
+              className="flex gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
               {testimonials.map((t, i) => (
                 <motion.div
                   key={i}
@@ -379,6 +403,8 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: Math.min(i * 0.08, 0.4) }}
+                  className="flex-shrink-0 snap-start"
+                  style={{ width: 'calc(25% - 15px)', minWidth: '260px' }}
                 >
                   <div className="p-6 rounded-2xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
                     <Quote size={22} className="text-primary/25 mb-3" />
@@ -394,6 +420,7 @@ export default function Home() {
                   </div>
                 </motion.div>
               ))}
+            </div>
           </div>
         </div>
       </section>
