@@ -96,7 +96,7 @@ export const apps: AppInfo[] = [
       { icon: '📝', title: 'Detailed Profiles', description: 'Get toxicity info, bite photos, and behavioral data.' },
       { icon: '📦', title: 'Build Collection', description: 'Save identified insects and build your personal catalogue.' },
     ],
-    stats: { downloads: '500K+', rating: '4.6', dau: '10K+' },
+    stats: { downloads: '', rating: '4.5+', dau: '' },
   },
   {
     id: 'habiteazy',
