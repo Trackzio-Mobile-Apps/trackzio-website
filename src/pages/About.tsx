@@ -68,7 +68,7 @@ const teamMembers = [
   { name: 'Koppala Sai Preetham Reddy', role: 'Web Scraping and LLM Enrichment Engineer', linkedin: 'https://in.linkedin.com/in/preethamkoppala', photo: preethamImg },
   { name: 'Aishik Kirtaniya', role: 'Android Engineer', linkedin: 'https://in.linkedin.com/in/aishik-k-0030b516a', photo: aishikImg },
   { name: 'Jaya Krishna Cheemala', role: 'iOS Developer', linkedin: 'https://www.linkedin.com/in/jayakrishna-cheemala0540', photo: jayaKrishnaImg },
-  { name: 'Vignesh R', role: 'QA Engineer – Founding Member', linkedin: 'https://www.linkedin.com/in/vignesh217', photo: null },
+  { name: 'Vignesh R', role: 'QA Engineer – Founding Member', linkedin: 'https://www.linkedin.com/in/vignesh217', photo: vigneshImg },
 ];
 
 export default function About() {
