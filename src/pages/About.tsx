@@ -2,10 +2,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { Linkedin } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import innovationImg from '@/assets/culture/innovation.jpg';
-import remoteWorkImg from '@/assets/culture/remote-work.jpg';
-import teamCollabImg from '@/assets/culture/team-collab.jpg';
-import teamFunImg from '@/assets/culture/team-fun.jpg';
+import companyPhoto1 from '@/assets/culture/company-photo1.png';
+import companyPhoto2 from '@/assets/culture/company-photo2.png';
+import companyPhoto3 from '@/assets/culture/company-photo3.png';
+import companyPhoto4 from '@/assets/culture/company-photo4.png';
 
 // Team photos
 import aishikImg from '@/assets/team/aishik-kirtaniya.jpg';
