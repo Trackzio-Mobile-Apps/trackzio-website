@@ -246,7 +246,7 @@ export default function Careers() {
                 />
               </div>
               <div className="text-center mt-4">
-                <div className="font-display font-bold text-foreground">Ayushya</div>
+                <div className="font-display font-bold text-foreground">Aayushya Aggarwal</div>
                 <div className="text-xs text-muted-foreground">Founder, Trackzio</div>
               </div>
             </div>
@@ -254,7 +254,7 @@ export default function Careers() {
             <div className="flex-1">
               <Quote size={36} className="text-primary/20 mb-4" />
               <blockquote className="text-xl sm:text-2xl lg:text-3xl font-display font-bold leading-snug text-foreground italic">
-                "Great teams are not built by control. They are built by trust, ownership, and freedom to grow."
+                "I've always believed that leadership means being in the trenches with the team — learning, teaching, solving problems together, and trusting the people and the process through every high and low."
               </blockquote>
               <div className="mt-6 h-1 w-16 rounded-full bg-primary/20" />
             </div>
