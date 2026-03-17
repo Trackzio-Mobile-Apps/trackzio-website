@@ -175,6 +175,7 @@ export default function AppDetail() {
 
   const platform = getPlatform();
   const faqs = appFaqs[app.id] || [];
+  const reviews = appReviews[app.id] || [];
   const visibleFaqs = showAllFaqs ? faqs : faqs.slice(0, 3);
   const bullets = featureBullets[app.id] || {};
 
