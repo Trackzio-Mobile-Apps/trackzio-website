@@ -365,8 +365,7 @@ export default function AppDetail() {
                         {r.author.charAt(0)}
                       </div>
                       <div>
-                        <div className="font-semibold text-foreground text-sm">{r.author}</div>
-                        <div className="text-xs text-muted-foreground">{r.role} · {app.name}</div>
+                        <div className="font-semibold text-foreground text-sm">— {r.author}</div>
                       </div>
                     </div>
                   </div>
