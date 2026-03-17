@@ -56,7 +56,7 @@ export const apps: AppInfo[] = [
       { icon: '🛒', title: 'Marketplace', description: 'Buy and sell coins in a trusted community marketplace.' },
       { icon: '💎', title: 'Rarity Analysis', description: 'Get estimated value and rarity classification instantly.' },
     ],
-    stats: { downloads: '800K+', rating: '4.8', dau: '15K+' },
+    stats: { downloads: '120K+', rating: '4.5+', dau: '30K+' },
   },
   {
     id: 'banknotes',
@@ -76,7 +76,7 @@ export const apps: AppInfo[] = [
       { icon: '📊', title: 'Rarity & Value', description: 'Discover rarity, estimated price, and circulation status.' },
       { icon: '🏛️', title: 'History & Design', description: 'Explore detailed history, design elements, and materials.' },
     ],
-    stats: { downloads: '600K+', rating: '4.7', dau: '12K+' },
+    stats: { downloads: '40K+', rating: '4.3+', dau: '7K+' },
   },
   {
     id: 'insecto',
@@ -96,7 +96,7 @@ export const apps: AppInfo[] = [
       { icon: '📝', title: 'Detailed Profiles', description: 'Get toxicity info, bite photos, and behavioral data.' },
       { icon: '📦', title: 'Build Collection', description: 'Save identified insects and build your personal catalogue.' },
     ],
-    stats: { downloads: '500K+', rating: '4.6', dau: '10K+' },
+    stats: { downloads: '', rating: '4.5+', dau: '' },
   },
   {
     id: 'habiteazy',
@@ -116,7 +116,7 @@ export const apps: AppInfo[] = [
       { icon: '📈', title: 'Visual Progress', description: 'See your journey with beautiful charts and statistics.' },
       { icon: '🦊', title: 'Fun Companion', description: 'Your virtual pet grows as you build better habits.' },
     ],
-    stats: { downloads: '600K+', rating: '4.7', dau: '13K+' },
+    stats: { downloads: '250K+', rating: '4.4+', dau: '30K+' },
   },
 ];
 
