@@ -33,32 +33,25 @@ const cultureImages = [
 
 const openRoles = [
   {
-    title: 'Data Analyst',
+    title: "Data Analyst & Founder's Office Intern",
     description: 'Help us understand user behavior, optimize AI models, and drive product decisions with data.',
     location: 'Remote · India',
-    type: 'Full-time',
-    applyUrl: 'https://forms.google.com',
+    type: 'Internship',
+    applyUrl: 'https://forms.gle/2A5H7bdf7PEohwS78',
   },
   {
-    title: 'Mobile Developer (React Native)',
+    title: 'Product Intern',
     description: 'Build and maintain cross-platform mobile experiences used by millions of users worldwide.',
     location: 'Remote · India',
-    type: 'Full-time',
-    applyUrl: 'https://forms.google.com',
+    type: 'Internship',
+    applyUrl: 'https://forms.gle/rUUzTSfuLh64dPbt6',
   },
   {
-    title: 'AI / ML Engineer',
-    description: 'Train and deploy machine learning models for image recognition across our product suite.',
-    location: 'Remote · India',
-    type: 'Full-time',
-    applyUrl: 'https://forms.google.com',
-  },
-  {
-    title: 'Product Designer',
+    title: 'UI/UX Intern',
     description: 'Design intuitive, beautiful interfaces that make complex AI features feel simple and delightful.',
     location: 'Remote · India',
-    type: 'Full-time',
-    applyUrl: 'https://forms.google.com',
+    type: 'Internship',
+    applyUrl: 'https://forms.gle/grPC7wXqhKjQRoR66',
   },
 ];
 
