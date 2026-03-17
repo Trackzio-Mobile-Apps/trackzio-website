@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion';
 
 const metrics = [
-  { value: '2.5M+', label: 'Downloads' },
-  { value: '4.7/5', label: 'Average Rating' },
-  { value: '4+', label: 'Apps' },
-  { value: '50K+', label: 'DAU' },
+  { value: '400K+', label: 'Total Downloads' },
+  { value: '4.3+', label: 'Average Rating' },
+  { value: '50K+', label: 'Active Users' },
 ];
 
 export default function MetricsBar() {
