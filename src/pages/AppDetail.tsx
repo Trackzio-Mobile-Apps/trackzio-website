@@ -131,6 +131,8 @@ export default function AppDetail() {
   const [canScrollReviewLeft, setCanScrollReviewLeft] = useState(false);
   const [canScrollReviewRight, setCanScrollReviewRight] = useState(true);
 
+  const autoScrollRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
   const appId2 = app?.id || '';
   usePageAnalytics(appId2, pageViewEvents[appId2] || 'page_view');
 
@@ -143,7 +145,30 @@ export default function AppDetail() {
     };
     update();
     el.addEventListener('scroll', update);
-    return () => el.removeEventListener('scroll', update);
+
+    const startAutoScroll = () => {
+      autoScrollRef.current = setInterval(() => {
+        if (!el) return;
+        if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 10) {
+          el.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          el.scrollBy({ left: el.clientWidth * 0.8, behavior: 'smooth' });
+        }
+      }, 4000);
+    };
+    startAutoScroll();
+
+    const pause = () => { if (autoScrollRef.current) clearInterval(autoScrollRef.current); };
+    const resume = () => { pause(); startAutoScroll(); };
+    el.addEventListener('mouseenter', pause);
+    el.addEventListener('mouseleave', resume);
+
+    return () => {
+      el.removeEventListener('scroll', update);
+      el.removeEventListener('mouseenter', pause);
+      el.removeEventListener('mouseleave', resume);
+      if (autoScrollRef.current) clearInterval(autoScrollRef.current);
+    };
   }, []);
 
   if (!app) return <Navigate to="/" replace />;
