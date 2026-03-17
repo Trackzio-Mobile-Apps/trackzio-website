@@ -116,7 +116,7 @@ export const apps: AppInfo[] = [
       { icon: '📈', title: 'Visual Progress', description: 'See your journey with beautiful charts and statistics.' },
       { icon: '🦊', title: 'Fun Companion', description: 'Your virtual pet grows as you build better habits.' },
     ],
-    stats: { downloads: '600K+', rating: '4.7', dau: '13K+' },
+    stats: { downloads: '250K+', rating: '4.4+', dau: '30K+' },
   },
 ];
 
