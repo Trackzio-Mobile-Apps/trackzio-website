@@ -33,32 +33,25 @@ const cultureImages = [
 
 const openRoles = [
   {
-    title: 'Data Analyst',
+    title: "Data Analyst & Founder's Office Intern",
     description: 'Help us understand user behavior, optimize AI models, and drive product decisions with data.',
     location: 'Remote · India',
-    type: 'Full-time',
-    applyUrl: 'https://forms.google.com',
+    type: 'Internship',
+    applyUrl: 'https://forms.gle/2A5H7bdf7PEohwS78',
   },
   {
-    title: 'Mobile Developer (React Native)',
+    title: 'Product Intern',
     description: 'Build and maintain cross-platform mobile experiences used by millions of users worldwide.',
     location: 'Remote · India',
-    type: 'Full-time',
-    applyUrl: 'https://forms.google.com',
+    type: 'Internship',
+    applyUrl: 'https://forms.gle/rUUzTSfuLh64dPbt6',
   },
   {
-    title: 'AI / ML Engineer',
-    description: 'Train and deploy machine learning models for image recognition across our product suite.',
-    location: 'Remote · India',
-    type: 'Full-time',
-    applyUrl: 'https://forms.google.com',
-  },
-  {
-    title: 'Product Designer',
+    title: 'UI/UX Intern',
     description: 'Design intuitive, beautiful interfaces that make complex AI features feel simple and delightful.',
     location: 'Remote · India',
-    type: 'Full-time',
-    applyUrl: 'https://forms.google.com',
+    type: 'Internship',
+    applyUrl: 'https://forms.gle/grPC7wXqhKjQRoR66',
   },
 ];
 
@@ -253,7 +246,7 @@ export default function Careers() {
                 />
               </div>
               <div className="text-center mt-4">
-                <div className="font-display font-bold text-foreground">Ayushya</div>
+                <div className="font-display font-bold text-foreground">Aayushya Aggarwal</div>
                 <div className="text-xs text-muted-foreground">Founder, Trackzio</div>
               </div>
             </div>
@@ -261,7 +254,7 @@ export default function Careers() {
             <div className="flex-1">
               <Quote size={36} className="text-primary/20 mb-4" />
               <blockquote className="text-xl sm:text-2xl lg:text-3xl font-display font-bold leading-snug text-foreground italic">
-                "Great teams are not built by control. They are built by trust, ownership, and freedom to grow."
+                "I've always believed that leadership means being in the trenches with the team — learning, teaching, solving problems together, and trusting the people and the process through every high and low."
               </blockquote>
               <div className="mt-6 h-1 w-16 rounded-full bg-primary/20" />
             </div>
