@@ -2,10 +2,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { Linkedin } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import innovationImg from '@/assets/culture/innovation.jpg';
-import remoteWorkImg from '@/assets/culture/remote-work.jpg';
-import teamCollabImg from '@/assets/culture/team-collab.jpg';
-import teamFunImg from '@/assets/culture/team-fun.jpg';
+import companyPhoto1 from '@/assets/culture/company-photo1.png';
+import companyPhoto2 from '@/assets/culture/company-photo2.png';
+import companyPhoto3 from '@/assets/culture/company-photo3.png';
+import companyPhoto4 from '@/assets/culture/company-photo4.png';
 
 // Team photos
 import aishikImg from '@/assets/team/aishik-kirtaniya.jpg';
@@ -18,6 +18,7 @@ import chitvanImg from '@/assets/team/chitvan-singhal.jpg';
 import aayushyaImg from '@/assets/team/aayushya-aggarwal.jpg';
 import sayanImg from '@/assets/team/sayan-chakrabarti.jpeg';
 import abhishekImg from '@/assets/team/abhishek-anand.jpeg';
+import vigneshImg from '@/assets/team/vignesh-raja.jpeg';
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -27,10 +28,10 @@ const fadeUp = {
 };
 
 const cultureImages = [
-  { src: innovationImg, alt: 'Innovation at Trackzio' },
-  { src: remoteWorkImg, alt: 'Remote work culture' },
-  { src: teamCollabImg, alt: 'Team collaboration' },
-  { src: teamFunImg, alt: 'Team fun moments' },
+  { src: companyPhoto1, alt: 'Trackzio team outing' },
+  { src: companyPhoto2, alt: 'Working at Trackzio' },
+  { src: companyPhoto3, alt: 'Team celebrations' },
+  { src: companyPhoto4, alt: 'Trackzio office' },
 ];
 
 const journeyBlocks = [
@@ -67,7 +68,7 @@ const teamMembers = [
   { name: 'Koppala Sai Preetham Reddy', role: 'Web Scraping and LLM Enrichment Engineer', linkedin: 'https://in.linkedin.com/in/preethamkoppala', photo: preethamImg },
   { name: 'Aishik Kirtaniya', role: 'Android Engineer', linkedin: 'https://in.linkedin.com/in/aishik-k-0030b516a', photo: aishikImg },
   { name: 'Jaya Krishna Cheemala', role: 'iOS Developer', linkedin: 'https://www.linkedin.com/in/jayakrishna-cheemala0540', photo: jayaKrishnaImg },
-  { name: 'Vignesh R', role: 'QA Engineer – Founding Member', linkedin: 'https://www.linkedin.com/in/vignesh217', photo: null },
+  { name: 'Vignesh R', role: 'QA Engineer – Founding Member', linkedin: 'https://www.linkedin.com/in/vignesh217', photo: vigneshImg },
 ];
 
 export default function About() {
