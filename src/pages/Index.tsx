@@ -22,10 +22,9 @@ const stagger = {
 };
 
 const metrics = [
-  { value: '2.5M+', label: 'Downloads' },
-  { value: '4.7/5', label: 'Average Rating' },
-  { value: '4+', label: 'Apps Published' },
-  { value: '50K+', label: 'Daily Active Users' },
+  { value: '400K+', label: 'Total Downloads' },
+  { value: '4.3+', label: 'Average Rating' },
+  { value: '50K+', label: 'Active Users' },
 ];
 
 const testimonials = [
