@@ -28,22 +28,22 @@ const metrics = [
 ];
 
 const testimonials = [
-  {
-    quote: "I've used a lot of habit trackers and games, and I really like this one. It's easy to add tasks and habits and configure them to meet my needs. It doesn't have a ton of ads, and right now the premium is only about $2/month so it's affordable. I work a flexible schedule of 50hr/week with my schedule changing with less than a day's notice, regularly. This app makes it much easier to organize my life despite the chaos and lack of time.",
-    author: "Amanda",
-  },
-  {
-    quote: "I make money in various currencies and this app is very very helpful in identifying the money that I have made in the different currencies. Good community 🥳🥳",
-    author: "Kirti",
-  },
-  {
-    quote: "As an avid collector of US coins and currency for over 20 years, I can say I love the concept of the app and the fact that there's an included community within the app that allows us to interact amongst each other.",
-    author: "Jaylin",
-  },
-  {
-    quote: "This is a great app for coin collectors. It's helpful in cataloging the collection virtually. Also, it provides visibility on the coins that have not been collected by me yet.",
-    author: "Ankit",
-  },
+  { quote: "This app makes building good habits fun and rewarding. It gamifies daily chores, turning routine tasks into small achievements that keep me motivated.", author: "Kunal" },
+  { quote: "I've used a lot of habit trackers and games, and I really like this one. It's easy to add tasks and habits and configure them to meet my needs. It doesn't have a ton of ads, and right now the premium is only about $2/month so it's affordable. I work a flexible schedule of 50hr/week with my schedule changing with less than a day's notice, regularly. This app makes it much easier to organize my life despite the chaos and lack of time.", author: "Amanda" },
+  { quote: "I love this app. Much easier to use than other apps like it. The UI is simple, making it easier to do what you want. The widget is perfect. I can't find anything wrong with it. Looking forward to future updates. Try this app. You won't be sorry.", author: "Koni" },
+  { quote: "Guys this is super cute and fantastic!", author: "Myat" },
+  { quote: "I make money in various currencies and this app is very very helpful in identifying the money that I have made in the different currencies. Good community.", author: "Kirti" },
+  { quote: "Best banknote identifier with good accuracy. A must for casual users and collectors.", author: "Chitvan" },
+  { quote: "Nice application for identification.", author: "Jaya" },
+  { quote: "As an avid collector of US coins and currency for over 20 years, I can say I love the concept of the app and the fact that there's an included community within the app that allows us to interact amongst each other.", author: "Jaylin" },
+  { quote: "Good coin scanner.", author: "Naing" },
+  { quote: "It's very good and helps a lot.", author: "Colete" },
+  { quote: "This is a great app for coin collectors. It's helpful in cataloging the collection virtually. Also, it provides visibility on the coins that have not been collected by me yet.", author: "Ankit" },
+  { quote: "Accurate and awesome tool utility.", author: "Pierre" },
+  { quote: "The app has a great UI with quick turnaround time to satisfy my curiosity.", author: "Aanish" },
+  { quote: "Decent repertoire of insects available for identifying them.", author: "Pintu" },
+  { quote: "Amazing app with such a vast library of readily available insects.", author: "Pallav" },
+  { quote: "Best app to identify insects!!!", author: "Jay" },
 ];
 
 const appEvents: Record<string, string> = {
