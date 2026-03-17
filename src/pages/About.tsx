@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { Linkedin } from 'lucide-react';
+import innovationImg from '@/assets/culture/innovation.jpg';
+import remoteWorkImg from '@/assets/culture/remote-work.jpg';
+import teamCollabImg from '@/assets/culture/team-collab.jpg';
+import teamFunImg from '@/assets/culture/team-fun.jpg';
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
