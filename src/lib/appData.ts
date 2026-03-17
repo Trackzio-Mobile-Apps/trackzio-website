@@ -56,7 +56,7 @@ export const apps: AppInfo[] = [
       { icon: '🛒', title: 'Marketplace', description: 'Buy and sell coins in a trusted community marketplace.' },
       { icon: '💎', title: 'Rarity Analysis', description: 'Get estimated value and rarity classification instantly.' },
     ],
-    stats: { downloads: '800K+', rating: '4.8', dau: '15K+' },
+    stats: { downloads: '120K+', rating: '4.5+', dau: '30K+' },
   },
   {
     id: 'banknotes',
