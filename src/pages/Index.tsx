@@ -28,22 +28,22 @@ const metrics = [
 ];
 
 const testimonials = [
-  {
-    quote: "I've used a lot of habit trackers and games, and I really like this one. It's easy to add tasks and habits and configure them to meet my needs. It doesn't have a ton of ads, and right now the premium is only about $2/month so it's affordable. I work a flexible schedule of 50hr/week with my schedule changing with less than a day's notice, regularly. This app makes it much easier to organize my life despite the chaos and lack of time.",
-    author: "Amanda",
-  },
-  {
-    quote: "I make money in various currencies and this app is very very helpful in identifying the money that I have made in the different currencies. Good community 🥳🥳",
-    author: "Kirti",
-  },
-  {
-    quote: "As an avid collector of US coins and currency for over 20 years, I can say I love the concept of the app and the fact that there's an included community within the app that allows us to interact amongst each other.",
-    author: "Jaylin",
-  },
-  {
-    quote: "This is a great app for coin collectors. It's helpful in cataloging the collection virtually. Also, it provides visibility on the coins that have not been collected by me yet.",
-    author: "Ankit",
-  },
+  { quote: "This app makes building good habits fun and rewarding. It gamifies daily chores, turning routine tasks into small achievements that keep me motivated.", author: "Kunal" },
+  { quote: "I've used a lot of habit trackers and games, and I really like this one. It's easy to add tasks and habits and configure them to meet my needs. It doesn't have a ton of ads, and right now the premium is only about $2/month so it's affordable. I work a flexible schedule of 50hr/week with my schedule changing with less than a day's notice, regularly. This app makes it much easier to organize my life despite the chaos and lack of time.", author: "Amanda" },
+  { quote: "I love this app. Much easier to use than other apps like it. The UI is simple, making it easier to do what you want. The widget is perfect. I can't find anything wrong with it. Looking forward to future updates. Try this app. You won't be sorry.", author: "Koni" },
+  { quote: "Guys this is super cute and fantastic!", author: "Myat" },
+  { quote: "I make money in various currencies and this app is very very helpful in identifying the money that I have made in the different currencies. Good community.", author: "Kirti" },
+  { quote: "Best banknote identifier with good accuracy. A must for casual users and collectors.", author: "Chitvan" },
+  { quote: "Nice application for identification.", author: "Jaya" },
+  { quote: "As an avid collector of US coins and currency for over 20 years, I can say I love the concept of the app and the fact that there's an included community within the app that allows us to interact amongst each other.", author: "Jaylin" },
+  { quote: "Good coin scanner.", author: "Naing" },
+  { quote: "It's very good and helps a lot.", author: "Colete" },
+  { quote: "This is a great app for coin collectors. It's helpful in cataloging the collection virtually. Also, it provides visibility on the coins that have not been collected by me yet.", author: "Ankit" },
+  { quote: "Accurate and awesome tool utility.", author: "Pierre" },
+  { quote: "The app has a great UI with quick turnaround time to satisfy my curiosity.", author: "Aanish" },
+  { quote: "Decent repertoire of insects available for identifying them.", author: "Pintu" },
+  { quote: "Amazing app with such a vast library of readily available insects.", author: "Pallav" },
+  { quote: "Best app to identify insects!!!", author: "Jay" },
 ];
 
 const appEvents: Record<string, string> = {
@@ -60,6 +60,7 @@ export default function Home() {
   const selected = apps[activeApp];
   const isMobile = useIsMobile();
   const carouselRef = useRef<HTMLDivElement>(null);
+  const autoScrollRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
@@ -84,7 +85,31 @@ export default function Home() {
     if (!el) return;
     updateScrollButtons();
     el.addEventListener('scroll', updateScrollButtons);
-    return () => el.removeEventListener('scroll', updateScrollButtons);
+
+    // Auto-scroll
+    const startAutoScroll = () => {
+      autoScrollRef.current = setInterval(() => {
+        if (!el) return;
+        if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 10) {
+          el.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          el.scrollBy({ left: el.clientWidth * 0.8, behavior: 'smooth' });
+        }
+      }, 4000);
+    };
+    startAutoScroll();
+
+    const pause = () => { if (autoScrollRef.current) clearInterval(autoScrollRef.current); };
+    const resume = () => { pause(); startAutoScroll(); };
+    el.addEventListener('mouseenter', pause);
+    el.addEventListener('mouseleave', resume);
+
+    return () => {
+      el.removeEventListener('scroll', updateScrollButtons);
+      el.removeEventListener('mouseenter', pause);
+      el.removeEventListener('mouseleave', resume);
+      if (autoScrollRef.current) clearInterval(autoScrollRef.current);
+    };
   }, []);
 
   const scrollCarousel = (dir: 'left' | 'right') => {
@@ -346,7 +371,31 @@ export default function Home() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="relative">
+            {canScrollLeft && (
+              <button
+                onClick={() => scrollCarousel('left')}
+                className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                style={{ boxShadow: 'var(--shadow-card)' }}
+              >
+                <ChevronLeft size={18} />
+              </button>
+            )}
+            {canScrollRight && (
+              <button
+                onClick={() => scrollCarousel('right')}
+                className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                style={{ boxShadow: 'var(--shadow-card)' }}
+              >
+                <ChevronRight size={18} />
+              </button>
+            )}
+
+            <div
+              ref={carouselRef}
+              className="flex gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
               {testimonials.map((t, i) => (
                 <motion.div
                   key={i}
@@ -354,6 +403,8 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: Math.min(i * 0.08, 0.4) }}
+                  className="flex-shrink-0 snap-start"
+                  style={{ width: 'calc(25% - 15px)', minWidth: '260px' }}
                 >
                   <div className="p-6 rounded-2xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
                     <Quote size={22} className="text-primary/25 mb-3" />
@@ -369,6 +420,7 @@ export default function Home() {
                   </div>
                 </motion.div>
               ))}
+            </div>
           </div>
         </div>
       </section>
