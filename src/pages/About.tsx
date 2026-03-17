@@ -18,6 +18,7 @@ import chitvanImg from '@/assets/team/chitvan-singhal.jpg';
 import aayushyaImg from '@/assets/team/aayushya-aggarwal.jpg';
 import sayanImg from '@/assets/team/sayan-chakrabarti.jpeg';
 import abhishekImg from '@/assets/team/abhishek-anand.jpeg';
+import vigneshImg from '@/assets/team/vignesh-raja.jpeg';
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
