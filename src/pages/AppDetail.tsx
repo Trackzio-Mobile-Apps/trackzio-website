@@ -384,12 +384,12 @@ export default function AppDetail() {
             <h2 className="text-3xl sm:text-4xl font-bold font-display">{app.name} in numbers</h2>
           </motion.div>
 
-          <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto">
+          <div className={`grid gap-8 max-w-3xl mx-auto ${[app.stats.downloads, app.stats.rating, app.stats.dau].filter(Boolean).length === 1 ? 'grid-cols-1 max-w-md' : 'grid-cols-3'}`}>
             {[
-              { value: app.stats.downloads, label: 'Downloads' },
+              { value: app.stats.downloads, label: 'Total Downloads' },
               { value: app.stats.rating, label: 'Average Rating' },
-              { value: app.stats.dau, label: 'Daily Active Users' },
-            ].map((stat, i) => (
+              { value: app.stats.dau, label: 'Total Active Users' },
+            ].filter(stat => stat.value).map((stat, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, scale: 0.9 }}
