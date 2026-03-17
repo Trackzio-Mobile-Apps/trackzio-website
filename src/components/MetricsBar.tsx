@@ -10,7 +10,7 @@ export default function MetricsBar() {
   return (
     <section className="border-y border-border/20 bg-muted/50" aria-label="Key metrics">
       <div className="container-site py-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-4">
           {metrics.map((m, i) => (
             <motion.div
               key={m.label}
