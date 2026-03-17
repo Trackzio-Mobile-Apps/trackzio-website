@@ -22,60 +22,27 @@ const stagger = {
 };
 
 const metrics = [
-  { value: '2.5M+', label: 'Downloads' },
-  { value: '4.7/5', label: 'Average Rating' },
-  { value: '4+', label: 'Apps Published' },
-  { value: '50K+', label: 'Daily Active Users' },
+  { value: '400K+', label: 'Total Downloads' },
+  { value: '4.3+', label: 'Average Rating' },
+  { value: '50K+', label: 'Active Users' },
 ];
 
 const testimonials = [
   {
-    quote: "Coinzy completely changed how I manage my finances. The AI categorization is incredibly accurate and saves me hours every month.",
-    author: "Priya M.",
-    role: "Freelance Designer",
-    app: "Coinzy",
+    quote: "I've used a lot of habit trackers and games, and I really like this one. It's easy to add tasks and habits and configure them to meet my needs. It doesn't have a ton of ads, and right now the premium is only about $2/month so it's affordable. I work a flexible schedule of 50hr/week with my schedule changing with less than a day's notice, regularly. This app makes it much easier to organize my life despite the chaos and lack of time.",
+    author: "Amanda",
   },
   {
-    quote: "Insecto is a game-changer for nature enthusiasts. My kids love pointing the camera at bugs and learning about them instantly.",
-    author: "Rahul K.",
-    role: "Parent & Nature Lover",
-    app: "Insecto",
+    quote: "I make money in various currencies and this app is very very helpful in identifying the money that I have made in the different currencies. Good community 🥳🥳",
+    author: "Kirti",
   },
   {
-    quote: "Habiteazy helped me build a consistent morning routine. The streak tracking keeps me motivated every single day.",
-    author: "Sneha T.",
-    role: "Marketing Professional",
-    app: "Habiteazy",
+    quote: "As an avid collector of US coins and currency for over 20 years, I can say I love the concept of the app and the fact that there's an included community within the app that allows us to interact amongst each other.",
+    author: "Jaylin",
   },
   {
-    quote: "Banknotes is fascinating! I travel a lot and love scanning currencies from different countries. The history section is amazing.",
-    author: "Arjun D.",
-    role: "Travel Blogger",
-    app: "Banknotes",
-  },
-  {
-    quote: "The AI accuracy across all Trackzio apps is impressive. You can tell the team really cares about getting it right.",
-    author: "Meera S.",
-    role: "Tech Enthusiast",
-    app: "Trackzio",
-  },
-  {
-    quote: "I use Habiteazy daily — the streaks keep me accountable. Best habit app I've tried.",
-    author: "Anil V.",
-    role: "Entrepreneur",
-    app: "Habiteazy",
-  },
-  {
-    quote: "Coinzy's marketplace is so convenient. I found rare coins I'd been searching for years.",
-    author: "Deepa R.",
-    role: "Coin Collector",
-    app: "Coinzy",
-  },
-  {
-    quote: "Banknotes taught my daughter about different currencies. It's both fun and educational.",
-    author: "Sunita P.",
-    role: "Teacher",
-    app: "Banknotes",
+    quote: "This is a great app for coin collectors. It's helpful in cataloging the collection virtually. Also, it provides visibility on the coins that have not been collected by me yet.",
+    author: "Ankit",
   },
 ];
 
@@ -148,11 +115,11 @@ export default function Home() {
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">AI-Powered Mobile Apps</p>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display leading-[1.1] tracking-tight mb-4">
-              Making Lives Easier <span className="text-gradient">Every App, Every Day.</span>
+              AI Platforms for Collectors and <span className="text-primary">Enthusiasts</span>
             </h1>
 
             <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
-              Trackzio builds apps that fit into your life — thoughtfully made, deeply researched, and always built with you in mind.
+              Trackzio builds intelligent apps that help people identify, understand, organise, and exchange the things they care about.
             </p>
 
             <motion.div
@@ -347,7 +314,7 @@ export default function Home() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-4">
             {metrics.map((m, i) => (
               <motion.div
                 key={m.label}
@@ -379,31 +346,7 @@ export default function Home() {
             </h2>
           </motion.div>
 
-          <div className="relative">
-            {canScrollLeft && (
-              <button
-                onClick={() => scrollCarousel('left')}
-                className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border/40 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                style={{ boxShadow: 'var(--shadow-card)' }}
-              >
-                <ChevronLeft size={18} />
-              </button>
-            )}
-            {canScrollRight && (
-              <button
-                onClick={() => scrollCarousel('right')}
-                className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border/40 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                style={{ boxShadow: 'var(--shadow-card)' }}
-              >
-                <ChevronRight size={18} />
-              </button>
-            )}
-
-            <div
-              ref={carouselRef}
-              className="flex gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-            >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {testimonials.map((t, i) => (
                 <motion.div
                   key={i}
@@ -411,8 +354,6 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: Math.min(i * 0.08, 0.4) }}
-                  className="flex-shrink-0 snap-start"
-                  style={{ width: 'calc(25% - 15px)', minWidth: '260px' }}
                 >
                   <div className="p-6 rounded-2xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
                     <Quote size={22} className="text-primary/25 mb-3" />
@@ -422,14 +363,12 @@ export default function Home() {
                         {t.author.charAt(0)}
                       </div>
                       <div>
-                        <div className="font-semibold text-foreground text-sm">{t.author}</div>
-                        <div className="text-xs text-muted-foreground">{t.role} · {t.app}</div>
+                        <div className="font-semibold text-foreground text-sm">— {t.author}</div>
                       </div>
                     </div>
                   </div>
                 </motion.div>
               ))}
-            </div>
           </div>
         </div>
       </section>

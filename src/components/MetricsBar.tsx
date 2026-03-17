@@ -1,17 +1,16 @@
 import { motion } from 'framer-motion';
 
 const metrics = [
-  { value: '2.5M+', label: 'Downloads' },
-  { value: '4.7/5', label: 'Average Rating' },
-  { value: '4+', label: 'Apps' },
-  { value: '50K+', label: 'DAU' },
+  { value: '400K+', label: 'Total Downloads' },
+  { value: '4.3+', label: 'Average Rating' },
+  { value: '50K+', label: 'Active Users' },
 ];
 
 export default function MetricsBar() {
   return (
     <section className="border-y border-border/20 bg-muted/50" aria-label="Key metrics">
       <div className="container-site py-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-4">
           {metrics.map((m, i) => (
             <motion.div
               key={m.label}
