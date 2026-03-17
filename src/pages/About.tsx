@@ -28,10 +28,10 @@ const fadeUp = {
 };
 
 const cultureImages = [
-  { src: innovationImg, alt: 'Innovation at Trackzio' },
-  { src: remoteWorkImg, alt: 'Remote work culture' },
-  { src: teamCollabImg, alt: 'Team collaboration' },
-  { src: teamFunImg, alt: 'Team fun moments' },
+  { src: companyPhoto1, alt: 'Trackzio team outing' },
+  { src: companyPhoto2, alt: 'Working at Trackzio' },
+  { src: companyPhoto3, alt: 'Team celebrations' },
+  { src: companyPhoto4, alt: 'Trackzio office' },
 ];
 
 const journeyBlocks = [
