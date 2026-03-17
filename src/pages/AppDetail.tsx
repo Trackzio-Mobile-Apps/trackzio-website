@@ -36,48 +36,32 @@ const downloadEvents: Record<string, { ios: string; android: string }> = {
   habiteazy: { ios: 'habiteazy_ios_download', android: 'habiteazy_android_download' },
 };
 
-const reviews = [
-  {
-    quote: "This app completely changed how I approach my daily routine. The AI is incredibly accurate and intuitive.",
-    author: "Priya M.",
-    role: "Freelance Designer",
-  },
-  {
-    quote: "So beautifully designed and easy to use. I recommend it to everyone I know.",
-    author: "Rahul K.",
-    role: "Tech Enthusiast",
-  },
-  {
-    quote: "The level of detail and accuracy is unmatched. This is exactly what I was looking for.",
-    author: "Sneha T.",
-    role: "Student",
-  },
-  {
-    quote: "I've tried many similar apps but this one stands out for its clean design and smart features.",
-    author: "Karthik R.",
-    role: "Software Engineer",
-  },
-  {
-    quote: "A must-have app for anyone passionate about collecting. The AI recognition blew my mind.",
-    author: "Amit S.",
-    role: "Hobbyist Collector",
-  },
-  {
-    quote: "Super smooth experience from start to finish. The interface is clean and very intuitive.",
-    author: "Neha P.",
-    role: "Product Manager",
-  },
-  {
-    quote: "I love how it keeps getting better with updates. The team really listens to feedback.",
-    author: "Vikram J.",
-    role: "App Reviewer",
-  },
-  {
-    quote: "Finally an app that delivers on its promises. Accurate, fast, and beautifully crafted.",
-    author: "Deepa R.",
-    role: "Digital Marketer",
-  },
-];
+const appReviews: Record<string, { quote: string; author: string }[]> = {
+  habiteazy: [
+    { quote: "This app makes building good habits fun and rewarding. It gamifies daily chores, turning routine tasks into small achievements that keep me motivated.", author: "Kunal" },
+    { quote: "I've used a lot of habit trackers and games, and I really like this one. It's easy to add tasks and habits and configure them to meet my needs. It doesn't have a ton of ads, and right now the premium is only about $2/month so it's affordable. I work a flexible schedule of 50hr/week with my schedule changing with less than a day's notice, regularly. This app makes it much easier to organize my life despite the chaos and lack of time.", author: "Amanda" },
+    { quote: "I love this app. Much easier to use than other apps like it. The UI is simple, making it easier to do what you want. The widget is perfect. I can't find anything wrong with it. Looking forward to future updates. Try this app. You won't be sorry.", author: "Koni" },
+    { quote: "Guys this is super cute and fantastic!", author: "Myat" },
+  ],
+  banknotes: [
+    { quote: "I make money in various currencies and this app is very very helpful in identifying the money that I have made in the different currencies. Good community.", author: "Kirti" },
+    { quote: "Best banknote identifier with good accuracy. A must for casual users and collectors.", author: "Chitvan" },
+    { quote: "Nice application for identification.", author: "Jaya" },
+  ],
+  coinzy: [
+    { quote: "As an avid collector of US coins and currency for over 20 years, I can say I love the concept of the app and the fact that there's an included community within the app that allows us to interact amongst each other.", author: "Jaylin" },
+    { quote: "Good coin scanner.", author: "Naing" },
+    { quote: "It's very good and helps a lot.", author: "Colete" },
+    { quote: "This is a great app for coin collectors. It's helpful in cataloging the collection virtually. Also, it provides visibility on the coins that have not been collected by me yet.", author: "Ankit" },
+    { quote: "Accurate and awesome tool utility.", author: "Pierre" },
+  ],
+  insecto: [
+    { quote: "The app has a great UI with quick turnaround time to satisfy my curiosity.", author: "Aanish" },
+    { quote: "Decent repertoire of insects available for identifying them.", author: "Pintu" },
+    { quote: "Amazing app with such a vast library of readily available insects.", author: "Pallav" },
+    { quote: "Best app to identify insects!!!", author: "Jay" },
+  ],
+};
 
 const appFaqs: Record<string, { q: string; a: string }[]> = {
   coinzy: [
