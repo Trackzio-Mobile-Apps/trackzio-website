@@ -60,6 +60,7 @@ export default function Home() {
   const selected = apps[activeApp];
   const isMobile = useIsMobile();
   const carouselRef = useRef<HTMLDivElement>(null);
+  const autoScrollRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
