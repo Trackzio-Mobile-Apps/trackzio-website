@@ -85,7 +85,31 @@ export default function Home() {
     if (!el) return;
     updateScrollButtons();
     el.addEventListener('scroll', updateScrollButtons);
-    return () => el.removeEventListener('scroll', updateScrollButtons);
+
+    // Auto-scroll
+    const startAutoScroll = () => {
+      autoScrollRef.current = setInterval(() => {
+        if (!el) return;
+        if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 10) {
+          el.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          el.scrollBy({ left: el.clientWidth * 0.8, behavior: 'smooth' });
+        }
+      }, 4000);
+    };
+    startAutoScroll();
+
+    const pause = () => { if (autoScrollRef.current) clearInterval(autoScrollRef.current); };
+    const resume = () => { pause(); startAutoScroll(); };
+    el.addEventListener('mouseenter', pause);
+    el.addEventListener('mouseleave', resume);
+
+    return () => {
+      el.removeEventListener('scroll', updateScrollButtons);
+      el.removeEventListener('mouseenter', pause);
+      el.removeEventListener('mouseleave', resume);
+      if (autoScrollRef.current) clearInterval(autoScrollRef.current);
+    };
   }, []);
 
   const scrollCarousel = (dir: 'left' | 'right') => {
