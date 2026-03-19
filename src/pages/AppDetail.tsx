@@ -181,6 +181,45 @@ const featureBullets: Record<string, Record<string, string[]>> = {
   },
 };
 
+// Showcase features per app — maps features to screenshots with benefit descriptions
+const showcaseFeatures: Record<string, { screenshot: string; title: string; description: string }[]> = {};
+
+// Dynamically build showcase from app data
+import coinzy1 from '@/assets/screenshots/coinzy-1.png';
+import coinzy2 from '@/assets/screenshots/coinzy-2.png';
+import coinzy3 from '@/assets/screenshots/coinzy-3.png';
+import banknotes1 from '@/assets/screenshots/banknotes-1.png';
+import banknotes2 from '@/assets/screenshots/banknotes-2.png';
+import banknotes3 from '@/assets/screenshots/banknotes-3.png';
+import insecto1 from '@/assets/screenshots/insecto-1.png';
+import insecto2 from '@/assets/screenshots/insecto-2.jpg';
+import insecto3 from '@/assets/screenshots/insecto-3.png';
+import habiteazy1 from '@/assets/screenshots/habiteazy-1.jpg';
+
+showcaseFeatures['coinzy'] = [
+  { screenshot: coinzy1, title: 'AI Coin Scanner', description: 'Point your camera at any coin for instant identification with 95%+ accuracy' },
+  { screenshot: coinzy2, title: 'Rich History & Details', description: 'Explore detailed historical data, minting info, and rarity for every coin' },
+  { screenshot: coinzy3, title: 'Community Marketplace', description: 'Buy, sell, and trade coins in a trusted collector community' },
+];
+
+showcaseFeatures['banknotes'] = [
+  { screenshot: banknotes1, title: 'AI Banknote Scanner', description: 'Scan any banknote and get instant identification from 150+ countries' },
+  { screenshot: banknotes2, title: 'Global Coverage', description: 'Supports modern, historical, and commemorative banknotes worldwide' },
+  { screenshot: banknotes3, title: 'Rarity & Value Analysis', description: 'Discover estimated market value and collector demand instantly' },
+];
+
+showcaseFeatures['insecto'] = [
+  { screenshot: insecto1, title: 'AI Insect Identification', description: 'Instantly identify any insect species with your phone camera' },
+  { screenshot: insecto2, title: 'Detailed Species Profiles', description: 'Get toxicity info, habitat details, and behavioral data for every species' },
+  { screenshot: insecto3, title: 'Build Your Collection', description: 'Save and organize every insect discovery in your personal catalogue' },
+];
+
+showcaseFeatures['habiteazy'] = [
+  { screenshot: habiteazy1, title: 'Streak Tracking', description: 'Stay motivated with daily streak counts and achievement badges' },
+  { screenshot: habiteazy1, title: 'Smart Scheduling', description: 'Set flexible reminders and customize your weekly habit plans' },
+  { screenshot: habiteazy1, title: 'Visual Progress', description: 'See your journey with beautiful charts, heat maps, and statistics' },
+];
+
 export default function AppDetail() {
   const { appId } = useParams<{ appId: string }>();
   const app = getApp(appId || '');
