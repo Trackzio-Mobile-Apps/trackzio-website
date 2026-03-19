@@ -24,6 +24,7 @@ const appLegalMap: Record<string, { label: string; privacy: string; terms: strin
   insecto: { label: 'Insecto AI', privacy: '/insecto-ai/privacy-policy', terms: '/insecto-ai/terms' },
   'habit-eazy': { label: 'Habit Eazy', privacy: '/habit-eazy/privacy-policy', terms: '/habit-eazy/terms' },
   habiteazy: { label: 'Habit Eazy', privacy: '/habit-eazy/privacy-policy', terms: '/habit-eazy/terms' },
+  rockzy: { label: 'Rockzy', privacy: '/rockzy/privacy-policy', terms: '/rockzy/terms' },
 };
 
 function getAppLegal(pathname: string) {
