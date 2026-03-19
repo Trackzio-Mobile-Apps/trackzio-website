@@ -64,6 +64,14 @@ const appReviews: Record<string, { quote: string; author: string }[]> = {
     { quote: "Amazing app with such a vast library of readily available insects.", author: "Pallav" },
     { quote: "Best app to identify insects!!!", author: "Jay" },
   ],
+  rockzy: [
+    { quote: "I could easily identify some rocks in the wild with this app. Waiting for an offline version to happen soon!", author: "Pintu Bodat" },
+    { quote: "Good app. I like my hobby to collect rocks and minerals and this app certainly helps identify them!", author: "Umesh Barot" },
+    { quote: "Great app with brilliant UI to identify rocks and minerals just by a click of the camera!", author: "Aanish Aggarwal" },
+    { quote: "Great for geology lovers! It's so simple to identify rocks by photo and then track your rock collection as it grows. Best rock identifier on the play store by far. Highly recommend!", author: "Chitvan Singhal" },
+    { quote: "If you enjoy collecting minerals, this rock identifier is a must have. You can identify rocks by photo within seconds and track your collection easily.", author: "Ijaaz Ahamed" },
+    { quote: "Really nice app, smooth ui and great scanning accuracy of gems, useful to identify rocks or gems using camera.", author: "Aishik Kirtaniya" },
+  ],
 };
 
 const appFaqs: Record<string, { q: string; a: string }[]> = {
