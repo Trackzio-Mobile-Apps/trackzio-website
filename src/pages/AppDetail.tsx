@@ -272,7 +272,7 @@ showcaseFeatures['insecto'] = [
   { screenshot: insecto1, title: 'AI Insect Scan', description: 'Identify insects using AI' },
   { screenshot: insecto2, title: 'AI Chat Assistant', description: 'Ask questions about insects' },
   { screenshot: insecto3, title: 'Collection Tracking', description: 'Save and organize discoveries' },
-  { screenshot: insecto3, title: 'Community Feed', description: 'Share findings with others' },
+  { screenshot: insecto6, title: 'Community Feed', description: 'Share findings with others' },
   { screenshot: insecto4, title: 'Danger Identification', description: 'Learn about harmful insects' },
   { screenshot: insecto5, title: '400K+ Insects Database', description: 'Explore a vast insect catalog' },
 ];
