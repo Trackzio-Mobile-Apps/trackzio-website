@@ -499,6 +499,21 @@ export default function AppDetail() {
           </div>
         </section>
       )}
+
+      {/* ── 7. App-specific Legal Footer ── */}
+      {appLegalLinks[appId!] && (
+        <section className="py-12 snap-start border-t border-border/40">
+          <div className="container-site flex flex-wrap items-center justify-center gap-6 text-sm">
+            <Link to={appLegalLinks[appId!].privacy} className="text-muted-foreground hover:text-primary transition-colors">
+              Privacy Policy
+            </Link>
+            <span className="text-border">|</span>
+            <Link to={appLegalLinks[appId!].terms} className="text-muted-foreground hover:text-primary transition-colors">
+              Terms &amp; Conditions
+            </Link>
+          </div>
+        </section>
+      )}
     </div>
   );
 }
