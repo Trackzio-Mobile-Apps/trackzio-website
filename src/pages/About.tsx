@@ -83,52 +83,22 @@ export default function About() {
       {/* ── Section 2: Who We Are ── */}
       <section className="py-24 sm:py-32 snap-start bg-section-tinted">
         <div className="container-site w-full">
-          <motion.div {...fadeUp} className="max-w-6xl mx-auto">
+          <motion.div {...fadeUp} className="max-w-4xl mx-auto">
             <div className="rounded-2xl bg-card overflow-hidden" style={{ boxShadow: '0 4px 24px -4px rgba(40, 54, 24, 0.08)' }}>
-              <div className="grid grid-cols-1 lg:grid-cols-2">
-                {/* Left: Text Content */}
-                <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
-                  <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">About Us</p>
-                  <h2 className="text-2xl sm:text-3xl font-bold font-display mb-5 leading-snug">
-                    Who we <span className="text-gradient">are</span>
-                  </h2>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    Our platforms combine artificial intelligence, structured data, and thoughtful design to help people identify, understand, and organize the things they care about.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    By bringing together identification technology, knowledge platforms, collection management tools, and enthusiast communities, Trackzio aims to create seamless digital ecosystems around people's interests.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    For collectors, our platforms also enable expert insights and trusted marketplaces that make discovering, evaluating, and exchanging items easier.
-                  </p>
-                </div>
-
-                {/* Right: Auto-changing Image Slider */}
-                <div className="p-4 sm:p-6 lg:p-8 flex items-center justify-center">
-                  <div className="relative w-full aspect-square rounded-xl overflow-hidden">
-                    <AnimatePresence mode="wait">
-                      <motion.img
-                        key={currentImage}
-                        src={cultureImages[currentImage].src}
-                        alt={cultureImages[currentImage].alt}
-                        className="absolute inset-0 w-full h-full object-cover rounded-xl"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.6 }}
-                      />
-                    </AnimatePresence>
-                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-                      {cultureImages.map((_, i) => (
-                        <button
-                          key={i}
-                          onClick={() => setCurrentImage(i)}
-                          className={`w-2 h-2 rounded-full transition-all duration-300 ${i === currentImage ? 'bg-white w-5' : 'bg-white/50'}`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
+              <div className="p-8 sm:p-10 lg:p-14 flex flex-col justify-center">
+                <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">About Us</p>
+                <h2 className="text-2xl sm:text-3xl font-bold font-display mb-5 leading-snug">
+                  Who we <span className="text-gradient">are</span>
+                </h2>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  Our platforms combine artificial intelligence, structured data, and thoughtful design to help people identify, understand, and organize the things they care about.
+                </p>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  By bringing together identification technology, knowledge platforms, collection management tools, and enthusiast communities, Trackzio aims to create seamless digital ecosystems around people's interests.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  For collectors, our platforms also enable expert insights and trusted marketplaces that make discovering, evaluating, and exchanging items easier.
+                </p>
               </div>
             </div>
           </motion.div>
