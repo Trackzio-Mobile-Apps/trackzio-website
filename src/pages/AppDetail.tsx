@@ -230,6 +230,13 @@ import insecto1 from '@/assets/screenshots/insecto-1.png';
 import insecto2 from '@/assets/screenshots/insecto-2.jpg';
 import insecto3 from '@/assets/screenshots/insecto-3.png';
 import habiteazy1 from '@/assets/screenshots/habiteazy-1.jpg';
+import rockzy1 from '@/assets/screenshots/rockzy-1.png';
+import rockzy2 from '@/assets/screenshots/rockzy-2.png';
+import rockzy3 from '@/assets/screenshots/rockzy-3.png';
+import rockzy4 from '@/assets/screenshots/rockzy-4.png';
+import rockzy5 from '@/assets/screenshots/rockzy-5.png';
+import rockzy6 from '@/assets/screenshots/rockzy-6.png';
+import rockzy7 from '@/assets/screenshots/rockzy-7.png';
 
 showcaseFeatures['coinzy'] = [
   { screenshot: coinzy1, title: 'AI Coin Scanner', description: 'Point your camera at any coin for instant identification with 95%+ accuracy' },
