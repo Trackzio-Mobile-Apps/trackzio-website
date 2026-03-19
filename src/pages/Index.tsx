@@ -116,7 +116,8 @@ export default function Home() {
   const scrollCarousel = (dir: 'left' | 'right') => {
     const el = carouselRef.current;
     if (!el) return;
-    const amount = el.clientWidth * 0.8;
+    const cardWidth = el.querySelector<HTMLElement>(':scope > div')?.offsetWidth || el.clientWidth;
+    const amount = cardWidth + 20;
     el.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
   };
 
