@@ -13,6 +13,8 @@ import Help from "./pages/Help";
 import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
+import TrackzioTerms from "./pages/TrackzioTerms";
+import TrackzioPrivacy from "./pages/TrackzioPrivacy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
