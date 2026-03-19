@@ -341,6 +341,11 @@ export default function AppDetail() {
         </div>
       </section>
 
+      {/* ── 2. Feature Showcase — Premium Phone Mockup Carousel ── */}
+      {showcaseFeatures[app.id] && showcaseFeatures[app.id].length > 0 && (
+        <FeatureShowcase features={showcaseFeatures[app.id]} accentHsl={app.accentHsl} />
+      )}
+
       {/* ── 3. Key Features — Z-Pattern Alternating Layout ── */}
       <section className="snap-start">
         <div className="container-site w-full pt-20 sm:pt-24 pb-8">
