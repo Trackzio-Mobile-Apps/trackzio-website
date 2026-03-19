@@ -70,13 +70,13 @@ export default function Footer() {
                   to={appLegal.privacy}
                   className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
                 >
-                  Privacy Policy
+                  {appLegal.label} Privacy Policy
                 </Link>
                 <Link
                   to={appLegal.terms}
                   className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
                 >
-                  Terms &amp; Conditions
+                  {appLegal.label} Terms &amp; Conditions
                 </Link>
               </>
             ) : (
