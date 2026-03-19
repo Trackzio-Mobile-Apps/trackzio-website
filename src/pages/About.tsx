@@ -1,11 +1,6 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { Linkedin } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import companyPhoto1 from '@/assets/culture/company-photo1.png';
-import companyPhoto2 from '@/assets/culture/company-photo2.png';
-import companyPhoto3 from '@/assets/culture/company-photo3.png';
-import companyPhoto4 from '@/assets/culture/company-photo4.png';
 
 // Team photos
 import aishikImg from '@/assets/team/aishik-kirtaniya.jpg';
