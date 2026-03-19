@@ -8,6 +8,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { getPlatform, getDownloadUrl } from '@/lib/platformUtils';
 import { QRCodeSVG } from 'qrcode.react';
 import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight, Download } from 'lucide-react';
+import FeatureShowcase from '@/components/FeatureShowcase';
 import {
   Accordion,
   AccordionContent,
