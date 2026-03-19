@@ -398,70 +398,8 @@ export default function AppDetail() {
         <FeatureShowcase features={showcaseFeatures[app.id]} accentHsl={app.accentHsl} />
       )}
 
-      {/* ── 3. Key Features — Z-Pattern Alternating Layout ── */}
-      <section className="snap-start">
-        <div className="container-site w-full pt-20 sm:pt-24 pb-8">
-          <motion.div {...fadeUp} className="text-center mb-4">
-            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Features</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display">What makes it special</h2>
-          </motion.div>
-        </div>
 
-        <div className="max-w-5xl mx-auto px-5 sm:px-8 flex flex-col gap-8 pb-16">
-          {app.features.map((feat, i) => {
-            const isReversed = i % 2 === 1;
-            const screenshot = app.screenshots[i % app.screenshots.length];
-            const featBullets = bullets[feat.title] || [];
 
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.7 }}
-                className="rounded-2xl bg-card overflow-hidden"
-                style={{ boxShadow: '0 4px 24px -4px rgba(40, 54, 24, 0.08)' }}
-              >
-                <div className={`grid grid-cols-1 ${isReversed ? 'md:grid-cols-[2fr_3fr]' : 'md:grid-cols-[3fr_2fr]'} items-center`} style={{ gap: '0px' }}>
-                  {/* Text side */}
-                  <div className={`p-8 sm:p-10 text-center md:text-left ${isReversed ? 'md:order-2' : 'md:order-1'} order-2`}>
-                    <div className="max-w-sm mx-auto md:mx-0">
-                      <div className="text-3xl mb-2">{feat.icon}</div>
-                      <h3 className="text-xl sm:text-2xl font-bold font-display text-foreground mb-2">{feat.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed mb-4 text-[15px]">{feat.description}</p>
-                      {featBullets.length > 0 && (
-                        <ul className="space-y-2">
-                          {featBullets.map((bullet, bi) => (
-                            <li key={bi} className="flex items-start gap-2 text-sm text-muted-foreground md:justify-start justify-center">
-                              <span className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: `hsl(${app.accentHsl})` }} />
-                              {bullet}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Screenshot side */}
-                  <div className={`flex justify-center items-center p-8 sm:p-10 bg-muted/30 ${isReversed ? 'md:order-1' : 'md:order-2'} order-1`}>
-                    <div
-                      className="w-full max-w-[200px] rounded-2xl overflow-hidden"
-                      style={{ boxShadow: '0 10px 36px -8px hsl(0 0% 0% / 0.1)' }}
-                    >
-                      <img
-                        src={screenshot}
-                        alt={feat.title}
-                        className="w-full h-auto object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
 
       {/* ── 4. Reviews — Horizontal Carousel with 4 cards ── */}
       <section className="py-20 sm:py-24 snap-start">
