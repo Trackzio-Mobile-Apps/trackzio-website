@@ -23,6 +23,8 @@ import InsectoPrivacy from "./pages/InsectoPrivacy";
 import InsectoTerms from "./pages/InsectoTerms";
 import HabitEazyPrivacy from "./pages/HabitEazyPrivacy";
 import HabitEazyTerms from "./pages/HabitEazyTerms";
+import RockzyPrivacy from "./pages/RockzyPrivacy";
+import RockzyTerms from "./pages/RockzyTerms";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -56,6 +58,8 @@ const App = () => (
             <Route path="/insecto-ai/terms" element={<InsectoTerms />} />
             <Route path="/habit-eazy/privacy-policy" element={<HabitEazyPrivacy />} />
             <Route path="/habit-eazy/terms" element={<HabitEazyTerms />} />
+            <Route path="/rockzy/privacy-policy" element={<RockzyPrivacy />} />
+            <Route path="/rockzy/terms" element={<RockzyTerms />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -2,6 +2,7 @@ import coinzyLogo from '@/assets/coinzy-logo.png';
 import banknotesLogo from '@/assets/banknotes-logo.png';
 import insectoLogo from '@/assets/insecto-logo.png';
 import habiteazyLogo from '@/assets/habiteazy-logo.png';
+import rockzyLogo from '@/assets/rockzy-logo.png';
 
 // Screenshots
 import banknotes1 from '@/assets/screenshots/banknotes-1.png';
@@ -14,6 +15,9 @@ import insecto1 from '@/assets/screenshots/insecto-1.png';
 import insecto2 from '@/assets/screenshots/insecto-2.jpg';
 import insecto3 from '@/assets/screenshots/insecto-3.png';
 import habiteazy1 from '@/assets/screenshots/habiteazy-1.jpg';
+import rockzy1 from '@/assets/screenshots/rockzy-1.png';
+import rockzy2 from '@/assets/screenshots/rockzy-2.png';
+import rockzy3 from '@/assets/screenshots/rockzy-3.png';
 
 export interface AppFeature {
   icon: string;
@@ -117,6 +121,26 @@ export const apps: AppInfo[] = [
       { icon: '🦊', title: 'Fun Companion', description: 'Your virtual pet grows as you build better habits.' },
     ],
     stats: { downloads: '250K+', rating: '4.4+', dau: '30K+' },
+  },
+  {
+    id: 'rockzy',
+    name: 'Rockzy',
+    tagline: 'AI Rock & Mineral Identifier',
+    description: 'Scan, collect, and explore over 8,000+ rocks and minerals with powerful AI tools. Identify rocks instantly, chat with AI, and build your collection.',
+    color: 'hsl(30, 70%, 45%)',
+    accentHsl: '30 70% 45%',
+    iosUrl: null,
+    androidUrl: 'https://play.google.com/store/apps/details?id=com.trackzio.minerals&pcampaignid=web_share',
+    icon: '🪨',
+    logo: rockzyLogo,
+    screenshots: [rockzy1, rockzy2, rockzy3],
+    features: [
+      { icon: '🔍', title: 'AI Rock Identification', description: 'Scan and identify any rock or mineral instantly using AI.' },
+      { icon: '💬', title: 'AI Chat Assistant', description: 'Ask questions and learn about rocks, minerals, and crystals.' },
+      { icon: '📦', title: 'Collection Tracking', description: 'Organize owned, identified, and wishlist minerals.' },
+      { icon: '🌍', title: 'Global Mineral Catalogue', description: 'Explore thousands of rocks and minerals worldwide.' },
+    ],
+    stats: { downloads: '', rating: '4.5+', dau: '' },
   },
 ];
 

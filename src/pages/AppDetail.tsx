@@ -28,6 +28,7 @@ const pageViewEvents: Record<string, string> = {
   banknotes: 'banknotes_page_view',
   insecto: 'insecto_page_view',
   habiteazy: 'habiteazy_page_view',
+  rockzy: 'rockzy_page_view',
 };
 
 const downloadEvents: Record<string, { ios: string; android: string }> = {
@@ -35,6 +36,7 @@ const downloadEvents: Record<string, { ios: string; android: string }> = {
   banknotes: { ios: 'banknotes_ios_download', android: 'banknotes_android_download' },
   insecto: { ios: 'insecto_ios_download', android: 'insecto_android_download' },
   habiteazy: { ios: 'habiteazy_ios_download', android: 'habiteazy_android_download' },
+  rockzy: { ios: 'rockzy_ios_download', android: 'rockzy_android_download' },
 };
 
 const appReviews: Record<string, { quote: string; author: string }[]> = {
@@ -61,6 +63,14 @@ const appReviews: Record<string, { quote: string; author: string }[]> = {
     { quote: "Decent repertoire of insects available for identifying them.", author: "Pintu" },
     { quote: "Amazing app with such a vast library of readily available insects.", author: "Pallav" },
     { quote: "Best app to identify insects!!!", author: "Jay" },
+  ],
+  rockzy: [
+    { quote: "I could easily identify some rocks in the wild with this app. Waiting for an offline version to happen soon!", author: "Pintu Bodat" },
+    { quote: "Good app. I like my hobby to collect rocks and minerals and this app certainly helps identify them!", author: "Umesh Barot" },
+    { quote: "Great app with brilliant UI to identify rocks and minerals just by a click of the camera!", author: "Aanish Aggarwal" },
+    { quote: "Great for geology lovers! It's so simple to identify rocks by photo and then track your rock collection as it grows. Best rock identifier on the play store by far. Highly recommend!", author: "Chitvan Singhal" },
+    { quote: "If you enjoy collecting minerals, this rock identifier is a must have. You can identify rocks by photo within seconds and track your collection easily.", author: "Ijaaz Ahamed" },
+    { quote: "Really nice app, smooth ui and great scanning accuracy of gems, useful to identify rocks or gems using camera.", author: "Aishik Kirtaniya" },
   ],
 };
 
@@ -144,6 +154,24 @@ const appFaqs: Record<string, { q: string; a: string }[]> = {
     { q: 'How do I report a bug or incorrect identification?', a: 'Go to Settings → Help & Feedback. Describe the issue and our team will review it promptly.' },
     { q: 'What should I do if the app cannot identify a banknote?', a: 'Try uploading a clearer photo with better lighting. Ensure the full banknote is visible. You can also search manually in the Global Catalogue.' },
   ],
+  rockzy: [
+    { q: 'What is Rockzy?', a: 'Rockzy is a comprehensive rocks and minerals app that helps you identify, collect, and organize rocks and minerals using AI.' },
+    { q: 'Why can\'t I identify more rocks?', a: 'Free users have a daily limit of 2 identifications. This resets every 24 hours. Upgrade to Premium for unlimited use.' },
+    { q: 'How does identification work?', a: 'Take a clear photo → AI analyzes → returns name, type, and details.' },
+    { q: 'Do I need an account?', a: 'You can use as guest, but account is required for saving collections.' },
+    { q: 'What happens if I delete the app?', a: 'Guest data is lost. Account data is restored on login.' },
+    { q: 'Free vs Premium?', a: 'Free: Limited identifications and collections. Premium: Unlimited identifications, unlimited collections, and full AI chat access.' },
+    { q: 'Can I cancel the subscription?', a: 'Yes, via Play Store / App Store settings.' },
+    { q: 'How to organise a collection?', a: 'Use Owned, Identified, Wishlist categories.' },
+    { q: 'What is "Which Rock Are You"?', a: 'A personality quiz that matches you with a rock.' },
+    { q: 'What are Zodiac Stones?', a: 'Crystals linked to zodiac signs and energies.' },
+    { q: 'How does AI Chat work?', a: 'Ask questions about rocks and minerals. Free has limits, Premium is unlimited.' },
+    { q: 'What is Global Catalogue?', a: 'A database of rocks and minerals worldwide.' },
+    { q: 'What is Rock of the Day?', a: 'A daily featured mineral with details and insights.' },
+    { q: 'How accurate is identification?', a: 'Depends on image quality. AI gives multiple possible matches.' },
+    { q: 'Is my data safe?', a: 'Yes, securely stored with encryption.' },
+    { q: 'How to report content?', a: 'Use the report option in the app.' },
+  ],
 };
 
 const appLegalLinks: Record<string, { privacy: string; terms: string }> = {
@@ -151,6 +179,7 @@ const appLegalLinks: Record<string, { privacy: string; terms: string }> = {
   banknotes: { privacy: '/banknote-ai/privacy-policy', terms: '/banknote-ai/terms' },
   insecto: { privacy: '/insecto-ai/privacy-policy', terms: '/insecto-ai/terms' },
   habiteazy: { privacy: '/habit-eazy/privacy-policy', terms: '/habit-eazy/terms' },
+  rockzy: { privacy: '/rockzy/privacy-policy', terms: '/rockzy/terms' },
 };
 
 // Feature bullet points per app
@@ -179,6 +208,12 @@ const featureBullets: Record<string, Record<string, string[]>> = {
     'Visual Progress': ['Heat map calendar view', 'Completion rate charts', 'Trend analysis over time'],
     'Fun Companion': ['Virtual pet evolution', 'Achievement unlocks', 'Motivational notifications'],
   },
+  rockzy: {
+    'AI Rock Identification': ['Supports 8,000+ rock varieties', 'Works from any angle', 'Results in under 2 seconds'],
+    'AI Chat Assistant': ['Ask anything about geology', 'Crystal healing properties', 'Mineral composition details'],
+    'Collection Tracking': ['Owned, Identified, Wishlist', 'Location-tagged entries', 'Share with community'],
+    'Global Mineral Catalogue': ['Searchable worldwide database', 'Filter by type and region', 'Detailed mineral profiles'],
+  },
 };
 
 // Showcase features per app — maps features to screenshots with benefit descriptions
@@ -195,6 +230,13 @@ import insecto1 from '@/assets/screenshots/insecto-1.png';
 import insecto2 from '@/assets/screenshots/insecto-2.jpg';
 import insecto3 from '@/assets/screenshots/insecto-3.png';
 import habiteazy1 from '@/assets/screenshots/habiteazy-1.jpg';
+import rockzy1 from '@/assets/screenshots/rockzy-1.png';
+import rockzy2 from '@/assets/screenshots/rockzy-2.png';
+import rockzy3 from '@/assets/screenshots/rockzy-3.png';
+import rockzy4 from '@/assets/screenshots/rockzy-4.png';
+import rockzy5 from '@/assets/screenshots/rockzy-5.png';
+import rockzy6 from '@/assets/screenshots/rockzy-6.png';
+import rockzy7 from '@/assets/screenshots/rockzy-7.png';
 
 showcaseFeatures['coinzy'] = [
   { screenshot: coinzy1, title: 'AI Coin Scanner', description: 'Point your camera at any coin for instant identification with 95%+ accuracy' },
@@ -218,6 +260,16 @@ showcaseFeatures['habiteazy'] = [
   { screenshot: habiteazy1, title: 'Streak Tracking', description: 'Stay motivated with daily streak counts and achievement badges' },
   { screenshot: habiteazy1, title: 'Smart Scheduling', description: 'Set flexible reminders and customize your weekly habit plans' },
   { screenshot: habiteazy1, title: 'Visual Progress', description: 'See your journey with beautiful charts, heat maps, and statistics' },
+];
+
+showcaseFeatures['rockzy'] = [
+  { screenshot: rockzy1, title: 'AI Rock Identification', description: 'Scan and identify any rock or mineral instantly using AI' },
+  { screenshot: rockzy2, title: 'AI Chat Assistant', description: 'Ask questions and learn about rocks, minerals, and crystals' },
+  { screenshot: rockzy3, title: 'Collection Tracking', description: 'Organize owned, identified, and wishlist minerals' },
+  { screenshot: rockzy4, title: 'Global Mineral Catalogue', description: 'Explore thousands of rocks and minerals worldwide' },
+  { screenshot: rockzy5, title: 'Community Feed', description: 'Share discoveries and interact with other enthusiasts' },
+  { screenshot: rockzy6, title: 'Zodiac Stones', description: 'Discover crystals linked to your zodiac sign' },
+  { screenshot: rockzy7, title: 'Rock Personality Quiz', description: 'Find out which rock matches your personality' },
 ];
 
 export default function AppDetail() {
