@@ -47,6 +47,14 @@ const App = () => (
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/trackzio-terms" element={<TrackzioTerms />} />
             <Route path="/trackzio-privacy" element={<TrackzioPrivacy />} />
+            <Route path="/coinzy/privacy-policy" element={<CoinzyPrivacy />} />
+            <Route path="/coinzy/terms" element={<CoinzyTerms />} />
+            <Route path="/banknote-ai/privacy-policy" element={<BanknotePrivacy />} />
+            <Route path="/banknote-ai/terms" element={<BanknoteTerms />} />
+            <Route path="/insecto-ai/privacy-policy" element={<InsectoPrivacy />} />
+            <Route path="/insecto-ai/terms" element={<InsectoTerms />} />
+            <Route path="/habit-eazy/privacy-policy" element={<HabitEazyPrivacy />} />
+            <Route path="/habit-eazy/terms" element={<HabitEazyTerms />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
