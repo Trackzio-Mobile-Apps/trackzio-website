@@ -208,6 +208,12 @@ const featureBullets: Record<string, Record<string, string[]>> = {
     'Visual Progress': ['Heat map calendar view', 'Completion rate charts', 'Trend analysis over time'],
     'Fun Companion': ['Virtual pet evolution', 'Achievement unlocks', 'Motivational notifications'],
   },
+  rockzy: {
+    'AI Rock Identification': ['Supports 8,000+ rock varieties', 'Works from any angle', 'Results in under 2 seconds'],
+    'AI Chat Assistant': ['Ask anything about geology', 'Crystal healing properties', 'Mineral composition details'],
+    'Collection Tracking': ['Owned, Identified, Wishlist', 'Location-tagged entries', 'Share with community'],
+    'Global Mineral Catalogue': ['Searchable worldwide database', 'Filter by type and region', 'Detailed mineral profiles'],
+  },
 };
 
 // Showcase features per app — maps features to screenshots with benefit descriptions
