@@ -145,6 +145,13 @@ const appFaqs: Record<string, { q: string; a: string }[]> = {
   ],
 };
 
+const appLegalLinks: Record<string, { privacy: string; terms: string }> = {
+  coinzy: { privacy: '/coinzy/privacy-policy', terms: '/coinzy/terms' },
+  banknotes: { privacy: '/banknote-ai/privacy-policy', terms: '/banknote-ai/terms' },
+  insecto: { privacy: '/insecto-ai/privacy-policy', terms: '/insecto-ai/terms' },
+  habiteazy: { privacy: '/habit-eazy/privacy-policy', terms: '/habit-eazy/terms' },
+};
+
 // Feature bullet points per app
 const featureBullets: Record<string, Record<string, string[]>> = {
   coinzy: {
