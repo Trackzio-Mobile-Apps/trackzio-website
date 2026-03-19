@@ -39,7 +39,7 @@ export default function Footer() {
           </div>
 
           {/* Links + Get in Touch */}
-          <nav className="flex items-center gap-6 text-sm" aria-label="Footer navigation">
+          <nav className="flex items-center gap-6 text-sm flex-wrap" aria-label="Footer navigation">
             {['Terms', 'Privacy', 'Contact'].map(label => (
               <Link
                 key={label}
@@ -49,6 +49,18 @@ export default function Footer() {
                 {label}
               </Link>
             ))}
+            <Link
+              to="/trackzio-privacy"
+              className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+            >
+              Trackzio Privacy
+            </Link>
+            <Link
+              to="/trackzio-terms"
+              className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+            >
+              Trackzio Terms
+            </Link>
             <Link
               to="/help"
               className="inline-flex items-center h-9 px-5 rounded-xl bg-primary-foreground text-primary text-sm font-semibold transition-opacity hover:opacity-90"
