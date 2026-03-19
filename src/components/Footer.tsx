@@ -24,6 +24,7 @@ const appLegalMap: Record<string, { label: string; privacy: string; terms: strin
   insecto: { label: 'Insecto AI', privacy: '/insecto-ai/privacy-policy', terms: '/insecto-ai/terms' },
   'habit-eazy': { label: 'Habit Eazy', privacy: '/habit-eazy/privacy-policy', terms: '/habit-eazy/terms' },
   habiteazy: { label: 'Habit Eazy', privacy: '/habit-eazy/privacy-policy', terms: '/habit-eazy/terms' },
+  rockzy: { label: 'Rockzy', privacy: '/rockzy/privacy-policy', terms: '/rockzy/terms' },
 };
 
 function getAppLegal(pathname: string) {
@@ -69,13 +70,13 @@ export default function Footer() {
                   to={appLegal.privacy}
                   className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
                 >
-                  Privacy Policy
+                  {appLegal.label} Privacy Policy
                 </Link>
                 <Link
                   to={appLegal.terms}
                   className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
                 >
-                  Terms &amp; Conditions
+                  {appLegal.label} Terms &amp; Conditions
                 </Link>
               </>
             ) : (
