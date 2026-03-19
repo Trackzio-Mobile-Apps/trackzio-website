@@ -234,20 +234,21 @@ import banknotes8 from '@/assets/screenshots/banknotes-8.webp';
 import banknotes9 from '@/assets/screenshots/banknotes-9.webp';
 import insecto1 from '@/assets/screenshots/insecto-1.png';
 import insecto2 from '@/assets/screenshots/insecto-2.webp';
-import insecto3 from '@/assets/screenshots/insecto-3.png';
+import insecto3 from '@/assets/screenshots/insecto-3.webp';
 import insecto4 from '@/assets/screenshots/insecto-4.webp';
 import insecto5 from '@/assets/screenshots/insecto-5.webp';
+import insecto6 from '@/assets/screenshots/insecto-6.webp';
 import habiteazy1 from '@/assets/screenshots/habiteazy-1.jpg';
 import habiteazy2 from '@/assets/screenshots/habiteazy-2.webp';
 import habiteazy4 from '@/assets/screenshots/habiteazy-4.jpg';
 import habiteazy5 from '@/assets/screenshots/habiteazy-5.jpg';
-import rockzy1 from '@/assets/screenshots/rockzy-1.png';
+import rockzy1 from '@/assets/screenshots/rockzy-1.webp';
 import rockzy2 from '@/assets/screenshots/rockzy-2.png';
-import rockzy3 from '@/assets/screenshots/rockzy-3.png';
-import rockzy4 from '@/assets/screenshots/rockzy-4.png';
+import rockzy3 from '@/assets/screenshots/rockzy-3.webp';
+import rockzy4 from '@/assets/screenshots/rockzy-4.webp';
 import rockzy5 from '@/assets/screenshots/rockzy-5.png';
-import rockzy6 from '@/assets/screenshots/rockzy-6.png';
-import rockzy7 from '@/assets/screenshots/rockzy-7.png';
+import rockzy6 from '@/assets/screenshots/rockzy-6.webp';
+import rockzy7 from '@/assets/screenshots/rockzy-7.webp';
 
 showcaseFeatures['coinzy'] = [
   { screenshot: coinzy1, title: 'AI Coin Scan', description: 'Identify coins instantly using AI' },
@@ -271,7 +272,7 @@ showcaseFeatures['insecto'] = [
   { screenshot: insecto1, title: 'AI Insect Scan', description: 'Identify insects using AI' },
   { screenshot: insecto2, title: 'AI Chat Assistant', description: 'Ask questions about insects' },
   { screenshot: insecto3, title: 'Collection Tracking', description: 'Save and organize discoveries' },
-  { screenshot: insecto3, title: 'Community Feed', description: 'Share findings with others' },
+  { screenshot: insecto6, title: 'Community Feed', description: 'Share findings with others' },
   { screenshot: insecto4, title: 'Danger Identification', description: 'Learn about harmful insects' },
   { screenshot: insecto5, title: '400K+ Insects Database', description: 'Explore a vast insect catalog' },
 ];
