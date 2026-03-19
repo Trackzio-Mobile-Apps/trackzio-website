@@ -145,6 +145,13 @@ const appFaqs: Record<string, { q: string; a: string }[]> = {
   ],
 };
 
+const appLegalLinks: Record<string, { privacy: string; terms: string }> = {
+  coinzy: { privacy: '/coinzy/privacy-policy', terms: '/coinzy/terms' },
+  banknotes: { privacy: '/banknote-ai/privacy-policy', terms: '/banknote-ai/terms' },
+  insecto: { privacy: '/insecto-ai/privacy-policy', terms: '/insecto-ai/terms' },
+  habiteazy: { privacy: '/habit-eazy/privacy-policy', terms: '/habit-eazy/terms' },
+};
+
 // Feature bullet points per app
 const featureBullets: Record<string, Record<string, string[]>> = {
   coinzy: {
@@ -496,6 +503,21 @@ export default function AppDetail() {
                 </div>
               )}
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── 7. App-specific Legal Footer ── */}
+      {appLegalLinks[appId!] && (
+        <section className="py-12 snap-start border-t border-border/40">
+          <div className="container-site flex flex-wrap items-center justify-center gap-6 text-sm">
+            <Link to={appLegalLinks[appId!].privacy} className="text-muted-foreground hover:text-primary transition-colors">
+              Privacy Policy
+            </Link>
+            <span className="text-border">|</span>
+            <Link to={appLegalLinks[appId!].terms} className="text-muted-foreground hover:text-primary transition-colors">
+              Terms &amp; Conditions
+            </Link>
           </div>
         </section>
       )}

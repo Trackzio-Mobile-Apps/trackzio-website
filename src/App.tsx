@@ -15,6 +15,14 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import TrackzioTerms from "./pages/TrackzioTerms";
 import TrackzioPrivacy from "./pages/TrackzioPrivacy";
+import CoinzyPrivacy from "./pages/CoinzyPrivacy";
+import CoinzyTerms from "./pages/CoinzyTerms";
+import BanknotePrivacy from "./pages/BanknotePrivacy";
+import BanknoteTerms from "./pages/BanknoteTerms";
+import InsectoPrivacy from "./pages/InsectoPrivacy";
+import InsectoTerms from "./pages/InsectoTerms";
+import HabitEazyPrivacy from "./pages/HabitEazyPrivacy";
+import HabitEazyTerms from "./pages/HabitEazyTerms";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,6 +47,14 @@ const App = () => (
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/trackzio-terms" element={<TrackzioTerms />} />
             <Route path="/trackzio-privacy" element={<TrackzioPrivacy />} />
+            <Route path="/coinzy/privacy-policy" element={<CoinzyPrivacy />} />
+            <Route path="/coinzy/terms" element={<CoinzyTerms />} />
+            <Route path="/banknote-ai/privacy-policy" element={<BanknotePrivacy />} />
+            <Route path="/banknote-ai/terms" element={<BanknoteTerms />} />
+            <Route path="/insecto-ai/privacy-policy" element={<InsectoPrivacy />} />
+            <Route path="/insecto-ai/terms" element={<InsectoTerms />} />
+            <Route path="/habit-eazy/privacy-policy" element={<HabitEazyPrivacy />} />
+            <Route path="/habit-eazy/terms" element={<HabitEazyTerms />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
