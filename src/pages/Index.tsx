@@ -93,7 +93,8 @@ export default function Home() {
         if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 10) {
           el.scrollTo({ left: 0, behavior: 'smooth' });
         } else {
-          el.scrollBy({ left: el.clientWidth * 0.8, behavior: 'smooth' });
+          const cardWidth = el.querySelector<HTMLElement>(':scope > div')?.offsetWidth || el.clientWidth;
+          el.scrollBy({ left: cardWidth + 20, behavior: 'smooth' });
         }
       }, 4000);
     };
