@@ -262,6 +262,16 @@ showcaseFeatures['habiteazy'] = [
   { screenshot: habiteazy1, title: 'Visual Progress', description: 'See your journey with beautiful charts, heat maps, and statistics' },
 ];
 
+showcaseFeatures['rockzy'] = [
+  { screenshot: rockzy1, title: 'AI Rock Identification', description: 'Scan and identify any rock or mineral instantly using AI' },
+  { screenshot: rockzy2, title: 'AI Chat Assistant', description: 'Ask questions and learn about rocks, minerals, and crystals' },
+  { screenshot: rockzy3, title: 'Collection Tracking', description: 'Organize owned, identified, and wishlist minerals' },
+  { screenshot: rockzy4, title: 'Global Mineral Catalogue', description: 'Explore thousands of rocks and minerals worldwide' },
+  { screenshot: rockzy5, title: 'Community Feed', description: 'Share discoveries and interact with other enthusiasts' },
+  { screenshot: rockzy6, title: 'Zodiac Stones', description: 'Discover crystals linked to your zodiac sign' },
+  { screenshot: rockzy7, title: 'Rock Personality Quiz', description: 'Find out which rock matches your personality' },
+];
+
 export default function AppDetail() {
   const { appId } = useParams<{ appId: string }>();
   const app = getApp(appId || '');
