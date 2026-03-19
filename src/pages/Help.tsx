@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { motion } from 'framer-motion';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { Mail, Phone, Send } from 'lucide-react';
@@ -78,6 +79,7 @@ const faqs = [
 export default function Help() {
   usePageAnalytics('help', 'help_page_view');
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [showAllFaqs, setShowAllFaqs] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -184,7 +186,7 @@ export default function Help() {
             </motion.div>
 
             <Accordion type="single" collapsible className="space-y-3">
-              {faqs.map((faq, i) =>
+              {(showAllFaqs ? faqs : faqs.slice(0, 3)).map((faq, i) =>
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 12 }}
@@ -198,6 +200,16 @@ export default function Help() {
                 </motion.div>
               )}
             </Accordion>
+
+            {!showAllFaqs && (
+              <div className="text-center mt-8">
+                <button
+                  onClick={() => setShowAllFaqs(true)}
+                  className="inline-flex items-center gap-2 h-11 px-6 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity">
+                  Show More
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>
