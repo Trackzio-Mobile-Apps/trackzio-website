@@ -22,12 +22,6 @@ const fadeUp = {
   transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] as const }
 };
 
-const cultureImages = [
-  { src: companyPhoto1, alt: 'Trackzio team outing' },
-  { src: companyPhoto2, alt: 'Working at Trackzio' },
-  { src: companyPhoto3, alt: 'Team celebrations' },
-  { src: companyPhoto4, alt: 'Trackzio office' },
-];
 
 const journeyBlocks = [
   {
