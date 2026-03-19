@@ -79,6 +79,7 @@ const faqs = [
 export default function Help() {
   usePageAnalytics('help', 'help_page_view');
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [showAllFaqs, setShowAllFaqs] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
