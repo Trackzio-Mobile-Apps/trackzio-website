@@ -107,7 +107,7 @@ export default function Header() {
                       onMouseEnter={handleDropdownEnter}
                       onMouseLeave={handleDropdownLeave}
                     >
-                      <div className="grid grid-cols-4 gap-3">
+                      <div className="grid grid-cols-5 gap-3">
                         {apps.map(app => (
                           <Link
                             key={app.id}
