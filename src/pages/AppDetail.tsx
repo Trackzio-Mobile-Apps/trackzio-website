@@ -223,6 +223,9 @@ const showcaseFeatures: Record<string, { screenshot: string; title: string; desc
 import coinzy1 from '@/assets/screenshots/coinzy-1.png';
 import coinzy2 from '@/assets/screenshots/coinzy-2.png';
 import coinzy3 from '@/assets/screenshots/coinzy-3.png';
+import coinzy4 from '@/assets/screenshots/coinzy-4.png';
+import coinzy5 from '@/assets/screenshots/coinzy-5.png';
+import coinzy6 from '@/assets/screenshots/coinzy-6.png';
 import banknotes4 from '@/assets/screenshots/banknotes-4.webp';
 import banknotes5 from '@/assets/screenshots/banknotes-5.webp';
 import banknotes6 from '@/assets/screenshots/banknotes-6.webp';
@@ -230,8 +233,10 @@ import banknotes7 from '@/assets/screenshots/banknotes-7.webp';
 import banknotes8 from '@/assets/screenshots/banknotes-8.webp';
 import banknotes9 from '@/assets/screenshots/banknotes-9.webp';
 import insecto1 from '@/assets/screenshots/insecto-1.png';
-import insecto2 from '@/assets/screenshots/insecto-2.jpg';
+import insecto2 from '@/assets/screenshots/insecto-2.webp';
 import insecto3 from '@/assets/screenshots/insecto-3.png';
+import insecto4 from '@/assets/screenshots/insecto-4.webp';
+import insecto5 from '@/assets/screenshots/insecto-5.webp';
 import habiteazy1 from '@/assets/screenshots/habiteazy-1.jpg';
 import habiteazy2 from '@/assets/screenshots/habiteazy-2.webp';
 import habiteazy4 from '@/assets/screenshots/habiteazy-4.jpg';
@@ -248,9 +253,9 @@ showcaseFeatures['coinzy'] = [
   { screenshot: coinzy1, title: 'AI Coin Scan', description: 'Identify coins instantly using AI' },
   { screenshot: coinzy2, title: 'Marketplace', description: 'Buy and sell coins with collectors' },
   { screenshot: coinzy3, title: 'Collection Tracking', description: 'Organize and manage your coin collection' },
-  { screenshot: coinzy1, title: 'Community Feed', description: 'Share and explore coin discoveries' },
-  { screenshot: coinzy2, title: 'Coin Value Insights', description: 'Know the real value of your coins' },
-  { screenshot: coinzy3, title: '250K+ Coins Database', description: 'Explore a massive global coin catalog' },
+  { screenshot: coinzy4, title: 'Community Feed', description: 'Share and explore coin discoveries' },
+  { screenshot: coinzy5, title: 'Coin Value Insights', description: 'Know the real value of your coins' },
+  { screenshot: coinzy6, title: '250K+ Coins Database', description: 'Explore a massive global coin catalog' },
 ];
 
 showcaseFeatures['banknotes'] = [
@@ -266,9 +271,9 @@ showcaseFeatures['insecto'] = [
   { screenshot: insecto1, title: 'AI Insect Scan', description: 'Identify insects using AI' },
   { screenshot: insecto2, title: 'AI Chat Assistant', description: 'Ask questions about insects' },
   { screenshot: insecto3, title: 'Collection Tracking', description: 'Save and organize discoveries' },
-  { screenshot: insecto1, title: 'Community Feed', description: 'Share findings with others' },
-  { screenshot: insecto2, title: 'Danger Identification', description: 'Learn about harmful insects' },
-  { screenshot: insecto3, title: '400K+ Insects Database', description: 'Explore a vast insect catalog' },
+  { screenshot: insecto3, title: 'Community Feed', description: 'Share findings with others' },
+  { screenshot: insecto4, title: 'Danger Identification', description: 'Learn about harmful insects' },
+  { screenshot: insecto5, title: '400K+ Insects Database', description: 'Explore a vast insect catalog' },
 ];
 
 showcaseFeatures['habiteazy'] = [
