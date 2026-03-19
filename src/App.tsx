@@ -23,6 +23,8 @@ import InsectoPrivacy from "./pages/InsectoPrivacy";
 import InsectoTerms from "./pages/InsectoTerms";
 import HabitEazyPrivacy from "./pages/HabitEazyPrivacy";
 import HabitEazyTerms from "./pages/HabitEazyTerms";
+import RockzyPrivacy from "./pages/RockzyPrivacy";
+import RockzyTerms from "./pages/RockzyTerms";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
