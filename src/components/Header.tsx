@@ -103,7 +103,7 @@ export default function Header() {
                       exit={{ opacity: 0, y: 8 }}
                       transition={{ duration: 0.15 }}
                       className="absolute top-full left-1/2 -translate-x-[65%] mt-1 rounded-2xl bg-card border border-border/40 p-4 z-50"
-                      style={{ boxShadow: 'var(--shadow-card)', width: 'min(90vw, 780px)' }}
+                      style={{ boxShadow: 'var(--shadow-card)', width: 'min(90vw, 920px)' }}
                       onMouseEnter={handleDropdownEnter}
                       onMouseLeave={handleDropdownLeave}
                     >
