@@ -63,15 +63,6 @@ const teamMembers = [
 export default function About() {
   usePageAnalytics('about', 'about us_page_view');
 
-  const [currentImage, setCurrentImage] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % cultureImages.length);
-    }, 3500);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className="snap-y snap-mandatory">
       {/* ── Section 1: Hero ── */}
