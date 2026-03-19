@@ -15,6 +15,9 @@ import insecto1 from '@/assets/screenshots/insecto-1.png';
 import insecto2 from '@/assets/screenshots/insecto-2.jpg';
 import insecto3 from '@/assets/screenshots/insecto-3.png';
 import habiteazy1 from '@/assets/screenshots/habiteazy-1.jpg';
+import rockzy1 from '@/assets/screenshots/rockzy-1.png';
+import rockzy2 from '@/assets/screenshots/rockzy-2.png';
+import rockzy3 from '@/assets/screenshots/rockzy-3.png';
 
 export interface AppFeature {
   icon: string;
