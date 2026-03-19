@@ -45,6 +45,7 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/privacy-policy" element={<Privacy />} />
             <Route path="/trackzio-terms" element={<TrackzioTerms />} />
             <Route path="/trackzio-privacy" element={<TrackzioPrivacy />} />
             <Route path="/coinzy/privacy-policy" element={<CoinzyPrivacy />} />

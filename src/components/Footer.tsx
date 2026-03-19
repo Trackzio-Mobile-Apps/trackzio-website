@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
 
 const socialLinks = [
@@ -16,7 +16,30 @@ const socialLinks = [
   )},
 ];
 
+const appLegalMap: Record<string, { label: string; privacy: string; terms: string }> = {
+  coinzy: { label: 'Coinzy', privacy: '/coinzy/privacy-policy', terms: '/coinzy/terms' },
+  'banknote-ai': { label: 'Banknote AI', privacy: '/banknote-ai/privacy-policy', terms: '/banknote-ai/terms' },
+  banknotes: { label: 'Banknote AI', privacy: '/banknote-ai/privacy-policy', terms: '/banknote-ai/terms' },
+  'insecto-ai': { label: 'Insecto AI', privacy: '/insecto-ai/privacy-policy', terms: '/insecto-ai/terms' },
+  insecto: { label: 'Insecto AI', privacy: '/insecto-ai/privacy-policy', terms: '/insecto-ai/terms' },
+  'habit-eazy': { label: 'Habit Eazy', privacy: '/habit-eazy/privacy-policy', terms: '/habit-eazy/terms' },
+  habiteazy: { label: 'Habit Eazy', privacy: '/habit-eazy/privacy-policy', terms: '/habit-eazy/terms' },
+};
+
+function getAppLegal(pathname: string) {
+  // Check if we're on an app detail page or an app legal page
+  for (const key of Object.keys(appLegalMap)) {
+    if (pathname.includes(key)) {
+      return appLegalMap[key];
+    }
+  }
+  return null;
+}
+
 export default function Footer() {
+  const { pathname } = useLocation();
+  const appLegal = getAppLegal(pathname);
+
   return (
     <footer className="bg-primary" role="contentinfo">
       <div className="container-site py-12">
@@ -30,7 +53,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Follow Trackzio on ${s.label}`}
-                onClick={() => s.event && trackEvent(s.event, { page_name: window.location.pathname })}
+                onClick={() => s.event && trackEvent(s.event, { page_name: pathname })}
                 className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
               >
                 {s.icon}
@@ -40,26 +63,54 @@ export default function Footer() {
 
           {/* Links + Get in Touch */}
           <nav className="flex items-center gap-6 text-sm flex-wrap" aria-label="Footer navigation">
-            {['Terms', 'Privacy', 'Contact'].map(label => (
-              <Link
-                key={label}
-                to={`/${label.toLowerCase()}`}
-                className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-              >
-                {label}
-              </Link>
-            ))}
+            {appLegal ? (
+              <>
+                <Link
+                  to={appLegal.privacy}
+                  className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+                <Link
+                  to={appLegal.terms}
+                  className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                >
+                  Terms &amp; Conditions
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/terms"
+                  className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                >
+                  Terms
+                </Link>
+                <Link
+                  to="/privacy"
+                  className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                >
+                  Privacy
+                </Link>
+                <Link
+                  to="/trackzio-privacy"
+                  className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                >
+                  Trackzio Privacy
+                </Link>
+                <Link
+                  to="/trackzio-terms"
+                  className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                >
+                  Trackzio Terms
+                </Link>
+              </>
+            )}
             <Link
-              to="/trackzio-privacy"
+              to="/contact"
               className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
             >
-              Trackzio Privacy
-            </Link>
-            <Link
-              to="/trackzio-terms"
-              className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-            >
-              Trackzio Terms
+              Contact
             </Link>
             <Link
               to="/help"
