@@ -28,6 +28,7 @@ const pageViewEvents: Record<string, string> = {
   banknotes: 'banknotes_page_view',
   insecto: 'insecto_page_view',
   habiteazy: 'habiteazy_page_view',
+  rockzy: 'rockzy_page_view',
 };
 
 const downloadEvents: Record<string, { ios: string; android: string }> = {
@@ -35,6 +36,7 @@ const downloadEvents: Record<string, { ios: string; android: string }> = {
   banknotes: { ios: 'banknotes_ios_download', android: 'banknotes_android_download' },
   insecto: { ios: 'insecto_ios_download', android: 'insecto_android_download' },
   habiteazy: { ios: 'habiteazy_ios_download', android: 'habiteazy_android_download' },
+  rockzy: { ios: 'rockzy_ios_download', android: 'rockzy_android_download' },
 };
 
 const appReviews: Record<string, { quote: string; author: string }[]> = {
