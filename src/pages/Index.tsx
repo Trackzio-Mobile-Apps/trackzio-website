@@ -405,8 +405,8 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: Math.min(i * 0.08, 0.4) }}
-                  className="flex-shrink-0 snap-start"
-                  style={{ width: 'calc(25% - 15px)', minWidth: '260px' }}
+                  className={`flex-shrink-0 snap-start ${isMobile ? 'w-full' : ''}`}
+                  style={isMobile ? undefined : { width: 'calc(25% - 15px)', minWidth: '280px' }}
                 >
                   <div className="p-6 rounded-2xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
                     <Quote size={22} className="text-primary/25 mb-3" />
