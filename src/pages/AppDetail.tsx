@@ -223,13 +223,19 @@ const showcaseFeatures: Record<string, { screenshot: string; title: string; desc
 import coinzy1 from '@/assets/screenshots/coinzy-1.png';
 import coinzy2 from '@/assets/screenshots/coinzy-2.png';
 import coinzy3 from '@/assets/screenshots/coinzy-3.png';
-import banknotes1 from '@/assets/screenshots/banknotes-1.png';
-import banknotes2 from '@/assets/screenshots/banknotes-2.png';
-import banknotes3 from '@/assets/screenshots/banknotes-3.png';
+import banknotes4 from '@/assets/screenshots/banknotes-4.webp';
+import banknotes5 from '@/assets/screenshots/banknotes-5.webp';
+import banknotes6 from '@/assets/screenshots/banknotes-6.webp';
+import banknotes7 from '@/assets/screenshots/banknotes-7.webp';
+import banknotes8 from '@/assets/screenshots/banknotes-8.webp';
+import banknotes9 from '@/assets/screenshots/banknotes-9.webp';
 import insecto1 from '@/assets/screenshots/insecto-1.png';
 import insecto2 from '@/assets/screenshots/insecto-2.jpg';
 import insecto3 from '@/assets/screenshots/insecto-3.png';
 import habiteazy1 from '@/assets/screenshots/habiteazy-1.jpg';
+import habiteazy2 from '@/assets/screenshots/habiteazy-2.webp';
+import habiteazy4 from '@/assets/screenshots/habiteazy-4.jpg';
+import habiteazy5 from '@/assets/screenshots/habiteazy-5.jpg';
 import rockzy1 from '@/assets/screenshots/rockzy-1.png';
 import rockzy2 from '@/assets/screenshots/rockzy-2.png';
 import rockzy3 from '@/assets/screenshots/rockzy-3.png';
@@ -239,37 +245,47 @@ import rockzy6 from '@/assets/screenshots/rockzy-6.png';
 import rockzy7 from '@/assets/screenshots/rockzy-7.png';
 
 showcaseFeatures['coinzy'] = [
-  { screenshot: coinzy1, title: 'AI Coin Scanner', description: 'Point your camera at any coin for instant identification with 95%+ accuracy' },
-  { screenshot: coinzy2, title: 'Rich History & Details', description: 'Explore detailed historical data, minting info, and rarity for every coin' },
-  { screenshot: coinzy3, title: 'Community Marketplace', description: 'Buy, sell, and trade coins in a trusted collector community' },
+  { screenshot: coinzy1, title: 'AI Coin Scan', description: 'Identify coins instantly using AI' },
+  { screenshot: coinzy2, title: 'Marketplace', description: 'Buy and sell coins with collectors' },
+  { screenshot: coinzy3, title: 'Collection Tracking', description: 'Organize and manage your coin collection' },
+  { screenshot: coinzy1, title: 'Community Feed', description: 'Share and explore coin discoveries' },
+  { screenshot: coinzy2, title: 'Coin Value Insights', description: 'Know the real value of your coins' },
+  { screenshot: coinzy3, title: '250K+ Coins Database', description: 'Explore a massive global coin catalog' },
 ];
 
 showcaseFeatures['banknotes'] = [
-  { screenshot: banknotes1, title: 'AI Banknote Scanner', description: 'Scan any banknote and get instant identification from 150+ countries' },
-  { screenshot: banknotes2, title: 'Global Coverage', description: 'Supports modern, historical, and commemorative banknotes worldwide' },
-  { screenshot: banknotes3, title: 'Rarity & Value Analysis', description: 'Discover estimated market value and collector demand instantly' },
+  { screenshot: banknotes4, title: 'AI Banknote Scan', description: 'Scan and identify banknotes instantly' },
+  { screenshot: banknotes5, title: 'Marketplace', description: 'Connect with buyers and sellers' },
+  { screenshot: banknotes6, title: 'Collection Tracking', description: 'Manage your banknote collection' },
+  { screenshot: banknotes7, title: 'Community Feed', description: 'Discover and share banknotes' },
+  { screenshot: banknotes8, title: 'Value Insights', description: 'Understand banknote worth' },
+  { screenshot: banknotes9, title: '50K+ Banknotes', description: 'Access a global banknote database' },
 ];
 
 showcaseFeatures['insecto'] = [
-  { screenshot: insecto1, title: 'AI Insect Identification', description: 'Instantly identify any insect species with your phone camera' },
-  { screenshot: insecto2, title: 'Detailed Species Profiles', description: 'Get toxicity info, habitat details, and behavioral data for every species' },
-  { screenshot: insecto3, title: 'Build Your Collection', description: 'Save and organize every insect discovery in your personal catalogue' },
+  { screenshot: insecto1, title: 'AI Insect Scan', description: 'Identify insects using AI' },
+  { screenshot: insecto2, title: 'AI Chat Assistant', description: 'Ask questions about insects' },
+  { screenshot: insecto3, title: 'Collection Tracking', description: 'Save and organize discoveries' },
+  { screenshot: insecto1, title: 'Community Feed', description: 'Share findings with others' },
+  { screenshot: insecto2, title: 'Danger Identification', description: 'Learn about harmful insects' },
+  { screenshot: insecto3, title: '400K+ Insects Database', description: 'Explore a vast insect catalog' },
 ];
 
 showcaseFeatures['habiteazy'] = [
-  { screenshot: habiteazy1, title: 'Streak Tracking', description: 'Stay motivated with daily streak counts and achievement badges' },
-  { screenshot: habiteazy1, title: 'Smart Scheduling', description: 'Set flexible reminders and customize your weekly habit plans' },
-  { screenshot: habiteazy1, title: 'Visual Progress', description: 'See your journey with beautiful charts, heat maps, and statistics' },
+  { screenshot: habiteazy1, title: 'Habit Tracking', description: 'Track your daily habits and stay consistent' },
+  { screenshot: habiteazy2, title: 'Task Management', description: 'Manage your daily to-do tasks efficiently' },
+  { screenshot: habiteazy4, title: 'Statistics & Reports', description: 'View colorful graphs and progress insights' },
+  { screenshot: habiteazy5, title: 'Your Personal Pal', description: 'Stay motivated with your companion throughout the journey' },
 ];
 
 showcaseFeatures['rockzy'] = [
-  { screenshot: rockzy1, title: 'AI Rock Identification', description: 'Scan and identify any rock or mineral instantly using AI' },
-  { screenshot: rockzy2, title: 'AI Chat Assistant', description: 'Ask questions and learn about rocks, minerals, and crystals' },
-  { screenshot: rockzy3, title: 'Collection Tracking', description: 'Organize owned, identified, and wishlist minerals' },
-  { screenshot: rockzy4, title: 'Global Mineral Catalogue', description: 'Explore thousands of rocks and minerals worldwide' },
-  { screenshot: rockzy5, title: 'Community Feed', description: 'Share discoveries and interact with other enthusiasts' },
-  { screenshot: rockzy6, title: 'Zodiac Stones', description: 'Discover crystals linked to your zodiac sign' },
-  { screenshot: rockzy7, title: 'Rock Personality Quiz', description: 'Find out which rock matches your personality' },
+  { screenshot: rockzy1, title: 'AI Rock Scan', description: 'Identify rocks and minerals instantly' },
+  { screenshot: rockzy2, title: 'AI Chat Assistant', description: 'Ask questions about minerals and crystals' },
+  { screenshot: rockzy3, title: 'Collection & Mineral Care', description: 'Track and maintain your mineral collection' },
+  { screenshot: rockzy4, title: 'Community Feed', description: 'Share discoveries with enthusiasts' },
+  { screenshot: rockzy5, title: 'Mineral Awareness', description: 'Learn properties and characteristics' },
+  { screenshot: rockzy6, title: '8K+ Minerals Database', description: 'Explore a global mineral catalog' },
+  { screenshot: rockzy7, title: 'Zodiac Stones', description: 'Discover crystals linked to your zodiac' },
 ];
 
 export default function AppDetail() {
