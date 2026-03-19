@@ -154,6 +154,24 @@ const appFaqs: Record<string, { q: string; a: string }[]> = {
     { q: 'How do I report a bug or incorrect identification?', a: 'Go to Settings → Help & Feedback. Describe the issue and our team will review it promptly.' },
     { q: 'What should I do if the app cannot identify a banknote?', a: 'Try uploading a clearer photo with better lighting. Ensure the full banknote is visible. You can also search manually in the Global Catalogue.' },
   ],
+  rockzy: [
+    { q: 'What is Rockzy?', a: 'Rockzy is a comprehensive rocks and minerals app that helps you identify, collect, and organize rocks and minerals using AI.' },
+    { q: 'Why can\'t I identify more rocks?', a: 'Free users have a daily limit of 2 identifications. This resets every 24 hours. Upgrade to Premium for unlimited use.' },
+    { q: 'How does identification work?', a: 'Take a clear photo → AI analyzes → returns name, type, and details.' },
+    { q: 'Do I need an account?', a: 'You can use as guest, but account is required for saving collections.' },
+    { q: 'What happens if I delete the app?', a: 'Guest data is lost. Account data is restored on login.' },
+    { q: 'Free vs Premium?', a: 'Free: Limited identifications and collections. Premium: Unlimited identifications, unlimited collections, and full AI chat access.' },
+    { q: 'Can I cancel the subscription?', a: 'Yes, via Play Store / App Store settings.' },
+    { q: 'How to organise a collection?', a: 'Use Owned, Identified, Wishlist categories.' },
+    { q: 'What is "Which Rock Are You"?', a: 'A personality quiz that matches you with a rock.' },
+    { q: 'What are Zodiac Stones?', a: 'Crystals linked to zodiac signs and energies.' },
+    { q: 'How does AI Chat work?', a: 'Ask questions about rocks and minerals. Free has limits, Premium is unlimited.' },
+    { q: 'What is Global Catalogue?', a: 'A database of rocks and minerals worldwide.' },
+    { q: 'What is Rock of the Day?', a: 'A daily featured mineral with details and insights.' },
+    { q: 'How accurate is identification?', a: 'Depends on image quality. AI gives multiple possible matches.' },
+    { q: 'Is my data safe?', a: 'Yes, securely stored with encryption.' },
+    { q: 'How to report content?', a: 'Use the report option in the app.' },
+  ],
 };
 
 const appLegalLinks: Record<string, { privacy: string; terms: string }> = {
