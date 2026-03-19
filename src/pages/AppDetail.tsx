@@ -161,6 +161,7 @@ const appLegalLinks: Record<string, { privacy: string; terms: string }> = {
   banknotes: { privacy: '/banknote-ai/privacy-policy', terms: '/banknote-ai/terms' },
   insecto: { privacy: '/insecto-ai/privacy-policy', terms: '/insecto-ai/terms' },
   habiteazy: { privacy: '/habit-eazy/privacy-policy', terms: '/habit-eazy/terms' },
+  rockzy: { privacy: '/rockzy/privacy-policy', terms: '/rockzy/terms' },
 };
 
 // Feature bullet points per app
