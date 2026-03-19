@@ -93,7 +93,8 @@ export default function Home() {
         if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 10) {
           el.scrollTo({ left: 0, behavior: 'smooth' });
         } else {
-          el.scrollBy({ left: el.clientWidth * 0.8, behavior: 'smooth' });
+          const cardWidth = el.querySelector<HTMLElement>(':scope > div')?.offsetWidth || el.clientWidth;
+          el.scrollBy({ left: cardWidth + 20, behavior: 'smooth' });
         }
       }, 4000);
     };
@@ -115,7 +116,8 @@ export default function Home() {
   const scrollCarousel = (dir: 'left' | 'right') => {
     const el = carouselRef.current;
     if (!el) return;
-    const amount = el.clientWidth * 0.8;
+    const cardWidth = el.querySelector<HTMLElement>(':scope > div')?.offsetWidth || el.clientWidth;
+    const amount = cardWidth + 20;
     el.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
   };
 
@@ -403,8 +405,8 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: Math.min(i * 0.08, 0.4) }}
-                  className="flex-shrink-0 snap-start"
-                  style={{ width: 'calc(25% - 15px)', minWidth: '260px' }}
+                  className={`flex-shrink-0 snap-start ${isMobile ? 'w-full' : ''}`}
+                  style={isMobile ? undefined : { width: 'calc(25% - 15px)', minWidth: '280px' }}
                 >
                   <div className="p-6 rounded-2xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
                     <Quote size={22} className="text-primary/25 mb-3" />
