@@ -81,25 +81,13 @@ export default function Footer() {
             ) : (
               <>
                 <Link
-                  to="/terms"
-                  className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-                >
-                  Terms
-                </Link>
-                <Link
-                  to="/privacy"
-                  className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-                >
-                  Privacy
-                </Link>
-                <Link
-                  to="/trackzio-privacy"
+                  to="/privacy-policy"
                   className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
                 >
                   Trackzio Privacy
                 </Link>
                 <Link
-                  to="/trackzio-terms"
+                  to="/terms"
                   className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
                 >
                   Trackzio Terms
