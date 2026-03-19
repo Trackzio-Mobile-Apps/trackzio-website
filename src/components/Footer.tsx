@@ -106,6 +106,14 @@ export default function Footer() {
             >
               Get in Touch
             </Link>
+            <a
+              href="https://forms.gle/pcmnfivhJZnr6Ybb9"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center h-9 px-5 rounded-xl bg-primary-foreground text-primary text-sm font-semibold transition-opacity hover:opacity-90"
+            >
+              Share Your Feedback
+            </a>
           </nav>
         </div>
 
