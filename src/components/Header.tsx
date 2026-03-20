@@ -138,7 +138,11 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden md:block absolute left-1/2 -translate-x-1/2 top-[calc(100%+4px)] w-[min(92vw,780px)] rounded-2xl border border-border/30 z-50 overflow-hidden"
+            className="hidden md:block fixed w-[min(92vw,780px)] rounded-2xl border border-border/30 z-50 overflow-hidden"
+            style={{
+              left: '50%',
+              transform: 'translateX(-50%)',
+              top: 'calc(4rem + 4px)',
             style={{
               background: 'hsl(38 35% 97%)',
               boxShadow: '0 20px 60px -12px hsla(0 0% 0% / 0.12), 0 4px 16px -4px hsla(0 0% 0% / 0.06)',
