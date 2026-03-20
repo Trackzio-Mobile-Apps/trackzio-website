@@ -143,7 +143,6 @@ export default function Header() {
               left: '50%',
               transform: 'translateX(-50%)',
               top: 'calc(4rem + 4px)',
-            style={{
               background: 'hsl(38 35% 97%)',
               boxShadow: '0 20px 60px -12px hsla(0 0% 0% / 0.12), 0 4px 16px -4px hsla(0 0% 0% / 0.06)',
             }}
