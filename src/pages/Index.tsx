@@ -7,7 +7,7 @@ import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { getPlatform, getDownloadUrl } from '@/lib/platformUtils';
 import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight, Download } from 'lucide-react';
-
+import FloatingAppShowcase from '@/components/FloatingAppShowcase';
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
   whileInView: { opacity: 1, y: 0 },
