@@ -7,7 +7,7 @@ import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { getPlatform, getDownloadUrl } from '@/lib/platformUtils';
 import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight, Download } from 'lucide-react';
-
+import FloatingAppShowcase from '@/components/FloatingAppShowcase';
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
   whileInView: { opacity: 1, y: 0 },
@@ -188,147 +188,9 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ── Section 2: Our Applications — Tinted background ── */}
-      <section id="apps" className="min-h-screen py-24 sm:py-32 snap-start bg-section-tinted">
-        <div className="container-site">
-          <motion.div {...fadeUp} className="max-w-2xl mb-20">
-            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">Our Applications</p>
-            <h2 className="text-4xl sm:text-5xl font-bold font-display leading-tight">
-              Apps that make life
-              <br />
-              <span className="text-gradient">simpler & smarter</span>
-            </h2>
-          </motion.div>
-
-          {/* Interactive list + preview */}
-          <motion.div
-            {...stagger}
-            transition={{ duration: 0.7 }}
-            className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start"
-          >
-            {/* Left: App list */}
-            <div className="lg:w-[300px] w-full shrink-0 flex flex-row lg:flex-col gap-1 overflow-x-auto lg:overflow-visible">
-              {apps.map((app, i) => (
-                <button
-                  key={app.id}
-                  onClick={() => setActiveApp(i)}
-                  onMouseEnter={() => setActiveApp(i)}
-                  className={`flex items-center gap-4 px-5 py-4 rounded-2xl text-left transition-all duration-300 w-full min-w-[200px] lg:min-w-0 ${
-                    activeApp === i
-                      ? 'bg-card shadow-sm'
-                      : 'hover:bg-card/60'
-                  }`}
-                >
-                  <img
-                    src={app.logo}
-                    alt={app.name}
-                    className="w-10 h-10 rounded-xl shrink-0"
-                  />
-                  <div className="overflow-hidden flex-1">
-                    <div
-                      className={`font-semibold text-sm transition-colors duration-300 ${
-                        activeApp === i ? 'text-primary' : 'text-foreground'
-                      }`}
-                    >
-                      {app.name}
-                    </div>
-                    <div className="text-xs text-muted-foreground leading-snug">
-                      {app.tagline}
-                    </div>
-                  </div>
-                  {activeApp === i && (
-                    <motion.div
-                      layoutId="app-indicator"
-                      className="hidden lg:block ml-auto w-1 h-8 rounded-full bg-primary shrink-0"
-                    />
-                  )}
-                </button>
-              ))}
-            </div>
-
-            {/* Right: Preview panel */}
-            <div className="flex-1 w-full min-h-[420px] relative">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={selected.id}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.4, ease: 'easeInOut' }}
-                  className="flex flex-col sm:flex-row items-center gap-10 lg:gap-14"
-                >
-                  {/* Preview visual */}
-                  <div
-                    className="w-full sm:w-1/2 aspect-square max-w-[360px] rounded-3xl flex items-center justify-center relative overflow-hidden bg-card"
-                    style={{
-                      background: `linear-gradient(160deg, hsl(${selected.accentHsl} / 0.1), hsl(${selected.accentHsl} / 0.03))`,
-                    }}
-                  >
-                    <motion.img
-                      src={selected.logo}
-                      alt={`${selected.name} logo`}
-                      className="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl"
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.5, ease: 'easeOut' }}
-                      style={{
-                        boxShadow: `0 20px 60px -12px hsl(${selected.accentHsl} / 0.25)`,
-                      }}
-                    />
-                    <div
-                      className="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-[0.06]"
-                      style={{ background: `hsl(${selected.accentHsl})` }}
-                    />
-                    <div
-                      className="absolute -bottom-8 -left-8 w-28 h-28 rounded-full opacity-[0.04]"
-                      style={{ background: `hsl(${selected.accentHsl})` }}
-                    />
-                  </div>
-
-                  {/* Preview text */}
-                  <div className="flex-1 w-full sm:w-1/2">
-                    <span
-                      className="inline-block text-xs font-semibold tracking-wider uppercase px-3 py-1 rounded-full mb-4"
-                      style={{
-                        color: `hsl(${selected.accentHsl})`,
-                        background: `hsl(${selected.accentHsl} / 0.1)`,
-                      }}
-                    >
-                      {selected.icon} {selected.name}
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl font-bold font-display leading-snug mb-4">
-                      {selected.tagline}
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed mb-6">
-                      {selected.description}
-                    </p>
-                    <div className="flex items-center gap-3 flex-wrap">
-                      <Link
-                        to={`/apps/${selected.id}`}
-                        onClick={() => {
-                          trackEvent('portfolio_tile_click', { app_name: selected.name, page_name: 'home' });
-                          trackEvent(appEvents[selected.id] || '', { app_name: selected.name, page_name: 'home' });
-                        }}
-                        className="inline-flex items-center gap-2 h-10 px-6 rounded-xl text-sm font-semibold transition-all group bg-primary text-primary-foreground hover:opacity-90 glow"
-                      >
-                        Explore Now
-                        <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                      </Link>
-                      {isMobile && (selected.iosUrl || selected.androidUrl) && (
-                        <button
-                          onClick={() => handleDownload(selected)}
-                          className="inline-flex items-center gap-2 h-10 px-6 rounded-xl text-sm font-semibold border-2 border-primary/30 text-primary transition-all hover:bg-primary/5"
-                        >
-                          <Download size={15} /> Download
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </motion.div>
-        </div>
+      {/* ── Section 2: Floating App Showcase ── */}
+      <section id="apps" className="snap-start bg-section-tinted">
+        <FloatingAppShowcase />
       </section>
 
       {/* ── Section 3: Stats — Light background ── */}
