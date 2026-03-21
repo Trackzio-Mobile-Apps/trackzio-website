@@ -201,6 +201,7 @@ export default function Header() {
                     to={item.to}
                     onClick={() => {
                       setOpen(false);
+                      window.scrollTo(0, 0);
                       item.event && trackEvent(item.event, { page_name: location.pathname });
                     }}
                     className={`px-3 py-2.5 text-sm rounded-md transition-colors ${

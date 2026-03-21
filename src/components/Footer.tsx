@@ -28,7 +28,6 @@ const appLegalMap: Record<string, { label: string; privacy: string; terms: strin
 };
 
 function getAppLegal(pathname: string) {
-  // Check if we're on an app detail page or an app legal page
   for (const key of Object.keys(appLegalMap)) {
     if (pathname.includes(key)) {
       return appLegalMap[key];
@@ -68,12 +67,14 @@ export default function Footer() {
               <>
                 <Link
                   to={appLegal.privacy}
+                  onClick={() => window.scrollTo(0, 0)}
                   className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
                 >
                   {appLegal.label} Privacy Policy
                 </Link>
                 <Link
                   to={appLegal.terms}
+                  onClick={() => window.scrollTo(0, 0)}
                   className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
                 >
                   {appLegal.label} Terms &amp; Conditions
@@ -83,12 +84,14 @@ export default function Footer() {
               <>
                 <Link
                   to="/privacy-policy"
+                  onClick={() => window.scrollTo(0, 0)}
                   className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
                 >
                   Trackzio Privacy
                 </Link>
                 <Link
                   to="/terms"
+                  onClick={() => window.scrollTo(0, 0)}
                   className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
                 >
                   Trackzio Terms
@@ -97,12 +100,14 @@ export default function Footer() {
             )}
             <Link
               to="/contact"
+              onClick={() => window.scrollTo(0, 0)}
               className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
             >
               Contact
             </Link>
             <Link
               to="/help"
+              onClick={() => window.scrollTo(0, 0)}
               className="inline-flex items-center h-9 px-5 rounded-xl bg-primary-foreground text-primary text-sm font-semibold transition-opacity hover:opacity-90"
             >
               Get in Touch
