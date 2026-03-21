@@ -206,7 +206,7 @@ export default function FloatingAppShowcase() {
 
                 <Link
                   to={`/apps/${selected.id}`}
-                  onClick={() => trackEvent('showcase_explore_click', { app_name: selected.name })}
+                  onClick={() => { trackEvent('showcase_explore_click', { app_name: selected.name }); window.scrollTo(0, 0); }}
                   className="inline-flex items-center gap-2 h-11 px-7 rounded-xl text-sm font-semibold transition-all group bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.97]"
                   style={{ boxShadow: `0 4px 16px -4px hsl(${selected.accentHsl} / 0.3)` }}
                 >

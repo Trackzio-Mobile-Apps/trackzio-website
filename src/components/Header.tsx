@@ -1,13 +1,13 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
-import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import { motion, AnimatePresence } from 'framer-motion';
 import trackzioLogo from '@/assets/trackzio-logo.jpg';
 import { apps } from '@/lib/appData';
 
 const megaMenuApps = apps
-  .filter(app => ['coinzy', 'banknote', 'insecto', 'habiteazy', 'rockzy'].includes(app.id))
+  .filter(app => ['coinzy', 'banknotes', 'insecto', 'habiteazy', 'rockzy'].includes(app.id))
   .map(app => ({ id: app.id, name: app.name, tagline: app.tagline, logo: app.logo, hasPage: true }));
 
 const navItems = [
@@ -85,7 +85,10 @@ export default function Header() {
               ) : (
                 <Link
                   to={item.to}
-                  onClick={() => item.event && trackEvent(item.event, { page_name: location.pathname })}
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    item.event && trackEvent(item.event, { page_name: location.pathname });
+                  }}
                   className={`px-3 py-2 text-sm rounded-md transition-colors ${
                     location.pathname === item.to
                       ? 'text-primary font-bold'
@@ -145,7 +148,7 @@ export default function Header() {
                   <Link
                     key={app.id}
                     to={`/apps/${app.id}`}
-                    onClick={() => setDropdownOpen(false)}
+                    onClick={() => { setDropdownOpen(false); window.scrollTo(0, 0); }}
                     className="flex items-center gap-3 p-3 rounded-xl border border-transparent transition-all duration-150 hover:bg-muted/50 hover:border-border/40 active:scale-[0.98]"
                   >
                     <img src={app.logo} alt={app.name} className="w-10 h-10 rounded-xl shrink-0" />
@@ -155,15 +158,6 @@ export default function Header() {
                     </div>
                   </Link>
                 ))}
-              </div>
-              <div className="mt-4 pt-3 border-t border-border/20 flex justify-end">
-                <a
-                  href="/#apps"
-                  onClick={(e) => { handleAppsClick(e); setDropdownOpen(false); }}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
-                >
-                  View all apps <ArrowRight size={12} />
-                </a>
               </div>
             </div>
           </motion.div>
@@ -207,6 +201,7 @@ export default function Header() {
                     to={item.to}
                     onClick={() => {
                       setOpen(false);
+                      window.scrollTo(0, 0);
                       item.event && trackEvent(item.event, { page_name: location.pathname });
                     }}
                     className={`px-3 py-2.5 text-sm rounded-md transition-colors ${
