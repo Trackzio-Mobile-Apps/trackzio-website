@@ -127,9 +127,9 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden md:block fixed w-[min(92vw,780px)] rounded-2xl border border-border/30 z-50 overflow-hidden"
+            className="hidden md:block fixed w-[min(92vw,520px)] rounded-2xl border border-border/30 z-50 overflow-hidden"
             style={{
-              left: '50%',
+              left: '25%',
               transform: 'translateX(-50%)',
               top: 'calc(4rem + 4px)',
               background: 'hsl(38 35% 97%)',
@@ -140,41 +140,21 @@ export default function Header() {
           >
             <div className="p-6">
               <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/70 mb-4 px-1">Our Apps</p>
-              <div className="grid grid-cols-3 gap-1">
-                {megaMenuApps.map(app => {
-                  const inner = (
-                    <>
-                      {app.logo ? (
-                        <img src={app.logo} alt={app.name} className="w-10 h-10 rounded-xl shrink-0" />
-                      ) : (
-                        <span className="w-10 h-10 rounded-xl bg-muted/60 flex items-center justify-center text-lg shrink-0">
-                          {emojiMap[app.id] || '📱'}
-                        </span>
-                      )}
-                      <div className="min-w-0">
-                        <div className="text-sm font-semibold text-foreground leading-tight">{app.name}</div>
-                        <p className="text-xs text-muted-foreground leading-snug mt-0.5 line-clamp-1">{app.tagline}</p>
-                      </div>
-                    </>
-                  );
-
-                  const cls = "flex items-center gap-3 p-3 rounded-xl transition-colors duration-150 hover:bg-muted/50 active:scale-[0.98]";
-
-                  return app.hasPage ? (
-                    <Link
-                      key={app.id}
-                      to={`/apps/${app.id}`}
-                      onClick={() => setDropdownOpen(false)}
-                      className={cls}
-                    >
-                      {inner}
-                    </Link>
-                  ) : (
-                    <div key={app.id} className={cls + ' cursor-default opacity-80'}>
-                      {inner}
+              <div className="grid grid-cols-3 gap-2">
+                {megaMenuApps.map(app => (
+                  <Link
+                    key={app.id}
+                    to={`/apps/${app.id}`}
+                    onClick={() => setDropdownOpen(false)}
+                    className="flex items-center gap-3 p-3 rounded-xl border border-transparent transition-all duration-150 hover:bg-muted/50 hover:border-border/40 active:scale-[0.98]"
+                  >
+                    <img src={app.logo} alt={app.name} className="w-10 h-10 rounded-xl shrink-0" />
+                    <div className="min-w-0">
+                      <div className="text-sm font-semibold text-foreground leading-tight">{app.name}</div>
+                      <p className="text-xs text-muted-foreground leading-snug mt-0.5 line-clamp-1">{app.tagline}</p>
                     </div>
-                  );
-                })}
+                  </Link>
+                ))}
               </div>
               <div className="mt-4 pt-3 border-t border-border/20 flex justify-end">
                 <a
