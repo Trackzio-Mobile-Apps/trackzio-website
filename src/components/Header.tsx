@@ -7,7 +7,7 @@ import trackzioLogo from '@/assets/trackzio-logo.jpg';
 import { apps } from '@/lib/appData';
 
 const megaMenuApps = apps
-  .filter(app => ['coinzy', 'banknote', 'insecto', 'habiteazy', 'rockzy'].includes(app.id))
+  .filter(app => ['coinzy', 'banknotes', 'insecto', 'habiteazy', 'rockzy'].includes(app.id))
   .map(app => ({ id: app.id, name: app.name, tagline: app.tagline, logo: app.logo, hasPage: true }));
 
 const navItems = [
