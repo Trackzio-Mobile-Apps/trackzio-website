@@ -6,16 +6,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import trackzioLogo from '@/assets/trackzio-logo.jpg';
 import { apps } from '@/lib/appData';
 
-const megaMenuApps = [
-  ...apps.map(app => ({ id: app.id, name: app.name, tagline: app.tagline, logo: app.logo, hasPage: true })),
-  { id: 'stampzy', name: 'Stampzy', tagline: 'AI-powered stamp identification & collecting', logo: null, hasPage: false },
-  { id: 'postcardzy', name: 'PostCardzy', tagline: 'Scan and catalog vintage postcards', logo: null, hasPage: false },
-  { id: 'modelcarzy', name: 'ModelCarzy', tagline: 'Identify & value diecast model cars', logo: null, hasPage: false },
-  { id: 'vinyltrack', name: 'VinylTrack', tagline: 'Discover and track vinyl records', logo: null, hasPage: false },
-  { id: 'arttrack', name: 'ArtTrack', tagline: 'Recognize artwork and learn art history', logo: null, hasPage: false },
-  { id: 'fossilfound', name: 'FossilFound', tagline: 'Identify fossils with AI precision', logo: null, hasPage: false },
-  { id: 'mapmaker', name: 'MapMaker', tagline: 'Catalog and explore antique maps', logo: null, hasPage: false },
-];
+const megaMenuApps = apps
+  .filter(app => ['coinzy', 'banknote', 'insecto', 'habiteazy', 'rockzy'].includes(app.id))
+  .map(app => ({ id: app.id, name: app.name, tagline: app.tagline, logo: app.logo, hasPage: true }));
 
 const navItems = [
   { label: 'Home', to: '/', event: '' },
