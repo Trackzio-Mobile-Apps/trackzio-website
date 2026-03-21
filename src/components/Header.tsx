@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
-import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import { motion, AnimatePresence } from 'framer-motion';
 import trackzioLogo from '@/assets/trackzio-logo.jpg';
