@@ -19,10 +19,6 @@ const navItems = [
   { label: 'Help Center', to: '/help', event: 'header_help center_apps' },
 ];
 
-const emojiMap: Record<string, string> = {
-  stampzy: '📮', postcardzy: '🏞️', modelcarzy: '🏎️',
-  vinyltrack: '🎵', arttrack: '🎨', fossilfound: '🦴', mapmaker: '🗺️',
-};
 
 export default function Header() {
   const [open, setOpen] = useState(false);
