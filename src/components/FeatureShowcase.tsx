@@ -30,19 +30,27 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
     return () => clearInterval(id);
   }, [advance]);
 
+  // Preload all screenshots for instant display
+  useEffect(() => {
+    features.forEach(f => {
+      const img = new Image();
+      img.src = f.screenshot;
+    });
+  }, [features]);
+
   if (count === 0) return null;
 
   const feat = features[current];
 
   return (
-    <section className="py-20 sm:py-28 snap-start overflow-hidden">
-      <div className="container-site">
+    <section className="min-h-screen flex flex-col items-center justify-center py-12 sm:py-16 snap-start overflow-hidden">
+      <div className="container-site flex flex-col items-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-8 sm:mb-12"
         >
           <p className="text-sm font-medium tracking-[0.2em] uppercase mb-3" style={{ color: `hsl(${accentHsl})` }}>
             App Showcase
@@ -52,16 +60,16 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
           </h2>
         </motion.div>
 
-        {/* Phone mockups */}
-        <div className="relative flex items-center justify-center gap-4 sm:gap-8 lg:gap-12 mb-10 sm:mb-14">
+        {/* Screenshots as clean rounded rectangles */}
+        <div className="relative flex items-center justify-center gap-4 sm:gap-8 lg:gap-12 mb-8 sm:mb-10">
           {/* Left preview — hidden on mobile */}
           {!isMobile && (
             <div
               className="relative flex-shrink-0 transition-all duration-700 ease-out cursor-pointer"
-              style={{ width: '160px', opacity: 0.5, filter: 'blur(1px)' }}
+              style={{ width: '140px', opacity: 0.45 }}
               onClick={() => setCurrent(prev)}
             >
-              <PhoneMockup
+              <ScreenshotCard
                 screenshot={features[prev].screenshot}
                 accentHsl={accentHsl}
                 label={features[prev].title}
@@ -69,7 +77,7 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
             </div>
           )}
 
-          {/* Center phone */}
+          {/* Center screenshot */}
           <div className="relative flex-shrink-0" style={{ width: isMobile ? '220px' : '240px' }}>
             <AnimatePresence mode="wait">
               <motion.div
@@ -79,7 +87,7 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
                 exit={{ opacity: 0, scale: 0.92 }}
                 transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
-                <PhoneMockup
+                <ScreenshotCard
                   screenshot={feat.screenshot}
                   accentHsl={accentHsl}
                   label={feat.title}
@@ -93,10 +101,10 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
           {!isMobile && (
             <div
               className="relative flex-shrink-0 transition-all duration-700 ease-out cursor-pointer"
-              style={{ width: '160px', opacity: 0.5, filter: 'blur(1px)' }}
+              style={{ width: '140px', opacity: 0.45 }}
               onClick={() => setCurrent(next)}
             >
-              <PhoneMockup
+              <ScreenshotCard
                 screenshot={features[next].screenshot}
                 accentHsl={accentHsl}
                 label={features[next].title}
@@ -126,7 +134,7 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
         </div>
 
         {/* Dot indicators */}
-        <div className="flex items-center justify-center gap-2 mt-8">
+        <div className="flex items-center justify-center gap-2 mt-6">
           {features.map((_, i) => (
             <button
               key={i}
@@ -144,8 +152,8 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
   );
 }
 
-/* ── Phone Mockup Frame ── */
-function PhoneMockup({
+/* ── Clean Rounded Screenshot Card ── */
+function ScreenshotCard({
   screenshot,
   accentHsl,
   label,
@@ -158,27 +166,21 @@ function PhoneMockup({
 }) {
   return (
     <div className="relative mx-auto">
-      {/* Outer phone frame */}
       <div
-        className="relative rounded-[2rem] p-[6px] bg-gradient-to-b from-zinc-700 via-zinc-800 to-zinc-900"
+        className="relative rounded-2xl overflow-hidden"
         style={{
           boxShadow: isCenter
-            ? `0 25px 60px -12px hsl(${accentHsl} / 0.25), 0 12px 30px -8px rgba(0,0,0,0.3)`
-            : '0 8px 24px -6px rgba(0,0,0,0.2)',
+            ? `0 20px 50px -12px hsl(${accentHsl} / 0.2), 0 8px 24px -6px rgba(0,0,0,0.15)`
+            : '0 6px 20px -6px rgba(0,0,0,0.12)',
         }}
       >
-        {/* Notch */}
-        <div className="absolute top-[6px] left-1/2 -translate-x-1/2 z-10 w-[35%] h-[18px] bg-zinc-900 rounded-b-xl" />
-
-        {/* Screen */}
-        <div className="relative rounded-[1.6rem] overflow-hidden bg-black">
-          <img
-            src={screenshot}
-            alt={label}
-            className="w-full h-auto block"
-            loading="lazy"
-          />
-        </div>
+        <img
+          src={screenshot}
+          alt={label}
+          className="w-full h-auto block"
+          loading="eager"
+          decoding="async"
+        />
       </div>
     </div>
   );
