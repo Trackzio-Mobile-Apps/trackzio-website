@@ -85,7 +85,10 @@ export default function Header() {
               ) : (
                 <Link
                   to={item.to}
-                  onClick={() => item.event && trackEvent(item.event, { page_name: location.pathname })}
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    item.event && trackEvent(item.event, { page_name: location.pathname });
+                  }}
                   className={`px-3 py-2 text-sm rounded-md transition-colors ${
                     location.pathname === item.to
                       ? 'text-primary font-bold'
