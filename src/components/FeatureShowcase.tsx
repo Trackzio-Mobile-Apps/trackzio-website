@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface ShowcaseFeature {
@@ -21,7 +21,6 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
   const [progress, setProgress] = useState(0);
   const count = features.length;
 
-  // Preload all screenshots
   useEffect(() => {
     features.forEach(f => {
       const img = new Image();
@@ -29,7 +28,7 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
     });
   }, [features]);
 
-  // Horizontal scroll pinning effect
+  // Desktop horizontal scroll pinning
   useEffect(() => {
     const section = sectionRef.current;
     const scrollContainer = scrollRef.current;
@@ -38,11 +37,8 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
     const handleWheel = (e: WheelEvent) => {
       const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
       if (maxScroll <= 0) return;
-
       const currentScroll = scrollContainer.scrollLeft;
       const delta = e.deltaY;
-
-      // If we can scroll horizontally, prevent vertical scroll
       if (
         (delta > 0 && currentScroll < maxScroll - 2) ||
         (delta < 0 && currentScroll > 2)
@@ -57,8 +53,6 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
       if (maxScroll <= 0) return;
       const pct = scrollContainer.scrollLeft / maxScroll;
       setProgress(Math.min(1, Math.max(0, pct)));
-
-      // Update current card index
       const cardWidth = scrollContainer.clientWidth / 3;
       const idx = Math.round(scrollContainer.scrollLeft / cardWidth);
       setCurrent(Math.min(idx, count - 1));
@@ -66,11 +60,26 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
 
     section.addEventListener('wheel', handleWheel, { passive: false });
     scrollContainer.addEventListener('scroll', handleScroll);
-
     return () => {
       section.removeEventListener('wheel', handleWheel);
       scrollContainer.removeEventListener('scroll', handleScroll);
     };
+  }, [isMobile, count]);
+
+  // Mobile snap tracking
+  useEffect(() => {
+    if (!isMobile) return;
+    const el = scrollRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const cardW = el.scrollWidth / count;
+      const idx = Math.round(el.scrollLeft / cardW);
+      setCurrent(Math.min(idx, count - 1));
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      if (maxScroll > 0) setProgress(el.scrollLeft / maxScroll);
+    };
+    el.addEventListener('scroll', onScroll);
+    return () => el.removeEventListener('scroll', onScroll);
   }, [isMobile, count]);
 
   if (count === 0) return null;
@@ -78,33 +87,63 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
   return (
     <section
       ref={sectionRef}
-      className="h-screen flex flex-col items-center justify-center py-6 sm:py-8 snap-start overflow-hidden"
+      className="min-h-screen flex flex-col items-center justify-center snap-start overflow-hidden"
+      style={{ padding: 'clamp(16px, 3vh, 32px) 0' }}
     >
-      <div className="container-site flex flex-col items-center w-full">
+      <div className="flex flex-col items-center" style={{ width: 'clamp(300px, 90%, 1200px)' }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-4"
+          className="text-center mb-3"
         >
-          <p className="text-sm font-medium tracking-[0.2em] uppercase mb-2" style={{ color: `hsl(${accentHsl})` }}>
+          <p
+            className="font-medium tracking-[0.2em] uppercase mb-1"
+            style={{ color: `hsl(${accentHsl})`, fontSize: 'clamp(0.7rem, 1.2vw, 0.875rem)' }}
+          >
             App Showcase
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold font-display text-foreground">
+          <h2
+            className="font-bold font-display text-foreground"
+            style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.25rem)' }}
+          >
             See it in action
           </h2>
         </motion.div>
 
-        {/* Horizontal Scroll Carousel */}
         {isMobile ? (
-          /* Mobile: simple swipe carousel */
+          /* Mobile: horizontal snap carousel */
           <div className="w-full">
-            <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 px-2" style={{ scrollbarWidth: 'none' }}>
+            <div
+              ref={scrollRef}
+              className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-4"
+              style={{ scrollbarWidth: 'none', paddingBottom: '12px' }}
+            >
               {features.map((feat, i) => (
-                <div key={i} className="flex-shrink-0 w-[80vw] snap-center">
-                  <CarouselCard feat={feat} accentHsl={accentHsl} />
+                <div key={i} className="flex-shrink-0 snap-center" style={{ width: '75vw' }}>
+                  <MobileCard feat={feat} accentHsl={accentHsl} />
                 </div>
+              ))}
+            </div>
+            {/* Mobile progress bar */}
+            <div className="mx-4 mt-3 h-1 rounded-full bg-muted overflow-hidden">
+              <div
+                className="h-full rounded-full transition-all duration-150"
+                style={{ backgroundColor: '#064e3b', width: `${Math.max(10, progress * 100)}%` }}
+              />
+            </div>
+            {/* Dots */}
+            <div className="flex items-center justify-center gap-2 mt-3">
+              {features.map((_, i) => (
+                <span
+                  key={i}
+                  className="w-2 h-2 rounded-full transition-all duration-300"
+                  style={{
+                    backgroundColor: i === current ? '#064e3b' : 'hsl(var(--muted))',
+                    transform: i === current ? 'scale(1.4)' : 'scale(1)',
+                  }}
+                />
               ))}
             </div>
           </div>
@@ -113,7 +152,7 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
           <div className="w-full max-w-5xl">
             <div
               ref={scrollRef}
-              className="flex gap-6 overflow-x-auto pb-4"
+              className="flex gap-5 overflow-x-auto pb-2"
               style={{ scrollbarWidth: 'none', scrollBehavior: 'smooth' }}
             >
               {features.map((feat, i) => (
@@ -124,19 +163,19 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.5 }}
                   className="flex-shrink-0"
-                  style={{ width: 'calc(33.333% - 16px)', maxHeight: '42vh' }}
+                  style={{ width: 'calc(33.333% - 14px)' }}
                 >
-                  <CarouselCard feat={feat} accentHsl={accentHsl} />
+                  <DesktopCard feat={feat} accentHsl={accentHsl} />
                 </motion.div>
               ))}
             </div>
 
             {/* Progress bar */}
-            <div className="mt-6 w-full h-1.5 rounded-full bg-muted overflow-hidden">
+            <div className="mt-4 w-full h-1.5 rounded-full bg-muted overflow-hidden">
               <motion.div
                 className="h-full rounded-full"
                 style={{
-                  backgroundColor: `hsl(${accentHsl})`,
+                  backgroundColor: '#064e3b',
                   width: `${Math.max(10, progress * 100)}%`,
                 }}
                 transition={{ duration: 0.1 }}
@@ -144,59 +183,62 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
             </div>
           </div>
         )}
-
-        {/* Dot indicators for mobile */}
-        {isMobile && (
-          <div className="flex items-center justify-center gap-2 mt-4">
-            {features.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrent(i)}
-                className="w-2.5 h-2.5 rounded-full transition-all duration-300"
-                style={{
-                  backgroundColor: i === current ? `hsl(${accentHsl})` : `hsl(${accentHsl} / 0.2)`,
-                  transform: i === current ? 'scale(1.3)' : 'scale(1)',
-                }}
-              />
-            ))}
-          </div>
-        )}
       </div>
     </section>
   );
 }
 
-/* ── Carousel Card with ultra-rounded corners ── */
-function CarouselCard({
-  feat,
-  accentHsl,
-}: {
-  feat: ShowcaseFeature;
-  accentHsl: string;
-}) {
+/* Desktop card - image fits fully with object-contain */
+function DesktopCard({ feat, accentHsl }: { feat: ShowcaseFeature; accentHsl: string }) {
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col">
       <div
-        className="overflow-hidden mb-4"
+        className="overflow-hidden rounded-2xl mb-3"
         style={{
-          borderRadius: '32px',
-          boxShadow: `0 16px 40px -12px hsl(${accentHsl} / 0.15), 0 6px 20px -6px rgba(0,0,0,0.1)`,
+          boxShadow: `0 12px 32px -8px hsl(${accentHsl} / 0.12), 0 4px 16px -4px rgba(0,0,0,0.08)`,
         }}
       >
         <img
           src={feat.screenshot}
           alt={feat.title}
-          className="w-full h-auto block max-h-[32vh] object-cover"
+          className="w-full block"
+          style={{ maxHeight: '55vh', objectFit: 'contain' }}
           loading="eager"
-          decoding="async"
         />
       </div>
-      <h3 className="text-base sm:text-lg font-bold font-display text-foreground mb-1">
+      <h3
+        className="font-bold font-display text-foreground mb-1"
+        style={{ fontSize: 'clamp(0.85rem, 1.3vw, 1.125rem)' }}
+      >
         {feat.title}
       </h3>
-      <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">
+      <p className="text-muted-foreground leading-relaxed line-clamp-2" style={{ fontSize: 'clamp(0.75rem, 1.1vw, 0.875rem)' }}>
         {feat.description}
       </p>
+    </div>
+  );
+}
+
+/* Mobile card - scaled down to fit */
+function MobileCard({ feat, accentHsl }: { feat: ShowcaseFeature; accentHsl: string }) {
+  return (
+    <div className="flex flex-col">
+      <div
+        className="overflow-hidden rounded-2xl mb-2"
+        style={{
+          boxShadow: `0 8px 24px -6px hsl(${accentHsl} / 0.15)`,
+        }}
+      >
+        <img
+          src={feat.screenshot}
+          alt={feat.title}
+          className="w-full block"
+          style={{ maxHeight: '50vh', objectFit: 'contain' }}
+          loading="eager"
+        />
+      </div>
+      <h3 className="font-bold font-display text-foreground text-base mb-0.5">{feat.title}</h3>
+      <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">{feat.description}</p>
     </div>
   );
 }

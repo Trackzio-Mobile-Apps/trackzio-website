@@ -4,16 +4,10 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Check } from 'lucide-react';
 import { apps } from '@/lib/appData';
 import { trackEvent } from '@/lib/analytics';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const showcaseApps = apps.map((app, i) => ({
   ...app,
-  position: [
-    { top: '6%', left: '8%' },
-    { top: '4%', left: '52%' },
-    { top: '40%', left: '2%' },
-    { top: '42%', left: '48%' },
-    { top: '74%', left: '24%' },
-  ][i],
   floatDelay: i * 0.4,
   bulletPoints: [
     ['AI-powered identification', 'Global coin database', 'Collection tracking'],
@@ -24,101 +18,139 @@ const showcaseApps = apps.map((app, i) => ({
   ][i],
 }));
 
+/* Desktop scattered positions — generous spacing, no overlap */
+const desktopPositions = [
+  { top: '2%', left: '4%' },
+  { top: '0%', left: '54%' },
+  { top: '36%', left: '8%' },
+  { top: '38%', left: '56%' },
+  { top: '72%', left: '28%' },
+];
+
 export default function FloatingAppShowcase() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const selected = showcaseApps[selectedIndex];
+  const isMobile = useIsMobile();
 
   return (
-    <section className="min-h-screen flex items-center py-16 sm:py-20 overflow-hidden snap-start">
-      <div className="container-site w-full">
+    <section
+      className="min-h-screen flex items-center overflow-hidden snap-start"
+      style={{ padding: 'clamp(32px, 5vh, 80px) 0' }}
+    >
+      <div style={{ width: 'clamp(300px, 90%, 1200px)', margin: '0 auto' }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-2xl mb-10 sm:mb-14"
+          className="mb-8 sm:mb-12"
         >
-          <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">
+          <p className="font-medium tracking-[0.2em] uppercase text-primary mb-3" style={{ fontSize: 'clamp(0.7rem, 1.2vw, 0.875rem)' }}>
             Our Ecosystem
           </p>
-          <h2 className="text-4xl sm:text-5xl font-bold font-display leading-tight">
+          <h2 className="font-bold font-display leading-tight" style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)' }}>
             Apps built for the{' '}
             <span className="text-primary">curious</span>
           </h2>
         </motion.div>
 
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-4 items-center">
-          {/* LEFT — Floating app selector + Center preview */}
+          {/* LEFT — App selector + Center preview */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="lg:w-[60%] w-full flex items-center gap-0"
+            className="lg:w-[60%] w-full flex flex-col lg:flex-row items-center gap-0"
           >
-            {/* App pills cluster — scattered floating layout */}
-            <div className="relative w-[50%] sm:w-[45%] shrink-0" style={{ height: '420px' }}>
-              {showcaseApps.map((app, i) => {
-                const isSelected = selectedIndex === i;
-                const positions = [
-                  { top: '0%', left: '12%' },
-                  { top: '5%', left: '58%' },
-                  { top: '35%', left: '0%' },
-                  { top: '40%', left: '50%' },
-                  { top: '72%', left: '22%' },
-                ];
-                const pos = positions[i];
-                return (
-                  <motion.button
-                    key={app.id}
-                    onClick={() => {
-                      setSelectedIndex(i);
-                      trackEvent('showcase_app_select', { app_name: app.name });
-                    }}
-                    className="absolute flex items-center gap-3 rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 cursor-pointer select-none border-2 transition-colors duration-300"
-                    style={{
-                      top: pos.top,
-                      left: pos.left,
-                      borderColor: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--border))',
-                      background: isSelected
-                        ? `linear-gradient(135deg, hsl(${app.accentHsl} / 0.08), hsl(${app.accentHsl} / 0.02))`
-                        : 'hsl(var(--card))',
-                      boxShadow: isSelected
-                        ? `0 8px 32px -8px hsl(${app.accentHsl} / 0.25), 0 0 0 1px hsl(${app.accentHsl} / 0.1)`
-                        : '0 4px 20px -6px rgba(0,0,0,0.08)',
-                    }}
-                    animate={{
-                      scale: isSelected ? 1.04 : 1,
-                      opacity: isSelected ? 1 : 0.7,
-                    }}
-                    whileHover={{ scale: isSelected ? 1.04 : 1.03, opacity: 1 }}
-                    whileTap={{ scale: 0.97 }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                  >
-                    <img src={app.logo} alt={app.name} className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl shrink-0" />
-                    <span
-                      className="font-semibold text-sm sm:text-base whitespace-nowrap transition-colors duration-300"
-                      style={{ color: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--foreground))' }}
+            {/* Mobile: horizontal scroll row */}
+            {isMobile ? (
+              <div
+                className="w-full flex gap-3 overflow-x-auto pb-4 px-1 mb-4"
+                style={{ scrollbarWidth: 'none' }}
+              >
+                {showcaseApps.map((app, i) => {
+                  const isSelected = selectedIndex === i;
+                  return (
+                    <motion.button
+                      key={app.id}
+                      onClick={() => {
+                        setSelectedIndex(i);
+                        trackEvent('showcase_app_select', { app_name: app.name });
+                      }}
+                      className="flex-shrink-0 flex items-center gap-2 rounded-xl px-3 py-2.5 cursor-pointer select-none border-2 transition-colors duration-300"
+                      style={{
+                        borderColor: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--border))',
+                        background: isSelected
+                          ? `linear-gradient(135deg, hsl(${app.accentHsl} / 0.08), hsl(${app.accentHsl} / 0.02))`
+                          : 'hsl(var(--card))',
+                        padding: '12px',
+                      }}
+                      animate={{ scale: isSelected ? 1.04 : 1, opacity: isSelected ? 1 : 0.7 }}
+                      whileTap={{ scale: 0.97 }}
                     >
-                      {app.name}
-                    </span>
-                  </motion.button>
-                );
-              })}
-            </div>
+                      <img src={app.logo} alt={app.name} className="w-8 h-8 rounded-lg shrink-0" />
+                      <span
+                        className="font-semibold text-sm whitespace-nowrap transition-colors duration-300"
+                        style={{ color: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--foreground))' }}
+                      >
+                        {app.name}
+                      </span>
+                    </motion.button>
+                  );
+                })}
+              </div>
+            ) : (
+              /* Desktop: scattered floating layout */
+              <div className="relative w-[50%] sm:w-[45%] shrink-0" style={{ height: '420px' }}>
+                {showcaseApps.map((app, i) => {
+                  const isSelected = selectedIndex === i;
+                  const pos = desktopPositions[i];
+                  return (
+                    <motion.button
+                      key={app.id}
+                      onClick={() => {
+                        setSelectedIndex(i);
+                        trackEvent('showcase_app_select', { app_name: app.name });
+                      }}
+                      className="absolute flex items-center gap-3 rounded-2xl cursor-pointer select-none border-2 transition-colors duration-300"
+                      style={{
+                        top: pos.top,
+                        left: pos.left,
+                        padding: '12px 20px',
+                        borderColor: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--border))',
+                        background: isSelected
+                          ? `linear-gradient(135deg, hsl(${app.accentHsl} / 0.08), hsl(${app.accentHsl} / 0.02))`
+                          : 'hsl(var(--card))',
+                        boxShadow: isSelected
+                          ? `0 8px 32px -8px hsl(${app.accentHsl} / 0.25), 0 0 0 1px hsl(${app.accentHsl} / 0.1)`
+                          : '0 4px 20px -6px rgba(0,0,0,0.08)',
+                      }}
+                      animate={{ scale: isSelected ? 1.04 : 1, opacity: isSelected ? 1 : 0.7 }}
+                      whileHover={{ scale: isSelected ? 1.04 : 1.03, opacity: 1 }}
+                      whileTap={{ scale: 0.97 }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                    >
+                      <img src={app.logo} alt={app.name} className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl shrink-0" />
+                      <span
+                        className="font-semibold text-sm sm:text-base whitespace-nowrap transition-colors duration-300"
+                        style={{ color: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--foreground))' }}
+                      >
+                        {app.name}
+                      </span>
+                    </motion.button>
+                  );
+                })}
+              </div>
+            )}
 
-            {/* CENTER — Large Logo (no circle background) */}
-            <div className="flex items-center justify-center w-[50%] sm:w-[55%] -ml-4 sm:-ml-6 z-10">
+            {/* CENTER — Large Logo */}
+            <div className="flex items-center justify-center w-full lg:w-[55%] lg:-ml-6 z-10">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={selected.id + '-logo'}
                   initial={{ opacity: 0, scale: 0.85, filter: 'blur(6px)' }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    filter: 'blur(0px)',
-                    y: [0, -8, 0],
-                  }}
+                  animate={{ opacity: 1, scale: 1, filter: 'blur(0px)', y: [0, -8, 0] }}
                   exit={{ opacity: 0, scale: 0.85, filter: 'blur(4px)' }}
                   transition={{
                     opacity: { duration: 0.4 },
@@ -131,8 +163,10 @@ export default function FloatingAppShowcase() {
                   <img
                     src={selected.logo}
                     alt={selected.name}
-                    className="w-48 h-48 sm:w-64 sm:h-64 rounded-[2rem] object-contain"
+                    className="rounded-[2rem] object-contain"
                     style={{
+                      width: 'clamp(160px, 22vw, 256px)',
+                      height: 'clamp(160px, 22vw, 256px)',
                       filter: `drop-shadow(0 24px 48px hsl(${selected.accentHsl} / 0.3))`,
                     }}
                   />
@@ -141,7 +175,7 @@ export default function FloatingAppShowcase() {
             </div>
           </motion.div>
 
-          {/* RIGHT — Dynamic content (40%) */}
+          {/* RIGHT — Dynamic content */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -165,11 +199,14 @@ export default function FloatingAppShowcase() {
                   {selected.name}
                 </span>
 
-                <h3 className="text-2xl sm:text-3xl font-bold font-display leading-snug mb-4 text-foreground">
+                <h3
+                  className="font-bold font-display leading-snug mb-4 text-foreground"
+                  style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.875rem)' }}
+                >
                   {selected.tagline}
                 </h3>
 
-                <p className="text-muted-foreground leading-relaxed mb-6 text-[15px]">
+                <p className="text-muted-foreground leading-relaxed mb-6" style={{ fontSize: 'clamp(0.8rem, 1.2vw, 0.9375rem)' }}>
                   {selected.description.length > 160 ? selected.description.slice(0, 160).trim() + '…' : selected.description}
                 </p>
 
