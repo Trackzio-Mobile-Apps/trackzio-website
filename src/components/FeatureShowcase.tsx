@@ -124,7 +124,7 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.5 }}
                   className="flex-shrink-0"
-                  style={{ width: 'calc(33.333% - 16px)', maxHeight: '55vh' }}
+                  style={{ width: 'calc(33.333% - 16px)', maxHeight: '42vh' }}
                 >
                   <CarouselCard feat={feat} accentHsl={accentHsl} />
                 </motion.div>
@@ -186,7 +186,7 @@ function CarouselCard({
         <img
           src={feat.screenshot}
           alt={feat.title}
-          className="w-full h-auto block max-h-[45vh] object-cover"
+          className="w-full h-auto block max-h-[32vh] object-cover"
           loading="eager"
           decoding="async"
         />

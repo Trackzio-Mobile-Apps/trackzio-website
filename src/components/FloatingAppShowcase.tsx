@@ -56,10 +56,18 @@ export default function FloatingAppShowcase() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             className="lg:w-[60%] w-full flex items-center gap-0"
           >
-            {/* App pills cluster */}
-            <div className="flex flex-col gap-4 w-[50%] sm:w-[45%] shrink-0">
+            {/* App pills cluster — scattered floating layout */}
+            <div className="relative w-[50%] sm:w-[45%] shrink-0" style={{ height: '420px' }}>
               {showcaseApps.map((app, i) => {
                 const isSelected = selectedIndex === i;
+                const positions = [
+                  { top: '0%', left: '12%' },
+                  { top: '5%', left: '58%' },
+                  { top: '35%', left: '0%' },
+                  { top: '40%', left: '50%' },
+                  { top: '72%', left: '22%' },
+                ];
+                const pos = positions[i];
                 return (
                   <motion.button
                     key={app.id}
@@ -67,8 +75,10 @@ export default function FloatingAppShowcase() {
                       setSelectedIndex(i);
                       trackEvent('showcase_app_select', { app_name: app.name });
                     }}
-                    className="flex items-center gap-3 rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 cursor-pointer select-none border-2 transition-colors duration-300"
+                    className="absolute flex items-center gap-3 rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 cursor-pointer select-none border-2 transition-colors duration-300"
                     style={{
+                      top: pos.top,
+                      left: pos.left,
                       borderColor: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--border))',
                       background: isSelected
                         ? `linear-gradient(135deg, hsl(${app.accentHsl} / 0.08), hsl(${app.accentHsl} / 0.02))`
