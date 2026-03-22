@@ -57,7 +57,7 @@ export default function FloatingAppShowcase() {
             className="lg:w-[60%] w-full flex items-center gap-0"
           >
             {/* App pills cluster */}
-            <div className="relative w-[50%] sm:w-[45%] h-[380px] sm:h-[420px] shrink-0">
+            <div className="flex flex-col gap-4 w-[50%] sm:w-[45%] shrink-0">
               {showcaseApps.map((app, i) => {
                 const isSelected = selectedIndex === i;
                 return (
@@ -67,10 +67,8 @@ export default function FloatingAppShowcase() {
                       setSelectedIndex(i);
                       trackEvent('showcase_app_select', { app_name: app.name });
                     }}
-                    className="absolute flex items-center gap-3 rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 cursor-pointer select-none border-2 transition-colors duration-300"
+                    className="flex items-center gap-3 rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 cursor-pointer select-none border-2 transition-colors duration-300"
                     style={{
-                      top: app.position.top,
-                      left: app.position.left,
                       borderColor: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--border))',
                       background: isSelected
                         ? `linear-gradient(135deg, hsl(${app.accentHsl} / 0.08), hsl(${app.accentHsl} / 0.02))`
@@ -80,21 +78,12 @@ export default function FloatingAppShowcase() {
                         : '0 4px 20px -6px rgba(0,0,0,0.08)',
                     }}
                     animate={{
-                      y: isSelected ? 0 : [0, -6, 0],
-                      scale: isSelected ? 1.08 : 1,
+                      scale: isSelected ? 1.04 : 1,
                       opacity: isSelected ? 1 : 0.7,
                     }}
-                    whileHover={{ scale: isSelected ? 1.08 : 1.05, opacity: 1, boxShadow: '0 8px 28px -6px rgba(0,0,0,0.12)' }}
+                    whileHover={{ scale: isSelected ? 1.04 : 1.03, opacity: 1 }}
                     whileTap={{ scale: 0.97 }}
-                    transition={
-                      isSelected
-                        ? { type: 'spring', stiffness: 300, damping: 25 }
-                        : {
-                            y: { repeat: Infinity, duration: 3 + i * 0.3, ease: 'easeInOut', delay: app.floatDelay },
-                            scale: { type: 'spring', stiffness: 300, damping: 25 },
-                            opacity: { duration: 0.3 },
-                          }
-                    }
+                    transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                   >
                     <img src={app.logo} alt={app.name} className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl shrink-0" />
                     <span
