@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -16,21 +16,12 @@ interface FeatureShowcaseProps {
 export default function FeatureShowcase({ features, accentHsl }: FeatureShowcaseProps) {
   const [current, setCurrent] = useState(0);
   const isMobile = useIsMobile();
-
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [progress, setProgress] = useState(0);
   const count = features.length;
-  const prev = (current - 1 + count) % count;
-  const next = (current + 1) % count;
 
-  const advance = useCallback(() => {
-    setCurrent(c => (c + 1) % count);
-  }, [count]);
-
-  useEffect(() => {
-    const id = setInterval(advance, 3500);
-    return () => clearInterval(id);
-  }, [advance]);
-
-  // Preload all screenshots for instant display
+  // Preload all screenshots
   useEffect(() => {
     features.forEach(f => {
       const img = new Image();
@@ -38,19 +29,64 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
     });
   }, [features]);
 
+  // Horizontal scroll pinning effect
+  useEffect(() => {
+    const section = sectionRef.current;
+    const scrollContainer = scrollRef.current;
+    if (!section || !scrollContainer || isMobile) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+      if (maxScroll <= 0) return;
+
+      const currentScroll = scrollContainer.scrollLeft;
+      const delta = e.deltaY;
+
+      // If we can scroll horizontally, prevent vertical scroll
+      if (
+        (delta > 0 && currentScroll < maxScroll - 2) ||
+        (delta < 0 && currentScroll > 2)
+      ) {
+        e.preventDefault();
+        scrollContainer.scrollLeft += delta;
+      }
+    };
+
+    const handleScroll = () => {
+      const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+      if (maxScroll <= 0) return;
+      const pct = scrollContainer.scrollLeft / maxScroll;
+      setProgress(Math.min(1, Math.max(0, pct)));
+
+      // Update current card index
+      const cardWidth = scrollContainer.clientWidth / 3;
+      const idx = Math.round(scrollContainer.scrollLeft / cardWidth);
+      setCurrent(Math.min(idx, count - 1));
+    };
+
+    section.addEventListener('wheel', handleWheel, { passive: false });
+    scrollContainer.addEventListener('scroll', handleScroll);
+
+    return () => {
+      section.removeEventListener('wheel', handleWheel);
+      scrollContainer.removeEventListener('scroll', handleScroll);
+    };
+  }, [isMobile, count]);
+
   if (count === 0) return null;
 
-  const feat = features[current];
-
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center py-12 sm:py-16 snap-start overflow-hidden">
-      <div className="container-site flex flex-col items-center">
+    <section
+      ref={sectionRef}
+      className="min-h-screen flex flex-col items-center justify-center py-10 sm:py-14 snap-start overflow-hidden"
+    >
+      <div className="container-site flex flex-col items-center w-full">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-8 sm:mb-12"
+          className="text-center mb-8"
         >
           <p className="text-sm font-medium tracking-[0.2em] uppercase mb-3" style={{ color: `hsl(${accentHsl})` }}>
             App Showcase
@@ -60,128 +96,107 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
           </h2>
         </motion.div>
 
-        {/* Screenshots as clean rounded rectangles */}
-        <div className="relative flex items-center justify-center gap-4 sm:gap-8 lg:gap-12 mb-8 sm:mb-10">
-          {/* Left preview — hidden on mobile */}
-          {!isMobile && (
-            <div
-              className="relative flex-shrink-0 transition-all duration-700 ease-out cursor-pointer"
-              style={{ width: '140px', opacity: 0.45 }}
-              onClick={() => setCurrent(prev)}
-            >
-              <ScreenshotCard
-                screenshot={features[prev].screenshot}
-                accentHsl={accentHsl}
-                label={features[prev].title}
-              />
+        {/* Horizontal Scroll Carousel */}
+        {isMobile ? (
+          /* Mobile: simple swipe carousel */
+          <div className="w-full">
+            <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 px-2" style={{ scrollbarWidth: 'none' }}>
+              {features.map((feat, i) => (
+                <div key={i} className="flex-shrink-0 w-[80vw] snap-center">
+                  <CarouselCard feat={feat} accentHsl={accentHsl} />
+                </div>
+              ))}
             </div>
-          )}
-
-          {/* Center screenshot */}
-          <div className="relative flex-shrink-0" style={{ width: isMobile ? '220px' : '240px' }}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current}
-                initial={{ opacity: 0, scale: 0.92 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.92 }}
-                transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-              >
-                <ScreenshotCard
-                  screenshot={feat.screenshot}
-                  accentHsl={accentHsl}
-                  label={feat.title}
-                  isCenter
-                />
-              </motion.div>
-            </AnimatePresence>
           </div>
-
-          {/* Right preview — hidden on mobile */}
-          {!isMobile && (
+        ) : (
+          /* Desktop: 3-visible pinned scroll */
+          <div className="w-full max-w-5xl">
             <div
-              className="relative flex-shrink-0 transition-all duration-700 ease-out cursor-pointer"
-              style={{ width: '140px', opacity: 0.45 }}
-              onClick={() => setCurrent(next)}
+              ref={scrollRef}
+              className="flex gap-6 overflow-x-auto pb-4"
+              style={{ scrollbarWidth: 'none', scrollBehavior: 'smooth' }}
             >
-              <ScreenshotCard
-                screenshot={features[next].screenshot}
-                accentHsl={accentHsl}
-                label={features[next].title}
+              {features.map((feat, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  className="flex-shrink-0"
+                  style={{ width: 'calc(33.333% - 16px)' }}
+                >
+                  <CarouselCard feat={feat} accentHsl={accentHsl} />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Progress bar */}
+            <div className="mt-6 w-full h-1.5 rounded-full bg-muted overflow-hidden">
+              <motion.div
+                className="h-full rounded-full"
+                style={{
+                  backgroundColor: `hsl(${accentHsl})`,
+                  width: `${Math.max(10, progress * 100)}%`,
+                }}
+                transition={{ duration: 0.1 }}
               />
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
-        {/* Feature title + description */}
-        <div className="text-center max-w-md mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={current}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.4 }}
-            >
-              <h3 className="text-xl sm:text-2xl font-bold font-display text-foreground mb-2">
-                {feat.title}
-              </h3>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                {feat.description}
-              </p>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Dot indicators */}
-        <div className="flex items-center justify-center gap-2 mt-6">
-          {features.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrent(i)}
-              className="w-2.5 h-2.5 rounded-full transition-all duration-300"
-              style={{
-                backgroundColor: i === current ? `hsl(${accentHsl})` : `hsl(${accentHsl} / 0.2)`,
-                transform: i === current ? 'scale(1.3)' : 'scale(1)',
-              }}
-            />
-          ))}
-        </div>
+        {/* Dot indicators for mobile */}
+        {isMobile && (
+          <div className="flex items-center justify-center gap-2 mt-4">
+            {features.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                className="w-2.5 h-2.5 rounded-full transition-all duration-300"
+                style={{
+                  backgroundColor: i === current ? `hsl(${accentHsl})` : `hsl(${accentHsl} / 0.2)`,
+                  transform: i === current ? 'scale(1.3)' : 'scale(1)',
+                }}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
-/* ── Clean Rounded Screenshot Card ── */
-function ScreenshotCard({
-  screenshot,
+/* ── Carousel Card with ultra-rounded corners ── */
+function CarouselCard({
+  feat,
   accentHsl,
-  label,
-  isCenter = false,
 }: {
-  screenshot: string;
+  feat: ShowcaseFeature;
   accentHsl: string;
-  label: string;
-  isCenter?: boolean;
 }) {
   return (
-    <div className="relative mx-auto">
+    <div className="flex flex-col h-full">
       <div
-        className="relative rounded-2xl overflow-hidden"
+        className="overflow-hidden mb-4"
         style={{
-          boxShadow: isCenter
-            ? `0 20px 50px -12px hsl(${accentHsl} / 0.2), 0 8px 24px -6px rgba(0,0,0,0.15)`
-            : '0 6px 20px -6px rgba(0,0,0,0.12)',
+          borderRadius: '32px',
+          boxShadow: `0 16px 40px -12px hsl(${accentHsl} / 0.15), 0 6px 20px -6px rgba(0,0,0,0.1)`,
         }}
       >
         <img
-          src={screenshot}
-          alt={label}
+          src={feat.screenshot}
+          alt={feat.title}
           className="w-full h-auto block"
           loading="eager"
           decoding="async"
         />
       </div>
+      <h3 className="text-base sm:text-lg font-bold font-display text-foreground mb-1">
+        {feat.title}
+      </h3>
+      <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">
+        {feat.description}
+      </p>
     </div>
   );
 }
