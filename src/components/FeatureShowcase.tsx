@@ -186,7 +186,7 @@ function CarouselCard({
         <img
           src={feat.screenshot}
           alt={feat.title}
-          className="w-full h-auto block"
+          className="w-full h-auto block max-h-[45vh] object-cover"
           loading="eager"
           decoding="async"
         />
