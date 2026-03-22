@@ -2,7 +2,7 @@ import coinzyLogo from '@/assets/coinzy-logo.png';
 import banknotesLogo from '@/assets/banknotes-logo.png';
 import insectoLogo from '@/assets/insecto-logo.png';
 import habiteazyLogo from '@/assets/habiteazy-logo.png';
-import rockzyLogo from '@/assets/rockzy-logo.png';
+import rockzyLogo from '@/assets/rockzy-logo-new.png';
 
 // Screenshots
 import banknotes1 from '@/assets/screenshots/banknotes-1.png';
