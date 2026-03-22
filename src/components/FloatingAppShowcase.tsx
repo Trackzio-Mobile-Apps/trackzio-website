@@ -29,14 +29,14 @@ export default function FloatingAppShowcase() {
   const selected = showcaseApps[selectedIndex];
 
   return (
-    <section className="py-24 sm:py-32 overflow-hidden">
-      <div className="container-site">
+    <section className="min-h-screen flex items-center py-16 sm:py-20 overflow-hidden snap-start">
+      <div className="container-site w-full">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-2xl mb-16"
+          className="max-w-2xl mb-10 sm:mb-14"
         >
           <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">
             Our Ecosystem
@@ -47,17 +47,17 @@ export default function FloatingAppShowcase() {
           </h2>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-4 items-stretch">
-          {/* LEFT — Floating app selector + Center preview circle */}
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-4 items-center">
+          {/* LEFT — Floating app selector + Center preview */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="lg:w-[60%] w-full flex items-stretch gap-0"
+            className="lg:w-[60%] w-full flex items-center gap-0"
           >
             {/* App pills cluster */}
-            <div className="relative w-[55%] sm:w-[50%] h-[420px] sm:h-[480px] shrink-0">
+            <div className="relative w-[50%] sm:w-[45%] h-[380px] sm:h-[420px] shrink-0">
               {showcaseApps.map((app, i) => {
                 const isSelected = selectedIndex === i;
                 return (
@@ -108,44 +108,34 @@ export default function FloatingAppShowcase() {
               })}
             </div>
 
-            {/* CENTER — Selected App Logo Circle */}
-            <div className="flex items-center justify-center w-[45%] sm:w-[50%] -ml-6 sm:-ml-8 z-10">
+            {/* CENTER — Large Logo (no circle background) */}
+            <div className="flex items-center justify-center w-[50%] sm:w-[55%] -ml-4 sm:-ml-6 z-10">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={selected.id + '-circle'}
-                  initial={{ opacity: 0, scale: 0.9, filter: 'blur(6px)' }}
+                  key={selected.id + '-logo'}
+                  initial={{ opacity: 0, scale: 0.85, filter: 'blur(6px)' }}
                   animate={{
                     opacity: 1,
                     scale: 1,
                     filter: 'blur(0px)',
-                    y: [0, -6, 0],
+                    y: [0, -8, 0],
                   }}
-                  exit={{ opacity: 0, scale: 0.9, filter: 'blur(4px)' }}
+                  exit={{ opacity: 0, scale: 0.85, filter: 'blur(4px)' }}
                   transition={{
                     opacity: { duration: 0.4 },
                     scale: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
                     filter: { duration: 0.4 },
                     y: { repeat: Infinity, duration: 4, ease: 'easeInOut' },
                   }}
-                  className="w-40 h-40 sm:w-52 sm:h-52 rounded-full flex items-center justify-center relative"
-                  style={{
-                    background: `linear-gradient(145deg, hsl(${selected.accentHsl} / 0.08), hsl(var(--card)), hsl(${selected.accentHsl} / 0.04))`,
-                    boxShadow: `0 24px 64px -16px hsl(${selected.accentHsl} / 0.25), 0 12px 32px -8px rgba(0,0,0,0.1), 0 0 0 1px hsl(${selected.accentHsl} / 0.12), inset 0 1px 0 0 rgba(255,255,255,0.6)`,
-                    border: `2px solid hsl(${selected.accentHsl} / 0.2)`,
-                  }}
+                  className="flex items-center justify-center"
                 >
-                  {/* Glow ring */}
-                  <div
-                    className="absolute -inset-3 rounded-full pointer-events-none opacity-40"
-                    style={{
-                      background: `radial-gradient(circle, hsl(${selected.accentHsl} / 0.12), transparent 70%)`,
-                    }}
-                  />
-                  {/* App logo */}
                   <img
                     src={selected.logo}
                     alt={selected.name}
-                    className="w-[70%] h-[70%] rounded-3xl object-contain relative z-10"
+                    className="w-48 h-48 sm:w-64 sm:h-64 rounded-[2rem] object-contain"
+                    style={{
+                      filter: `drop-shadow(0 24px 48px hsl(${selected.accentHsl} / 0.3))`,
+                    }}
                   />
                 </motion.div>
               </AnimatePresence>
@@ -158,7 +148,7 @@ export default function FloatingAppShowcase() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="lg:w-[40%] w-full flex items-center"
+            className="lg:w-[40%] w-full flex items-start lg:pt-4"
           >
             <AnimatePresence mode="wait">
               <motion.div
