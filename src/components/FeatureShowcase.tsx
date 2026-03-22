@@ -78,7 +78,7 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen flex flex-col items-center justify-center py-10 sm:py-14 snap-start overflow-hidden"
+      className="h-screen flex flex-col items-center justify-center py-6 sm:py-8 snap-start overflow-hidden"
     >
       <div className="container-site flex flex-col items-center w-full">
         <motion.div
@@ -86,9 +86,9 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-8"
+          className="text-center mb-4"
         >
-          <p className="text-sm font-medium tracking-[0.2em] uppercase mb-3" style={{ color: `hsl(${accentHsl})` }}>
+          <p className="text-sm font-medium tracking-[0.2em] uppercase mb-2" style={{ color: `hsl(${accentHsl})` }}>
             App Showcase
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold font-display text-foreground">
