@@ -7,7 +7,8 @@ import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { getPlatform, getDownloadUrl } from '@/lib/platformUtils';
 import { QRCodeSVG } from 'qrcode.react';
-import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight, Download } from 'lucide-react';
+import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import PlatformDownloadButtons from '@/components/PlatformDownloadButtons';
 import FeatureShowcase from '@/components/FeatureShowcase';
 import {
   Accordion,
