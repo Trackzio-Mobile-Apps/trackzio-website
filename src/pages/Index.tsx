@@ -133,20 +133,24 @@ export default function Home() {
   return (
     <div className="snap-y snap-mandatory">
       {/* ── Section 1: Hero — Light background ── */}
-      <section className="min-h-screen flex items-center justify-center pt-8 pb-12 relative overflow-hidden snap-start">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.05),transparent_50%)]" />
-        <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--primary)/0.03),transparent_60%)]" />
+      <section className="min-h-screen flex items-center justify-center py-24 sm:py-32 relative overflow-hidden snap-start">
+        {/* Soft radial glow */}
+        <div
+          className="absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse 65% 55% at 50% 45%, #f2f3f4 0%, #ffffff 75%)' }}
+        />
 
         <div className="container-site relative z-10">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
-            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">AI-Powered Mobile Apps</p>
+            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-6">AI-Powered Mobile Apps</p>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display leading-[1.1] tracking-tight mb-4">
-              AI Platforms for Collectors and <span className="text-primary">Enthusiasts</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold font-display leading-[1.08] tracking-tight mb-6 text-foreground">
+              Making Lives Easier{' '}
+              <span className="text-primary">Every App, Every Day.</span>
             </h1>
 
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
-              Trackzio builds intelligent apps that help people identify, understand, organise, and exchange the things they care about.
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed">
+              Trackzio builds apps that fit into your life — thoughtfully made, deeply researched, and always built with you in mind.
             </p>
 
             <motion.div
