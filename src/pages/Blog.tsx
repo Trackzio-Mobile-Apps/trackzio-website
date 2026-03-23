@@ -150,10 +150,10 @@ export default function Blog() {
         <div className="container-site max-w-5xl">
           <motion.div {...fadeUp}>
             <p className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-6">Blog of the Week</p>
-            <div
-              className="rounded-xl bg-card overflow-hidden flex flex-col md:flex-row cursor-pointer group"
+            <Link
+              to={`/blog/${blogOfTheWeek.slug}`}
+              className="rounded-xl bg-card overflow-hidden flex flex-col md:flex-row cursor-pointer group block"
               style={{ boxShadow: '0 8px 32px -8px hsla(0 0% 0% / 0.1)' }}
-              onClick={() => handleReadArticle(blogOfTheWeek.slug)}
             >
               <div className="md:w-1/2 aspect-[16/10] md:aspect-auto overflow-hidden">
                 <img
