@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { ArrowRight, Clock } from 'lucide-react';
@@ -125,12 +126,7 @@ export default function Blog() {
     setSelectedIndex(0);
   };
 
-  const handleReadArticle = (slug: string) => {
-    // For now, scroll to the split-view section with the article selected
-    const idx = splitFiltered.findIndex(a => a.slug === slug);
-    if (idx >= 0) setSelectedIndex(idx);
-    document.getElementById('featured-articles')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  // handleReadArticle no longer needed - using Link components instead
 
   return (
     <div>
@@ -154,10 +150,10 @@ export default function Blog() {
         <div className="container-site max-w-5xl">
           <motion.div {...fadeUp}>
             <p className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-6">Blog of the Week</p>
-            <div
-              className="rounded-xl bg-card overflow-hidden flex flex-col md:flex-row cursor-pointer group"
+            <Link
+              to={`/blog/${blogOfTheWeek.slug}`}
+              className="rounded-xl bg-card overflow-hidden flex flex-col md:flex-row cursor-pointer group block"
               style={{ boxShadow: '0 8px 32px -8px hsla(0 0% 0% / 0.1)' }}
-              onClick={() => handleReadArticle(blogOfTheWeek.slug)}
             >
               <div className="md:w-1/2 aspect-[16/10] md:aspect-auto overflow-hidden">
                 <img
@@ -183,14 +179,11 @@ export default function Blog() {
                     <Clock size={12} /> {blogOfTheWeek.readTime}
                   </span>
                 </div>
-                <button
-                  onClick={(e) => { e.stopPropagation(); handleReadArticle(blogOfTheWeek.slug); }}
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors w-fit"
-                >
+                <span className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors w-fit">
                   Read <ArrowRight size={14} />
-                </button>
+                </span>
               </div>
-            </div>
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -254,10 +247,10 @@ export default function Blog() {
                 </div>
               </div>
 
-              <div
-                className="lg:w-[62%] bg-card rounded-xl overflow-hidden flex flex-col cursor-pointer group"
+              <Link
+                to={activePreview ? `/blog/${activePreview.slug}` : '#'}
+                className="lg:w-[62%] bg-card rounded-xl overflow-hidden flex flex-col cursor-pointer group block"
                 style={{ boxShadow: '0 4px 20px -6px hsla(0 0% 0% / 0.08)' }}
-                onClick={() => activePreview && handleReadArticle(activePreview.slug)}
               >
                 {activePreview ? (
                   <>
@@ -294,7 +287,7 @@ export default function Blog() {
                     <p className="text-muted-foreground text-sm">Select an article to preview.</p>
                   </div>
                 )}
-              </div>
+              </Link>
             </div>
           </motion.div>
         </div>

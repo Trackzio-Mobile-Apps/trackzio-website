@@ -7,7 +7,8 @@ import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { getPlatform, getDownloadUrl } from '@/lib/platformUtils';
 import { QRCodeSVG } from 'qrcode.react';
-import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight, Download } from 'lucide-react';
+import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import PlatformDownloadButtons from '@/components/PlatformDownloadButtons';
 import FeatureShowcase from '@/components/FeatureShowcase';
 import {
   Accordion,
@@ -286,10 +287,8 @@ showcaseFeatures['habiteazy'] = [
 
 showcaseFeatures['rockzy'] = [
   { screenshot: rockzy1, title: 'AI Rock Scan', description: 'Identify rocks and minerals instantly' },
-  { screenshot: rockzy2, title: 'AI Chat Assistant', description: 'Ask questions about minerals and crystals' },
   { screenshot: rockzy3, title: 'Collection & Mineral Care', description: 'Track and maintain your mineral collection' },
   { screenshot: rockzy4, title: 'Community Feed', description: 'Share discoveries with enthusiasts' },
-  { screenshot: rockzy5, title: 'Mineral Awareness', description: 'Learn properties and characteristics' },
   { screenshot: rockzy6, title: '8K+ Minerals Database', description: 'Explore a global mineral catalog' },
   { screenshot: rockzy7, title: 'Zodiac Stones', description: 'Discover crystals linked to your zodiac' },
 ];
@@ -394,13 +393,13 @@ export default function AppDetail() {
 
             {/* Download section */}
             <div className="mt-6 flex flex-col items-center gap-4">
-              <button
-                onClick={handleDownload}
-                className="inline-flex items-center gap-2 h-11 px-7 rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity text-white"
-                style={{ backgroundColor: `hsl(${app.accentHsl})` }}
-              >
-                <Download size={16} /> Download Now
-              </button>
+              <PlatformDownloadButtons
+                iosUrl={app.iosUrl}
+                androidUrl={app.androidUrl}
+                appName={app.name}
+                appId={app.id}
+                accentHsl={app.accentHsl}
+              />
 
               {!isMobile && qrUrl && (
                 <div className="flex flex-col items-center gap-2">
