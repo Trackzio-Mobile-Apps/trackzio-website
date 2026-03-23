@@ -126,12 +126,7 @@ export default function Blog() {
     setSelectedIndex(0);
   };
 
-  const handleReadArticle = (slug: string) => {
-    // For now, scroll to the split-view section with the article selected
-    const idx = splitFiltered.findIndex(a => a.slug === slug);
-    if (idx >= 0) setSelectedIndex(idx);
-    document.getElementById('featured-articles')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  // handleReadArticle no longer needed - using Link components instead
 
   return (
     <div>
