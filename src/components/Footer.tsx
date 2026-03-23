@@ -36,6 +36,8 @@ function getAppLegal(pathname: string) {
   return null;
 }
 
+const FEEDBACK_URL = 'https://forms.gle/pcmnfivhJZnr6Ybb9';
+
 export default function Footer() {
   const { pathname } = useLocation();
   const appLegal = getAppLegal(pathname);
@@ -43,8 +45,8 @@ export default function Footer() {
   return (
     <footer className="bg-primary" role="contentinfo">
       <div className="container-site py-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          {/* Social */}
+        {/* Top row: Social left, Buttons right */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-5">
             {socialLinks.map(s => (
               <a
@@ -61,50 +63,7 @@ export default function Footer() {
             ))}
           </div>
 
-          {/* Links + Get in Touch */}
-          <nav className="flex items-center gap-6 text-sm flex-wrap" aria-label="Footer navigation">
-            {appLegal ? (
-              <>
-                <Link
-                  to={appLegal.privacy}
-                  onClick={() => window.scrollTo(0, 0)}
-                  className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-                >
-                  {appLegal.label} Privacy Policy
-                </Link>
-                <Link
-                  to={appLegal.terms}
-                  onClick={() => window.scrollTo(0, 0)}
-                  className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-                >
-                  {appLegal.label} Terms &amp; Conditions
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link
-                  to="/privacy-policy"
-                  onClick={() => window.scrollTo(0, 0)}
-                  className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-                >
-                  Trackzio Privacy
-                </Link>
-                <Link
-                  to="/terms"
-                  onClick={() => window.scrollTo(0, 0)}
-                  className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-                >
-                  Trackzio Terms
-                </Link>
-              </>
-            )}
-            <Link
-              to="/contact"
-              onClick={() => window.scrollTo(0, 0)}
-              className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-            >
-              Contact
-            </Link>
+          <div className="flex items-center gap-3">
             <Link
               to="/help"
               onClick={() => window.scrollTo(0, 0)}
@@ -113,18 +72,57 @@ export default function Footer() {
               Get in Touch
             </Link>
             <a
-              href="https://forms.gle/pcmnfivhJZnr6Ybb9"
+              href={FEEDBACK_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center h-9 px-5 rounded-xl bg-primary-foreground text-primary text-sm font-semibold transition-opacity hover:opacity-90"
             >
               Share Your Feedback
             </a>
-          </nav>
+          </div>
         </div>
 
-        <div className="mt-8 text-center text-sm text-primary-foreground/50">
-          © 2026 Trackzio. All rights reserved.
+        {/* Bottom row: Legal links + copyright */}
+        <div className="mt-8 pt-6 border-t border-primary-foreground/15 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-primary-foreground/50">
+          {appLegal ? (
+            <>
+              <Link
+                to={appLegal.privacy}
+                onClick={() => window.scrollTo(0, 0)}
+                className="hover:text-primary-foreground transition-colors"
+              >
+                {appLegal.label} Privacy Policy
+              </Link>
+              <span className="hidden sm:inline">·</span>
+              <Link
+                to={appLegal.terms}
+                onClick={() => window.scrollTo(0, 0)}
+                className="hover:text-primary-foreground transition-colors"
+              >
+                {appLegal.label} Terms & Conditions
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/privacy-policy"
+                onClick={() => window.scrollTo(0, 0)}
+                className="hover:text-primary-foreground transition-colors"
+              >
+                Trackzio Privacy
+              </Link>
+              <span className="hidden sm:inline">·</span>
+              <Link
+                to="/terms"
+                onClick={() => window.scrollTo(0, 0)}
+                className="hover:text-primary-foreground transition-colors"
+              >
+                Trackzio Terms
+              </Link>
+            </>
+          )}
+          <span className="hidden sm:inline">·</span>
+          <span>© 2026 Trackzio</span>
         </div>
       </div>
     </footer>
