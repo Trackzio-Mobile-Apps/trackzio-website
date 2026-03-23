@@ -393,13 +393,13 @@ export default function AppDetail() {
 
             {/* Download section */}
             <div className="mt-6 flex flex-col items-center gap-4">
-              <button
-                onClick={handleDownload}
-                className="inline-flex items-center gap-2 h-11 px-7 rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity text-white"
-                style={{ backgroundColor: `hsl(${app.accentHsl})` }}
-              >
-                <Download size={16} /> Download Now
-              </button>
+              <PlatformDownloadButtons
+                iosUrl={app.iosUrl}
+                androidUrl={app.androidUrl}
+                appName={app.name}
+                appId={app.id}
+                accentHsl={app.accentHsl}
+              />
 
               {!isMobile && qrUrl && (
                 <div className="flex flex-col items-center gap-2">

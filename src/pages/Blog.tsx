@@ -287,7 +287,7 @@ export default function Blog() {
                     <p className="text-muted-foreground text-sm">Select an article to preview.</p>
                   </div>
                 )}
-              </div>
+              </Link>
             </div>
           </motion.div>
         </div>
