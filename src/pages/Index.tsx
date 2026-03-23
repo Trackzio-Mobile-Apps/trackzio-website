@@ -145,12 +145,12 @@ export default function Home() {
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-6">AI-Powered Mobile Apps</p>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold font-display leading-[1.08] tracking-tight mb-6 text-foreground">
-              Making Lives Easier{' '}
-              <span className="text-primary">Every App, Every Day.</span>
+              AI Platforms for Collectors and{' '}
+              <span className="text-primary">Enthusiasts</span>
             </h1>
 
             <p className="text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed">
-              Trackzio builds apps that fit into your life — thoughtfully made, deeply researched, and always built with you in mind.
+              Trackzio builds intelligent apps that help people identify, understand, organize, and exchange the things they care about.
             </p>
 
             <motion.div
