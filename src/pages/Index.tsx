@@ -277,7 +277,7 @@ export default function Home() {
                   <div className="p-6 rounded-2xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
                     <Quote size={22} className="text-primary/25 mb-3" />
                     <p className="text-sm leading-relaxed text-foreground flex-1 font-medium">"{t.quote}"</p>
-                    <div className="mt-5 flex items-center gap-3">
+                    <div className="mt-3 flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center font-display font-bold text-primary text-sm">
                         {t.author.charAt(0)}
                       </div>
