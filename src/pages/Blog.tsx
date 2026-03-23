@@ -247,10 +247,10 @@ export default function Blog() {
                 </div>
               </div>
 
-              <div
-                className="lg:w-[62%] bg-card rounded-xl overflow-hidden flex flex-col cursor-pointer group"
+              <Link
+                to={activePreview ? `/blog/${activePreview.slug}` : '#'}
+                className="lg:w-[62%] bg-card rounded-xl overflow-hidden flex flex-col cursor-pointer group block"
                 style={{ boxShadow: '0 4px 20px -6px hsla(0 0% 0% / 0.08)' }}
-                onClick={() => activePreview && handleReadArticle(activePreview.slug)}
               >
                 {activePreview ? (
                   <>
