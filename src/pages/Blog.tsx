@@ -183,7 +183,7 @@ export default function Blog() {
                   Read <ArrowRight size={14} />
                 </span>
               </div>
-            </div>
+            </Link>
           </motion.div>
         </div>
       </section>
