@@ -131,10 +131,7 @@ export default function FloatingAppShowcase() {
                   return (
                     <motion.button
                       key={app.id}
-                      onClick={() => {
-                        setSelectedIndex(i);
-                        trackEvent('showcase_app_select', { app_name: app.name });
-                      }}
+                      onClick={() => handleSelect(i)}
                       className="absolute flex items-center gap-3 rounded-2xl cursor-pointer select-none border-2 transition-colors duration-300"
                       style={{
                         top: pos.top,
