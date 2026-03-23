@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface ShowcaseFeature {
@@ -26,21 +26,25 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
     });
   }, [features]);
 
-  // Auto-rotating loop instead of scroll-locking
-  useEffect(() => {
+  const startTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
     if (count <= 1) return;
     timerRef.current = setInterval(() => {
       setCurrent(prev => (prev + 1) % count);
     }, 3500);
+  };
+
+  useEffect(() => {
+    startTimer();
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [count]);
 
-  if (count === 0) return null;
+  const handleFeatureClick = (index: number) => {
+    setCurrent(index);
+    startTimer();
+  };
 
-  // Show 3 at a time on desktop, 1 on mobile
-  const visibleIndices = isMobile
-    ? [current]
-    : [current % count, (current + 1) % count, (current + 2) % count];
+  if (count === 0) return null;
 
   return (
     <section
@@ -53,7 +57,7 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-6"
+          className="text-center mb-8"
         >
           <p
             className="font-medium tracking-[0.2em] uppercase mb-1"
@@ -69,65 +73,72 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
           </h2>
         </motion.div>
 
-        {/* Screenshots grid - auto-rotating */}
-        <div className={`w-full max-w-5xl grid gap-5 ${isMobile ? 'grid-cols-1 max-w-xs mx-auto' : 'grid-cols-3'}`}>
-          {visibleIndices.map((idx, pos) => {
-            const feat = features[idx];
-            return (
-              <motion.div
-                key={`${idx}-${pos}`}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="flex flex-col"
+        <div className={`w-full max-w-5xl flex ${isMobile ? 'flex-col gap-6' : 'flex-row gap-10'}`}>
+          {/* Left: Static feature list */}
+          <div className={`${isMobile ? 'w-full' : 'w-[38%]'} flex flex-col gap-1`}>
+            {features.map((feat, i) => (
+              <button
+                key={i}
+                onClick={() => handleFeatureClick(i)}
+                className={`text-left px-4 py-3 rounded-xl transition-all duration-300 ${
+                  current === i
+                    ? 'bg-card shadow-sm'
+                    : 'hover:bg-muted/50'
+                }`}
+                style={current === i ? { borderLeft: `3px solid hsl(${accentHsl})` } : { borderLeft: '3px solid transparent' }}
               >
-                <div
-                  className="overflow-hidden rounded-2xl mb-3"
-                  style={{
-                    boxShadow: `0 12px 32px -8px hsl(${accentHsl} / 0.12), 0 4px 16px -4px rgba(0,0,0,0.08)`,
-                  }}
-                >
-                  <img
-                    src={feat.screenshot}
-                    alt={feat.title}
-                    className="w-full block"
-                    style={{ maxHeight: isMobile ? '50vh' : '55vh', objectFit: 'contain' }}
-                    loading="eager"
-                  />
-                </div>
                 <h3
-                  className="font-bold font-display text-foreground mb-1"
-                  style={{ fontSize: 'clamp(0.85rem, 1.3vw, 1.125rem)' }}
+                  className={`font-semibold text-sm mb-0.5 transition-colors ${current === i ? '' : 'text-foreground'}`}
+                  style={current === i ? { color: `hsl(${accentHsl})` } : undefined}
                 >
                   {feat.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed line-clamp-2" style={{ fontSize: 'clamp(0.75rem, 1.1vw, 0.875rem)' }}>
+                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
                   {feat.description}
                 </p>
-              </motion.div>
-            );
-          })}
-        </div>
+              </button>
+            ))}
+          </div>
 
-        {/* Dots */}
-        <div className="flex items-center justify-center gap-2 mt-4">
-          {features.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => {
-                setCurrent(i);
-                if (timerRef.current) clearInterval(timerRef.current);
-                timerRef.current = setInterval(() => {
-                  setCurrent(prev => (prev + 1) % count);
-                }, 3500);
-              }}
-              className="w-2 h-2 rounded-full transition-all duration-300"
+          {/* Right: Auto-rotating screenshot */}
+          <div className={`${isMobile ? 'w-full' : 'w-[62%]'} flex flex-col items-center`}>
+            <div
+              className="overflow-hidden rounded-2xl w-full"
               style={{
-                backgroundColor: i === current ? `hsl(${accentHsl})` : 'hsl(var(--muted))',
-                transform: i === current ? 'scale(1.4)' : 'scale(1)',
+                boxShadow: `0 12px 32px -8px hsl(${accentHsl} / 0.12), 0 4px 16px -4px rgba(0,0,0,0.08)`,
               }}
-            />
-          ))}
+            >
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={current}
+                  src={features[current].screenshot}
+                  alt={features[current].title}
+                  className="w-full block"
+                  style={{ maxHeight: isMobile ? '50vh' : '55vh', objectFit: 'contain' }}
+                  loading="eager"
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -30 }}
+                  transition={{ duration: 0.35 }}
+                />
+              </AnimatePresence>
+            </div>
+
+            {/* Dots */}
+            <div className="flex items-center justify-center gap-2 mt-4">
+              {features.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleFeatureClick(i)}
+                  className="w-2 h-2 rounded-full transition-all duration-300"
+                  style={{
+                    backgroundColor: i === current ? `hsl(${accentHsl})` : 'hsl(var(--muted))',
+                    transform: i === current ? 'scale(1.4)' : 'scale(1)',
+                  }}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
