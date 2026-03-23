@@ -287,10 +287,8 @@ showcaseFeatures['habiteazy'] = [
 
 showcaseFeatures['rockzy'] = [
   { screenshot: rockzy1, title: 'AI Rock Scan', description: 'Identify rocks and minerals instantly' },
-  { screenshot: rockzy2, title: 'AI Chat Assistant', description: 'Ask questions about minerals and crystals' },
   { screenshot: rockzy3, title: 'Collection & Mineral Care', description: 'Track and maintain your mineral collection' },
   { screenshot: rockzy4, title: 'Community Feed', description: 'Share discoveries with enthusiasts' },
-  { screenshot: rockzy5, title: 'Mineral Awareness', description: 'Learn properties and characteristics' },
   { screenshot: rockzy6, title: '8K+ Minerals Database', description: 'Explore a global mineral catalog' },
   { screenshot: rockzy7, title: 'Zodiac Stones', description: 'Discover crystals linked to your zodiac' },
 ];
