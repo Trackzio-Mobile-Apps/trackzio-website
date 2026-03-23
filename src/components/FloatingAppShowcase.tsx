@@ -99,10 +99,7 @@ export default function FloatingAppShowcase() {
                   return (
                     <motion.button
                       key={app.id}
-                      onClick={() => {
-                        setSelectedIndex(i);
-                        trackEvent('showcase_app_select', { app_name: app.name });
-                      }}
+                      onClick={() => handleSelect(i)}
                       className="flex-shrink-0 flex items-center gap-2 rounded-xl px-3 py-2.5 cursor-pointer select-none border-2 transition-colors duration-300"
                       style={{
                         borderColor: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--border))',
