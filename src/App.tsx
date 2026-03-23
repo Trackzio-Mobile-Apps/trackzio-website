@@ -8,6 +8,7 @@ import Home from "./pages/Index";
 import AppDetail from "./pages/AppDetail";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
+import BlogArticle from "./pages/BlogArticle";
 import Careers from "./pages/Careers";
 import Help from "./pages/Help";
 import Contact from "./pages/Contact";
