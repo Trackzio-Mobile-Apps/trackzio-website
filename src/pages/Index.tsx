@@ -29,7 +29,7 @@ const metrics = [
 
 const testimonials = [
   { quote: "This app makes building good habits fun and rewarding. It gamifies daily chores, turning routine tasks into small achievements that keep me motivated.", author: "Kunal" },
-  { quote: "I've used a lot of habit trackers and games, and I really like this one. It's easy to add tasks and habits and configure them to meet my needs. It doesn't have a ton of ads, and right now the premium is only about $2/month so it's affordable. I work a flexible schedule of 50hr/week with my schedule changing with less than a day's notice, regularly. This app makes it much easier to organize my life despite the chaos and lack of time.", author: "Amanda" },
+  { quote: "I've used a lot of habit trackers and games, and I really like this one. It's easy to add tasks and habits and configure them to meet my needs. It doesn't have a ton of ads, and right now the premium is only about $2/month so it's affordable. This app makes it much easier to organize my life despite the chaos and lack of time.", author: "Amanda" },
   { quote: "I love this app. Much easier to use than other apps like it. The UI is simple, making it easier to do what you want. The widget is perfect. I can't find anything wrong with it. Looking forward to future updates. Try this app. You won't be sorry.", author: "Koni" },
   { quote: "Guys this is super cute and fantastic!", author: "Myat" },
   { quote: "I make money in various currencies and this app is very very helpful in identifying the money that I have made in the different currencies. Good community.", author: "Kirti" },
@@ -277,7 +277,7 @@ export default function Home() {
                   <div className="p-6 rounded-2xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
                     <Quote size={22} className="text-primary/25 mb-3" />
                     <p className="text-sm leading-relaxed text-foreground flex-1 font-medium">"{t.quote}"</p>
-                    <div className="mt-5 flex items-center gap-3">
+                    <div className="mt-3 flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center font-display font-bold text-primary text-sm">
                         {t.author.charAt(0)}
                       </div>

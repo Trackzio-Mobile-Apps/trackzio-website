@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check } from 'lucide-react';
@@ -20,17 +20,42 @@ const showcaseApps = apps.map((app, i) => ({
 
 /* Desktop scattered positions — generous spacing, no overlap */
 const desktopPositions = [
-  { top: '2%', left: '4%' },
-  { top: '0%', left: '54%' },
-  { top: '36%', left: '8%' },
-  { top: '38%', left: '56%' },
-  { top: '72%', left: '28%' },
+  { top: '0%', left: '2%' },
+  { top: '0%', left: '56%' },
+  { top: '38%', left: '6%' },
+  { top: '40%', left: '58%' },
+  { top: '76%', left: '26%' },
 ];
 
 export default function FloatingAppShowcase() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const selected = showcaseApps[selectedIndex];
   const isMobile = useIsMobile();
+  const autoRotateRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const userInteractedRef = useRef(false);
+
+  // Auto-rotation for ecosystem icons
+  useEffect(() => {
+    autoRotateRef.current = setInterval(() => {
+      if (!userInteractedRef.current) {
+        setSelectedIndex(prev => (prev + 1) % showcaseApps.length);
+      }
+    }, 3500);
+    return () => { if (autoRotateRef.current) clearInterval(autoRotateRef.current); };
+  }, []);
+
+  const handleSelect = (i: number) => {
+    userInteractedRef.current = true;
+    setSelectedIndex(i);
+    trackEvent('showcase_app_select', { app_name: showcaseApps[i].name });
+    if (autoRotateRef.current) clearInterval(autoRotateRef.current);
+    setTimeout(() => { userInteractedRef.current = false; }, 8000);
+    autoRotateRef.current = setInterval(() => {
+      if (!userInteractedRef.current) {
+        setSelectedIndex(prev => (prev + 1) % showcaseApps.length);
+      }
+    }, 3500);
+  };
 
   return (
     <section
@@ -74,10 +99,7 @@ export default function FloatingAppShowcase() {
                   return (
                     <motion.button
                       key={app.id}
-                      onClick={() => {
-                        setSelectedIndex(i);
-                        trackEvent('showcase_app_select', { app_name: app.name });
-                      }}
+                      onClick={() => handleSelect(i)}
                       className="flex-shrink-0 flex items-center gap-2 rounded-xl px-3 py-2.5 cursor-pointer select-none border-2 transition-colors duration-300"
                       style={{
                         borderColor: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--border))',
@@ -109,10 +131,7 @@ export default function FloatingAppShowcase() {
                   return (
                     <motion.button
                       key={app.id}
-                      onClick={() => {
-                        setSelectedIndex(i);
-                        trackEvent('showcase_app_select', { app_name: app.name });
-                      }}
+                      onClick={() => handleSelect(i)}
                       className="absolute flex items-center gap-3 rounded-2xl cursor-pointer select-none border-2 transition-colors duration-300"
                       style={{
                         top: pos.top,
