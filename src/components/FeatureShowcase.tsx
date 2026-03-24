@@ -96,8 +96,8 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
                     src={feature.screenshot}
                     alt={feature.title}
                     loading="eager"
-                    className="object-contain"
-                    style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto' }}
+                    className="object-contain block mx-auto"
+                    style={{ maxWidth: '100%', maxHeight: 'calc(100vh - 220px)', width: 'auto', height: '100%' }}
                   />
                 </div>
 
