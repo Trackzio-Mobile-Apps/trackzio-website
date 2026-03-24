@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { ArrowRight, Clock } from 'lucide-react';
+import { articles, blogCategories, blogOfTheWeek } from '@/lib/blogData';
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -11,105 +12,9 @@ const fadeUp = {
   transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] as const },
 };
 
-const splitCategories = ['Personal Growth', 'Nature & AI', 'Technology', 'Product Updates', 'Tips & Tricks'];
-
-const articles = [
-  {
-    category: 'Personal Growth',
-    title: 'The Science Behind Habit Building: Why Small Steps Lead to Big Changes',
-    excerpt: 'Discover how neuroscience explains why tiny daily habits compound into life-changing transformations.',
-    body: `The human brain is wired for efficiency, not change. Every time you repeat an action, the neural pathway responsible for that behavior strengthens — a process neuroscientists call "long-term potentiation." This is why small, consistent habits are far more powerful than grand, one-time efforts.`,
-    date: 'Feb 28, 2026',
-    readTime: '8 min',
-    image: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800&h=500&fit=crop',
-    author: 'Aayushya Aggarwal',
-    featured: true,
-    slug: 'science-behind-habit-building',
-  },
-  {
-    category: 'Nature & AI',
-    title: 'How AI is Revolutionizing Insect Identification for Everyday Explorers',
-    excerpt: 'AI-powered tools are making it easier than ever to identify and learn about the insects around us.',
-    body: '',
-    date: 'Feb 20, 2026',
-    readTime: '10 min',
-    image: 'https://images.unsplash.com/photo-1559235038-1b0fadf76f78?w=800&h=500&fit=crop',
-    author: 'Trackzio Team',
-    slug: 'ai-insect-identification',
-  },
-  {
-    category: 'Technology',
-    title: 'Building an AI Product Ecosystem: Lessons from Creating Five Apps in One Year',
-    excerpt: 'What happens when you try to build multiple AI-powered apps simultaneously? Our journey and hard-earned lessons.',
-    body: '',
-    date: 'Feb 12, 2026',
-    readTime: '9 min',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=500&fit=crop',
-    author: 'Aayushya Aggarwal',
-    slug: 'building-ai-product-ecosystem',
-  },
-  {
-    category: 'Product Updates',
-    title: "Coinzy 2.0: What's New in the Latest Update",
-    excerpt: 'A closer look at the new features, improved AI accuracy, and redesigned marketplace in Coinzy 2.0.',
-    body: '',
-    date: 'Feb 5, 2026',
-    readTime: '7 min',
-    image: 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=800&h=500&fit=crop',
-    author: 'Trackzio Team',
-    slug: 'coinzy-2-update',
-  },
-  {
-    category: 'Tips & Tricks',
-    title: '5 Ways to Get the Most Out of Your Habit Tracker',
-    excerpt: 'Practical tips from power users on how to maximize consistency and motivation with Habiteazy.',
-    body: '',
-    date: 'Jan 28, 2026',
-    readTime: '6 min',
-    image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=500&fit=crop',
-    author: 'Aayushya Aggarwal',
-    slug: 'habit-tracker-tips',
-  },
-  {
-    category: 'Nature & AI',
-    title: 'The Most Fascinating Insects Found by Insecto Users in 2025',
-    excerpt: 'A roundup of the rarest and most surprising insect identifications made by our community last year.',
-    body: '',
-    date: 'Jan 20, 2026',
-    readTime: '8 min',
-    image: 'https://images.unsplash.com/photo-1568393691622-c7ba131d63b4?w=800&h=500&fit=crop',
-    author: 'Trackzio Team',
-    slug: 'fascinating-insects-2025',
-  },
-  {
-    category: 'Personal Growth',
-    title: 'Morning Routines That Actually Stick: A Data-Driven Approach',
-    excerpt: 'We analyzed thousands of habit tracking patterns to find the morning routines that users maintain longest.',
-    body: '',
-    date: 'Jan 14, 2026',
-    readTime: '7 min',
-    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=500&fit=crop',
-    author: 'Aayushya Aggarwal',
-    slug: 'morning-routines-data-driven',
-  },
-  {
-    category: 'Technology',
-    title: 'The Future of Mobile-First AI Applications',
-    excerpt: 'How on-device machine learning is changing the way we build and interact with mobile applications.',
-    body: '',
-    date: 'Jan 8, 2026',
-    readTime: '10 min',
-    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=500&fit=crop',
-    author: 'Trackzio Team',
-    slug: 'future-mobile-ai',
-  },
-];
-
-const blogOfTheWeek = articles[0];
-
 export default function Blog() {
   usePageAnalytics('blog', 'blog_page_view');
-  const [activeSplitCategory, setActiveSplitCategory] = useState(splitCategories[0]);
+  const [activeSplitCategory, setActiveSplitCategory] = useState(blogCategories[0]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [showAllCategories, setShowAllCategories] = useState(false);
 
@@ -125,8 +30,6 @@ export default function Blog() {
     setActiveSplitCategory(cat);
     setSelectedIndex(0);
   };
-
-  // handleReadArticle no longer needed - using Link components instead
 
   return (
     <div>
@@ -195,7 +98,7 @@ export default function Blog() {
             <p className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-6">Featured Articles</p>
 
             <div className="flex flex-wrap gap-2 mb-8">
-              {splitCategories.map(cat => (
+              {blogCategories.map(cat => (
                 <button
                   key={cat}
                   onClick={() => handleCategoryChange(cat)}
@@ -221,7 +124,7 @@ export default function Blog() {
                   ) : (
                     splitFiltered.map((article, i) => (
                       <button
-                        key={article.title}
+                        key={article.slug}
                         onClick={() => setSelectedIndex(i)}
                         className={`w-full text-left p-5 transition-colors ${
                           selectedIndex === i
