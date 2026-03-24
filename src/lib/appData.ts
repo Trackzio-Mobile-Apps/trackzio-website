@@ -90,7 +90,7 @@ export const apps: AppInfo[] = [
     color: 'hsl(78, 45%, 42%)',
     accentHsl: '78 45% 42%',
     iosUrl: null,
-    androidUrl: 'https://play.google.com/store/apps/details?id=com.insect.trackzio',
+    androidUrl: 'https://play.google.com/store/apps/details?id=com.insect.trackzio&pcampaignid=web_share',
     icon: '🐛',
     logo: insectoLogo,
     screenshots: [insecto1, insecto2, insecto3],
