@@ -23,18 +23,10 @@ const navItems = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileAppsOpen, setMobileAppsOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const dropdownTimer = useRef<ReturnType<typeof setTimeout>>();
-
-  const handleAppsClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (location.pathname === '/') {
-      document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      navigate('/#apps');
-    }
-  };
 
   const handleDropdownEnter = () => {
     clearTimeout(dropdownTimer.current);
@@ -67,10 +59,11 @@ export default function Header() {
               onMouseLeave={item.hasDropdown ? handleDropdownLeave : undefined}
             >
               {item.hasDropdown ? (
-                <a
-                  href="/#apps"
+                <button
+                  type="button"
                   onClick={(e) => {
-                    handleAppsClick(e);
+                    e.preventDefault();
+                    setDropdownOpen(prev => !prev);
                     item.event && trackEvent(item.event, { page_name: location.pathname });
                   }}
                   className={`inline-flex items-center gap-1 px-3 py-2 text-sm rounded-md transition-colors ${
@@ -81,7 +74,7 @@ export default function Header() {
                 >
                   {item.label}
                   <ChevronDown size={14} className={`transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
-                </a>
+                </button>
               ) : (
                 <Link
                   to={item.to}
@@ -104,13 +97,13 @@ export default function Header() {
 
         {/* CTA + Mobile toggle */}
         <div className="flex items-center gap-3">
-          <a
-            href="/#apps"
-            onClick={(e) => { handleAppsClick(e); trackEvent('header_explore_apps', { page_name: location.pathname }); }}
+          <button
+            type="button"
+            onClick={() => { setDropdownOpen(prev => !prev); trackEvent('header_explore_apps', { page_name: location.pathname }); }}
             className="hidden sm:inline-flex h-9 px-4 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-semibold transition-all hover:opacity-90 glow"
           >
             Explore Apps
-          </a>
+          </button>
           <button
             onClick={() => setOpen(!open)}
             className="md:hidden p-2 text-muted-foreground hover:text-primary"
@@ -178,23 +171,44 @@ export default function Header() {
             <div className="container-site py-4 flex flex-col gap-1">
               {navItems.map(item => (
                 item.hasDropdown ? (
-                  <a
-                    key={item.to}
-                    href="/#apps"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setOpen(false);
-                      if (location.pathname === '/') {
-                        document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' });
-                      } else {
-                        navigate('/#apps');
-                      }
-                      item.event && trackEvent(item.event, { page_name: location.pathname });
-                    }}
-                    className="px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-muted-foreground hover:text-primary"
-                  >
-                    {item.label}
-                  </a>
+                  <div key={item.to}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMobileAppsOpen(prev => !prev);
+                        item.event && trackEvent(item.event, { page_name: location.pathname });
+                      }}
+                      className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-muted-foreground hover:text-primary"
+                    >
+                      {item.label}
+                      <ChevronDown size={14} className={`transition-transform duration-200 ${mobileAppsOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    <AnimatePresence>
+                      {mobileAppsOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="grid grid-cols-2 gap-1 px-2 py-2">
+                            {megaMenuApps.map(app => (
+                              <Link
+                                key={app.id}
+                                to={`/apps/${app.id}`}
+                                onClick={() => { setMobileAppsOpen(false); setOpen(false); window.scrollTo(0, 0); }}
+                                className="flex items-center gap-2 p-2 rounded-lg transition-colors hover:bg-muted/50"
+                              >
+                                <img src={app.logo} alt={app.name} className="w-8 h-8 rounded-lg shrink-0" />
+                                <span className="text-sm font-medium text-foreground">{app.name}</span>
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 ) : (
                   <Link
                     key={item.to}
@@ -214,22 +228,16 @@ export default function Header() {
                   </Link>
                 )
               ))}
-              <a
-                href="/#apps"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setOpen(false);
-                  if (location.pathname === '/') {
-                    document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' });
-                  } else {
-                    navigate('/#apps');
-                  }
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileAppsOpen(prev => !prev);
                   trackEvent('header_explore_apps', { page_name: location.pathname });
                 }}
                 className="mt-2 flex h-10 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-semibold"
               >
                 Explore Apps
-              </a>
+              </button>
             </div>
           </motion.nav>
         )}
