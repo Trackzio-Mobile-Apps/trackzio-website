@@ -70,7 +70,7 @@ export const apps: AppInfo[] = [
     color: 'hsl(152, 55%, 32%)',
     accentHsl: '152 55% 32%',
     iosUrl: 'https://apps.apple.com/in/app/banknote-identification-ai/id6747063766',
-    androidUrl: 'https://play.google.com/store/apps/details?id=com.trackzio.banknote',
+    androidUrl: 'https://play.google.com/store/apps/details?id=com.trackzio.banknote&pcampaignid=web_share',
     icon: '💵',
     logo: banknotesLogo,
     screenshots: [banknotes1, banknotes2, banknotes3],
