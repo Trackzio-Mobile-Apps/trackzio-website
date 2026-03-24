@@ -87,18 +87,18 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
               >
                 {/* Screenshot */}
                 <div
-                  className="w-full flex items-center justify-center overflow-hidden"
+                  className="w-full flex items-center justify-center"
                   style={{
-                    height: isMobile ? '45vh' : 'clamp(280px, 48vh, 420px)',
+                    maxHeight: isMobile ? '50vh' : 'clamp(260px, 52vh, 460px)',
                     background: `linear-gradient(135deg, hsl(${accentHsl} / 0.06), hsl(${accentHsl} / 0.02))`,
                   }}
                 >
                   <img
                     src={feature.screenshot}
                     alt={feature.title}
-                    className="h-full object-contain"
+                    className="w-full object-contain"
                     loading="eager"
-                    style={{ maxHeight: '100%', maxWidth: '100%' }}
+                    style={{ maxHeight: isMobile ? '50vh' : 'clamp(260px, 52vh, 460px)' }}
                   />
                 </div>
 
