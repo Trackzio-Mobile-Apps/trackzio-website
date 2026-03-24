@@ -110,7 +110,7 @@ export const apps: AppInfo[] = [
     color: 'hsl(270, 55%, 50%)',
     accentHsl: '270 55% 50%',
     iosUrl: 'https://apps.apple.com/in/app/habit-eazy-habit-to-do-pal/id6738790392',
-    androidUrl: 'https://play.google.com/store/apps/details?id=com.progresspal',
+    androidUrl: 'https://play.google.com/store/apps/details?id=com.progresspal&pcampaignid=web_share',
     icon: '✅',
     logo: habiteazyLogo,
     screenshots: [habiteazy1, habiteazy1, habiteazy1],
