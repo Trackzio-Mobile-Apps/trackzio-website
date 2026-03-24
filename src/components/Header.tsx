@@ -74,7 +74,7 @@ export default function Header() {
                 >
                   {item.label}
                   <ChevronDown size={14} className={`transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
-                </a>
+                </button>
               ) : (
                 <Link
                   to={item.to}
