@@ -48,32 +48,32 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
   return (
     <section
       className="flex flex-col items-center justify-center overflow-hidden"
-      style={{ minHeight: '100vh', padding: 'clamp(24px, 3vh, 48px) 0' }}
+      style={{ height: '100vh', maxHeight: '100vh', padding: 'clamp(16px, 2vh, 32px) 0' }}
     >
-      <div className="flex flex-col items-center justify-center h-full" style={{ width: 'clamp(300px, 92%, 1200px)' }}>
+      <div className="flex flex-col items-center justify-between h-full" style={{ width: 'clamp(300px, 92%, 1200px)', maxHeight: '100%' }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-6"
+          className="text-center shrink-0 mb-3"
         >
           <p
             className="font-medium tracking-[0.2em] uppercase mb-1"
-            style={{ color: `hsl(${accentHsl})`, fontSize: 'clamp(0.7rem, 1.2vw, 0.875rem)' }}
+            style={{ color: `hsl(${accentHsl})`, fontSize: 'clamp(0.65rem, 1vw, 0.8rem)' }}
           >
             App Showcase
           </p>
           <h2
             className="font-bold font-display text-foreground"
-            style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.25rem)' }}
+            style={{ fontSize: 'clamp(1.25rem, 3vw, 2rem)' }}
           >
             See it in action
           </h2>
         </motion.div>
 
-        {/* 3-column card grid */}
-        <div className={`w-full grid gap-5 ${isMobile ? 'grid-cols-1' : 'grid-cols-3'}`}>
+        {/* 3-column card grid — fills remaining space */}
+        <div className={`w-full grid gap-4 flex-1 min-h-0 ${isMobile ? 'grid-cols-1' : 'grid-cols-3'}`}>
           <AnimatePresence mode="popLayout">
             {visibleFeatures.map(({ feature, index }) => (
               <motion.div
@@ -82,30 +82,29 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -60 }}
                 transition={{ duration: 0.45, ease: 'easeInOut' }}
-                className="flex flex-col rounded-2xl overflow-hidden bg-card border border-border/30"
+                className="flex flex-col rounded-2xl overflow-hidden bg-card border border-border/30 min-h-0"
                 style={{ boxShadow: '0 4px 20px -4px rgba(0,0,0,0.06)' }}
               >
-                {/* Screenshot */}
+                {/* Screenshot — takes available space, never crops */}
                 <div
-                  className="w-full flex items-center justify-center"
+                  className="flex-1 min-h-0 flex items-center justify-center p-2"
                   style={{
-                    maxHeight: isMobile ? '50vh' : 'clamp(260px, 52vh, 460px)',
                     background: `linear-gradient(135deg, hsl(${accentHsl} / 0.06), hsl(${accentHsl} / 0.02))`,
                   }}
                 >
                   <img
                     src={feature.screenshot}
                     alt={feature.title}
-                    className="w-full object-contain"
                     loading="eager"
-                    style={{ maxHeight: isMobile ? '50vh' : 'clamp(260px, 52vh, 460px)' }}
+                    className="object-contain"
+                    style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto' }}
                   />
                 </div>
 
                 {/* Title & description */}
-                <div className="px-4 py-3 text-center">
-                  <h3 className="font-bold text-sm text-foreground">{feature.title}</h3>
-                  <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{feature.description}</p>
+                <div className="px-3 py-2 text-center shrink-0">
+                  <h3 className="font-bold text-xs text-foreground">{feature.title}</h3>
+                  <p className="text-[0.65rem] text-muted-foreground mt-0.5 leading-snug">{feature.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -114,7 +113,7 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
 
         {/* Progress bar */}
         {count > visibleCount && (
-          <div className="mt-5 w-full max-w-md mx-auto">
+          <div className="mt-3 w-full max-w-md mx-auto shrink-0">
             <div className="h-1.5 rounded-full bg-muted overflow-hidden">
               <motion.div
                 className="h-full rounded-full"
@@ -123,7 +122,7 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
                 transition={{ duration: 0.4 }}
               />
             </div>
-            <div className="flex justify-center gap-2 mt-3">
+            <div className="flex justify-center gap-2 mt-2">
               {features.map((_, i) => (
                 <button
                   key={i}
