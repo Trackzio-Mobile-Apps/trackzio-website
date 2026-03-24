@@ -228,22 +228,16 @@ export default function Header() {
                   </Link>
                 )
               ))}
-              <a
-                href="/#apps"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setOpen(false);
-                  if (location.pathname === '/') {
-                    document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' });
-                  } else {
-                    navigate('/#apps');
-                  }
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileAppsOpen(prev => !prev);
                   trackEvent('header_explore_apps', { page_name: location.pathname });
                 }}
                 className="mt-2 flex h-10 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-semibold"
               >
                 Explore Apps
-              </a>
+              </button>
             </div>
           </motion.nav>
         )}
