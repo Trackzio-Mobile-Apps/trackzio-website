@@ -50,7 +50,7 @@ export const apps: AppInfo[] = [
     color: 'hsl(174, 60%, 35%)',
     accentHsl: '174 60% 35%',
     iosUrl: null,
-    androidUrl: 'https://play.google.com/store/apps/details?id=com.coinzy.trackzio',
+    androidUrl: 'https://play.google.com/store/apps/details?id=com.coinzy.trackzio&pcampaignid=web_share',
     icon: '🪙',
     logo: coinzyLogo,
     screenshots: [coinzy1, coinzy2, coinzy3],
