@@ -23,18 +23,10 @@ const navItems = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileAppsOpen, setMobileAppsOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const dropdownTimer = useRef<ReturnType<typeof setTimeout>>();
-
-  const handleAppsClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (location.pathname === '/') {
-      document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      navigate('/#apps');
-    }
-  };
 
   const handleDropdownEnter = () => {
     clearTimeout(dropdownTimer.current);
