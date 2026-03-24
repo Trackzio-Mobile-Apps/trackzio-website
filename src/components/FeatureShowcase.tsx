@@ -14,11 +14,13 @@ interface FeatureShowcaseProps {
 }
 
 export default function FeatureShowcase({ features, accentHsl }: FeatureShowcaseProps) {
-  const [current, setCurrent] = useState(0);
   const isMobile = useIsMobile();
   const count = features.length;
+  const visibleCount = isMobile ? 1 : 3;
+  const [startIndex, setStartIndex] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  // Preload images
   useEffect(() => {
     features.forEach(f => {
       const img = new Image();
@@ -26,38 +28,35 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
     });
   }, [features]);
 
-  const startTimer = () => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    if (count <= 1) return;
-    timerRef.current = setInterval(() => {
-      setCurrent(prev => (prev + 1) % count);
-    }, 3500);
-  };
-
+  // Auto-rotate
   useEffect(() => {
-    startTimer();
+    if (count <= visibleCount) return;
+    timerRef.current = setInterval(() => {
+      setStartIndex(prev => (prev + 1) % count);
+    }, 3500);
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [count]);
-
-  const handleFeatureClick = (index: number) => {
-    setCurrent(index);
-    startTimer();
-  };
+  }, [count, visibleCount]);
 
   if (count === 0) return null;
+
+  // Get visible features with wrapping
+  const visibleFeatures = Array.from({ length: Math.min(visibleCount, count) }, (_, i) => ({
+    feature: features[(startIndex + i) % count],
+    index: (startIndex + i) % count,
+  }));
 
   return (
     <section
       className="flex flex-col items-center justify-center overflow-hidden"
-      style={{ padding: 'clamp(32px, 5vh, 64px) 0' }}
+      style={{ minHeight: '100vh', padding: 'clamp(24px, 3vh, 48px) 0' }}
     >
-      <div className="flex flex-col items-center" style={{ width: 'clamp(300px, 90%, 1200px)' }}>
+      <div className="flex flex-col items-center justify-center h-full" style={{ width: 'clamp(300px, 92%, 1200px)' }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-8"
+          className="text-center mb-6"
         >
           <p
             className="font-medium tracking-[0.2em] uppercase mb-1"
@@ -73,73 +72,78 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
           </h2>
         </motion.div>
 
-        <div className={`w-full max-w-5xl flex ${isMobile ? 'flex-col gap-6' : 'flex-row gap-10'}`}>
-          {/* Left: Static feature list */}
-          <div className={`${isMobile ? 'w-full' : 'w-[38%]'} flex flex-col gap-1`}>
-            {features.map((feat, i) => (
-              <button
-                key={i}
-                onClick={() => handleFeatureClick(i)}
-                className={`text-left px-4 py-3 rounded-xl transition-all duration-300 ${
-                  current === i
-                    ? 'bg-card shadow-sm'
-                    : 'hover:bg-muted/50'
-                }`}
-                style={current === i ? { borderLeft: `3px solid hsl(${accentHsl})` } : { borderLeft: '3px solid transparent' }}
+        {/* 3-column card grid */}
+        <div className={`w-full grid gap-5 ${isMobile ? 'grid-cols-1' : 'grid-cols-3'}`}>
+          <AnimatePresence mode="popLayout">
+            {visibleFeatures.map(({ feature, index }) => (
+              <motion.div
+                key={`${index}-${startIndex}`}
+                initial={{ opacity: 0, x: 60 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -60 }}
+                transition={{ duration: 0.45, ease: 'easeInOut' }}
+                className="flex flex-col rounded-2xl overflow-hidden bg-card border border-border/30"
+                style={{ boxShadow: '0 4px 20px -4px rgba(0,0,0,0.06)' }}
               >
-                <h3
-                  className={`font-semibold text-sm mb-0.5 transition-colors ${current === i ? '' : 'text-foreground'}`}
-                  style={current === i ? { color: `hsl(${accentHsl})` } : undefined}
+                {/* Screenshot */}
+                <div
+                  className="w-full flex items-center justify-center overflow-hidden"
+                  style={{
+                    height: isMobile ? '45vh' : 'clamp(280px, 48vh, 420px)',
+                    background: `linear-gradient(135deg, hsl(${accentHsl} / 0.06), hsl(${accentHsl} / 0.02))`,
+                  }}
                 >
-                  {feat.title}
-                </h3>
-                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
-                  {feat.description}
-                </p>
-              </button>
+                  <img
+                    src={feature.screenshot}
+                    alt={feature.title}
+                    className="h-full object-contain"
+                    loading="eager"
+                    style={{ maxHeight: '100%', maxWidth: '100%' }}
+                  />
+                </div>
+
+                {/* Title & description */}
+                <div className="px-4 py-3 text-center">
+                  <h3 className="font-bold text-sm text-foreground">{feature.title}</h3>
+                  <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{feature.description}</p>
+                </div>
+              </motion.div>
             ))}
-          </div>
+          </AnimatePresence>
+        </div>
 
-          {/* Right: Auto-rotating screenshot */}
-          <div className={`${isMobile ? 'w-full' : 'w-[62%]'} flex flex-col items-center`}>
-            <div
-              className="overflow-hidden rounded-2xl w-full"
-              style={{
-                boxShadow: `0 12px 32px -8px hsl(${accentHsl} / 0.12), 0 4px 16px -4px rgba(0,0,0,0.08)`,
-              }}
-            >
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={current}
-                  src={features[current].screenshot}
-                  alt={features[current].title}
-                  className="w-full block"
-                  style={{ maxHeight: isMobile ? '50vh' : '55vh', objectFit: 'contain' }}
-                  loading="eager"
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -30 }}
-                  transition={{ duration: 0.35 }}
-                />
-              </AnimatePresence>
+        {/* Progress bar */}
+        {count > visibleCount && (
+          <div className="mt-5 w-full max-w-md mx-auto">
+            <div className="h-1.5 rounded-full bg-muted overflow-hidden">
+              <motion.div
+                className="h-full rounded-full"
+                style={{ backgroundColor: `hsl(${accentHsl})` }}
+                animate={{ width: `${((startIndex + 1) / count) * 100}%` }}
+                transition={{ duration: 0.4 }}
+              />
             </div>
-
-            {/* Dots */}
-            <div className="flex items-center justify-center gap-2 mt-4">
+            <div className="flex justify-center gap-2 mt-3">
               {features.map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => handleFeatureClick(i)}
+                  onClick={() => {
+                    setStartIndex(i);
+                    if (timerRef.current) clearInterval(timerRef.current);
+                    timerRef.current = setInterval(() => {
+                      setStartIndex(prev => (prev + 1) % count);
+                    }, 3500);
+                  }}
                   className="w-2 h-2 rounded-full transition-all duration-300"
                   style={{
-                    backgroundColor: i === current ? `hsl(${accentHsl})` : 'hsl(var(--muted))',
-                    transform: i === current ? 'scale(1.4)' : 'scale(1)',
+                    backgroundColor: i === startIndex ? `hsl(${accentHsl})` : 'hsl(var(--muted))',
+                    transform: i === startIndex ? 'scale(1.4)' : 'scale(1)',
                   }}
                 />
               ))}
             </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );
