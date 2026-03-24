@@ -97,13 +97,13 @@ export default function Header() {
 
         {/* CTA + Mobile toggle */}
         <div className="flex items-center gap-3">
-          <a
-            href="/#apps"
-            onClick={(e) => { handleAppsClick(e); trackEvent('header_explore_apps', { page_name: location.pathname }); }}
+          <button
+            type="button"
+            onClick={() => { setDropdownOpen(prev => !prev); trackEvent('header_explore_apps', { page_name: location.pathname }); }}
             className="hidden sm:inline-flex h-9 px-4 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-semibold transition-all hover:opacity-90 glow"
           >
             Explore Apps
-          </a>
+          </button>
           <button
             onClick={() => setOpen(!open)}
             className="md:hidden p-2 text-muted-foreground hover:text-primary"
