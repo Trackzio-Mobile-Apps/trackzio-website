@@ -59,10 +59,11 @@ export default function Header() {
               onMouseLeave={item.hasDropdown ? handleDropdownLeave : undefined}
             >
               {item.hasDropdown ? (
-                <a
-                  href="/#apps"
+                <button
+                  type="button"
                   onClick={(e) => {
-                    handleAppsClick(e);
+                    e.preventDefault();
+                    setDropdownOpen(prev => !prev);
                     item.event && trackEvent(item.event, { page_name: location.pathname });
                   }}
                   className={`inline-flex items-center gap-1 px-3 py-2 text-sm rounded-md transition-colors ${
