@@ -58,7 +58,7 @@ export default function Help() {
       </section>
 
       {/* Get in Touch */}
-      <section id="contact-form" className="min-h-screen flex items-center py-16 sm:py-20 snap-start">
+      <section id="contact-form" className="min-h-screen flex items-center py-24 sm:py-32 snap-start bg-section-tinted">
         <div className="container-site max-w-4xl w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
             <motion.div {...fadeUp}>
