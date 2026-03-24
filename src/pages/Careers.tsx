@@ -90,7 +90,7 @@ export default function Careers() {
       </section>
 
       {/* Culture */}
-      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start">
+      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start bg-section-tinted">
         <div className="container-site max-w-6xl w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Our Culture</p>
