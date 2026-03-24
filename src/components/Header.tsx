@@ -171,23 +171,44 @@ export default function Header() {
             <div className="container-site py-4 flex flex-col gap-1">
               {navItems.map(item => (
                 item.hasDropdown ? (
-                  <a
-                    key={item.to}
-                    href="/#apps"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setOpen(false);
-                      if (location.pathname === '/') {
-                        document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' });
-                      } else {
-                        navigate('/#apps');
-                      }
-                      item.event && trackEvent(item.event, { page_name: location.pathname });
-                    }}
-                    className="px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-muted-foreground hover:text-primary"
-                  >
-                    {item.label}
-                  </a>
+                  <div key={item.to}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMobileAppsOpen(prev => !prev);
+                        item.event && trackEvent(item.event, { page_name: location.pathname });
+                      }}
+                      className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-muted-foreground hover:text-primary"
+                    >
+                      {item.label}
+                      <ChevronDown size={14} className={`transition-transform duration-200 ${mobileAppsOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    <AnimatePresence>
+                      {mobileAppsOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="grid grid-cols-2 gap-1 px-2 py-2">
+                            {megaMenuApps.map(app => (
+                              <Link
+                                key={app.id}
+                                to={`/apps/${app.id}`}
+                                onClick={() => { setMobileAppsOpen(false); setOpen(false); window.scrollTo(0, 0); }}
+                                className="flex items-center gap-2 p-2 rounded-lg transition-colors hover:bg-muted/50"
+                              >
+                                <img src={app.logo} alt={app.name} className="w-8 h-8 rounded-lg shrink-0" />
+                                <span className="text-sm font-medium text-foreground">{app.name}</span>
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 ) : (
                   <Link
                     key={item.to}
