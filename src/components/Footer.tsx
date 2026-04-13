@@ -17,23 +17,44 @@ const socialLinks = [
   )},
 ];
 
-const appLegalMap: Record<string, { label: string; privacy: string; terms: string }> = {
+/** Legal links keyed by `appData` app id (exact match for `/apps/[appId]`). */
+const appLegalByAppId: Record<string, { label: string; privacy: string; terms: string }> = {
   coinzy: { label: "Coinzy", privacy: "/coinzy/privacy-policy", terms: "/coinzy/terms" },
-  "banknote-ai": { label: "Banknote AI", privacy: "/banknote-ai/privacy-policy", terms: "/banknote-ai/terms" },
-  banknote: { label: "Banknote AI", privacy: "/banknote-ai/privacy-policy", terms: "/banknote-ai/terms" },
   banknotes: { label: "Banknote AI", privacy: "/banknote-ai/privacy-policy", terms: "/banknote-ai/terms" },
-  "insecto-ai": { label: "Insecto AI", privacy: "/insecto-ai/privacy-policy", terms: "/insecto-ai/terms" },
   insecto: { label: "Insecto AI", privacy: "/insecto-ai/privacy-policy", terms: "/insecto-ai/terms" },
-  "habit-eazy": { label: "Habit Eazy", privacy: "/habit-eazy/privacy-policy", terms: "/habit-eazy/terms" },
   habiteazy: { label: "Habit Eazy", privacy: "/habit-eazy/privacy-policy", terms: "/habit-eazy/terms" },
   rockzy: { label: "Rockzy", privacy: "/rockzy/privacy-policy", terms: "/rockzy/terms" },
 };
 
-function getAppLegal(pathname: string) {
-  for (const key of Object.keys(appLegalMap)) {
-    if (pathname.includes(key)) {
-      return appLegalMap[key];
-    }
+/** For non–app-detail URLs, match longer keys first so e.g. `banknotes` wins over `banknote`. */
+const appLegalPathSegments: { segment: string; legal: (typeof appLegalByAppId)["coinzy"] }[] = [
+  { segment: "banknote-ai", legal: appLegalByAppId.banknotes },
+  { segment: "insecto-ai", legal: appLegalByAppId.insecto },
+  { segment: "habit-eazy", legal: appLegalByAppId.habiteazy },
+  { segment: "coinzy", legal: appLegalByAppId.coinzy },
+  { segment: "banknotes", legal: appLegalByAppId.banknotes },
+  { segment: "insecto", legal: appLegalByAppId.insecto },
+  { segment: "habiteazy", legal: appLegalByAppId.habiteazy },
+  { segment: "rockzy", legal: appLegalByAppId.rockzy },
+];
+
+function normalizePath(pathname: string, asPath: string): string {
+  const noQuery = asPath.split("?")[0].split("#")[0];
+  return pathname || noQuery || "";
+}
+
+function getAppLegal(pathname: string, asPath: string) {
+  const path = normalizePath(pathname, asPath);
+  if (!path) return null;
+
+  const appsMatch = path.match(/^\/apps\/([^/]+)/);
+  if (appsMatch) {
+    const appId = appsMatch[1];
+    return appLegalByAppId[appId] ?? null;
+  }
+
+  for (const { segment, legal } of appLegalPathSegments) {
+    if (path.includes(segment)) return legal;
   }
   return null;
 }
@@ -41,8 +62,8 @@ function getAppLegal(pathname: string) {
 const FEEDBACK_URL = 'https://forms.gle/pcmnfivhJZnr6Ybb9';
 
 export default function Footer() {
-  const { pathname } = useRouter();
-  const appLegal = getAppLegal(pathname);
+  const { pathname, asPath } = useRouter();
+  const appLegal = getAppLegal(pathname, asPath);
 
   return (
     <footer className="bg-primary" role="contentinfo">

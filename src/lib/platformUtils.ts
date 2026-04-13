@@ -1,5 +1,6 @@
-export function getPlatform(): 'ios' | 'android' | 'desktop' {
-  const ua = navigator.userAgent || navigator.vendor || '';
+export function getPlatform(): "ios" | "android" | "desktop" {
+  if (typeof navigator === "undefined") return "desktop";
+  const ua = navigator.userAgent || navigator.vendor || "";
   if (/iPad|iPhone|iPod/.test(ua)) return 'ios';
   if (/android/i.test(ua)) return 'android';
   return 'desktop';

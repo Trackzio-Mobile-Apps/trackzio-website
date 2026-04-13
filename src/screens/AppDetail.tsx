@@ -296,9 +296,15 @@ showcaseFeatures['rockzy'] = [
   { screenshot: rockzy7, title: 'Zodiac Stones', description: 'Discover crystals linked to your zodiac' },
 ];
 
-export default function AppDetail() {
+type AppDetailProps = {
+  /** Passed from getStaticProps so SSR matches first client paint (avoids hydration mismatch). */
+  appId?: string;
+};
+
+export default function AppDetail({ appId: appIdProp }: AppDetailProps) {
   const router = useRouter();
-  const appId = typeof router.query.appId === "string" ? router.query.appId : "";
+  const appIdFromRouter = typeof router.query.appId === "string" ? router.query.appId : "";
+  const appId = appIdProp ?? appIdFromRouter;
   const app = getApp(appId);
 
   useEffect(() => {
@@ -355,7 +361,7 @@ export default function AppDetail() {
     if (!getApp(appId)) void router.replace("/");
   }, [router.isReady, router, appId]);
 
-  if (!router.isReady || !app) return null;
+  if (!app) return null;
 
   const platform = getPlatform();
   const faqs = appFaqs[app.id] || [];

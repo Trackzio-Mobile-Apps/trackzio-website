@@ -1,9 +1,11 @@
-import type { GetStaticPaths } from "next";
+import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import AppDetail from "@/screens/AppDetail";
 import { apps } from "@/lib/appData";
 
-export default function AppDetailPage() {
-  return <AppDetail />;
+type PageProps = { appId: string };
+
+export default function AppDetailPage({ appId }: InferGetStaticPropsType<typeof getStaticProps>) {
+  return <AppDetail appId={appId} />;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => ({
@@ -11,6 +13,8 @@ export const getStaticPaths: GetStaticPaths = async () => ({
   fallback: false,
 });
 
-export async function getStaticProps() {
-  return { props: {} };
-}
+export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
+  const appId = params?.appId;
+  if (typeof appId !== "string") return { notFound: true };
+  return { props: { appId } };
+};
