@@ -41,6 +41,18 @@ export default function Header() {
     return () => clearTimeout(dropdownTimer.current);
   }, []);
 
+  const goToAppsSection = () => {
+    setDropdownOpen(false);
+    setOpen(false);
+    setMobileAppsOpen(false);
+    trackEvent('header_explore_apps', { page_name: location.pathname });
+    if (location.pathname === '/') {
+      document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/#apps');
+    }
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/40">
       <div className="container-site flex h-16 items-center justify-between">
@@ -99,7 +111,10 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <button
             type="button"
-            onClick={() => { setDropdownOpen(prev => !prev); trackEvent('header_explore_apps', { page_name: location.pathname }); }}
+            onClick={(e) => {
+              e.preventDefault();
+              goToAppsSection();
+            }}
             className="hidden sm:inline-flex h-9 px-4 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-semibold transition-all hover:opacity-90 glow"
           >
             Explore Apps
@@ -230,9 +245,9 @@ export default function Header() {
               ))}
               <button
                 type="button"
-                onClick={() => {
-                  setMobileAppsOpen(prev => !prev);
-                  trackEvent('header_explore_apps', { page_name: location.pathname });
+                onClick={(e) => {
+                  e.preventDefault();
+                  goToAppsSection();
                 }}
                 className="mt-2 flex h-10 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-semibold"
               >

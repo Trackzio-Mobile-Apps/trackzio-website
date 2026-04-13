@@ -140,14 +140,14 @@ export default function Blog() {
                     ))
                   )}
                 </div>
-                <div className="p-4 border-t border-border">
+                {/* <div className="p-4 border-t border-border">
                   <button
                     onClick={() => { setShowAllCategories(false); setSelectedIndex(0); }}
                     className="w-full py-2.5 rounded-xl bg-primary text-primary-foreground text-xs font-semibold tracking-wide hover:bg-primary/90 transition-colors uppercase"
                   >
                     View All {activeSplitCategory}
                   </button>
-                </div>
+                </div> */}
               </div>
 
               <Link
