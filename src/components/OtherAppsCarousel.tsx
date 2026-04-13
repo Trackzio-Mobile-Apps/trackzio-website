@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { apps } from '@/lib/appData';
@@ -157,7 +157,7 @@ export default function OtherAppsCarousel({ excludeAppId, accentHsl }: OtherApps
                 className="flex shrink-0 flex-col min-h-0 snap-start w-full min-w-0 flex-[0_0_100%] lg:w-auto lg:flex-[0_0_calc((100%-2.5rem)/3)]"
               >
                 <Link
-                  to={`/apps/${app.id}`}
+                  href={`/apps/${app.id}`}
                   onClick={() =>
                     trackEvent('app_detail_other_app_click', {
                       from_app: excludeAppId,

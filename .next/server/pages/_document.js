@@ -1,0 +1,86 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(() => {
+var exports = {};
+exports.id = "pages/_document";
+exports.ids = ["pages/_document"];
+exports.modules = {
+
+/***/ "./src/pages/_document.tsx":
+/*!*********************************!*\
+  !*** ./src/pages/_document.tsx ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Document)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var next_document__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/document */ \"./node_modules/next/document.js\");\n/* harmony import */ var next_document__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_document__WEBPACK_IMPORTED_MODULE_1__);\n\n\nfunction Document() {\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_document__WEBPACK_IMPORTED_MODULE_1__.Html, {\n        lang: \"en\",\n        children: [\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_document__WEBPACK_IMPORTED_MODULE_1__.Head, {\n                children: [\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"meta\", {\n                        charSet: \"utf-8\"\n                    }, void 0, false, {\n                        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                        lineNumber: 7,\n                        columnNumber: 9\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"link\", {\n                        rel: \"icon\",\n                        type: \"image/png\",\n                        href: \"/favicon.png\"\n                    }, void 0, false, {\n                        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                        lineNumber: 8,\n                        columnNumber: 9\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"link\", {\n                        rel: \"apple-touch-icon\",\n                        href: \"/favicon.png\"\n                    }, void 0, false, {\n                        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                        lineNumber: 9,\n                        columnNumber: 9\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"meta\", {\n                        name: \"description\",\n                        content: \"Trackzio builds intelligent mobile apps that bridge curiosity and clarity through AI. Explore Coinzy, Banknotes, Insecto, and Habiteazy.\"\n                    }, void 0, false, {\n                        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                        lineNumber: 10,\n                        columnNumber: 9\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"meta\", {\n                        name: \"author\",\n                        content: \"Trackzio\"\n                    }, void 0, false, {\n                        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                        lineNumber: 14,\n                        columnNumber: 9\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"meta\", {\n                        property: \"og:type\",\n                        content: \"website\"\n                    }, void 0, false, {\n                        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                        lineNumber: 15,\n                        columnNumber: 9\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"meta\", {\n                        property: \"og:image\",\n                        content: \"https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1aa0a2e1-6496-478d-adae-ed1eec81c71c/id-preview-4c928e46--e918dbcc-2c60-4212-b2a2-df3f863e2601.lovable.app-1772427211027.png\"\n                    }, void 0, false, {\n                        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                        lineNumber: 16,\n                        columnNumber: 9\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"meta\", {\n                        name: \"twitter:card\",\n                        content: \"summary_large_image\"\n                    }, void 0, false, {\n                        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                        lineNumber: 20,\n                        columnNumber: 9\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"meta\", {\n                        name: \"twitter:site\",\n                        content: \"@Lovable\"\n                    }, void 0, false, {\n                        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                        lineNumber: 21,\n                        columnNumber: 9\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"meta\", {\n                        name: \"twitter:image\",\n                        content: \"https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1aa0a2e1-6496-478d-adae-ed1eec81c71c/id-preview-4c928e46--e918dbcc-2c60-4212-b2a2-df3f863e2601.lovable.app-1772427211027.png\"\n                    }, void 0, false, {\n                        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                        lineNumber: 22,\n                        columnNumber: 9\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"meta\", {\n                        property: \"og:title\",\n                        content: \"Trackzio — AI-Powered Apps for Curious Minds\"\n                    }, void 0, false, {\n                        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                        lineNumber: 26,\n                        columnNumber: 9\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"meta\", {\n                        name: \"twitter:title\",\n                        content: \"Trackzio — AI-Powered Apps for Curious Minds\"\n                    }, void 0, false, {\n                        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                        lineNumber: 27,\n                        columnNumber: 9\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"meta\", {\n                        property: \"og:description\",\n                        content: \"Trackzio builds intelligent mobile apps that bridge curiosity and clarity through AI. Explore Coinzy, Banknotes, Insecto, and Habiteazy.\"\n                    }, void 0, false, {\n                        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                        lineNumber: 28,\n                        columnNumber: 9\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"meta\", {\n                        name: \"twitter:description\",\n                        content: \"Trackzio builds intelligent mobile apps that bridge curiosity and clarity through AI. Explore Coinzy, Banknotes, Insecto, and Habiteazy.\"\n                    }, void 0, false, {\n                        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                        lineNumber: 32,\n                        columnNumber: 9\n                    }, this)\n                ]\n            }, void 0, true, {\n                fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                lineNumber: 6,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"body\", {\n                children: [\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_document__WEBPACK_IMPORTED_MODULE_1__.Main, {}, void 0, false, {\n                        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                        lineNumber: 38,\n                        columnNumber: 9\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_document__WEBPACK_IMPORTED_MODULE_1__.NextScript, {}, void 0, false, {\n                        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                        lineNumber: 39,\n                        columnNumber: 9\n                    }, this)\n                ]\n            }, void 0, true, {\n                fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n                lineNumber: 37,\n                columnNumber: 7\n            }, this)\n        ]\n    }, void 0, true, {\n        fileName: \"/Users/shreyansjain/website/trackzio-shine-project/src/pages/_document.tsx\",\n        lineNumber: 5,\n        columnNumber: 5\n    }, this);\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvcGFnZXMvX2RvY3VtZW50LnRzeCIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBNkQ7QUFFOUMsU0FBU0k7SUFDdEIscUJBQ0UsOERBQUNKLCtDQUFJQTtRQUFDSyxNQUFLOzswQkFDVCw4REFBQ0osK0NBQUlBOztrQ0FDSCw4REFBQ0s7d0JBQUtDLFNBQVE7Ozs7OztrQ0FDZCw4REFBQ0M7d0JBQUtDLEtBQUk7d0JBQU9DLE1BQUs7d0JBQVlDLE1BQUs7Ozs7OztrQ0FDdkMsOERBQUNIO3dCQUFLQyxLQUFJO3dCQUFtQkUsTUFBSzs7Ozs7O2tDQUNsQyw4REFBQ0w7d0JBQ0NNLE1BQUs7d0JBQ0xDLFNBQVE7Ozs7OztrQ0FFViw4REFBQ1A7d0JBQUtNLE1BQUs7d0JBQVNDLFNBQVE7Ozs7OztrQ0FDNUIsOERBQUNQO3dCQUFLUSxVQUFTO3dCQUFVRCxTQUFROzs7Ozs7a0NBQ2pDLDhEQUFDUDt3QkFDQ1EsVUFBUzt3QkFDVEQsU0FBUTs7Ozs7O2tDQUVWLDhEQUFDUDt3QkFBS00sTUFBSzt3QkFBZUMsU0FBUTs7Ozs7O2tDQUNsQyw4REFBQ1A7d0JBQUtNLE1BQUs7d0JBQWVDLFNBQVE7Ozs7OztrQ0FDbEMsOERBQUNQO3dCQUNDTSxNQUFLO3dCQUNMQyxTQUFROzs7Ozs7a0NBRVYsOERBQUNQO3dCQUFLUSxVQUFTO3dCQUFXRCxTQUFROzs7Ozs7a0NBQ2xDLDhEQUFDUDt3QkFBS00sTUFBSzt3QkFBZ0JDLFNBQVE7Ozs7OztrQ0FDbkMsOERBQUNQO3dCQUNDUSxVQUFTO3dCQUNURCxTQUFROzs7Ozs7a0NBRVYsOERBQUNQO3dCQUNDTSxNQUFLO3dCQUNMQyxTQUFROzs7Ozs7Ozs7Ozs7MEJBR1osOERBQUNFOztrQ0FDQyw4REFBQ2IsK0NBQUlBOzs7OztrQ0FDTCw4REFBQ0MscURBQVVBOzs7Ozs7Ozs7Ozs7Ozs7OztBQUluQiIsInNvdXJjZXMiOlsid2VicGFjazovL3RyYWNremlvLXNpdGUvLi9zcmMvcGFnZXMvX2RvY3VtZW50LnRzeD8xODhlIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEh0bWwsIEhlYWQsIE1haW4sIE5leHRTY3JpcHQgfSBmcm9tIFwibmV4dC9kb2N1bWVudFwiO1xuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBEb2N1bWVudCgpIHtcbiAgcmV0dXJuIChcbiAgICA8SHRtbCBsYW5nPVwiZW5cIj5cbiAgICAgIDxIZWFkPlxuICAgICAgICA8bWV0YSBjaGFyU2V0PVwidXRmLThcIiAvPlxuICAgICAgICA8bGluayByZWw9XCJpY29uXCIgdHlwZT1cImltYWdlL3BuZ1wiIGhyZWY9XCIvZmF2aWNvbi5wbmdcIiAvPlxuICAgICAgICA8bGluayByZWw9XCJhcHBsZS10b3VjaC1pY29uXCIgaHJlZj1cIi9mYXZpY29uLnBuZ1wiIC8+XG4gICAgICAgIDxtZXRhXG4gICAgICAgICAgbmFtZT1cImRlc2NyaXB0aW9uXCJcbiAgICAgICAgICBjb250ZW50PVwiVHJhY2t6aW8gYnVpbGRzIGludGVsbGlnZW50IG1vYmlsZSBhcHBzIHRoYXQgYnJpZGdlIGN1cmlvc2l0eSBhbmQgY2xhcml0eSB0aHJvdWdoIEFJLiBFeHBsb3JlIENvaW56eSwgQmFua25vdGVzLCBJbnNlY3RvLCBhbmQgSGFiaXRlYXp5LlwiXG4gICAgICAgIC8+XG4gICAgICAgIDxtZXRhIG5hbWU9XCJhdXRob3JcIiBjb250ZW50PVwiVHJhY2t6aW9cIiAvPlxuICAgICAgICA8bWV0YSBwcm9wZXJ0eT1cIm9nOnR5cGVcIiBjb250ZW50PVwid2Vic2l0ZVwiIC8+XG4gICAgICAgIDxtZXRhXG4gICAgICAgICAgcHJvcGVydHk9XCJvZzppbWFnZVwiXG4gICAgICAgICAgY29udGVudD1cImh0dHBzOi8vcHViLWJiMmUxMDNhMzJkYjRlMTk4NTI0YTJlOWVkOGYzNWI0LnIyLmRldi8xYWEwYTJlMS02NDk2LTQ3OGQtYWRhZS1lZDFlZWM4MWM3MWMvaWQtcHJldmlldy00YzkyOGU0Ni0tZTkxOGRiY2MtMmM2MC00MjEyLWIyYTItZGYzZjg2M2UyNjAxLmxvdmFibGUuYXBwLTE3NzI0MjcyMTEwMjcucG5nXCJcbiAgICAgICAgLz5cbiAgICAgICAgPG1ldGEgbmFtZT1cInR3aXR0ZXI6Y2FyZFwiIGNvbnRlbnQ9XCJzdW1tYXJ5X2xhcmdlX2ltYWdlXCIgLz5cbiAgICAgICAgPG1ldGEgbmFtZT1cInR3aXR0ZXI6c2l0ZVwiIGNvbnRlbnQ9XCJATG92YWJsZVwiIC8+XG4gICAgICAgIDxtZXRhXG4gICAgICAgICAgbmFtZT1cInR3aXR0ZXI6aW1hZ2VcIlxuICAgICAgICAgIGNvbnRlbnQ9XCJodHRwczovL3B1Yi1iYjJlMTAzYTMyZGI0ZTE5ODUyNGEyZTllZDhmMzViNC5yMi5kZXYvMWFhMGEyZTEtNjQ5Ni00NzhkLWFkYWUtZWQxZWVjODFjNzFjL2lkLXByZXZpZXctNGM5MjhlNDYtLWU5MThkYmNjLTJjNjAtNDIxMi1iMmEyLWRmM2Y4NjNlMjYwMS5sb3ZhYmxlLmFwcC0xNzcyNDI3MjExMDI3LnBuZ1wiXG4gICAgICAgIC8+XG4gICAgICAgIDxtZXRhIHByb3BlcnR5PVwib2c6dGl0bGVcIiBjb250ZW50PVwiVHJhY2t6aW8g4oCUIEFJLVBvd2VyZWQgQXBwcyBmb3IgQ3VyaW91cyBNaW5kc1wiIC8+XG4gICAgICAgIDxtZXRhIG5hbWU9XCJ0d2l0dGVyOnRpdGxlXCIgY29udGVudD1cIlRyYWNremlvIOKAlCBBSS1Qb3dlcmVkIEFwcHMgZm9yIEN1cmlvdXMgTWluZHNcIiAvPlxuICAgICAgICA8bWV0YVxuICAgICAgICAgIHByb3BlcnR5PVwib2c6ZGVzY3JpcHRpb25cIlxuICAgICAgICAgIGNvbnRlbnQ9XCJUcmFja3ppbyBidWlsZHMgaW50ZWxsaWdlbnQgbW9iaWxlIGFwcHMgdGhhdCBicmlkZ2UgY3VyaW9zaXR5IGFuZCBjbGFyaXR5IHRocm91Z2ggQUkuIEV4cGxvcmUgQ29pbnp5LCBCYW5rbm90ZXMsIEluc2VjdG8sIGFuZCBIYWJpdGVhenkuXCJcbiAgICAgICAgLz5cbiAgICAgICAgPG1ldGFcbiAgICAgICAgICBuYW1lPVwidHdpdHRlcjpkZXNjcmlwdGlvblwiXG4gICAgICAgICAgY29udGVudD1cIlRyYWNremlvIGJ1aWxkcyBpbnRlbGxpZ2VudCBtb2JpbGUgYXBwcyB0aGF0IGJyaWRnZSBjdXJpb3NpdHkgYW5kIGNsYXJpdHkgdGhyb3VnaCBBSS4gRXhwbG9yZSBDb2luenksIEJhbmtub3RlcywgSW5zZWN0bywgYW5kIEhhYml0ZWF6eS5cIlxuICAgICAgICAvPlxuICAgICAgPC9IZWFkPlxuICAgICAgPGJvZHk+XG4gICAgICAgIDxNYWluIC8+XG4gICAgICAgIDxOZXh0U2NyaXB0IC8+XG4gICAgICA8L2JvZHk+XG4gICAgPC9IdG1sPlxuICApO1xufVxuIl0sIm5hbWVzIjpbIkh0bWwiLCJIZWFkIiwiTWFpbiIsIk5leHRTY3JpcHQiLCJEb2N1bWVudCIsImxhbmciLCJtZXRhIiwiY2hhclNldCIsImxpbmsiLCJyZWwiLCJ0eXBlIiwiaHJlZiIsIm5hbWUiLCJjb250ZW50IiwicHJvcGVydHkiLCJib2R5Il0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/pages/_document.tsx\n");
+
+/***/ }),
+
+/***/ "next/dist/compiled/next-server/pages.runtime.dev.js":
+/*!**********************************************************************!*\
+  !*** external "next/dist/compiled/next-server/pages.runtime.dev.js" ***!
+  \**********************************************************************/
+/***/ ((module) => {
+
+module.exports = require("next/dist/compiled/next-server/pages.runtime.dev.js");
+
+/***/ }),
+
+/***/ "react":
+/*!************************!*\
+  !*** external "react" ***!
+  \************************/
+/***/ ((module) => {
+
+module.exports = require("react");
+
+/***/ }),
+
+/***/ "react/jsx-dev-runtime":
+/*!****************************************!*\
+  !*** external "react/jsx-dev-runtime" ***!
+  \****************************************/
+/***/ ((module) => {
+
+module.exports = require("react/jsx-dev-runtime");
+
+/***/ }),
+
+/***/ "react/jsx-runtime":
+/*!************************************!*\
+  !*** external "react/jsx-runtime" ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = require("react/jsx-runtime");
+
+/***/ }),
+
+/***/ "path":
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+/***/ ((module) => {
+
+module.exports = require("path");
+
+/***/ })
+
+};
+;
+
+// load runtime
+var __webpack_require__ = require("../webpack-runtime.js");
+__webpack_require__.C(exports);
+var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next"], () => (__webpack_exec__("./src/pages/_document.tsx")));
+module.exports = __webpack_exports__;
+
+})();

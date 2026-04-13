@@ -1,0 +1,161 @@
+{
+  "apps": [
+    {
+      "id": "coinzy",
+      "name": "Coinzy",
+      "tagline": "Identify coins instantly with AI",
+      "description": "Coinzy uses advanced AI to identify coins from around the world. Scan any coin, explore its history, rarity, and estimated value. Build your collection and trade on the marketplace.",
+      "color": "hsl(174, 60%, 35%)",
+      "accentHsl": "174 60% 35%",
+      "iosUrl": "https://apps.apple.com/in/app/coinzy-coin-ai-identification/id6752857760",
+      "androidUrl": "https://play.google.com/store/apps/details?id=com.coinzy.trackzio&pcampaignid=web_share",
+      "icon": "🪙",
+      "logo": "/assets/coinzy-logo.png",
+      "screenshots": [
+        "/assets/screenshots/coinzy-1.png",
+        "/assets/screenshots/coinzy-2.png",
+        "/assets/screenshots/coinzy-3.png"
+      ],
+      "features": [
+        { "icon": "📸", "title": "AI Coin Scanner", "description": "Point your camera at any coin for instant identification." },
+        { "icon": "📚", "title": "Rich History", "description": "Explore detailed historical data, minting info, and rarity." },
+        { "icon": "🛒", "title": "Marketplace", "description": "Buy and sell coins in a trusted community marketplace." },
+        { "icon": "💎", "title": "Rarity Analysis", "description": "Get estimated value and rarity classification instantly." }
+      ],
+      "stats": { "downloads": "120K+", "rating": "4.5+", "dau": "30K+" },
+      "showcase": [
+        { "screenshot": "/assets/screenshots/coinzy-1.png", "title": "AI Coin Scan", "description": "Identify coins instantly using AI" },
+        { "screenshot": "/assets/screenshots/coinzy-2.png", "title": "Marketplace", "description": "Buy and sell coins with collectors" },
+        { "screenshot": "/assets/screenshots/coinzy-3.png", "title": "Collection Tracking", "description": "Organize and manage your coin collection" },
+        { "screenshot": "/assets/screenshots/coinzy-4.png", "title": "Community Feed", "description": "Share and explore coin discoveries" },
+        { "screenshot": "/assets/screenshots/coinzy-5.png", "title": "Coin Value Insights", "description": "Know the real value of your coins" },
+        { "screenshot": "/assets/screenshots/coinzy-6.png", "title": "250K+ Coins Database", "description": "Explore a massive global coin catalog" }
+      ]
+    },
+    {
+      "id": "banknotes",
+      "name": "Banknotes",
+      "tagline": "Scan and identify banknotes from around the world",
+      "description": "Banknotes uses advanced image recognition to identify banknotes from around the world. Learn about currency history, security features, and exchange rates instantly.",
+      "color": "hsl(152, 55%, 32%)",
+      "accentHsl": "152 55% 32%",
+      "iosUrl": "https://apps.apple.com/in/app/banknote-identification-ai/id6747063766",
+      "androidUrl": "https://play.google.com/store/apps/details?id=com.trackzio.banknote&pcampaignid=web_share",
+      "icon": "💵",
+      "logo": "/assets/banknotes-logo.png",
+      "screenshots": [
+        "/assets/screenshots/banknotes-1.png",
+        "/assets/screenshots/banknotes-2.png",
+        "/assets/screenshots/banknotes-3.png"
+      ],
+      "features": [
+        { "icon": "🔍", "title": "AI Banknote Scanner", "description": "Scan any banknote and get instant identification results." },
+        { "icon": "🌍", "title": "Global Coverage", "description": "Supports banknotes from countries across the world." },
+        { "icon": "📊", "title": "Rarity & Value", "description": "Discover rarity, estimated price, and circulation status." },
+        { "icon": "🏛️", "title": "History & Design", "description": "Explore detailed history, design elements, and materials." }
+      ],
+      "stats": { "downloads": "40K+", "rating": "4.3+", "dau": "7K+" },
+      "showcase": [
+        { "screenshot": "/assets/screenshots/banknotes-4.webp", "title": "AI Banknote Scan", "description": "Scan and identify banknotes instantly" },
+        { "screenshot": "/assets/screenshots/banknotes-5.webp", "title": "Marketplace", "description": "Connect with buyers and sellers" },
+        { "screenshot": "/assets/screenshots/banknotes-6.webp", "title": "Collection Tracking", "description": "Manage your banknote collection" },
+        { "screenshot": "/assets/screenshots/banknotes-7.webp", "title": "Community Feed", "description": "Discover and share banknotes" },
+        { "screenshot": "/assets/screenshots/banknotes-8.webp", "title": "Value Insights", "description": "Understand banknote worth" },
+        { "screenshot": "/assets/screenshots/banknotes-9.webp", "title": "50K+ Banknotes", "description": "Access a global banknote database" }
+      ]
+    },
+    {
+      "id": "insecto",
+      "name": "Insecto",
+      "tagline": "Discover insects and learn about them instantly",
+      "description": "Point your camera at any insect and Insecto will identify it instantly. Get detailed information about species, habitat, behavior, and whether they are beneficial or harmful.",
+      "color": "hsl(78, 45%, 42%)",
+      "accentHsl": "78 45% 42%",
+      "iosUrl": null,
+      "androidUrl": "https://play.google.com/store/apps/details?id=com.insect.trackzio&pcampaignid=web_share",
+      "icon": "🐛",
+      "logo": "/assets/insecto-logo.png",
+      "screenshots": [
+        "/assets/screenshots/insecto-1.png",
+        "/assets/screenshots/insecto-2.jpg",
+        "/assets/screenshots/insecto-3.png"
+      ],
+      "features": [
+        { "icon": "📷", "title": "AI Identification", "description": "Instantly identify any insect with your camera." },
+        { "icon": "🗂️", "title": "Explore by Category", "description": "Browse popular, toxic, pests, and location-specific insects." },
+        { "icon": "📝", "title": "Detailed Profiles", "description": "Get toxicity info, bite photos, and behavioral data." },
+        { "icon": "📦", "title": "Build Collection", "description": "Save identified insects and build your personal catalogue." }
+      ],
+      "stats": { "downloads": "", "rating": "4.5+", "dau": "" },
+      "showcase": [
+        { "screenshot": "/assets/screenshots/insecto-1.png", "title": "AI Insect Scan", "description": "Identify insects using AI" },
+        { "screenshot": "/assets/screenshots/insecto-2.webp", "title": "AI Chat Assistant", "description": "Ask questions about insects" },
+        { "screenshot": "/assets/screenshots/insecto-3.webp", "title": "Collection Tracking", "description": "Save and organize discoveries" },
+        { "screenshot": "/assets/screenshots/insecto-6.webp", "title": "Community Feed", "description": "Share findings with others" },
+        { "screenshot": "/assets/screenshots/insecto-4.webp", "title": "Danger Identification", "description": "Learn about harmful insects" },
+        { "screenshot": "/assets/screenshots/insecto-5.webp", "title": "400K+ Insects Database", "description": "Explore a vast insect catalog" }
+      ]
+    },
+    {
+      "id": "habiteazy",
+      "name": "Habiteazy",
+      "tagline": "Build positive habits and stay consistent",
+      "description": "Habiteazy makes habit building simple and rewarding. Track your streaks, set reminders, and visualize your progress with beautiful charts and motivational insights.",
+      "color": "hsl(270, 55%, 50%)",
+      "accentHsl": "270 55% 50%",
+      "iosUrl": "https://apps.apple.com/in/app/habit-eazy-habit-to-do-pal/id6738790392",
+      "androidUrl": "https://play.google.com/store/apps/details?id=com.progresspal&pcampaignid=web_share",
+      "icon": "✅",
+      "logo": "/assets/habiteazy-logo.png",
+      "screenshots": [
+        "/assets/screenshots/habiteazy-1.jpg",
+        "/assets/screenshots/habiteazy-1.jpg",
+        "/assets/screenshots/habiteazy-1.jpg"
+      ],
+      "features": [
+        { "icon": "🔥", "title": "Streak Tracking", "description": "Stay motivated with daily streak counts and fire badges." },
+        { "icon": "📅", "title": "Smart Scheduling", "description": "Set flexible reminders and weekly habit plans." },
+        { "icon": "📈", "title": "Visual Progress", "description": "See your journey with beautiful charts and statistics." },
+        { "icon": "🦊", "title": "Fun Companion", "description": "Your virtual pet grows as you build better habits." }
+      ],
+      "stats": { "downloads": "250K+", "rating": "4.4+", "dau": "30K+" },
+      "showcase": [
+        { "screenshot": "/assets/screenshots/habiteazy-1.jpg", "title": "Habit Tracking", "description": "Track your daily habits and stay consistent" },
+        { "screenshot": "/assets/screenshots/habiteazy-2.webp", "title": "Task Management", "description": "Manage your daily to-do tasks efficiently" },
+        { "screenshot": "/assets/screenshots/habiteazy-4.jpg", "title": "Statistics & Reports", "description": "View colorful graphs and progress insights" },
+        { "screenshot": "/assets/screenshots/habiteazy-5.jpg", "title": "Your Personal Pal", "description": "Stay motivated with your companion throughout the journey" }
+      ]
+    },
+    {
+      "id": "rockzy",
+      "name": "Rockzy",
+      "tagline": "AI Rock & Mineral Identifier",
+      "description": "Scan, collect, and explore over 8,000+ rocks and minerals with powerful AI tools. Identify rocks instantly, chat with AI, and build your collection.",
+      "color": "hsl(30, 70%, 45%)",
+      "accentHsl": "30 70% 45%",
+      "iosUrl": null,
+      "androidUrl": "https://play.google.com/store/apps/details?id=com.trackzio.minerals&pcampaignid=web_share",
+      "icon": "🪨",
+      "logo": "/assets/rockzy-logo-new.png",
+      "screenshots": [
+        "/assets/screenshots/rockzy-1.png",
+        "/assets/screenshots/rockzy-2.png",
+        "/assets/screenshots/rockzy-3.png"
+      ],
+      "features": [
+        { "icon": "🔍", "title": "AI Rock Identification", "description": "Scan and identify any rock or mineral instantly using AI." },
+        { "icon": "💬", "title": "AI Chat Assistant", "description": "Ask questions and learn about rocks, minerals, and crystals." },
+        { "icon": "📦", "title": "Collection Tracking", "description": "Organize owned, identified, and wishlist minerals." },
+        { "icon": "🌍", "title": "Global Mineral Catalogue", "description": "Explore thousands of rocks and minerals worldwide." }
+      ],
+      "stats": { "downloads": "", "rating": "4.5+", "dau": "" },
+      "showcase": [
+        { "screenshot": "/assets/screenshots/rockzy-1.webp", "title": "AI Rock Scan", "description": "Identify rocks and minerals instantly" },
+        { "screenshot": "/assets/screenshots/rockzy-3.webp", "title": "Collection & Mineral Care", "description": "Track and maintain your mineral collection" },
+        { "screenshot": "/assets/screenshots/rockzy-4.webp", "title": "Community Feed", "description": "Share discoveries with enthusiasts" },
+        { "screenshot": "/assets/screenshots/rockzy-6.webp", "title": "8K+ Minerals Database", "description": "Explore a global mineral catalog" },
+        { "screenshot": "/assets/screenshots/rockzy-7.webp", "title": "Zodiac Stones", "description": "Discover crystals linked to your zodiac" }
+      ]
+    }
+  ]
+}

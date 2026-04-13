@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { ArrowRight, Check } from 'lucide-react';
 import { apps } from '@/lib/appData';
 import { trackEvent } from '@/lib/analytics';
@@ -280,7 +280,7 @@ function ContentPanel({ selected, narrow }: { selected: (typeof showcaseApps)[0]
         </ul>
 
         <Link
-          to={`/apps/${selected.id}`}
+          href={`/apps/${selected.id}`}
           onClick={() => {
             trackEvent('showcase_explore_click', { app_name: selected.name });
             window.scrollTo(0, 0);

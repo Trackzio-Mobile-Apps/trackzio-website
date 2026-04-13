@@ -1,10 +1,12 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState, useRef, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import { motion, AnimatePresence } from 'framer-motion';
-import trackzioLogo from '@/assets/trackzio-logo.jpg';
 import { apps } from '@/lib/appData';
+
+const trackzioLogo = '/assets/trackzio-logo.jpg';
 
 const megaMenuApps = apps
   .filter(app => ['coinzy', 'banknotes', 'insecto', 'habiteazy', 'rockzy'].includes(app.id))
@@ -24,8 +26,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileAppsOpen, setMobileAppsOpen] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
+  const router = useRouter();
   const dropdownTimer = useRef<ReturnType<typeof setTimeout>>();
 
   const handleDropdownEnter = () => {
@@ -45,7 +46,7 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/40">
       <div className="container-site flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2" aria-label="Trackzio Home">
+        <Link href="/" className="flex items-center gap-2" aria-label="Trackzio Home">
           <img src={trackzioLogo} alt="Trackzio" className="h-8 rounded" />
         </Link>
 
@@ -64,10 +65,10 @@ export default function Header() {
                   onClick={(e) => {
                     e.preventDefault();
                     setDropdownOpen(prev => !prev);
-                    item.event && trackEvent(item.event, { page_name: location.pathname });
+                    item.event && trackEvent(item.event, { page_name: router.pathname });
                   }}
                   className={`inline-flex items-center gap-1 px-3 py-2 text-sm rounded-md transition-colors ${
-                    location.pathname === '/apps'
+                    router.pathname.startsWith('/apps')
                       ? 'text-primary font-bold'
                       : 'text-muted-foreground font-medium hover:text-primary'
                   }`}
@@ -77,15 +78,19 @@ export default function Header() {
                 </button>
               ) : (
                 <Link
-                  to={item.to}
+                  href={item.to}
                   onClick={() => {
                     window.scrollTo(0, 0);
-                    item.event && trackEvent(item.event, { page_name: location.pathname });
+                    item.event && trackEvent(item.event, { page_name: router.pathname });
                   }}
                   className={`px-3 py-2 text-sm rounded-md transition-colors ${
-                    location.pathname === item.to
-                      ? 'text-primary font-bold'
-                      : 'text-muted-foreground font-medium hover:text-primary'
+                    item.to === '/#apps'
+                      ? router.pathname.startsWith('/apps')
+                        ? 'text-primary font-bold'
+                        : 'text-muted-foreground font-medium hover:text-primary'
+                      : router.pathname === item.to
+                        ? 'text-primary font-bold'
+                        : 'text-muted-foreground font-medium hover:text-primary'
                   }`}
                 >
                   {item.label}
@@ -99,7 +104,7 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <button
             type="button"
-            onClick={() => { setDropdownOpen(prev => !prev); trackEvent('header_explore_apps', { page_name: location.pathname }); }}
+            onClick={() => { setDropdownOpen(prev => !prev); trackEvent('header_explore_apps', { page_name: router.pathname }); }}
             className="hidden sm:inline-flex h-9 px-4 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-semibold transition-all hover:opacity-90 glow"
           >
             Explore Apps
@@ -140,7 +145,7 @@ export default function Header() {
                 {megaMenuApps.map(app => (
                   <Link
                     key={app.id}
-                    to={`/apps/${app.id}`}
+                    href={`/apps/${app.id}`}
                     onClick={() => { setDropdownOpen(false); window.scrollTo(0, 0); }}
                     className="flex items-center gap-3 p-3 rounded-xl border border-transparent transition-all duration-150 hover:bg-muted/50 hover:border-border/40 active:scale-[0.98]"
                   >
@@ -176,7 +181,7 @@ export default function Header() {
                       type="button"
                       onClick={() => {
                         setMobileAppsOpen(prev => !prev);
-                        item.event && trackEvent(item.event, { page_name: location.pathname });
+                        item.event && trackEvent(item.event, { page_name: router.pathname });
                       }}
                       className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-muted-foreground hover:text-primary"
                     >
@@ -196,7 +201,7 @@ export default function Header() {
                             {megaMenuApps.map(app => (
                               <Link
                                 key={app.id}
-                                to={`/apps/${app.id}`}
+                                href={`/apps/${app.id}`}
                                 onClick={() => { setMobileAppsOpen(false); setOpen(false); window.scrollTo(0, 0); }}
                                 className="flex items-center gap-2 p-2 rounded-lg transition-colors hover:bg-muted/50"
                               >
@@ -212,16 +217,20 @@ export default function Header() {
                 ) : (
                   <Link
                     key={item.to}
-                    to={item.to}
+                    href={item.to}
                     onClick={() => {
                       setOpen(false);
                       window.scrollTo(0, 0);
-                      item.event && trackEvent(item.event, { page_name: location.pathname });
+                      item.event && trackEvent(item.event, { page_name: router.pathname });
                     }}
                     className={`px-3 py-2.5 text-sm rounded-md transition-colors ${
-                      location.pathname === item.to
-                        ? 'text-primary font-bold'
-                        : 'text-muted-foreground font-medium hover:text-primary'
+                      item.to === '/#apps'
+                        ? router.pathname.startsWith('/apps')
+                          ? 'text-primary font-bold'
+                          : 'text-muted-foreground font-medium hover:text-primary'
+                        : router.pathname === item.to
+                          ? 'text-primary font-bold'
+                          : 'text-muted-foreground font-medium hover:text-primary'
                     }`}
                   >
                     {item.label}
@@ -232,7 +241,7 @@ export default function Header() {
                 type="button"
                 onClick={() => {
                   setMobileAppsOpen(prev => !prev);
-                  trackEvent('header_explore_apps', { page_name: location.pathname });
+                  trackEvent('header_explore_apps', { page_name: router.pathname });
                 }}
                 className="mt-2 flex h-10 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-semibold"
               >
