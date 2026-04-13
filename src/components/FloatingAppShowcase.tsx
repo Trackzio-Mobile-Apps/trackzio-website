@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Check } from 'lucide-react';
 import { apps } from '@/lib/appData';
 import { trackEvent } from '@/lib/analytics';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 const showcaseApps = apps.map((app, i) => ({
   ...app,
@@ -18,30 +17,62 @@ const showcaseApps = apps.map((app, i) => ({
   ][i],
 }));
 
-/* Desktop scattered positions — generous spacing, no overlap */
-const desktopPositions = [
-  { top: '0%', left: '2%' },
-  { top: '0%', left: '56%' },
-  { top: '38%', left: '6%' },
-  { top: '40%', left: '58%' },
-  { top: '76%', left: '26%' },
-];
+function AppChip({
+  app,
+  isSelected,
+  onSelect,
+  compact,
+}: {
+  app: (typeof showcaseApps)[0];
+  isSelected: boolean;
+  onSelect: () => void;
+  compact?: boolean;
+}) {
+  return (
+    <motion.button
+      type="button"
+      onClick={onSelect}
+      aria-label={app.name}
+      aria-pressed={isSelected}
+      className={`flex w-full items-center justify-center gap-1.5 sm:gap-2 rounded-xl cursor-pointer select-none border-2 transition-colors duration-300 ${
+        compact ? 'min-h-[44px] px-1.5 py-2 sm:px-2.5' : 'min-h-[48px] px-3 py-2.5'
+      }`}
+      style={{
+        borderColor: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--border))',
+        background: isSelected
+          ? `linear-gradient(135deg, hsl(${app.accentHsl} / 0.08), hsl(${app.accentHsl} / 0.02))`
+          : 'hsl(var(--card))',
+      }}
+      animate={{ scale: isSelected ? 1.02 : 1, opacity: isSelected ? 1 : 0.85 }}
+      whileHover={{ scale: isSelected ? 1.02 : 1.01, opacity: 1 }}
+      whileTap={{ scale: 0.98 }}
+    >
+      <img src={app.logo} alt="" className={`rounded-lg shrink-0 ${compact ? 'h-7 w-7 sm:h-8 sm:w-8' : 'h-9 w-9'}`} />
+      <span
+        className="font-semibold text-xs sm:text-sm text-center leading-tight transition-colors duration-300 line-clamp-2 sm:line-clamp-none"
+        style={{ color: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--foreground))' }}
+      >
+        {app.name}
+      </span>
+    </motion.button>
+  );
+}
 
 export default function FloatingAppShowcase() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const selected = showcaseApps[selectedIndex];
-  const isMobile = useIsMobile();
   const autoRotateRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const userInteractedRef = useRef(false);
 
-  // Auto-rotation for ecosystem icons
   useEffect(() => {
     autoRotateRef.current = setInterval(() => {
       if (!userInteractedRef.current) {
         setSelectedIndex(prev => (prev + 1) % showcaseApps.length);
       }
     }, 3500);
-    return () => { if (autoRotateRef.current) clearInterval(autoRotateRef.current); };
+    return () => {
+      if (autoRotateRef.current) clearInterval(autoRotateRef.current);
+    };
   }, []);
 
   const handleSelect = (i: number) => {
@@ -49,7 +80,9 @@ export default function FloatingAppShowcase() {
     setSelectedIndex(i);
     trackEvent('showcase_app_select', { app_name: showcaseApps[i].name });
     if (autoRotateRef.current) clearInterval(autoRotateRef.current);
-    setTimeout(() => { userInteractedRef.current = false; }, 8000);
+    setTimeout(() => {
+      userInteractedRef.current = false;
+    }, 8000);
     autoRotateRef.current = setInterval(() => {
       if (!userInteractedRef.current) {
         setSelectedIndex(prev => (prev + 1) % showcaseApps.length);
@@ -59,10 +92,10 @@ export default function FloatingAppShowcase() {
 
   return (
     <section
-      className="min-h-screen flex items-center overflow-hidden snap-start"
-      style={{ padding: 'clamp(32px, 5vh, 80px) 0' }}
+      className="min-h-0 lg:min-h-screen flex items-center overflow-x-hidden snap-start py-12 sm:py-16 lg:py-[clamp(2rem,5vh,5rem)]"
+      style={{ paddingLeft: 'max(1rem, env(safe-area-inset-left))', paddingRight: 'max(1rem, env(safe-area-inset-right))' }}
     >
-      <div style={{ width: 'clamp(300px, 90%, 1200px)', margin: '0 auto' }}>
+      <div className="w-full max-w-[1200px] mx-auto px-3 sm:px-4 md:px-6 min-w-0">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -70,199 +103,201 @@ export default function FloatingAppShowcase() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mb-8 sm:mb-12"
         >
-          <p className="font-medium tracking-[0.2em] uppercase text-primary mb-3" style={{ fontSize: 'clamp(0.7rem, 1.2vw, 0.875rem)' }}>
+          <p
+            className="font-medium tracking-[0.2em] uppercase text-primary mb-3"
+            style={{ fontSize: 'clamp(0.7rem, 1.2vw, 0.875rem)' }}
+          >
             Our Ecosystem
           </p>
           <h2 className="font-bold font-display leading-tight" style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)' }}>
-            Apps built for the{' '}
-            <span className="text-primary">curious</span>
+            Apps built for the <span className="text-primary">curious</span>
           </h2>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-4 items-center">
-          {/* LEFT — App selector + Center preview */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="lg:w-[60%] w-full flex flex-col lg:flex-row items-center gap-0"
+        {/* ── Mobile & tablet: stacked ── */}
+        <div className="flex flex-col gap-8 lg:hidden min-w-0">
+          <div
+            className="w-full flex gap-3 overflow-x-auto pb-4 px-0.5 scrollbar-hide scroll-smooth snap-x snap-mandatory"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {/* Mobile: horizontal scroll row */}
-            {isMobile ? (
-              <div
-                className="w-full flex gap-3 overflow-x-auto pb-4 px-1 mb-4"
-                style={{ scrollbarWidth: 'none' }}
+            {showcaseApps.map((app, i) => (
+              <motion.button
+                key={app.id}
+                type="button"
+                onClick={() => handleSelect(i)}
+                className="flex-shrink-0 flex items-center gap-2 rounded-xl px-3 py-2.5 cursor-pointer select-none border-2 transition-colors duration-300 snap-start min-h-[48px]"
+                style={{
+                  borderColor: selectedIndex === i ? `hsl(${app.accentHsl})` : 'hsl(var(--border))',
+                  background:
+                    selectedIndex === i
+                      ? `linear-gradient(135deg, hsl(${app.accentHsl} / 0.08), hsl(${app.accentHsl} / 0.02))`
+                      : 'hsl(var(--card))',
+                  padding: '12px',
+                }}
+                animate={{ scale: selectedIndex === i ? 1.04 : 1, opacity: selectedIndex === i ? 1 : 0.7 }}
+                whileTap={{ scale: 0.97 }}
               >
-                {showcaseApps.map((app, i) => {
-                  const isSelected = selectedIndex === i;
-                  return (
-                    <motion.button
-                      key={app.id}
-                      onClick={() => handleSelect(i)}
-                      className="flex-shrink-0 flex items-center gap-2 rounded-xl px-3 py-2.5 cursor-pointer select-none border-2 transition-colors duration-300"
-                      style={{
-                        borderColor: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--border))',
-                        background: isSelected
-                          ? `linear-gradient(135deg, hsl(${app.accentHsl} / 0.08), hsl(${app.accentHsl} / 0.02))`
-                          : 'hsl(var(--card))',
-                        padding: '12px',
-                      }}
-                      animate={{ scale: isSelected ? 1.04 : 1, opacity: isSelected ? 1 : 0.7 }}
-                      whileTap={{ scale: 0.97 }}
-                    >
-                      <img src={app.logo} alt={app.name} className="w-8 h-8 rounded-lg shrink-0" />
-                      <span
-                        className="font-semibold text-sm whitespace-nowrap transition-colors duration-300"
-                        style={{ color: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--foreground))' }}
-                      >
-                        {app.name}
-                      </span>
-                    </motion.button>
-                  );
-                })}
-              </div>
-            ) : (
-              /* Desktop: scattered floating layout */
-              <div className="relative w-[50%] sm:w-[45%] shrink-0" style={{ height: '420px' }}>
-                {showcaseApps.map((app, i) => {
-                  const isSelected = selectedIndex === i;
-                  const pos = desktopPositions[i];
-                  return (
-                    <motion.button
-                      key={app.id}
-                      onClick={() => handleSelect(i)}
-                      className="absolute flex items-center gap-3 rounded-2xl cursor-pointer select-none border-2 transition-colors duration-300"
-                      style={{
-                        top: pos.top,
-                        left: pos.left,
-                        padding: '12px 20px',
-                        borderColor: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--border))',
-                        background: isSelected
-                          ? `linear-gradient(135deg, hsl(${app.accentHsl} / 0.08), hsl(${app.accentHsl} / 0.02))`
-                          : 'hsl(var(--card))',
-                        boxShadow: isSelected
-                          ? `0 8px 32px -8px hsl(${app.accentHsl} / 0.25), 0 0 0 1px hsl(${app.accentHsl} / 0.1)`
-                          : '0 4px 20px -6px rgba(0,0,0,0.08)',
-                      }}
-                      animate={{ scale: isSelected ? 1.04 : 1, opacity: isSelected ? 1 : 0.7 }}
-                      whileHover={{ scale: isSelected ? 1.04 : 1.03, opacity: 1 }}
-                      whileTap={{ scale: 0.97 }}
-                      transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                    >
-                      <img src={app.logo} alt={app.name} className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl shrink-0" />
-                      <span
-                        className="font-semibold text-sm sm:text-base whitespace-nowrap transition-colors duration-300"
-                        style={{ color: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--foreground))' }}
-                      >
-                        {app.name}
-                      </span>
-                    </motion.button>
-                  );
-                })}
-              </div>
-            )}
-
-            {/* CENTER — Large Logo */}
-            <div className="flex items-center justify-center w-full lg:w-[55%] lg:-ml-6 z-10">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={selected.id + '-logo'}
-                  initial={{ opacity: 0, scale: 0.85, filter: 'blur(6px)' }}
-                  animate={{ opacity: 1, scale: 1, filter: 'blur(0px)', y: [0, -8, 0] }}
-                  exit={{ opacity: 0, scale: 0.85, filter: 'blur(4px)' }}
-                  transition={{
-                    opacity: { duration: 0.4 },
-                    scale: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
-                    filter: { duration: 0.4 },
-                    y: { repeat: Infinity, duration: 4, ease: 'easeInOut' },
-                  }}
-                  className="flex items-center justify-center"
+                <img src={app.logo} alt={app.name} className="w-8 h-8 rounded-lg shrink-0" />
+                <span
+                  className="font-semibold text-sm whitespace-nowrap transition-colors duration-300"
+                  style={{ color: selectedIndex === i ? `hsl(${app.accentHsl})` : 'hsl(var(--foreground))' }}
                 >
-                  <img
-                    src={selected.logo}
-                    alt={selected.name}
-                    className="rounded-[2rem] object-contain"
-                    style={{
-                      width: 'clamp(160px, 22vw, 256px)',
-                      height: 'clamp(160px, 22vw, 256px)',
-                      filter: `drop-shadow(0 24px 48px hsl(${selected.accentHsl} / 0.3))`,
-                    }}
-                  />
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </motion.div>
+                  {app.name}
+                </span>
+              </motion.button>
+            ))}
+          </div>
 
-          {/* RIGHT — Dynamic content */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="lg:w-[40%] w-full flex items-start lg:pt-4"
-          >
+          <div className="flex justify-center py-2">
             <AnimatePresence mode="wait">
               <motion.div
-                key={selected.id}
-                initial={{ opacity: 0, y: 16, filter: 'blur(4px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: -12, filter: 'blur(4px)' }}
-                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full"
+                key={selected.id + '-logo-m'}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.35 }}
+                className="flex items-center justify-center"
               >
-                <span
-                  className="inline-block text-xs font-bold tracking-[0.15em] uppercase px-3.5 py-1.5 rounded-full mb-5"
-                  style={{ color: `hsl(${selected.accentHsl})`, background: `hsl(${selected.accentHsl} / 0.1)` }}
-                >
-                  {selected.name}
-                </span>
-
-                <h3
-                  className="font-bold font-display leading-snug mb-4 text-foreground"
-                  style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.875rem)' }}
-                >
-                  {selected.tagline}
-                </h3>
-
-                <p className="text-muted-foreground leading-relaxed mb-6" style={{ fontSize: 'clamp(0.8rem, 1.2vw, 0.9375rem)' }}>
-                  {selected.description.length > 160 ? selected.description.slice(0, 160).trim() + '…' : selected.description}
-                </p>
-
-                <ul className="space-y-3 mb-8">
-                  {selected.bulletPoints.map((point, i) => (
-                    <motion.li
-                      key={point}
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 + i * 0.08, duration: 0.35 }}
-                      className="flex items-center gap-3 text-sm text-foreground/85"
-                    >
-                      <span
-                        className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-                        style={{ background: `hsl(${selected.accentHsl} / 0.12)`, color: `hsl(${selected.accentHsl})` }}
-                      >
-                        <Check size={12} strokeWidth={3} />
-                      </span>
-                      {point}
-                    </motion.li>
-                  ))}
-                </ul>
-
-                <Link
-                  to={`/apps/${selected.id}`}
-                  onClick={() => { trackEvent('showcase_explore_click', { app_name: selected.name }); window.scrollTo(0, 0); }}
-                  className="inline-flex items-center gap-2 h-11 px-7 rounded-xl text-sm font-semibold transition-all group bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.97]"
-                  style={{ boxShadow: `0 4px 16px -4px hsl(${selected.accentHsl} / 0.3)` }}
-                >
-                  Explore Now
-                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                </Link>
+                <img
+                  src={selected.logo}
+                  alt={selected.name}
+                  className="rounded-[1.5rem] sm:rounded-[2rem] object-contain w-[min(85vw,256px)] h-[min(85vw,256px)] max-w-full"
+                  style={{ filter: `drop-shadow(0 24px 48px hsl(${selected.accentHsl} / 0.3))` }}
+                />
               </motion.div>
             </AnimatePresence>
-          </motion.div>
+          </div>
+
+          <ContentPanel selected={selected} />
         </div>
+
+        {/* ── Desktop (lg+): contained 3-column grid ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.55 }}
+          className="hidden lg:grid lg:grid-cols-[1.45fr_minmax(200px,250px)_minmax(20rem,26rem)] xl:grid-cols-[1.5fr_280px_minmax(22rem,30rem)] gap-6 xl:gap-10 lg:items-center w-full min-w-0 p-0 bg-transparent"
+        >
+          {/* Column 1: app grid — wider column, larger chips */}
+          <div className="min-w-0 w-full">
+            <div className="grid grid-cols-2 gap-3 w-full">
+              {showcaseApps.slice(0, 4).map((app, i) => (
+                <AppChip
+                  key={app.id}
+                  app={app}
+                  isSelected={selectedIndex === i}
+                  onSelect={() => handleSelect(i)}
+                />
+              ))}
+            </div>
+            <div className="mt-3 flex justify-center w-full">
+              <div className="w-full max-w-[calc(50%-0.375rem)]">
+                <AppChip
+                  app={showcaseApps[4]}
+                  isSelected={selectedIndex === 4}
+                  onSelect={() => handleSelect(4)}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Column 2: logo */}
+          <div className="flex items-center justify-center min-w-0 py-0 shrink-0">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selected.id + '-logo-d'}
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.92 }}
+                transition={{ duration: 0.4 }}
+                className="flex items-center justify-center"
+              >
+                <img
+                  src={selected.logo}
+                  alt={selected.name}
+                  className="rounded-3xl object-contain w-full max-w-[220px] xl:max-w-[260px] aspect-square"
+                  style={{ filter: `drop-shadow(0 20px 40px hsl(${selected.accentHsl} / 0.28))` }}
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Column 3: copy — narrower fixed-width column */}
+          <div className="min-w-0 w-full max-w-full flex flex-col justify-center justify-self-stretch lg:pl-4 xl:pl-6">
+            <ContentPanel selected={selected} />
+          </div>
+        </motion.div>
       </div>
     </section>
+  );
+}
+
+function ContentPanel({ selected, narrow }: { selected: (typeof showcaseApps)[0]; narrow?: boolean }) {
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={selected.id}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.35 }}
+        className="w-full min-w-0 max-w-full"
+      >
+        <span
+          className={`inline-block text-xs font-bold tracking-[0.15em] uppercase px-3 py-1.5 rounded-full ${narrow ? 'mb-3' : 'mb-4'}`}
+          style={{ color: `hsl(${selected.accentHsl})`, background: `hsl(${selected.accentHsl} / 0.1)` }}
+        >
+          {selected.name}
+        </span>
+
+        <h3
+          className={`font-bold font-display leading-snug text-foreground text-balance ${
+            narrow ? 'mb-2.5 text-lg xl:text-xl' : 'mb-3 text-xl xl:text-2xl'
+          }`}
+        >
+          {selected.tagline}
+        </h3>
+
+        <p
+          className={`text-muted-foreground leading-relaxed ${narrow ? 'mb-4 text-[0.8125rem] leading-relaxed' : 'mb-5 text-sm xl:text-[0.9375rem]'}`}
+        >
+          {selected.description.length > 160 ? selected.description.slice(0, 160).trim() + '…' : selected.description}
+        </p>
+
+        <ul className={narrow ? 'space-y-2 mb-5' : 'space-y-2.5 mb-6'}>
+          {selected.bulletPoints.map((point, i) => (
+            <motion.li
+              key={point}
+              initial={{ opacity: 0, x: -6 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.05 + i * 0.06, duration: 0.3 }}
+              className={`flex items-start gap-2.5 text-foreground/90 ${narrow ? 'text-[0.8125rem]' : 'text-sm'}`}
+            >
+              <span
+                className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                style={{ background: `hsl(${selected.accentHsl} / 0.12)`, color: `hsl(${selected.accentHsl})` }}
+              >
+                <Check size={12} strokeWidth={3} />
+              </span>
+              <span className="min-w-0 leading-snug">{point}</span>
+            </motion.li>
+          ))}
+        </ul>
+
+        <Link
+          to={`/apps/${selected.id}`}
+          onClick={() => {
+            trackEvent('showcase_explore_click', { app_name: selected.name });
+            window.scrollTo(0, 0);
+          }}
+          className={`inline-flex items-center justify-center gap-2 min-h-[44px] w-full sm:w-auto rounded-xl font-semibold transition-all group bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.98] ${narrow ? 'px-5 text-sm' : 'px-7 text-sm'}`}
+          style={{ boxShadow: `0 4px 16px -4px hsl(${selected.accentHsl} / 0.3)` }}
+        >
+          Explore Now
+          <ArrowRight size={16} className="transition-transform group-hover:translate-x-1 shrink-0" />
+        </Link>
+      </motion.div>
+    </AnimatePresence>
   );
 }

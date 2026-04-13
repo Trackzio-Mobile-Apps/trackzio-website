@@ -17,14 +17,15 @@ const socialLinks = [
 ];
 
 const appLegalMap: Record<string, { label: string; privacy: string; terms: string }> = {
-  coinzy: { label: 'Coinzy', privacy: '/coinzy/privacy-policy', terms: '/coinzy/terms' },
-  'banknote-ai': { label: 'Banknote AI', privacy: '/banknote-ai/privacy-policy', terms: '/banknote-ai/terms' },
-  banknotes: { label: 'Banknote AI', privacy: '/banknote-ai/privacy-policy', terms: '/banknote-ai/terms' },
-  'insecto-ai': { label: 'Insecto AI', privacy: '/insecto-ai/privacy-policy', terms: '/insecto-ai/terms' },
-  insecto: { label: 'Insecto AI', privacy: '/insecto-ai/privacy-policy', terms: '/insecto-ai/terms' },
-  'habit-eazy': { label: 'Habit Eazy', privacy: '/habit-eazy/privacy-policy', terms: '/habit-eazy/terms' },
-  habiteazy: { label: 'Habit Eazy', privacy: '/habit-eazy/privacy-policy', terms: '/habit-eazy/terms' },
-  rockzy: { label: 'Rockzy', privacy: '/rockzy/privacy-policy', terms: '/rockzy/terms' },
+  coinzy: { label: 'Coinzy', privacy: '/privacy-policy-coinzy', terms: '/coinzy%3A-terms' },
+  'banknote-ai': { label: 'Banknote AI', privacy: '/privacy-policy-banknote', terms: '/banknote-terms' },
+  banknote: { label: 'Banknote AI', privacy: '/privacy-policy-banknote', terms: '/banknote-terms' },
+  banknotes: { label: 'Banknote AI', privacy: '/privacy-policy-banknote', terms: '/banknote-terms' },
+  'insecto-ai': { label: 'Insecto AI', privacy: '/privacy-policy-insecto-ai-1', terms: '/terms-for-insecto-ai' },
+  insecto: { label: 'Insecto AI', privacy: '/privacy-policy-insecto-ai-1', terms: '/terms-for-insecto-ai' },
+  'habit-eazy': { label: 'Habit Eazy', privacy: '/privacy-policy-habit-eazy-1', terms: '/habit-eazy%3A-terms' },
+  habiteazy: { label: 'Habit Eazy', privacy: '/privacy-policy-habit-eazy-1', terms: '/habit-eazy%3A-terms' },
+  rockzy: { label: 'Rockzy', privacy: '/privacy-policy-rockzy-ai', terms: '/rockzy-terms-of-service' },
 };
 
 function getAppLegal(pathname: string) {

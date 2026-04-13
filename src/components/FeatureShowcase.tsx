@@ -1,6 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useEffect, useRef, useCallback, useState } from 'react';
 
 interface ShowcaseFeature {
   screenshot: string;
@@ -14,50 +12,97 @@ interface FeatureShowcaseProps {
 }
 
 export default function FeatureShowcase({ features, accentHsl }: FeatureShowcaseProps) {
-  const isMobile = useIsMobile();
-  const count = features.length;
-  const visibleCount = isMobile ? 1 : 3;
-  const [startIndex, setStartIndex] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const autoScrollRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Preload images
+  const updateScrollProgress = useCallback(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    if (maxScroll <= 0) {
+      setScrollProgress(0);
+      return;
+    }
+    setScrollProgress(el.scrollLeft / maxScroll);
+  }, []);
+
+  const onScroll = useCallback(() => {
+    requestAnimationFrame(updateScrollProgress);
+  }, [updateScrollProgress]);
+
   useEffect(() => {
-    features.forEach(f => {
-      const img = new Image();
-      img.src = f.screenshot;
-    });
-  }, [features]);
+    updateScrollProgress();
+  }, [features, updateScrollProgress]);
 
-  // Auto-rotate
   useEffect(() => {
-    if (count <= visibleCount) return;
-    timerRef.current = setInterval(() => {
-      setStartIndex(prev => (prev + 1) % count);
-    }, 3500);
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [count, visibleCount]);
+    const el = containerRef.current;
+    if (!el || features.length === 0) return;
 
-  if (count === 0) return null;
+    const clearAuto = () => {
+      if (autoScrollRef.current) {
+        clearInterval(autoScrollRef.current);
+        autoScrollRef.current = null;
+      }
+    };
 
-  // Get visible features with wrapping
-  const visibleFeatures = Array.from({ length: Math.min(visibleCount, count) }, (_, i) => ({
-    feature: features[(startIndex + i) % count],
-    index: (startIndex + i) % count,
-  }));
+    const scrollOneSlide = () => {
+      const first = el.firstElementChild as HTMLElement | null;
+      if (!first) return el.clientWidth;
+      const gap = parseFloat(getComputedStyle(el).gap) || 0;
+      return first.offsetWidth + gap;
+    };
+
+    const tick = () => {
+      if (!el) return;
+      if (el.scrollWidth <= el.clientWidth + 1) return;
+      const step = scrollOneSlide();
+      if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 10) {
+        el.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        el.scrollBy({ left: step, behavior: 'smooth' });
+      }
+    };
+
+    const startAuto = () => {
+      clearAuto();
+      autoScrollRef.current = setInterval(tick, 4000);
+    };
+
+    const pause = () => clearAuto();
+    const resume = () => startAuto();
+
+    el.addEventListener('scroll', onScroll, { passive: true });
+    el.addEventListener('mouseenter', pause);
+    el.addEventListener('mouseleave', resume);
+    el.addEventListener('touchstart', pause, { passive: true });
+    el.addEventListener('touchend', resume);
+
+    const onResize = () => requestAnimationFrame(updateScrollProgress);
+    window.addEventListener('resize', onResize);
+
+    startAuto();
+
+    return () => {
+      clearAuto();
+      el.removeEventListener('scroll', onScroll);
+      el.removeEventListener('mouseenter', pause);
+      el.removeEventListener('mouseleave', resume);
+      el.removeEventListener('touchstart', pause);
+      el.removeEventListener('touchend', resume);
+      window.removeEventListener('resize', onResize);
+    };
+  }, [features.length, onScroll, updateScrollProgress]);
+
+  if (features.length === 0) return null;
 
   return (
     <section
       className="flex flex-col items-center justify-center overflow-hidden"
       style={{ height: '100vh', maxHeight: '100vh', padding: 'clamp(16px, 2vh, 32px) 0' }}
     >
-      <div className="flex flex-col items-center justify-between h-full" style={{ width: 'clamp(300px, 92%, 1200px)', maxHeight: '100%' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.7 }}
-          className="text-center shrink-0 mb-3"
-        >
+      <div className="flex flex-col items-center justify-between h-full w-full" style={{ maxWidth: '1200px', width: 'clamp(300px, 92%, 1200px)', maxHeight: '100%' }}>
+        <div className="text-center shrink-0 mb-3 px-2">
           <p
             className="font-medium tracking-[0.2em] uppercase mb-1"
             style={{ color: `hsl(${accentHsl})`, fontSize: 'clamp(0.65rem, 1vw, 0.8rem)' }}
@@ -70,22 +115,24 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
           >
             See it in action
           </h2>
-        </motion.div>
+        </div>
 
-        {/* 3-column card grid — fills remaining space */}
-        <div className={`w-full grid gap-4 flex-1 min-h-0 ${isMobile ? 'grid-cols-1' : 'grid-cols-3'}`}>
-          <AnimatePresence mode="popLayout">
-            {visibleFeatures.map(({ feature, index }) => (
-              <motion.div
-                key={`${index}-${startIndex}`}
-                initial={{ opacity: 0, x: 60 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -60 }}
-                transition={{ duration: 0.45, ease: 'easeInOut' }}
-                className="flex flex-col rounded-2xl overflow-hidden bg-card border border-border/30 min-h-0"
+        <div
+          ref={containerRef}
+          role="region"
+          aria-label="App screenshots carousel"
+          className="flex flex-1 min-h-0 w-full gap-4 md:gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory snap-always scrollbar-hide pb-2 px-2 sm:px-4"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {features.map((feature, index) => (
+            <article
+              key={`${feature.title}-${index}`}
+              className="flex shrink-0 flex-col h-full min-h-0 py-1 snap-start w-full flex-[0_0_100%] md:w-auto md:flex-[0_0_calc((100%-2.5rem)/3)]"
+            >
+              <div
+                className="flex flex-col rounded-2xl overflow-hidden bg-card border border-border/30 min-h-0 flex-1 h-full"
                 style={{ boxShadow: '0 4px 20px -4px rgba(0,0,0,0.06)' }}
               >
-                {/* Screenshot — takes available space, never crops */}
                 <div
                   className="flex-1 min-h-0 flex items-center justify-center p-2"
                   style={{
@@ -95,51 +142,30 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
                   <img
                     src={feature.screenshot}
                     alt={feature.title}
-                    loading="eager"
-                    className="object-contain block mx-auto"
-                    style={{ maxWidth: '100%', maxHeight: 'calc(100vh - 220px)', width: 'auto', height: '100%' }}
+                    loading="lazy"
+                    decoding="async"
+                    className="object-contain block mx-auto w-auto max-w-full max-h-[calc(100vh-220px)] h-full"
                   />
                 </div>
-
-                {/* Title & description */}
                 <div className="px-3 py-2 text-center shrink-0">
                   <h3 className="font-bold text-xs text-foreground">{feature.title}</h3>
                   <p className="text-[0.65rem] text-muted-foreground mt-0.5 leading-snug">{feature.description}</p>
                 </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+              </div>
+            </article>
+          ))}
         </div>
 
-        {/* Progress bar */}
-        {count > visibleCount && (
-          <div className="mt-3 w-full max-w-md mx-auto shrink-0">
+        {features.length > 1 && (
+          <div className="mt-2 w-full max-w-md mx-auto shrink-0 px-4" aria-hidden="true">
             <div className="h-1.5 rounded-full bg-muted overflow-hidden">
-              <motion.div
-                className="h-full rounded-full"
-                style={{ backgroundColor: `hsl(${accentHsl})` }}
-                animate={{ width: `${((startIndex + 1) / count) * 100}%` }}
-                transition={{ duration: 0.4 }}
+              <div
+                className="h-full rounded-full transition-[width] duration-150 ease-out"
+                style={{
+                  width: `${Math.round(scrollProgress * 100)}%`,
+                  backgroundColor: `hsl(${accentHsl})`,
+                }}
               />
-            </div>
-            <div className="flex justify-center gap-2 mt-2">
-              {features.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    setStartIndex(i);
-                    if (timerRef.current) clearInterval(timerRef.current);
-                    timerRef.current = setInterval(() => {
-                      setStartIndex(prev => (prev + 1) % count);
-                    }, 3500);
-                  }}
-                  className="w-2 h-2 rounded-full transition-all duration-300"
-                  style={{
-                    backgroundColor: i === startIndex ? `hsl(${accentHsl})` : 'hsl(var(--muted))',
-                    transform: i === startIndex ? 'scale(1.4)' : 'scale(1)',
-                  }}
-                />
-              ))}
             </div>
           </div>
         )}

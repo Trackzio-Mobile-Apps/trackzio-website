@@ -62,6 +62,19 @@ const App = () => (
             <Route path="/habit-eazy/terms" element={<HabitEazyTerms />} />
             <Route path="/rockzy/privacy-policy" element={<RockzyPrivacy />} />
             <Route path="/rockzy/terms" element={<RockzyTerms />} />
+            {/* Canonical legal URLs (trackzio.com-style); old routes above remain */}
+            <Route path="/privacy-policy-banknote" element={<BanknotePrivacy />} />
+            <Route path="/privacy-policy-coinzy" element={<CoinzyPrivacy />} />
+            <Route path="/privacy-policy-habit-eazy-1" element={<HabitEazyPrivacy />} />
+            <Route path="/privacy-policy-insecto-ai-1" element={<InsectoPrivacy />} />
+            <Route path="/privacy-policy-rockzy-ai" element={<RockzyPrivacy />} />
+            <Route path="/banknote-terms" element={<BanknoteTerms />} />
+            <Route path="/coinzy:-terms" element={<CoinzyTerms />} />
+            <Route path="/coinzy%3A-terms" element={<CoinzyTerms />} />
+            <Route path="/habit-eazy:-terms" element={<HabitEazyTerms />} />
+            <Route path="/habit-eazy%3A-terms" element={<HabitEazyTerms />} />
+            <Route path="/rockzy-terms-of-service" element={<RockzyTerms />} />
+            <Route path="/terms-for-insecto-ai" element={<InsectoTerms />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,24 +1,16 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { apps } from '@/lib/appData';
+import { motion } from 'framer-motion';
 import { trackEvent } from '@/lib/analytics';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { getPlatform, getDownloadUrl } from '@/lib/platformUtils';
-import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight, Download } from 'lucide-react';
+import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import FloatingAppShowcase from '@/components/FloatingAppShowcase';
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: '-100px' },
   transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] as const },
-};
-
-const stagger = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
 };
 
 const metrics = [
@@ -46,18 +38,9 @@ const testimonials = [
   { quote: "Best app to identify insects!!!", author: "Jay" },
 ];
 
-const appEvents: Record<string, string> = {
-  coinzy: 'home_Coinzy_explore_click',
-  banknotes: 'home_Banknotes_explore_click',
-  insecto: 'home_insecto_explore_click',
-  habiteazy: 'home_Habiteazy_explore_click',
-};
-
 export default function Home() {
   usePageAnalytics('home', 'page_view_home');
   const location = useLocation();
-  const [activeApp, setActiveApp] = useState(0);
-  const selected = apps[activeApp];
   const isMobile = useIsMobile();
   const carouselRef = useRef<HTMLDivElement>(null);
   const autoScrollRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -105,10 +88,15 @@ export default function Home() {
     el.addEventListener('mouseenter', pause);
     el.addEventListener('mouseleave', resume);
 
+    el.addEventListener('touchstart', pause, { passive: true });
+    el.addEventListener('touchend', resume);
+
     return () => {
       el.removeEventListener('scroll', updateScrollButtons);
       el.removeEventListener('mouseenter', pause);
       el.removeEventListener('mouseleave', resume);
+      el.removeEventListener('touchstart', pause);
+      el.removeEventListener('touchend', resume);
       if (autoScrollRef.current) clearInterval(autoScrollRef.current);
     };
   }, []);
@@ -121,35 +109,28 @@ export default function Home() {
     el.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
   };
 
-  const handleDownload = (app: typeof selected) => {
-    const url = getDownloadUrl(app.iosUrl, app.androidUrl);
-    if (url) {
-      const platform = getPlatform();
-      trackEvent(`home_${app.id}_download`, { platform, app_name: app.name });
-      window.open(url, '_blank');
-    }
-  };
-
   return (
-    <div className="snap-y snap-mandatory">
+    <div className="snap-y snap-mandatory max-sm:snap-none">
       {/* ── Section 1: Hero — Light background ── */}
-      <section className="min-h-screen flex items-center justify-center py-24 sm:py-32 relative overflow-hidden snap-start">
+      <section className="min-h-[min(100dvh,56rem)] sm:min-h-screen flex items-center justify-center py-12 sm:py-24 lg:py-32 relative overflow-hidden snap-start pt-[max(0.75rem,env(safe-area-inset-top))]">
         {/* Soft radial glow */}
         <div
           className="absolute inset-0"
           style={{ background: 'radial-gradient(ellipse 65% 55% at 50% 45%, #f2f3f4 0%, #ffffff 75%)' }}
         />
 
-        <div className="container-site relative z-10">
+        <div className="container-site relative z-10 px-3 sm:px-0">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
-            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-6">AI-Powered Mobile Apps</p>
+            <p className="text-xs sm:text-sm font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase text-primary mb-4 sm:mb-6">
+              AI-Powered Mobile Apps
+            </p>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold font-display leading-[1.08] tracking-tight mb-6 text-foreground">
+            <h1 className="text-[clamp(1.65rem,5.5vw+0.5rem,2.5rem)] sm:text-5xl lg:text-6xl xl:text-7xl font-bold font-display leading-[1.1] sm:leading-[1.08] tracking-tight mb-5 sm:mb-6 text-foreground text-balance px-0.5">
               AI Platforms for Collectors and{' '}
               <span className="text-primary">Enthusiasts</span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed px-1 sm:px-0">
               Trackzio builds intelligent apps that help people identify, understand, organize, and exchange the things they care about.
             </p>
 
@@ -157,7 +138,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="mt-8 flex items-center justify-center gap-4 flex-wrap"
+              className="mt-6 sm:mt-8 flex items-stretch sm:items-center justify-center gap-4 flex-wrap"
             >
               <a
                 href="#apps"
@@ -166,10 +147,10 @@ export default function Home() {
                   document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' });
                   trackEvent('hero_explore_apps', { page_name: 'home' });
                 }}
-                className="inline-flex items-center gap-2 h-12 px-8 rounded-xl bg-primary text-primary-foreground font-semibold text-base transition-all hover:opacity-90 glow group"
+                className="inline-flex items-center justify-center gap-2 min-h-[48px] w-full max-w-[20rem] sm:w-auto sm:max-w-none px-6 sm:px-8 rounded-xl bg-primary text-primary-foreground font-semibold text-sm sm:text-base transition-all hover:opacity-90 glow group"
               >
                 Explore Our Apps
-                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1 shrink-0" />
               </a>
             </motion.div>
           </motion.div>
@@ -179,7 +160,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.8 }}
-          className="absolute bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer"
+          className="absolute bottom-6 sm:bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer pb-[env(safe-area-inset-bottom,0)]"
           onClick={() => document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' })}
         >
           <span className="text-xs tracking-[0.15em] uppercase text-foreground/50">Scroll</span>
@@ -198,16 +179,16 @@ export default function Home() {
       </section>
 
       {/* ── Section 3: Stats — Light background ── */}
-      <section className="min-h-screen flex items-center snap-start">
+      <section className="min-h-0 sm:min-h-screen flex items-center py-16 sm:py-24 lg:py-32 snap-start">
         <div className="container-site w-full">
-          <motion.div {...fadeUp} className="text-center mb-16">
-            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">By the Numbers</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display">
+          <motion.div {...fadeUp} className="text-center mb-10 sm:mb-14 md:mb-16 max-w-2xl mx-auto px-1">
+            <p className="text-xs sm:text-sm font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase text-primary mb-3 sm:mb-4">By the Numbers</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-balance leading-tight">
               Trusted by millions
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 lg:gap-4 max-w-4xl sm:max-w-none mx-auto">
             {metrics.map((m, i) => (
               <motion.div
                 key={m.label}
@@ -215,9 +196,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="text-center py-8"
+                className="text-center py-4 sm:py-8"
               >
-                <div className="text-5xl sm:text-6xl lg:text-7xl font-bold font-display text-primary mb-3">
+                <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-display text-primary mb-2 sm:mb-3 tabular-nums">
                   {m.value}
                 </div>
                 <div className="text-sm sm:text-base text-muted-foreground tracking-wide">
@@ -230,20 +211,22 @@ export default function Home() {
       </section>
 
       {/* ── Section 4: Testimonials — Tinted background ── */}
-      <section className="min-h-screen flex items-center py-24 sm:py-32 snap-start bg-section-tinted">
+      <section className="min-h-0 sm:min-h-screen flex items-center py-16 sm:py-24 lg:py-32 snap-start bg-section-tinted">
         <div className="container-site w-full">
-          <motion.div {...fadeUp} className="text-center mb-16">
-            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">What People Say</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display">
+          <motion.div {...fadeUp} className="text-center mb-10 sm:mb-14 md:mb-16 max-w-2xl mx-auto px-1">
+            <p className="text-xs sm:text-sm font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase text-primary mb-3 sm:mb-4">What People Say</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-balance leading-tight">
               Loved by our users
             </h2>
           </motion.div>
 
-          <div className="relative">
+          <div className="relative px-1 sm:px-0">
             {canScrollLeft && (
               <button
+                type="button"
+                aria-label="Previous testimonials"
                 onClick={() => scrollCarousel('left')}
-                className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                className="hidden sm:flex absolute left-0 sm:-left-2 md:-left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
                 style={{ boxShadow: 'var(--shadow-card)' }}
               >
                 <ChevronLeft size={18} />
@@ -251,8 +234,10 @@ export default function Home() {
             )}
             {canScrollRight && (
               <button
+                type="button"
+                aria-label="Next testimonials"
                 onClick={() => scrollCarousel('right')}
-                className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                className="hidden sm:flex absolute right-0 sm:-right-2 md:-right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
                 style={{ boxShadow: 'var(--shadow-card)' }}
               >
                 <ChevronRight size={18} />
@@ -261,7 +246,7 @@ export default function Home() {
 
             <div
               ref={carouselRef}
-              className="flex gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
+              className="flex gap-4 sm:gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory snap-always scroll-smooth pb-4 -mx-1 px-1 sm:mx-0 sm:px-0"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {testimonials.map((t, i) => (
@@ -271,10 +256,10 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: Math.min(i * 0.08, 0.4) }}
-                  className={`flex-shrink-0 snap-start ${isMobile ? 'w-full' : ''}`}
-                  style={isMobile ? undefined : { width: 'calc(25% - 15px)', minWidth: '280px' }}
+                  className={`flex-shrink-0 snap-start ${isMobile ? 'w-[min(100%,22rem)] min-[400px]:w-[min(100%,24rem)]' : ''}`}
+                  style={isMobile ? undefined : { width: 'calc(25% - 15px)', minWidth: '260px' }}
                 >
-                  <div className="p-6 rounded-2xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
+                  <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-card h-full flex flex-col min-h-[11rem] sm:min-h-0" style={{ boxShadow: 'var(--shadow-card)' }}>
                     <Quote size={22} className="text-primary/25 mb-3" />
                     <p className="text-sm leading-relaxed text-foreground flex-1 font-medium">"{t.quote}"</p>
                     <div className="mt-3 flex items-center gap-3">
