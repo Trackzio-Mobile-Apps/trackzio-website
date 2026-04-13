@@ -34,8 +34,10 @@ function AppChip({
       onClick={onSelect}
       aria-label={app.name}
       aria-pressed={isSelected}
-      className={`flex w-full items-center justify-center gap-1.5 sm:gap-2 rounded-xl cursor-pointer select-none border-2 transition-colors duration-300 ${
-        compact ? 'min-h-[44px] px-1.5 py-2 sm:px-2.5' : 'min-h-[48px] px-3 py-2.5'
+      className={`flex w-full rounded-xl cursor-pointer select-none border-2 transition-colors duration-300 ${
+        compact
+          ? 'min-h-[52px] flex-col items-center justify-center gap-1 px-1.5 py-2 min-[400px]:flex-row min-[400px]:gap-2 min-[400px]:px-2.5'
+          : 'min-h-[48px] items-center justify-center gap-2 px-3 py-2.5'
       }`}
       style={{
         borderColor: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--border))',
@@ -47,9 +49,9 @@ function AppChip({
       whileHover={{ scale: isSelected ? 1.02 : 1.01, opacity: 1 }}
       whileTap={{ scale: 0.98 }}
     >
-      <img src={app.logo} alt="" className={`rounded-lg shrink-0 ${compact ? 'h-7 w-7 sm:h-8 sm:w-8' : 'h-9 w-9'}`} />
+      <img src={app.logo} alt="" className={`rounded-lg shrink-0 ${compact ? 'h-8 w-8 min-[400px]:h-7 min-[400px]:w-7 sm:h-8 sm:w-8' : 'h-9 w-9'}`} />
       <span
-        className="font-semibold text-xs sm:text-sm text-center leading-tight transition-colors duration-300 line-clamp-2 sm:line-clamp-none"
+        className="font-semibold text-[11px] min-[400px]:text-xs sm:text-sm text-center leading-snug transition-colors duration-300 line-clamp-2 break-words min-[400px]:line-clamp-none min-[400px]:whitespace-nowrap"
         style={{ color: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--foreground))' }}
       >
         {app.name}
@@ -114,38 +116,30 @@ export default function FloatingAppShowcase() {
           </h2>
         </motion.div>
 
-        {/* ── Mobile & tablet: stacked ── */}
+        {/* ── Mobile & tablet: stacked — 2×2 + 1 grid (matches desktop), no horizontal scroll ── */}
         <div className="flex flex-col gap-8 lg:hidden min-w-0">
-          <div
-            className="w-full flex gap-3 overflow-x-auto pb-4 px-0.5 scrollbar-hide scroll-smooth snap-x snap-mandatory"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {showcaseApps.map((app, i) => (
-              <motion.button
-                key={app.id}
-                type="button"
-                onClick={() => handleSelect(i)}
-                className="flex-shrink-0 flex items-center gap-2 rounded-xl px-3 py-2.5 cursor-pointer select-none border-2 transition-colors duration-300 snap-start min-h-[48px]"
-                style={{
-                  borderColor: selectedIndex === i ? `hsl(${app.accentHsl})` : 'hsl(var(--border))',
-                  background:
-                    selectedIndex === i
-                      ? `linear-gradient(135deg, hsl(${app.accentHsl} / 0.08), hsl(${app.accentHsl} / 0.02))`
-                      : 'hsl(var(--card))',
-                  padding: '12px',
-                }}
-                animate={{ scale: selectedIndex === i ? 1.04 : 1, opacity: selectedIndex === i ? 1 : 0.7 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <img src={app.logo} alt={app.name} className="w-8 h-8 rounded-lg shrink-0" />
-                <span
-                  className="font-semibold text-sm whitespace-nowrap transition-colors duration-300"
-                  style={{ color: selectedIndex === i ? `hsl(${app.accentHsl})` : 'hsl(var(--foreground))' }}
-                >
-                  {app.name}
-                </span>
-              </motion.button>
-            ))}
+          <div className="w-full max-w-lg mx-auto px-0.5">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-3 w-full">
+              {showcaseApps.slice(0, 4).map((app, i) => (
+                <AppChip
+                  key={app.id}
+                  app={app}
+                  isSelected={selectedIndex === i}
+                  onSelect={() => handleSelect(i)}
+                  compact
+                />
+              ))}
+            </div>
+            <div className="mt-2.5 sm:mt-3 flex justify-center w-full">
+              <div className="w-full max-w-[calc(50%-0.375rem)]">
+                <AppChip
+                  app={showcaseApps[4]}
+                  isSelected={selectedIndex === 4}
+                  onSelect={() => handleSelect(4)}
+                  compact
+                />
+              </div>
+            </div>
           </div>
 
           <div className="flex justify-center py-2">
@@ -262,7 +256,7 @@ function ContentPanel({ selected, narrow }: { selected: (typeof showcaseApps)[0]
         <p
           className={`text-muted-foreground leading-relaxed ${narrow ? 'mb-4 text-[0.8125rem] leading-relaxed' : 'mb-5 text-sm xl:text-[0.9375rem]'}`}
         >
-          {selected.description.length > 160 ? selected.description.slice(0, 160).trim() + '…' : selected.description}
+          {selected.description.length > 220 ? selected.description.slice(0, 220).trim() + '…' : selected.description}
         </p>
 
         <ul className={narrow ? 'space-y-2 mb-5' : 'space-y-2.5 mb-6'}>

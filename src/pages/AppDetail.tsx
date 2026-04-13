@@ -10,6 +10,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import PlatformDownloadButtons from '@/components/PlatformDownloadButtons';
 import FeatureShowcase from '@/components/FeatureShowcase';
+import OtherAppsCarousel from '@/components/OtherAppsCarousel';
 import {
   Accordion,
   AccordionContent,
@@ -295,6 +296,11 @@ showcaseFeatures['rockzy'] = [
 
 export default function AppDetail() {
   const { appId } = useParams<{ appId: string }>();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [appId]);
+
   const app = getApp(appId || '');
   const isMobile = useIsMobile();
   const [showAllFaqs, setShowAllFaqs] = useState(false);
@@ -563,7 +569,7 @@ export default function AppDetail() {
         </section>
       )}
 
-
+      <OtherAppsCarousel excludeAppId={app.id} accentHsl={app.accentHsl} />
 
     </div>
   );

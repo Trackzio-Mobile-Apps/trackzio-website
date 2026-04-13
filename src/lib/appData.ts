@@ -49,7 +49,7 @@ export const apps: AppInfo[] = [
     description: 'Coinzy uses advanced AI to identify coins from around the world. Scan any coin, explore its history, rarity, and estimated value. Build your collection and trade on the marketplace.',
     color: 'hsl(174, 60%, 35%)',
     accentHsl: '174 60% 35%',
-    iosUrl: null,
+    iosUrl: 'https://apps.apple.com/in/app/coinzy-coin-ai-identification/id6752857760',
     androidUrl: 'https://play.google.com/store/apps/details?id=com.coinzy.trackzio&pcampaignid=web_share',
     icon: '🪙',
     logo: coinzyLogo,

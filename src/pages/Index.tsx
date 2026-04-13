@@ -184,7 +184,7 @@ export default function Home() {
           <motion.div {...fadeUp} className="text-center mb-10 sm:mb-14 md:mb-16 max-w-2xl mx-auto px-1">
             <p className="text-xs sm:text-sm font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase text-primary mb-3 sm:mb-4">By the Numbers</p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-balance leading-tight">
-              Trusted by millions
+            Trusted by a global userbase
             </h2>
           </motion.div>
 

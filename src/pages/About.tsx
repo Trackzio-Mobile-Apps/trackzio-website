@@ -66,10 +66,10 @@ export default function About() {
   return (
     <div className="snap-y snap-mandatory max-sm:snap-none">
       {/* ── Section 1: Hero ── */}
-      <section className="min-h-[min(52vh,28rem)] sm:min-h-[40vh] flex items-center justify-center pt-6 pb-10 sm:pt-8 sm:pb-12 snap-start">
+      <section className="min-h-[40vh] flex items-center justify-center pt-8 pb-12 snap-start">
         <div className="container-site">
-          <motion.div {...fadeUp} className="max-w-5xl mx-auto text-center px-0.5">
-            <p className="text-xs sm:text-sm font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase text-primary mb-3 sm:mb-4">
+          <motion.div {...fadeUp} className="max-w-5xl mx-auto text-center">
+            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-4">
               About Us
             </p>
             <h1 className="text-[clamp(1.6rem,5.2vw,1.95rem)] sm:text-5xl md:text-6xl lg:text-7xl font-bold font-display leading-[1.12] sm:leading-[1.1] tracking-tight mb-4 text-balance">
