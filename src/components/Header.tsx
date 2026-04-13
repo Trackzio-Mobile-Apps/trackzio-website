@@ -1,22 +1,41 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useState, useRef, useEffect } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
-import { trackEvent } from '@/lib/analytics';
-import { motion, AnimatePresence } from 'framer-motion';
-import trackzioLogo from '@/assets/trackzio-logo.jpg';
-import { apps } from '@/lib/appData';
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState, useRef, useEffect, useMemo } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
+import { motion, AnimatePresence } from "framer-motion";
+import trackzioLogo from "@/assets/trackzio-logo.jpg";
+import { apps } from "@/lib/appData";
+import appsManifest from "../../content/apps/apps.json";
+import type { AppManifestEntry } from "@/lib/content/schemas";
+import { imageSrc } from "@/lib/imageSrc";
 
-const megaMenuApps = apps
-  .filter(app => ['coinzy', 'banknotes', 'insecto', 'habiteazy', 'rockzy'].includes(app.id))
-  .map(app => ({ id: app.id, name: app.name, tagline: app.tagline, logo: app.logo, hasPage: true }));
+const MENU_IDS = ["coinzy", "banknotes", "insecto", "habiteazy", "rockzy"] as const;
+
+function buildMegaMenuApps() {
+  const manifest = appsManifest as AppManifestEntry[];
+  const published = new Set(manifest.filter((m) => m.published).map((m) => m.id));
+  const order = Object.fromEntries(manifest.map((m) => [m.id, m.order]));
+  return MENU_IDS.filter((id) => published.has(id))
+    .map((id) => apps.find((a) => a.id === id))
+    .filter(Boolean)
+    .sort((a, b) => (order[a!.id] ?? 99) - (order[b!.id] ?? 99))
+    .map((app) => ({
+      id: app!.id,
+      name: app!.name,
+      tagline: app!.tagline,
+      logo: imageSrc(app!.logo),
+      hasPage: true,
+    }));
+}
 
 const navItems = [
-  { label: 'Home', to: '/', event: '' },
-  { label: 'Our Apps', to: '/#apps', event: 'header_explore_apps', hasDropdown: true },
-  { label: 'About Us', to: '/about', event: 'header_About us_apps' },
-  { label: 'Blog', to: '/blog', event: 'header_blog_apps' },
-  { label: 'Careers', to: '/careers', event: 'header_career_apps' },
-  { label: 'Help Center', to: '/help', event: 'header_help center_apps' },
+  { label: "Home", href: "/", event: "" },
+  { label: "Our Apps", href: "/#apps", event: "header_explore_apps", hasDropdown: true },
+  { label: "About Us", href: "/about", event: "header_About us_apps" },
+  { label: "Blog", href: "/blog", event: "header_blog_apps" },
+  { label: "Careers", href: "/careers", event: "header_career_apps" },
+  { label: "Help Center", href: "/help", event: "header_help center_apps" },
 ];
 
 
@@ -24,8 +43,8 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileAppsOpen, setMobileAppsOpen] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
+  const { pathname } = useRouter();
+  const megaMenuApps = useMemo(() => buildMegaMenuApps(), []);
   const dropdownTimer = useRef<ReturnType<typeof setTimeout>>();
 
   const handleDropdownEnter = () => {
@@ -41,31 +60,19 @@ export default function Header() {
     return () => clearTimeout(dropdownTimer.current);
   }, []);
 
-  const goToAppsSection = () => {
-    setDropdownOpen(false);
-    setOpen(false);
-    setMobileAppsOpen(false);
-    trackEvent('header_explore_apps', { page_name: location.pathname });
-    if (location.pathname === '/') {
-      document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      navigate('/#apps');
-    }
-  };
-
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/40">
       <div className="container-site flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2" aria-label="Trackzio Home">
-          <img src={trackzioLogo} alt="Trackzio" className="h-8 rounded" />
+        <Link href="/" className="flex items-center gap-2" aria-label="Trackzio Home">
+          <img src={imageSrc(trackzioLogo)} alt="Trackzio" className="h-8 rounded" />
         </Link>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
-          {navItems.map(item => (
+          {navItems.map((item) => (
             <div
-              key={item.to}
+              key={item.href}
               className="relative"
               onMouseEnter={item.hasDropdown ? handleDropdownEnter : undefined}
               onMouseLeave={item.hasDropdown ? handleDropdownLeave : undefined}
@@ -75,29 +82,29 @@ export default function Header() {
                   type="button"
                   onClick={(e) => {
                     e.preventDefault();
-                    setDropdownOpen(prev => !prev);
-                    item.event && trackEvent(item.event, { page_name: location.pathname });
+                    setDropdownOpen((prev) => !prev);
+                    item.event && trackEvent(item.event, { page_name: pathname });
                   }}
                   className={`inline-flex items-center gap-1 px-3 py-2 text-sm rounded-md transition-colors ${
-                    location.pathname === '/apps'
-                      ? 'text-primary font-bold'
-                      : 'text-muted-foreground font-medium hover:text-primary'
+                    pathname === "/apps"
+                      ? "text-primary font-bold"
+                      : "text-muted-foreground font-medium hover:text-primary"
                   }`}
                 >
                   {item.label}
-                  <ChevronDown size={14} className={`transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown size={14} className={`transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`} />
                 </button>
               ) : (
                 <Link
-                  to={item.to}
+                  href={item.href}
                   onClick={() => {
                     window.scrollTo(0, 0);
-                    item.event && trackEvent(item.event, { page_name: location.pathname });
+                    item.event && trackEvent(item.event, { page_name: pathname });
                   }}
                   className={`px-3 py-2 text-sm rounded-md transition-colors ${
-                    location.pathname === item.to
-                      ? 'text-primary font-bold'
-                      : 'text-muted-foreground font-medium hover:text-primary'
+                    pathname === item.href
+                      ? "text-primary font-bold"
+                      : "text-muted-foreground font-medium hover:text-primary"
                   }`}
                 >
                   {item.label}
@@ -111,9 +118,9 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <button
             type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              goToAppsSection();
+            onClick={() => {
+              setDropdownOpen((prev) => !prev);
+              trackEvent("header_explore_apps", { page_name: pathname });
             }}
             className="hidden sm:inline-flex h-9 px-4 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-semibold transition-all hover:opacity-90 glow"
           >
@@ -152,11 +159,14 @@ export default function Header() {
             <div className="p-6">
               <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/70 mb-4 px-1">Our Apps</p>
               <div className="grid grid-cols-3 gap-2">
-                {megaMenuApps.map(app => (
+                {megaMenuApps.map((app) => (
                   <Link
                     key={app.id}
-                    to={`/apps/${app.id}`}
-                    onClick={() => { setDropdownOpen(false); window.scrollTo(0, 0); }}
+                    href={`/apps/${app.id}`}
+                    onClick={() => {
+                      setDropdownOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
                     className="flex items-center gap-3 p-3 rounded-xl border border-transparent transition-all duration-150 hover:bg-muted/50 hover:border-border/40 active:scale-[0.98]"
                   >
                     <img src={app.logo} alt={app.name} className="w-10 h-10 rounded-xl shrink-0" />
@@ -184,14 +194,14 @@ export default function Header() {
             aria-label="Mobile navigation"
           >
             <div className="container-site py-4 flex flex-col gap-1">
-              {navItems.map(item => (
+              {navItems.map((item) =>
                 item.hasDropdown ? (
-                  <div key={item.to}>
+                  <div key={item.href}>
                     <button
                       type="button"
                       onClick={() => {
-                        setMobileAppsOpen(prev => !prev);
-                        item.event && trackEvent(item.event, { page_name: location.pathname });
+                        setMobileAppsOpen((prev) => !prev);
+                        item.event && trackEvent(item.event, { page_name: pathname });
                       }}
                       className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-muted-foreground hover:text-primary"
                     >
@@ -208,11 +218,15 @@ export default function Header() {
                           className="overflow-hidden"
                         >
                           <div className="grid grid-cols-2 gap-1 px-2 py-2">
-                            {megaMenuApps.map(app => (
+                            {megaMenuApps.map((app) => (
                               <Link
                                 key={app.id}
-                                to={`/apps/${app.id}`}
-                                onClick={() => { setMobileAppsOpen(false); setOpen(false); window.scrollTo(0, 0); }}
+                                href={`/apps/${app.id}`}
+                                onClick={() => {
+                                  setMobileAppsOpen(false);
+                                  setOpen(false);
+                                  window.scrollTo(0, 0);
+                                }}
                                 className="flex items-center gap-2 p-2 rounded-lg transition-colors hover:bg-muted/50"
                               >
                                 <img src={app.logo} alt={app.name} className="w-8 h-8 rounded-lg shrink-0" />
@@ -226,28 +240,28 @@ export default function Header() {
                   </div>
                 ) : (
                   <Link
-                    key={item.to}
-                    to={item.to}
+                    key={item.href}
+                    href={item.href}
                     onClick={() => {
                       setOpen(false);
                       window.scrollTo(0, 0);
-                      item.event && trackEvent(item.event, { page_name: location.pathname });
+                      item.event && trackEvent(item.event, { page_name: pathname });
                     }}
                     className={`px-3 py-2.5 text-sm rounded-md transition-colors ${
-                      location.pathname === item.to
-                        ? 'text-primary font-bold'
-                        : 'text-muted-foreground font-medium hover:text-primary'
+                      pathname === item.href
+                        ? "text-primary font-bold"
+                        : "text-muted-foreground font-medium hover:text-primary"
                     }`}
                   >
                     {item.label}
                   </Link>
-                )
-              ))}
+                ),
+              )}
               <button
                 type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  goToAppsSection();
+                onClick={() => {
+                  setMobileAppsOpen((prev) => !prev);
+                  trackEvent("header_explore_apps", { page_name: pathname });
                 }}
                 className="mt-2 flex h-10 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-semibold"
               >

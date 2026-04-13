@@ -1,8 +1,10 @@
-import { useEffect, useRef, useCallback, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useEffect, useRef, useCallback, useState } from "react";
+import type { StaticImageData } from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { imageSrc } from "@/lib/imageSrc";
 
 interface ShowcaseFeature {
-  screenshot: string;
+  screenshot: string | StaticImageData;
   title: string;
   description: string;
 }
@@ -222,7 +224,7 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
                     }}
                   >
                     <img
-                      src={feature.screenshot}
+                      src={imageSrc(feature.screenshot)}
                       alt={feature.title}
                       loading="lazy"
                       decoding="async"

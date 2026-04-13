@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from "next/link";
 import { ArrowRight, Check } from 'lucide-react';
 import { apps } from '@/lib/appData';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent } from "@/lib/analytics";
+import { imageSrc } from "@/lib/imageSrc";
 
 const showcaseApps = apps.map((app, i) => ({
   ...app,
@@ -49,7 +50,7 @@ function AppChip({
       whileHover={{ scale: isSelected ? 1.02 : 1.01, opacity: 1 }}
       whileTap={{ scale: 0.98 }}
     >
-      <img src={app.logo} alt="" className={`rounded-lg shrink-0 ${compact ? 'h-8 w-8 min-[400px]:h-7 min-[400px]:w-7 sm:h-8 sm:w-8' : 'h-9 w-9'}`} />
+      <img src={imageSrc(app.logo)} alt="" className={`rounded-lg shrink-0 ${compact ? 'h-8 w-8 min-[400px]:h-7 min-[400px]:w-7 sm:h-8 sm:w-8' : 'h-9 w-9'}`} />
       <span
         className="font-semibold text-[11px] min-[400px]:text-xs sm:text-sm text-center leading-snug transition-colors duration-300 line-clamp-2 break-words min-[400px]:line-clamp-none min-[400px]:whitespace-nowrap"
         style={{ color: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--foreground))' }}
@@ -153,7 +154,7 @@ export default function FloatingAppShowcase() {
                 className="flex items-center justify-center"
               >
                 <img
-                  src={selected.logo}
+                  src={imageSrc(selected.logo)}
                   alt={selected.name}
                   className="rounded-[1.5rem] sm:rounded-[2rem] object-contain w-[min(85vw,256px)] h-[min(85vw,256px)] max-w-full"
                   style={{ filter: `drop-shadow(0 24px 48px hsl(${selected.accentHsl} / 0.3))` }}
@@ -208,7 +209,7 @@ export default function FloatingAppShowcase() {
                 className="flex items-center justify-center"
               >
                 <img
-                  src={selected.logo}
+                  src={imageSrc(selected.logo)}
                   alt={selected.name}
                   className="rounded-3xl object-contain w-full max-w-[220px] xl:max-w-[260px] aspect-square"
                   style={{ filter: `drop-shadow(0 20px 40px hsl(${selected.accentHsl} / 0.28))` }}
@@ -280,7 +281,7 @@ function ContentPanel({ selected, narrow }: { selected: (typeof showcaseApps)[0]
         </ul>
 
         <Link
-          to={`/apps/${selected.id}`}
+          href={`/apps/${selected.id}`}
           onClick={() => {
             trackEvent('showcase_explore_click', { app_name: selected.name });
             window.scrollTo(0, 0);

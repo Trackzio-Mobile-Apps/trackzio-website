@@ -1,0 +1,7 @@
+[
+  { "id": "coinzy", "published": true, "order": 1 },
+  { "id": "banknotes", "published": true, "order": 2 },
+  { "id": "insecto", "published": true, "order": 3 },
+  { "id": "habiteazy", "published": true, "order": 4 },
+  { "id": "rockzy", "published": true, "order": 5 }
+]

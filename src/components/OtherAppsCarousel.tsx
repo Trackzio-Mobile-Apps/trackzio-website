@@ -1,9 +1,10 @@
 import { useEffect, useRef, useCallback, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import Link from "next/link";
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { apps } from '@/lib/appData';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent } from "@/lib/analytics";
+import { imageSrc } from "@/lib/imageSrc";
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -157,7 +158,7 @@ export default function OtherAppsCarousel({ excludeAppId, accentHsl }: OtherApps
                 className="flex shrink-0 flex-col min-h-0 snap-start w-full min-w-0 flex-[0_0_100%] lg:w-auto lg:flex-[0_0_calc((100%-2.5rem)/3)]"
               >
                 <Link
-                  to={`/apps/${app.id}`}
+                  href={`/apps/${app.id}`}
                   onClick={() =>
                     trackEvent('app_detail_other_app_click', {
                       from_app: excludeAppId,
@@ -170,7 +171,7 @@ export default function OtherAppsCarousel({ excludeAppId, accentHsl }: OtherApps
                 >
                   <div className="flex items-start gap-4 mb-4">
                     <img
-                      src={app.logo}
+                      src={imageSrc(app.logo)}
                       alt={`${app.name} logo`}
                       className="w-14 h-14 rounded-xl shrink-0"
                       style={{ boxShadow: `0 4px 16px -4px hsl(${app.accentHsl} / 0.25)` }}

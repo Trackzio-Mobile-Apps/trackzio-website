@@ -1,4 +1,5 @@
-import coinzyLogo from '@/assets/coinzy-logo.png';
+import type { StaticImageData } from "next/image";
+import coinzyLogo from "@/assets/coinzy-logo.png";
 import banknotesLogo from '@/assets/banknotes-logo.png';
 import insectoLogo from '@/assets/insecto-logo.png';
 import habiteazyLogo from '@/assets/habiteazy-logo.png';
@@ -35,8 +36,8 @@ export interface AppInfo {
   iosUrl: string | null;
   androidUrl: string | null;
   icon: string;
-  logo: string;
-  screenshots: string[];
+  logo: string | StaticImageData;
+  screenshots: (string | StaticImageData)[];
   features: AppFeature[];
   stats: { downloads: string; rating: string; dau: string };
 }

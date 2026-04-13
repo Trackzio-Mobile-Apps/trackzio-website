@@ -1,4 +1,5 @@
-import { Link, useLocation } from 'react-router-dom';
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { trackEvent } from '@/lib/analytics';
 
 const socialLinks = [
@@ -17,15 +18,15 @@ const socialLinks = [
 ];
 
 const appLegalMap: Record<string, { label: string; privacy: string; terms: string }> = {
-  coinzy: { label: 'Coinzy', privacy: '/privacy-policy-coinzy', terms: '/coinzy%3A-terms' },
-  'banknote-ai': { label: 'Banknote AI', privacy: '/privacy-policy-banknote', terms: '/banknote-terms' },
-  banknote: { label: 'Banknote AI', privacy: '/privacy-policy-banknote', terms: '/banknote-terms' },
-  banknotes: { label: 'Banknote AI', privacy: '/privacy-policy-banknote', terms: '/banknote-terms' },
-  'insecto-ai': { label: 'Insecto AI', privacy: '/privacy-policy-insecto-ai-1', terms: '/terms-for-insecto-ai' },
-  insecto: { label: 'Insecto AI', privacy: '/privacy-policy-insecto-ai-1', terms: '/terms-for-insecto-ai' },
-  'habit-eazy': { label: 'Habit Eazy', privacy: '/privacy-policy-habit-eazy-1', terms: '/habit-eazy%3A-terms' },
-  habiteazy: { label: 'Habit Eazy', privacy: '/privacy-policy-habit-eazy-1', terms: '/habit-eazy%3A-terms' },
-  rockzy: { label: 'Rockzy', privacy: '/privacy-policy-rockzy-ai', terms: '/rockzy-terms-of-service' },
+  coinzy: { label: "Coinzy", privacy: "/coinzy/privacy-policy", terms: "/coinzy/terms" },
+  "banknote-ai": { label: "Banknote AI", privacy: "/banknote-ai/privacy-policy", terms: "/banknote-ai/terms" },
+  banknote: { label: "Banknote AI", privacy: "/banknote-ai/privacy-policy", terms: "/banknote-ai/terms" },
+  banknotes: { label: "Banknote AI", privacy: "/banknote-ai/privacy-policy", terms: "/banknote-ai/terms" },
+  "insecto-ai": { label: "Insecto AI", privacy: "/insecto-ai/privacy-policy", terms: "/insecto-ai/terms" },
+  insecto: { label: "Insecto AI", privacy: "/insecto-ai/privacy-policy", terms: "/insecto-ai/terms" },
+  "habit-eazy": { label: "Habit Eazy", privacy: "/habit-eazy/privacy-policy", terms: "/habit-eazy/terms" },
+  habiteazy: { label: "Habit Eazy", privacy: "/habit-eazy/privacy-policy", terms: "/habit-eazy/terms" },
+  rockzy: { label: "Rockzy", privacy: "/rockzy/privacy-policy", terms: "/rockzy/terms" },
 };
 
 function getAppLegal(pathname: string) {
@@ -40,7 +41,7 @@ function getAppLegal(pathname: string) {
 const FEEDBACK_URL = 'https://forms.gle/pcmnfivhJZnr6Ybb9';
 
 export default function Footer() {
-  const { pathname } = useLocation();
+  const { pathname } = useRouter();
   const appLegal = getAppLegal(pathname);
 
   return (
@@ -66,7 +67,7 @@ export default function Footer() {
 
           <div className="flex items-center gap-3">
             <Link
-              to="/help"
+              href="/help"
               onClick={() => window.scrollTo(0, 0)}
               className="inline-flex items-center h-9 px-5 rounded-xl bg-primary-foreground text-primary text-sm font-semibold transition-opacity hover:opacity-90"
             >
@@ -88,7 +89,7 @@ export default function Footer() {
           {appLegal ? (
             <>
               <Link
-                to={appLegal.privacy}
+                href={appLegal.privacy}
                 onClick={() => window.scrollTo(0, 0)}
                 className="hover:text-primary-foreground transition-colors"
               >
@@ -96,7 +97,7 @@ export default function Footer() {
               </Link>
               <span className="hidden sm:inline">·</span>
               <Link
-                to={appLegal.terms}
+                href={appLegal.terms}
                 onClick={() => window.scrollTo(0, 0)}
                 className="hover:text-primary-foreground transition-colors"
               >
@@ -106,7 +107,7 @@ export default function Footer() {
           ) : (
             <>
               <Link
-                to="/privacy-policy"
+                href="/privacy"
                 onClick={() => window.scrollTo(0, 0)}
                 className="hover:text-primary-foreground transition-colors"
               >
@@ -114,7 +115,7 @@ export default function Footer() {
               </Link>
               <span className="hidden sm:inline">·</span>
               <Link
-                to="/terms"
+                href="/trackzio-terms"
                 onClick={() => window.scrollTo(0, 0)}
                 className="hover:text-primary-foreground transition-colors"
               >
