@@ -17,17 +17,29 @@ const socialLinks = [
   )},
 ];
 
-/** Legal links keyed by `appData` app id (exact match for `/apps/[appId]`). */
+/** Legal links keyed by `appData` app id (exact match for `/apps/[appId]`). Canonical store-style URLs. */
 const appLegalByAppId: Record<string, { label: string; privacy: string; terms: string }> = {
-  coinzy: { label: "Coinzy", privacy: "/coinzy/privacy-policy", terms: "/coinzy/terms" },
-  banknotes: { label: "Banknote AI", privacy: "/banknote-ai/privacy-policy", terms: "/banknote-ai/terms" },
-  insecto: { label: "Insecto AI", privacy: "/insecto-ai/privacy-policy", terms: "/insecto-ai/terms" },
-  habiteazy: { label: "Habit Eazy", privacy: "/habit-eazy/privacy-policy", terms: "/habit-eazy/terms" },
-  rockzy: { label: "Rockzy", privacy: "/rockzy/privacy-policy", terms: "/rockzy/terms" },
+  coinzy: { label: "Coinzy", privacy: "/privacy-policy-coinzy", terms: "/coinzy%3A-terms" },
+  banknotes: { label: "Banknote AI", privacy: "/privacy-policy-banknote", terms: "/banknote-terms" },
+  insecto: { label: "Insecto AI", privacy: "/privacy-policy-insecto-ai-1", terms: "/terms-for-insecto-ai" },
+  habiteazy: { label: "Habit Eazy", privacy: "/privacy-policy-habit-eazy-1", terms: "/habit-eazy%3A-terms" },
+  rockzy: { label: "Rockzy", privacy: "/privacy-policy-rockzy-ai", terms: "/rockzy-terms-of-service" },
 };
 
-/** For non–app-detail URLs, match longer keys first so e.g. `banknotes` wins over `banknote`. */
-const appLegalPathSegments: { segment: string; legal: (typeof appLegalByAppId)["coinzy"] }[] = [
+type AppLegalEntry = (typeof appLegalByAppId)["coinzy"];
+
+/** When not on `/apps/[appId]`, infer app from path (canonical slugs first, then nested routes). */
+const appLegalPathSegments: { segment: string; legal: AppLegalEntry }[] = [
+  { segment: "privacy-policy-banknote", legal: appLegalByAppId.banknotes },
+  { segment: "banknote-terms", legal: appLegalByAppId.banknotes },
+  { segment: "privacy-policy-coinzy", legal: appLegalByAppId.coinzy },
+  { segment: "coinzy:", legal: appLegalByAppId.coinzy },
+  { segment: "privacy-policy-habit-eazy-1", legal: appLegalByAppId.habiteazy },
+  { segment: "habit-eazy:", legal: appLegalByAppId.habiteazy },
+  { segment: "privacy-policy-insecto-ai-1", legal: appLegalByAppId.insecto },
+  { segment: "terms-for-insecto-ai", legal: appLegalByAppId.insecto },
+  { segment: "privacy-policy-rockzy-ai", legal: appLegalByAppId.rockzy },
+  { segment: "rockzy-terms-of-service", legal: appLegalByAppId.rockzy },
   { segment: "banknote-ai", legal: appLegalByAppId.banknotes },
   { segment: "insecto-ai", legal: appLegalByAppId.insecto },
   { segment: "habit-eazy", legal: appLegalByAppId.habiteazy },
@@ -38,13 +50,18 @@ const appLegalPathSegments: { segment: string; legal: (typeof appLegalByAppId)["
   { segment: "rockzy", legal: appLegalByAppId.rockzy },
 ];
 
-function normalizePath(pathname: string, asPath: string): string {
-  const noQuery = asPath.split("?")[0].split("#")[0];
-  return pathname || noQuery || "";
+/**
+ * Use the real URL path for legal matching. Next.js sets `pathname` to the route *pattern*
+ * for dynamic segments (e.g. `/apps/[appId]`), not `/apps/coinzy`, so `asPath` is required
+ * to show the correct app in the footer on app detail pages.
+ */
+function getPathForLegalMatching(pathname: string, asPath: string): string {
+  const cleaned = asPath.split("?")[0].split("#")[0];
+  return cleaned || pathname || "";
 }
 
 function getAppLegal(pathname: string, asPath: string) {
-  const path = normalizePath(pathname, asPath);
+  const path = getPathForLegalMatching(pathname, asPath);
   if (!path) return null;
 
   const appsMatch = path.match(/^\/apps\/([^/]+)/);

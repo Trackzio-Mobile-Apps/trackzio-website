@@ -1,2 +1,3 @@
-/coinzy:-terms /coinzy/terms 301
-/habit-eazy:-terms /habit-eazy/terms 301
+# Decoded colon paths → encoded canonical (same as middleware.ts); next hop is next.config → page file.
+/coinzy:-terms /coinzy%3A-terms 301
+/habit-eazy:-terms /habit-eazy%3A-terms 301

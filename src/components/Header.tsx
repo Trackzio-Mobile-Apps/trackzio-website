@@ -39,13 +39,33 @@ const navItems = [
 ];
 
 
+function scrollToAppsSection() {
+  document.getElementById("apps")?.scrollIntoView({ behavior: "smooth" });
+}
+
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileAppsOpen, setMobileAppsOpen] = useState(false);
-  const { pathname } = useRouter();
+  const { pathname, push } = useRouter();
   const megaMenuApps = useMemo(() => buildMegaMenuApps(), []);
   const dropdownTimer = useRef<ReturnType<typeof setTimeout>>();
+
+  /** Same behavior as hero “Explore Our Apps”: go to home #apps and smooth-scroll. */
+  const navigateToAppsSection = () => {
+    trackEvent("header_explore_apps", { page_name: pathname });
+    setDropdownOpen(false);
+    setOpen(false);
+    if (pathname === "/") {
+      scrollToAppsSection();
+    } else {
+      void push("/").then(() => {
+        window.requestAnimationFrame(() => {
+          setTimeout(scrollToAppsSection, 50);
+        });
+      });
+    }
+  };
 
   const handleDropdownEnter = () => {
     clearTimeout(dropdownTimer.current);
@@ -118,10 +138,7 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <button
             type="button"
-            onClick={() => {
-              setDropdownOpen((prev) => !prev);
-              trackEvent("header_explore_apps", { page_name: pathname });
-            }}
+            onClick={navigateToAppsSection}
             className="hidden sm:inline-flex h-9 px-4 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-semibold transition-all hover:opacity-90 glow"
           >
             Explore Apps
@@ -259,10 +276,7 @@ export default function Header() {
               )}
               <button
                 type="button"
-                onClick={() => {
-                  setMobileAppsOpen((prev) => !prev);
-                  trackEvent("header_explore_apps", { page_name: pathname });
-                }}
+                onClick={navigateToAppsSection}
                 className="mt-2 flex h-10 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-semibold"
               >
                 Explore Apps

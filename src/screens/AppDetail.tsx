@@ -179,11 +179,11 @@ const appFaqs: Record<string, { q: string; a: string }[]> = {
 };
 
 const appLegalLinks: Record<string, { privacy: string; terms: string }> = {
-  coinzy: { privacy: "/coinzy/privacy-policy", terms: "/coinzy/terms" },
-  banknotes: { privacy: "/banknote-ai/privacy-policy", terms: "/banknote-ai/terms" },
-  insecto: { privacy: "/insecto-ai/privacy-policy", terms: "/insecto-ai/terms" },
-  habiteazy: { privacy: "/habit-eazy/privacy-policy", terms: "/habit-eazy/terms" },
-  rockzy: { privacy: "/rockzy/privacy-policy", terms: "/rockzy/terms" },
+  coinzy: { privacy: "/privacy-policy-coinzy", terms: "/coinzy%3A-terms" },
+  banknotes: { privacy: "/privacy-policy-banknote", terms: "/banknote-terms" },
+  insecto: { privacy: "/privacy-policy-insecto-ai-1", terms: "/terms-for-insecto-ai" },
+  habiteazy: { privacy: "/privacy-policy-habit-eazy-1", terms: "/habit-eazy%3A-terms" },
+  rockzy: { privacy: "/privacy-policy-rockzy-ai", terms: "/rockzy-terms-of-service" },
 };
 
 // Feature bullet points per app
