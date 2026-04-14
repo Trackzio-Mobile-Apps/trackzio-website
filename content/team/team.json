@@ -16,14 +16,6 @@
     "published": true
   },
   {
-    "slug": "shreyans-jain",
-    "name": "Shreyans Jain",
-    "role": "Senior React Native Engineer – Founding Member",
-    "linkedin": "https://www.linkedin.com/in/shreyans-jain-8396b6245",
-    "image": "/content/team/shreyans-jain.png",
-    "published": true
-  },
-  {
     "slug": "abhishek-p-anand",
     "name": "Abhishek P Anand",
     "role": "Founding Product (UI/UX) Designer",
@@ -31,7 +23,14 @@
     "image": "/content/team/abhishek-anand.jpeg",
     "published": true
   },
-
+  {
+    "slug": "shreyans-jain",
+    "name": "Shreyans Jain",
+    "role": "Senior React Native Engineer – Founding Member",
+    "linkedin": "https://www.linkedin.com/in/shreyans-jain-8396b6245",
+    "image": "/content/team/shreyans-jain.png",
+    "published": true
+  },
   {
     "slug": "chitvan-singhal",
     "name": "Chitvan Singhal",
