@@ -2,10 +2,11 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from "next/link";
 import { ArrowRight, Check } from 'lucide-react';
-import { apps } from '@/lib/appData';
+import { getClientApps } from "@/lib/content/apps-client";
 import { trackEvent } from "@/lib/analytics";
 import { imageSrc } from "@/lib/imageSrc";
 
+const apps = getClientApps();
 const showcaseApps = apps.map((app, i) => ({
   ...app,
   floatDelay: i * 0.4,

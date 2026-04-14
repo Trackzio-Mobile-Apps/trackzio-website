@@ -1,7 +1,7 @@
+"use client";
+
 import { useState, useRef, useEffect } from 'react';
-import { useRouter } from "next/router";
 import { motion } from 'framer-motion';
-import { getApp } from '@/lib/appData';
 import { trackEvent } from '@/lib/analytics';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -13,6 +13,7 @@ import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight } from 'lucid
 import PlatformDownloadButtons from '@/components/PlatformDownloadButtons';
 import FeatureShowcase from '@/components/FeatureShowcase';
 import OtherAppsCarousel from '@/components/OtherAppsCarousel';
+import type { AppContent } from "@/lib/content/apps";
 import {
   Accordion,
   AccordionContent,
@@ -297,19 +298,13 @@ showcaseFeatures['rockzy'] = [
 ];
 
 type AppDetailProps = {
-  /** Passed from getStaticProps so SSR matches first client paint (avoids hydration mismatch). */
-  appId?: string;
+  app: AppContent;
 };
 
-export default function AppDetail({ appId: appIdProp }: AppDetailProps) {
-  const router = useRouter();
-  const appIdFromRouter = typeof router.query.appId === "string" ? router.query.appId : "";
-  const appId = appIdProp ?? appIdFromRouter;
-  const app = getApp(appId);
-
+export default function AppDetail({ app }: AppDetailProps) {
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [appId]);
+  }, [app.id]);
   const isMobile = useIsMobile();
   const [showAllFaqs, setShowAllFaqs] = useState(false);
   const reviewsRef = useRef<HTMLDivElement>(null);
@@ -318,7 +313,7 @@ export default function AppDetail({ appId: appIdProp }: AppDetailProps) {
 
   const autoScrollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const appId2 = app?.id || '';
+  const appId2 = app.id;
   usePageAnalytics(appId2, pageViewEvents[appId2] || 'page_view');
 
   useEffect(() => {
@@ -356,18 +351,15 @@ export default function AppDetail({ appId: appIdProp }: AppDetailProps) {
     };
   }, []);
 
-  useEffect(() => {
-    if (!router.isReady) return;
-    if (!getApp(appId)) void router.replace("/");
-  }, [router.isReady, router, appId]);
-
-  if (!app) return null;
-
   const platform = getPlatform();
   const faqs = appFaqs[app.id] || [];
   const reviews = appReviews[app.id] || [];
   const visibleFaqs = showAllFaqs ? faqs : faqs.slice(0, 3);
-  const bullets = featureBullets[app.id] || {};
+  const showcaseFromContent = app.screenshots.map((s, index) => ({
+    screenshot: s,
+    title: app.features[index] || `Feature ${index + 1}`,
+    description: app.longDescription || app.description,
+  }));
 
   const handleDownload = () => {
     const url = getDownloadUrl(app.iosUrl, app.androidUrl);
@@ -409,6 +401,7 @@ export default function AppDetail({ appId: appIdProp }: AppDetailProps) {
               {app.name}
             </h1>
             <p className="mt-3 text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">{app.description}</p>
+            <p className="mt-2 text-base text-muted-foreground/90 max-w-2xl mx-auto leading-relaxed">{app.longDescription}</p>
 
             {/* Download section */}
             <div className="mt-6 flex flex-col items-center gap-4">
@@ -434,13 +427,25 @@ export default function AppDetail({ appId: appIdProp }: AppDetailProps) {
       </section>
 
       {/* ── 2. Feature Showcase — Premium Phone Mockup Carousel ── */}
-      {showcaseFeatures[app.id] && showcaseFeatures[app.id].length > 0 && (
-        <FeatureShowcase features={showcaseFeatures[app.id]} accentHsl={app.accentHsl} />
+      {showcaseFromContent.length > 0 && (
+        <FeatureShowcase features={showcaseFromContent} accentHsl={app.accentHsl} />
       )}
 
-
-
-
+      <section className="py-20 sm:py-24 snap-start">
+        <div className="container-site w-full">
+          <motion.div {...fadeUp} className="text-center mb-12">
+            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Features</p>
+            <h2 className="text-3xl sm:text-4xl font-bold font-display">What you can do</h2>
+          </motion.div>
+          <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {app.features.map((feature) => (
+              <div key={feature} className="rounded-2xl bg-card px-6 py-5" style={{ boxShadow: "var(--shadow-card)" }}>
+                <p className="text-sm sm:text-base font-medium text-foreground">{feature}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       {/* ── 4. Reviews — Horizontal Carousel with 4 cards ── */}
       <section className="py-20 sm:py-24 snap-start">
         <div className="container-site w-full">
@@ -517,12 +522,12 @@ export default function AppDetail({ appId: appIdProp }: AppDetailProps) {
             <h2 className="text-3xl sm:text-4xl font-bold font-display">{app.name} in numbers</h2>
           </motion.div>
 
-          <div className={`grid gap-8 max-w-3xl mx-auto ${[app.stats.downloads, app.stats.rating, app.stats.dau].filter(Boolean).length === 1 ? 'grid-cols-1 max-w-md' : 'grid-cols-3'}`}>
+          <div className="grid gap-8 max-w-3xl mx-auto grid-cols-1 sm:grid-cols-3">
             {[
-              { value: app.stats.downloads, label: 'Total Downloads' },
-              { value: app.stats.rating, label: 'Average Rating' },
-              { value: app.stats.dau, label: 'Total Active Users' },
-            ].filter(stat => stat.value).map((stat, i) => (
+              { value: app.stats.downloads || "Coming soon", label: 'Total Downloads' },
+              { value: app.stats.rating || "Coming soon", label: 'Average Rating' },
+              { value: app.stats.dau || "Coming soon", label: 'Total Active Users' },
+            ].map((stat, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, scale: 0.9 }}

@@ -1,20 +1,8 @@
 import { motion } from 'framer-motion';
 import { usePageAnalytics } from "@/hooks/usePageAnalytics";
 import { imageSrc } from "@/lib/imageSrc";
+import { getTeamMembers } from "@/lib/content/team";
 import { Linkedin } from 'lucide-react';
-
-// Team photos
-import aishikImg from '@/assets/team/aishik-kirtaniya.jpg';
-import shreyansImg from '@/assets/team/shreyans-jain.png';
-import preethamImg from '@/assets/team/preetham-reddy.jpg';
-import ijaazImg from '@/assets/team/ijaaz-ahamed.jpeg';
-import burhanuddinImg from '@/assets/team/burhanuddin-makda.png';
-import jayaKrishnaImg from '@/assets/team/jaya-krishna.jpg';
-import chitvanImg from '@/assets/team/chitvan-singhal.jpg';
-import aayushyaImg from '@/assets/team/aayushya-aggarwal.jpg';
-import sayanImg from '@/assets/team/sayan-chakrabarti.jpeg';
-import abhishekImg from '@/assets/team/abhishek-anand.jpeg';
-import vigneshImg from '@/assets/team/vignesh-raja.jpeg';
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -47,19 +35,7 @@ const journeyBlocks = [
   }
 ];
 
-const teamMembers = [
-  { name: 'Aayushya Aggarwal', role: 'Founder', linkedin: 'https://www.linkedin.com/in/aayushya-aggarwal-a61250ab/', photo: aayushyaImg },
-  { name: 'Sayan Chakrabarti', role: 'Lead Engineer – Backend, Founding Member', linkedin: 'https://www.linkedin.com/in/sayanriju/', photo: sayanImg },
-  { name: 'Abhishek P Anand', role: 'Founding Product (UI/UX) Designer', linkedin: 'https://www.linkedin.com/in/abhishekpanand/', photo: abhishekImg },
-  { name: 'Shreyans Jain', role: 'Senior React Native Engineer – Founding Member', linkedin: 'https://www.linkedin.com/in/shreyans-jain-8396b6245', photo: shreyansImg },
-  { name: 'Chitvan Singhal', role: 'Backend Engineer – Founding Member', linkedin: 'https://in.linkedin.com/in/chitvan-singhal-26550b198', photo: chitvanImg },
-  { name: 'Burhanuddin Makda', role: 'Senior Software Developer', linkedin: 'https://www.linkedin.com/in/burhanuddin-makda-865a48103', photo: burhanuddinImg },
-  { name: 'Ijaaz Ahamed', role: 'Senior React Native Engineer', linkedin: 'https://www.linkedin.com/in/ijaazahamed', photo: ijaazImg },
-  { name: 'Koppala Sai Preetham Reddy', role: 'Web Scraping and LLM Enrichment Engineer', linkedin: 'https://in.linkedin.com/in/preethamkoppala', photo: preethamImg },
-  { name: 'Aishik Kirtaniya', role: 'Android Engineer', linkedin: 'https://in.linkedin.com/in/aishik-k-0030b516a', photo: aishikImg },
-  { name: 'Jaya Krishna Cheemala', role: 'iOS Developer', linkedin: 'https://www.linkedin.com/in/jayakrishna-cheemala0540', photo: jayaKrishnaImg },
-  { name: 'Vignesh R', role: 'QA Engineer – Founding Member', linkedin: 'https://www.linkedin.com/in/vignesh217', photo: vigneshImg },
-];
+const teamMembers = getTeamMembers();
 
 export default function About() {
   usePageAnalytics('about', 'about us_page_view');
@@ -197,16 +173,16 @@ export default function About() {
           <div className="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 max-w-6xl mx-auto">
             {teamMembers.map((member, i) => (
               <motion.div
-                key={member.name}
+                key={member.slug}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: Math.min(i * 0.07, 0.5) }}
                 className="group relative aspect-[3/4] max-w-md min-[480px]:max-w-none mx-auto min-[480px]:mx-0 w-full rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer transition-shadow duration-300 hover:shadow-xl focus-within:ring-2 focus-within:ring-primary/40 focus-within:ring-offset-2 focus-within:ring-offset-background"
               >
-                {member.photo ? (
+                {member.image ? (
                   <img
-                    src={imageSrc(member.photo)}
+                    src={imageSrc(member.image)}
                     alt={member.name}
                     className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />

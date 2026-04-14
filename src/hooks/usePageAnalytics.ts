@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { useRouter } from "next/router";
 import { trackScroll50, trackPagePerformance } from "@/lib/analytics";
+import { useSitePathname } from "@/contexts/SiteRouterContext";
 
 export function usePageAnalytics(pageName: string, eventName: string) {
-  const { asPath } = useRouter();
+  const pathname = useSitePathname();
 
   useEffect(() => {
     import("@/lib/analytics").then(({ trackEvent }) => {
@@ -14,5 +14,5 @@ export function usePageAnalytics(pageName: string, eventName: string) {
     trackPagePerformance(pageName);
 
     return cleanup;
-  }, [asPath, pageName, eventName]);
+  }, [pathname, pageName, eventName]);
 }

@@ -3,6 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   redirects: async () => [
     { source: "/apps", destination: "/#apps", permanent: false },
+    { source: "/apps/banknote-ai", destination: "/apps/banknotes", permanent: true },
+    { source: "/apps/habit-eazy", destination: "/apps/habiteazy", permanent: true },
     { source: "/privacy-policy", destination: "/privacy", permanent: true },
     { source: "/terms", destination: "/trackzio-terms", permanent: true },
     { source: "/privacy-policy-banknote", destination: "/banknote-ai/privacy-policy", permanent: true },

@@ -1,7 +1,7 @@
 import Link, { type LinkProps } from "next/link";
-import { useRouter } from "next/router";
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
+import { useSitePathname } from "@/contexts/SiteRouterContext";
 
 type NavLinkProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href"> &
   Pick<LinkProps, "href"> & {
@@ -11,9 +11,12 @@ type NavLinkProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href"> 
 
 const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(
   ({ className, activeClassName, pendingClassName, href, ...props }, ref) => {
-    const { asPath } = useRouter();
+    const pathname = useSitePathname();
     const path = typeof href === "string" ? href : href.pathname ?? "";
-    const isActive = path === "/" ? asPath === "/" : asPath === path || asPath.startsWith(`${path}/`);
+    const isActive =
+      path === "/"
+        ? pathname === "/"
+        : pathname === path || pathname.startsWith(`${path}/`);
 
     return (
       <Link

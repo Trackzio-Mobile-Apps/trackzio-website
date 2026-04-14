@@ -1,9 +1,10 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import type { Metadata } from "next";
 import { remark } from "remark";
 import remarkHtml from "remark-html";
-import { blogFrontmatterSchema, type BlogFrontmatter } from "./schemas";
+import { blogFrontmatterSchema, formatZodError, type BlogFrontmatter } from "./schemas";
 
 const blogsDir = path.join(process.cwd(), "content/blogs");
 
@@ -27,11 +28,12 @@ function parseMarkdownFile(filePath: string): { data: BlogFrontmatter; body: str
   const { data, content } = matter(raw);
   const parsed = blogFrontmatterSchema.safeParse(data);
   if (!parsed.success) {
-    throw new Error(`Invalid frontmatter in ${filePath}: ${parsed.error.message}`);
+    throw new Error(`Invalid frontmatter in ${filePath}:\n${formatZodError(parsed.error)}`);
   }
   return { data: parsed.data, body: content };
 }
 
+/** All published posts, newest first (by `date` ISO string). */
 export function getAllBlogs(): BlogSummary[] {
   const items: BlogSummary[] = [];
   for (const file of listMarkdownFiles()) {
@@ -46,6 +48,44 @@ export function getAllBlogs(): BlogSummary[] {
 export async function markdownToHtml(markdown: string): Promise<string> {
   const file = await remark().use(remarkHtml).process(markdown);
   return String(file);
+}
+
+/** Frontmatter only (no HTML). Used for SEO metadata without running the full markdown pipeline twice. */
+export function getBlogFrontmatterBySlug(slug: string): BlogFrontmatter | null {
+  const filePath = path.join(blogsDir, `${slug}.md`);
+  if (!fs.existsSync(filePath)) return null;
+  try {
+    const { data } = parseMarkdownFile(filePath);
+    if (!data.published) return null;
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+/** Next.js Metadata for `/blog/[slug]` (App Router). */
+export function getBlogMetadata(slug: string): Metadata {
+  const post = getBlogFrontmatterBySlug(slug);
+  if (!post) {
+    return { title: "Not found" };
+  }
+  return {
+    title: post.title,
+    description: post.excerpt || post.title,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt || post.title,
+      type: "article",
+      publishedTime: post.date,
+      images: [{ url: post.image }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt || post.title,
+      images: [post.image],
+    },
+  };
 }
 
 export async function getBlogBySlug(slug: string): Promise<BlogPost | null> {

@@ -2,9 +2,11 @@ import { useEffect, useRef, useCallback, useState, useMemo } from 'react';
 import Link from "next/link";
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
-import { apps } from '@/lib/appData';
+import { getClientApps } from "@/lib/content/apps-client";
 import { trackEvent } from "@/lib/analytics";
 import { imageSrc } from "@/lib/imageSrc";
+
+const apps = getClientApps();
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },

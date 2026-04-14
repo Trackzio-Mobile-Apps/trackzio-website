@@ -23,4 +23,27 @@ export default tseslint.config(
       "@typescript-eslint/no-unused-vars": "off",
     },
   },
+  {
+    files: ["src/components/**/*.{ts,tsx}", "src/hooks/**/*.{ts,tsx}"],
+    ignores: ["src/components/AppLayoutClient.tsx", "src/components/PagesLayoutClient.tsx"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "next/router",
+              message:
+                "Shared UI/hooks must use SiteRouterContext (useSitePathname/useSiteNavigate) instead of next/router.",
+            },
+            {
+              name: "next/navigation",
+              message:
+                "Shared UI/hooks must use SiteRouterContext (useSitePathname/useSiteNavigate) instead of next/navigation.",
+            },
+          ],
+        },
+      ],
+    },
+  },
 );

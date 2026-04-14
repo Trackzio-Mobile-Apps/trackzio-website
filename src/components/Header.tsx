@@ -1,30 +1,19 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useState, useRef, useEffect, useMemo } from "react";
+import { useSitePathname, useSiteNavigate } from "@/contexts/SiteRouterContext";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import { motion, AnimatePresence } from "framer-motion";
 import trackzioLogo from "@/assets/trackzio-logo.jpg";
-import { apps } from "@/lib/appData";
-import appsManifest from "../../content/apps/apps.json";
-import type { AppManifestEntry } from "@/lib/content/schemas";
+import { getClientApps } from "@/lib/content/apps-client";
 import { imageSrc } from "@/lib/imageSrc";
 
-const MENU_IDS = ["coinzy", "banknotes", "insecto", "habiteazy", "rockzy"] as const;
-
 function buildMegaMenuApps() {
-  const manifest = appsManifest as AppManifestEntry[];
-  const published = new Set(manifest.filter((m) => m.published).map((m) => m.id));
-  const order = Object.fromEntries(manifest.map((m) => [m.id, m.order]));
-  return MENU_IDS.filter((id) => published.has(id))
-    .map((id) => apps.find((a) => a.id === id))
-    .filter(Boolean)
-    .sort((a, b) => (order[a!.id] ?? 99) - (order[b!.id] ?? 99))
-    .map((app) => ({
-      id: app!.id,
-      name: app!.name,
-      tagline: app!.tagline,
-      logo: imageSrc(app!.logo),
+  return getClientApps().map((app) => ({
+      id: app.id,
+      name: app.name,
+      tagline: app.tagline,
+      logo: imageSrc(app.logo),
       hasPage: true,
     }));
 }
@@ -47,7 +36,8 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileAppsOpen, setMobileAppsOpen] = useState(false);
-  const { pathname, push } = useRouter();
+  const pathname = useSitePathname();
+  const navigate = useSiteNavigate();
   const megaMenuApps = useMemo(() => buildMegaMenuApps(), []);
   const dropdownTimer = useRef<ReturnType<typeof setTimeout>>();
 
@@ -59,7 +49,7 @@ export default function Header() {
     if (pathname === "/") {
       scrollToAppsSection();
     } else {
-      void push("/").then(() => {
+      void Promise.resolve(navigate("/")).then(() => {
         window.requestAnimationFrame(() => {
           setTimeout(scrollToAppsSection, 50);
         });

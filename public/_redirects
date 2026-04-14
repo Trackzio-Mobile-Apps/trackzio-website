@@ -1,3 +1,5 @@
 # Decoded colon paths → encoded canonical (same as middleware.ts); next hop is next.config → page file.
 /coinzy:-terms /coinzy%3A-terms 301
 /habit-eazy:-terms /habit-eazy%3A-terms 301
+/apps/banknote-ai /apps/banknotes 301
+/apps/habit-eazy /apps/habiteazy 301

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Link from "next/link";
 import { motion } from 'framer-motion';
-import { apps } from '@/lib/appData';
+import { getClientApps } from "@/lib/content/apps-client";
 import { trackEvent } from "@/lib/analytics";
 import { imageSrc } from "@/lib/imageSrc";
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
@@ -20,6 +20,8 @@ const metrics = [
   { value: '4+', label: 'Apps Published' },
   { value: '50K+', label: 'Daily Active Users' },
 ];
+
+const apps = getClientApps();
 
 export default function Apps() {
   usePageAnalytics('apps', 'page_view_apps');

@@ -6,6 +6,7 @@ import { ArrowRight, MapPin, Users, Zap, Globe, Palette, ChevronLeft, ChevronRig
 
 import founderPhoto from "@/assets/founder-ayushya.jpg";
 import { imageSrc } from "@/lib/imageSrc";
+import { getPublishedJobs } from "@/lib/content/jobs";
 import cultureTeamCollab from '@/assets/culture/team-collab.jpg';
 import cultureInnovation from '@/assets/culture/innovation.jpg';
 import cultureRemoteWork from '@/assets/culture/remote-work.jpg';
@@ -32,29 +33,7 @@ const cultureImages = [
   { src: cultureTeamFun, alt: 'Team fun outing' },
 ];
 
-const openRoles = [
-  {
-    title: "Data Analyst & Founder's Office Intern",
-    description: 'Help us understand user behavior, optimize AI models, and drive product decisions with data.',
-    location: 'Remote · India',
-    type: 'Internship',
-    applyUrl: 'https://forms.gle/2A5H7bdf7PEohwS78',
-  },
-  {
-    title: 'Product Intern',
-    description: 'Build and maintain cross-platform mobile experiences used by millions of users worldwide.',
-    location: 'Remote · India',
-    type: 'Internship',
-    applyUrl: 'https://forms.gle/rUUzTSfuLh64dPbt6',
-  },
-  {
-    title: 'UI/UX Intern',
-    description: 'Design intuitive, beautiful interfaces that make complex AI features feel simple and delightful.',
-    location: 'Remote · India',
-    type: 'Internship',
-    applyUrl: 'https://forms.gle/grPC7wXqhKjQRoR66',
-  },
-];
+const openRoles = getPublishedJobs();
 
 export default function Careers() {
   usePageAnalytics('careers', 'Career_page_view');
@@ -181,7 +160,7 @@ export default function Careers() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {openRoles.map((role, i) => (
               <motion.div
-                key={i}
+                key={role.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

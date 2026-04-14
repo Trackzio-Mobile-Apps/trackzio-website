@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "data-analyst-founders-office-intern",
+    "title": "Data Analyst & Founder's Office Intern",
+    "description": "Help us understand user behavior, optimize AI models, and drive product decisions with data.",
+    "location": "Remote · India",
+    "type": "Internship",
+    "applyUrl": "https://forms.gle/2A5H7bdf7PEohwS78",
+    "order": 1,
+    "published": true
+  },
+  {
+    "slug": "product-intern",
+    "title": "Product Intern",
+    "description": "Build and maintain cross-platform mobile experiences used by millions of users worldwide.",
+    "location": "Remote · India",
+    "type": "Internship",
+    "applyUrl": "https://forms.gle/rUUzTSfuLh64dPbt6",
+    "order": 2,
+    "published": true
+  },
+  {
+    "slug": "ui-ux-intern",
+    "title": "UI/UX Intern",
+    "description": "Design intuitive, beautiful interfaces that make complex AI features feel simple and delightful.",
+    "location": "Remote · India",
+    "type": "Internship",
+    "applyUrl": "https://forms.gle/grPC7wXqhKjQRoR66",
+    "order": 3,
+    "published": true
+  }
+]

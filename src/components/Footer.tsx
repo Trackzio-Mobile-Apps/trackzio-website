@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { trackEvent } from '@/lib/analytics';
+import { useSitePathname } from "@/contexts/SiteRouterContext";
 
 const socialLinks = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/trackzio-apps/', event: 'footer_linkedin_click', icon: (
@@ -50,18 +50,8 @@ const appLegalPathSegments: { segment: string; legal: AppLegalEntry }[] = [
   { segment: "rockzy", legal: appLegalByAppId.rockzy },
 ];
 
-/**
- * Use the real URL path for legal matching. Next.js sets `pathname` to the route *pattern*
- * for dynamic segments (e.g. `/apps/[appId]`), not `/apps/coinzy`, so `asPath` is required
- * to show the correct app in the footer on app detail pages.
- */
-function getPathForLegalMatching(pathname: string, asPath: string): string {
-  const cleaned = asPath.split("?")[0].split("#")[0];
-  return cleaned || pathname || "";
-}
-
-function getAppLegal(pathname: string, asPath: string) {
-  const path = getPathForLegalMatching(pathname, asPath);
+/** Path must be the real URL path (no query/hash), e.g. `/apps/coinzy`. */
+function getAppLegal(path: string) {
   if (!path) return null;
 
   const appsMatch = path.match(/^\/apps\/([^/]+)/);
@@ -79,8 +69,8 @@ function getAppLegal(pathname: string, asPath: string) {
 const FEEDBACK_URL = 'https://forms.gle/pcmnfivhJZnr6Ybb9';
 
 export default function Footer() {
-  const { pathname, asPath } = useRouter();
-  const appLegal = getAppLegal(pathname, asPath);
+  const pathname = useSitePathname();
+  const appLegal = getAppLegal(pathname);
 
   return (
     <footer className="bg-primary" role="contentinfo">
