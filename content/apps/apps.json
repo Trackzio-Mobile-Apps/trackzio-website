@@ -44,7 +44,7 @@
     "longDescription": "Point your camera at any insect and Insecto will identify it instantly. Get detailed information about species, habitat, behavior, and whether they are beneficial or harmful.",
     "accentHsl": "78 45% 42%",
     "logo": "insecto-logo.png",
-    "iosUrl": null,
+    "iosUrl": "https://apps.apple.com/us/app/rockzy-ai-rock-identifier/id6758651735",
     "androidUrl": "https://play.google.com/store/apps/details?id=com.insect.trackzio&pcampaignid=web_share",
     "stats": { "downloads": "Coming soon", "rating": "4.5+", "dau": "Coming soon" },
     "features": ["AI Identification", "Explore by Category", "Detailed Profiles", "Build Collection"],
