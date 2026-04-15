@@ -527,6 +527,36 @@
         "quote": "No manual page file needed, and legal links still open correctly.",
         "author": "Tester Two",
         "rating": 4
+      },
+      {
+        "quote": "App detail page loaded all sections and legal links without any fallback errors.",
+        "author": "Ritika Verma",
+        "rating": 5
+      },
+      {
+        "quote": "Screenshots carousel handled larger data smoothly and image order looked correct.",
+        "author": "Aman Patel",
+        "rating": 4
+      },
+      {
+        "quote": "FAQ expansion and collapse behavior remains stable even with more entries.",
+        "author": "Nitin Kumar",
+        "rating": 5
+      },
+      {
+        "quote": "Store URL and internal route both resolve to the expected legal content.",
+        "author": "Meera Shah",
+        "rating": 5
+      },
+      {
+        "quote": "Analytics event fields from legal frontmatter are rendering with no runtime issue.",
+        "author": "Sana Ali",
+        "rating": 4
+      },
+      {
+        "quote": "Excellent for testing new-app onboarding end-to-end before release.",
+        "author": "Karan Joshi",
+        "rating": 5
       }
     ],
     "faqs": [
@@ -541,6 +571,34 @@
       {
         "q": "Can I delete this after QA?",
         "a": "Yes. Remove test-app-legal-2 from apps.json, app-details.json, legal markdown, and legal URL mapping files."
+      },
+      {
+        "q": "Are the numbers on this app real?",
+        "a": "They are realistic QA values used to validate UI formatting and metric rendering."
+      },
+      {
+        "q": "Why does this app have ten screenshots?",
+        "a": "To test long screenshot sequences, scrolling behavior, and responsive layout stability."
+      },
+      {
+        "q": "Can legal pages work without creating manual route files?",
+        "a": "Yes. Dynamic routes generate legal pages automatically for new app ids that have privacy.md and terms.md."
+      },
+      {
+        "q": "What happens if legal markdown is missing?",
+        "a": "Validation and/or build should fail depending on the missing content and route requirements."
+      },
+      {
+        "q": "Does the footer detect this app automatically?",
+        "a": "Yes, once the app id exists in apps content and legal URL mappings, footer links resolve dynamically."
+      },
+      {
+        "q": "Can we use this app to test deployment previews?",
+        "a": "Yes. It is intentionally built for preview and production sanity checks of content flow."
+      },
+      {
+        "q": "Should this app go live permanently?",
+        "a": "Only if you want a persistent QA fixture. Otherwise remove it before production cleanup."
       }
     ],
     "reviewSummary": {
