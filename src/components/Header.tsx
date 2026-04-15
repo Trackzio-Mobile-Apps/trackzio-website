@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { useSitePathname, useSiteNavigate } from "@/contexts/SiteRouterContext";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import { motion, AnimatePresence } from "framer-motion";
 import trackzioLogo from "@/assets/trackzio-logo.jpg";
@@ -36,10 +36,22 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileAppsOpen, setMobileAppsOpen] = useState(false);
+  const [desktopAppsPage, setDesktopAppsPage] = useState(0);
+  const [mobileAppsPage, setMobileAppsPage] = useState(0);
   const pathname = useSitePathname();
   const navigate = useSiteNavigate();
   const megaMenuApps = useMemo(() => buildMegaMenuApps(), []);
   const dropdownTimer = useRef<ReturnType<typeof setTimeout>>();
+  const appsPerPage = 6;
+  const totalAppsPages = Math.max(1, Math.ceil(megaMenuApps.length / appsPerPage));
+  const desktopVisibleApps = megaMenuApps.slice(
+    desktopAppsPage * appsPerPage,
+    desktopAppsPage * appsPerPage + appsPerPage,
+  );
+  const mobileVisibleApps = megaMenuApps.slice(
+    mobileAppsPage * appsPerPage,
+    mobileAppsPage * appsPerPage + appsPerPage,
+  );
 
   /** Same behavior as hero “Explore Our Apps”: go to home #apps and smooth-scroll. */
   const navigateToAppsSection = () => {
@@ -70,6 +82,14 @@ export default function Header() {
     return () => clearTimeout(dropdownTimer.current);
   }, []);
 
+  useEffect(() => {
+    if (!dropdownOpen) setDesktopAppsPage(0);
+  }, [dropdownOpen]);
+
+  useEffect(() => {
+    if (!mobileAppsOpen) setMobileAppsPage(0);
+  }, [mobileAppsOpen]);
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/40">
       <div className="container-site flex h-16 items-center justify-between">
@@ -93,6 +113,7 @@ export default function Header() {
                   onClick={(e) => {
                     e.preventDefault();
                     setDropdownOpen((prev) => !prev);
+                    setDesktopAppsPage(0);
                     item.event && trackEvent(item.event, { page_name: pathname });
                   }}
                   className={`inline-flex items-center gap-1 px-3 py-2 text-sm rounded-md transition-colors ${
@@ -164,9 +185,33 @@ export default function Header() {
             onMouseLeave={handleDropdownLeave}
           >
             <div className="p-6">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/70 mb-4 px-1">Our Apps</p>
+              <div className="mb-4 px-1 flex items-center justify-between gap-2">
+                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/70">Our Apps</p>
+                {megaMenuApps.length > appsPerPage && (
+                  <div className="flex items-center gap-1">
+                    <button
+                      type="button"
+                      aria-label="Previous apps"
+                      onClick={() => setDesktopAppsPage((p) => Math.max(0, p - 1))}
+                      disabled={desktopAppsPage === 0}
+                      className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-border/50 text-muted-foreground disabled:opacity-40 disabled:cursor-not-allowed hover:bg-muted/50"
+                    >
+                      <ChevronLeft size={14} />
+                    </button>
+                    <button
+                      type="button"
+                      aria-label="Next apps"
+                      onClick={() => setDesktopAppsPage((p) => Math.min(totalAppsPages - 1, p + 1))}
+                      disabled={desktopAppsPage >= totalAppsPages - 1}
+                      className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-border/50 text-muted-foreground disabled:opacity-40 disabled:cursor-not-allowed hover:bg-muted/50"
+                    >
+                      <ChevronRight size={14} />
+                    </button>
+                  </div>
+                )}
+              </div>
               <div className="grid grid-cols-3 gap-2">
-                {megaMenuApps.map((app) => (
+                {desktopVisibleApps.map((app) => (
                   <Link
                     key={app.id}
                     href={`/apps/${app.id}`}
@@ -184,6 +229,11 @@ export default function Header() {
                   </Link>
                 ))}
               </div>
+              {megaMenuApps.length > appsPerPage && (
+                <div className="mt-3 text-center text-xs text-muted-foreground">
+                  {desktopAppsPage + 1} / {totalAppsPages}
+                </div>
+              )}
             </div>
           </motion.div>
         )}
@@ -208,6 +258,7 @@ export default function Header() {
                       type="button"
                       onClick={() => {
                         setMobileAppsOpen((prev) => !prev);
+                        setMobileAppsPage(0);
                         item.event && trackEvent(item.event, { page_name: pathname });
                       }}
                       className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-muted-foreground hover:text-primary"
@@ -224,8 +275,30 @@ export default function Header() {
                           transition={{ duration: 0.2 }}
                           className="overflow-hidden"
                         >
+                          {megaMenuApps.length > appsPerPage && (
+                            <div className="flex items-center justify-end gap-1 px-2 pt-1">
+                              <button
+                                type="button"
+                                aria-label="Previous apps"
+                                onClick={() => setMobileAppsPage((p) => Math.max(0, p - 1))}
+                                disabled={mobileAppsPage === 0}
+                                className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-border/50 text-muted-foreground disabled:opacity-40 disabled:cursor-not-allowed"
+                              >
+                                <ChevronLeft size={14} />
+                              </button>
+                              <button
+                                type="button"
+                                aria-label="Next apps"
+                                onClick={() => setMobileAppsPage((p) => Math.min(totalAppsPages - 1, p + 1))}
+                                disabled={mobileAppsPage >= totalAppsPages - 1}
+                                className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-border/50 text-muted-foreground disabled:opacity-40 disabled:cursor-not-allowed"
+                              >
+                                <ChevronRight size={14} />
+                              </button>
+                            </div>
+                          )}
                           <div className="grid grid-cols-2 gap-1 px-2 py-2">
-                            {megaMenuApps.map((app) => (
+                            {mobileVisibleApps.map((app) => (
                               <Link
                                 key={app.id}
                                 href={`/apps/${app.id}`}
@@ -241,6 +314,11 @@ export default function Header() {
                               </Link>
                             ))}
                           </div>
+                          {megaMenuApps.length > appsPerPage && (
+                            <div className="pb-2 text-center text-xs text-muted-foreground">
+                              {mobileAppsPage + 1} / {totalAppsPages}
+                            </div>
+                          )}
                         </motion.div>
                       )}
                     </AnimatePresence>
