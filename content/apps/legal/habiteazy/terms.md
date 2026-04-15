@@ -2,7 +2,6 @@
 title: "Habiteazy: Habit & To-Do — Terms of Service"
 lastUpdated: "12 March 2026"
 analyticsPage: "habiteazy-terms"
-analyticsEvent: "page_view_habiteazy_terms"
 ---
 
 ## 1. Agreement to Terms

@@ -2,7 +2,6 @@
 title: "Rockzy: AI Rock Identifier — Terms of Service"
 lastUpdated: "2 February 2026"
 analyticsPage: "rockzy-terms"
-analyticsEvent: "page_view_rockzy_terms"
 ---
 
 ## 1. Agreement to Terms

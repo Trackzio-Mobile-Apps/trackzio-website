@@ -44,6 +44,7 @@ Array of:
 - **`slug`** — must equal **`id`** for this project (keeps routing and manifest aligned).
 - **`published`** — if `false`, the app is hidden from loaders that filter published entries.
 - **`order`** — display order (ascending).
+- **`longDescription`** — full app description (used on app cards, detail page, and SEO). There is no separate short `description` field.
 
 ---
 

@@ -5,6 +5,7 @@
     "role": "Founder",
     "linkedin": "https://www.linkedin.com/in/aayushya-aggarwal-a61250ab/",
     "image": "/content/team/aayushya-aggarwal.jpg",
+    "order": 1,
     "published": true
   },
   {
@@ -13,6 +14,7 @@
     "role": "Lead Engineer – Backend, Founding Member",
     "linkedin": "https://www.linkedin.com/in/sayanriju/",
     "image": "/content/team/sayan-chakrabarti.jpeg",
+    "order": 2,
     "published": true
   },
   {
@@ -21,6 +23,7 @@
     "role": "Founding Product (UI/UX) Designer",
     "linkedin": "https://www.linkedin.com/in/abhishekpanand/",
     "image": "/content/team/abhishek-anand.jpeg",
+    "order": 3,
     "published": true
   },
   {
@@ -29,6 +32,7 @@
     "role": "Senior Full Stack Engineer – Founding Member",
     "linkedin": "https://www.linkedin.com/in/shreyans-jain-8396b6245",
     "image": "/content/team/shreyans-jain.png",
+    "order": 4,
     "published": true
   },
   {
@@ -37,6 +41,7 @@
     "role": "Backend Engineer – Founding Member",
     "linkedin": "https://in.linkedin.com/in/chitvan-singhal-26550b198",
     "image": "/content/team/chitvan-singhal.jpg",
+    "order": 5,
     "published": true
   },
   {
@@ -45,6 +50,7 @@
     "role": "Senior Software Developer",
     "linkedin": "https://www.linkedin.com/in/burhanuddin-makda-865a48103",
     "image": "/content/team/burhanuddin-makda.png",
+    "order": 6,
     "published": true
   },
   {
@@ -53,6 +59,7 @@
     "role": "Senior React Native Engineer",
     "linkedin": "https://www.linkedin.com/in/ijaazahamed",
     "image": "/content/team/ijaaz-ahamed.jpeg",
+    "order": 7,
     "published": true
   },
   {
@@ -61,6 +68,7 @@
     "role": "Web Scraping and LLM Enrichment Engineer",
     "linkedin": "https://in.linkedin.com/in/preethamkoppala",
     "image": "/content/team/preetham-reddy.jpg",
+    "order": 8,
     "published": true
   },
   {
@@ -69,6 +77,7 @@
     "role": "Android Engineer",
     "linkedin": "https://in.linkedin.com/in/aishik-k-0030b516a",
     "image": "/content/team/aishik-kirtaniya.jpg",
+    "order": 9,
     "published": true
   },
   {
@@ -77,6 +86,7 @@
     "role": "iOS Developer",
     "linkedin": "https://www.linkedin.com/in/jayakrishna-cheemala0540",
     "image": "/content/team/jaya-krishna.jpg",
+    "order": 10,
     "published": true
   },
   {
@@ -85,6 +95,7 @@
     "role": "QA Engineer – Founding Member",
     "linkedin": "https://www.linkedin.com/in/vignesh217",
     "image": "/content/team/vignesh-raja.jpeg",
+    "order": 11,
     "published": true
   },
   {
@@ -93,6 +104,7 @@
     "role": "UI/UX Designer",
     "linkedin": "https://www.linkedin.com/in/nikitades/",
     "image": "/content/team/nikita-nautiyal.jpeg",
+    "order": 12,
     "published": true
   },
   {
@@ -101,6 +113,7 @@
     "role": "Associate Product Manager",
     "linkedin": "https://www.linkedin.com/in/ashmita-r-s",
     "image": "/content/team/ashmita.jpg",
+    "order": 13,
     "published": true
   }
 ]

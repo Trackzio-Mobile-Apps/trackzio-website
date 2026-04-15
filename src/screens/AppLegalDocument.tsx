@@ -15,7 +15,7 @@ export default function AppLegalDocument({ doc }: { doc?: LegalPageDoc }) {
     return null;
   }
 
-  usePageAnalytics(doc.analyticsPage, doc.analyticsEvent);
+  usePageAnalytics(doc.analyticsPage);
 
   return (
     <section className="section-padding">

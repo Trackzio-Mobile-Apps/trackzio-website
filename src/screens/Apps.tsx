@@ -83,10 +83,10 @@ export default function Apps() {
                     </div>
 
                     <p className={`text-sm text-muted-foreground leading-relaxed mb-2 ${isExpanded ? '' : 'line-clamp-2'}`}>
-                      {app.description}
+                      {app.longDescription}
                     </p>
 
-                    {app.description.length > 100 && (
+                    {app.longDescription.length > 100 && (
                       <button
                         onClick={() => setExpandedApp(isExpanded ? null : app.id)}
                         className="inline-flex items-center gap-1 text-xs font-medium text-primary mb-5 hover:opacity-80 transition-opacity"

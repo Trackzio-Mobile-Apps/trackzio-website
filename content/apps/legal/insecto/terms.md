@@ -2,7 +2,6 @@
 title: "Insecto AI: Bug Identifier — Terms of Service"
 lastUpdated: "4th September 2025"
 analyticsPage: "insecto-terms"
-analyticsEvent: "page_view_insecto_terms"
 ---
 
 ## 1. Agreement to Terms

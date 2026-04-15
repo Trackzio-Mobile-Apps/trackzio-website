@@ -261,7 +261,9 @@ function ContentPanel({ selected, narrow }: { selected: (typeof showcaseApps)[0]
         <p
           className={`text-muted-foreground leading-relaxed ${narrow ? 'mb-4 text-[0.8125rem] leading-relaxed' : 'mb-5 text-sm xl:text-[0.9375rem]'}`}
         >
-          {selected.description.length > 220 ? selected.description.slice(0, 220).trim() + '…' : selected.description}
+          {selected.longDescription.length > 220
+            ? selected.longDescription.slice(0, 220).trim() + '…'
+            : selected.longDescription}
         </p>
 
         <ul className={narrow ? 'space-y-2 mb-5' : 'space-y-2.5 mb-6'}>

@@ -248,7 +248,14 @@ function validateTeam(registry: SlugRef[]) {
   if (new Set(slugs).size !== slugs.length) {
     fail("content/team/team.json: duplicate slug values.");
   }
+  const orders = new Set<number>();
   for (const row of data) {
+    if (row.order != null) {
+      if (orders.has(row.order)) {
+        fail(`content/team/team.json: duplicate order ${row.order} (member slug "${row.slug}").`);
+      }
+      orders.add(row.order);
+    }
     registerSlugs(registry, row.slug, `team.json → ${row.slug} (${row.name})`);
     assertPublicFileExists(row.image, `team "${row.slug}"`);
   }

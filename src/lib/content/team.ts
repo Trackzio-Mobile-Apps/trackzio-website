@@ -10,7 +10,15 @@ function parseTeam(): TeamMemberContent[] {
   return parsed.data;
 }
 
-/** Published team members for the About page (order preserved from JSON). */
+/** Published team members for the About page, sorted by `order` when provided. */
 export function getTeamMembers(): TeamMemberContent[] {
-  return parseTeam().filter((row) => row.published);
+  return parseTeam()
+    .map((row, idx) => ({ row, idx }))
+    .filter(({ row }) => row.published)
+    .sort((a, b) => {
+      const ao = a.row.order ?? Number.MAX_SAFE_INTEGER;
+      const bo = b.row.order ?? Number.MAX_SAFE_INTEGER;
+      return ao - bo || a.idx - b.idx;
+    })
+    .map(({ row }) => row);
 }

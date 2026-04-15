@@ -2,7 +2,6 @@
 title: "Banknotes: Banknote Identification AI — Privacy Policy"
 lastUpdated: "12 March 2026"
 analyticsPage: "banknotes-privacy"
-analyticsEvent: "page_view_banknotes_privacy"
 ---
 
 ## 1. Introduction

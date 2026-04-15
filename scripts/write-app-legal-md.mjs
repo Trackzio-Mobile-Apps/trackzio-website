@@ -31,7 +31,6 @@ const termsTemplate = (opts) => `---
 title: "${opts.title}"
 lastUpdated: "${opts.updated}"
 analyticsPage: "${opts.analyticsPage}"
-analyticsEvent: "${opts.analyticsEvent}"
 ---
 
 ## 1. Agreement to Terms
@@ -101,7 +100,6 @@ const privacyTemplate = (opts) => `---
 title: "${opts.title}"
 lastUpdated: "${opts.updated}"
 analyticsPage: "${opts.analyticsPage}"
-analyticsEvent: "${opts.analyticsEvent}"
 ---
 
 ## 1. Introduction
@@ -156,7 +154,6 @@ write(
 title: "Insecto AI: Bug Identifier — Privacy Policy"
 lastUpdated: "4th September 2025"
 analyticsPage: "insecto-privacy"
-analyticsEvent: "page_view_insecto_privacy"
 ---
 
 ## 1. Introduction
@@ -265,7 +262,6 @@ write(
     title: "Insecto AI: Bug Identifier — Terms of Service",
     updated: "4th September 2025",
     analyticsPage: "insecto-terms",
-    analyticsEvent: "page_view_insecto_terms",
     appName: "Insecto AI: Bug Identifier",
   }),
 );
@@ -278,7 +274,6 @@ write(
 title: "Rockzy: AI Rock Identifier — Terms of Service"
 lastUpdated: "2 February 2026"
 analyticsPage: "rockzy-terms"
-analyticsEvent: "page_view_rockzy_terms"
 ---
 
 ## 1. Agreement to Terms
@@ -373,7 +368,6 @@ write(
     title: "Rockzy: AI Rock Identifier — Privacy Policy",
     updated: "2 February 2026",
     analyticsPage: "rockzy-privacy",
-    analyticsEvent: "page_view_rockzy_privacy",
     appName: "Rockzy: AI Rock Identifier",
   }),
 );
@@ -391,7 +385,6 @@ for (const { id, name, short } of [
       title: `${name} — Privacy Policy`,
       updated: "12 March 2026",
       analyticsPage: `${id}-privacy`,
-      analyticsEvent: `page_view_${id.replace(/-/g, "_")}_privacy`,
       appName: short,
     }),
   );
@@ -402,7 +395,6 @@ for (const { id, name, short } of [
       title: `${name} — Terms of Service`,
       updated: "12 March 2026",
       analyticsPage: `${id}-terms`,
-      analyticsEvent: `page_view_${id.replace(/-/g, "_")}_terms`,
       appName: short,
     }),
   );

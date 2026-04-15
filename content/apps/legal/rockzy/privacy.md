@@ -2,7 +2,6 @@
 title: "Rockzy: AI Rock Identifier — Privacy Policy"
 lastUpdated: "2 February 2026"
 analyticsPage: "rockzy-privacy"
-analyticsEvent: "page_view_rockzy_privacy"
 ---
 
 ## 1. Introduction
