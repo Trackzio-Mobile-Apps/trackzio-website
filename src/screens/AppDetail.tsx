@@ -100,7 +100,7 @@ export default function AppDetail({ app }: AppDetailProps) {
   const showcaseFromContent = app.screenshots.map((s, index) => ({
     screenshot: s,
     title: app.features[index] || `Feature ${index + 1}`,
-    description: app.longDescription || app.description,
+    description: app.longDescription,
   }));
 
   const qrUrl = (() => {
@@ -132,7 +132,6 @@ export default function AppDetail({ app }: AppDetailProps) {
             <h1 className="text-4xl sm:text-5xl font-bold font-display" style={{ color: `hsl(${app.accentHsl})` }}>
               {app.name}
             </h1>
-            <p className="mt-3 text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">{app.description}</p>
             <p className="mt-2 text-base text-muted-foreground/90 max-w-2xl mx-auto leading-relaxed">{app.longDescription}</p>
 
             {/* Download section */}

@@ -6,15 +6,30 @@
     "order": 1,
     "name": "Coinzy",
     "tagline": "Identify coins instantly with AI",
-    "description": "Coinzy uses advanced AI to identify coins from around the world.",
     "longDescription": "Coinzy uses advanced AI to identify coins from around the world. Scan any coin, explore its history, rarity, and estimated value. Build your collection and trade on the marketplace.",
     "accentHsl": "174 60% 35%",
     "logo": "coinzy-logo.png",
     "iosUrl": "https://apps.apple.com/in/app/coinzy-coin-ai-identification/id6752857760",
     "androidUrl": "https://play.google.com/store/apps/details?id=com.coinzy.trackzio&pcampaignid=web_share",
-    "stats": { "downloads": "120K+", "rating": "4.5+", "dau": "30K+" },
-    "features": ["AI Coin Scanner", "Rich History", "Marketplace", "Rarity Analysis"],
-    "screenshots": ["coinzy-1.png", "coinzy-2.png", "coinzy-3.png", "coinzy-4.png", "coinzy-5.png", "coinzy-6.png"]
+    "stats": {
+      "downloads": "120K+",
+      "rating": "4.5+",
+      "dau": "30K+"
+    },
+    "features": [
+      "AI Coin Scanner",
+      "Rich History",
+      "Marketplace",
+      "Rarity Analysis"
+    ],
+    "screenshots": [
+      "coinzy-1.png",
+      "coinzy-2.png",
+      "coinzy-3.png",
+      "coinzy-4.png",
+      "coinzy-5.png",
+      "coinzy-6.png"
+    ]
   },
   {
     "id": "banknotes",
@@ -23,15 +38,30 @@
     "order": 2,
     "name": "Banknotes",
     "tagline": "Scan and identify banknotes from around the world",
-    "description": "Banknotes uses advanced image recognition to identify banknotes from around the world.",
     "longDescription": "Banknotes uses advanced image recognition to identify banknotes from around the world. Learn about currency history, security features, and exchange rates instantly.",
     "accentHsl": "152 55% 32%",
     "logo": "banknotes-logo.png",
     "iosUrl": "https://apps.apple.com/in/app/banknote-identification-ai/id6747063766",
     "androidUrl": "https://play.google.com/store/apps/details?id=com.trackzio.banknote&pcampaignid=web_share",
-    "stats": { "downloads": "40K+", "rating": "4.3+", "dau": "7K+" },
-    "features": ["AI Banknote Scanner", "Global Coverage", "Rarity & Value", "History & Design"],
-    "screenshots": ["banknotes-4.webp", "banknotes-5.webp", "banknotes-6.webp", "banknotes-7.webp", "banknotes-8.webp", "banknotes-9.webp"]
+    "stats": {
+      "downloads": "40K+",
+      "rating": "4.3+",
+      "dau": "7K+"
+    },
+    "features": [
+      "AI Banknote Scanner",
+      "Global Coverage",
+      "Rarity & Value",
+      "History & Design"
+    ],
+    "screenshots": [
+      "banknotes-4.webp",
+      "banknotes-5.webp",
+      "banknotes-6.webp",
+      "banknotes-7.webp",
+      "banknotes-8.webp",
+      "banknotes-9.webp"
+    ]
   },
   {
     "id": "insecto",
@@ -40,15 +70,30 @@
     "order": 3,
     "name": "Insecto",
     "tagline": "Discover insects and learn about them instantly",
-    "description": "Point your camera at any insect and Insecto will identify it instantly.",
     "longDescription": "Point your camera at any insect and Insecto will identify it instantly. Get detailed information about species, habitat, behavior, and whether they are beneficial or harmful.",
     "accentHsl": "78 45% 42%",
     "logo": "insecto-logo.png",
     "iosUrl": null,
     "androidUrl": "https://play.google.com/store/apps/details?id=com.insect.trackzio&pcampaignid=web_share",
-    "stats": { "downloads": "Coming soon", "rating": "4.5+", "dau": "Coming soon" },
-    "features": ["AI Identification", "Explore by Category", "Detailed Profiles", "Build Collection"],
-    "screenshots": ["insecto-1.png", "insecto-2.webp", "insecto-3.webp", "insecto-4.webp", "insecto-5.webp", "insecto-6.webp"]
+    "stats": {
+      "downloads": "Coming soon",
+      "rating": "4.5+",
+      "dau": "Coming soon"
+    },
+    "features": [
+      "AI Identification",
+      "Explore by Category",
+      "Detailed Profiles",
+      "Build Collection"
+    ],
+    "screenshots": [
+      "insecto-1.png",
+      "insecto-2.webp",
+      "insecto-3.webp",
+      "insecto-4.webp",
+      "insecto-5.webp",
+      "insecto-6.webp"
+    ]
   },
   {
     "id": "habiteazy",
@@ -57,15 +102,28 @@
     "order": 4,
     "name": "Habiteazy",
     "tagline": "Build positive habits and stay consistent",
-    "description": "Habiteazy makes habit building simple and rewarding.",
     "longDescription": "Habiteazy makes habit building simple and rewarding. Track your streaks, set reminders, and visualize your progress with beautiful charts and motivational insights.",
     "accentHsl": "270 55% 50%",
     "logo": "habiteazy-logo.png",
     "iosUrl": "https://apps.apple.com/in/app/habit-eazy-habit-to-do-pal/id6738790392",
     "androidUrl": "https://play.google.com/store/apps/details?id=com.progresspal&pcampaignid=web_share",
-    "stats": { "downloads": "250K+", "rating": "4.4+", "dau": "30K+" },
-    "features": ["Streak Tracking", "Smart Scheduling", "Visual Progress", "Fun Companion"],
-    "screenshots": ["habiteazy-1.jpg", "habiteazy-2.webp", "habiteazy-4.jpg", "habiteazy-5.jpg"]
+    "stats": {
+      "downloads": "250K+",
+      "rating": "4.4+",
+      "dau": "30K+"
+    },
+    "features": [
+      "Streak Tracking",
+      "Smart Scheduling",
+      "Visual Progress",
+      "Fun Companion"
+    ],
+    "screenshots": [
+      "habiteazy-1.jpg",
+      "habiteazy-2.webp",
+      "habiteazy-4.jpg",
+      "habiteazy-5.jpg"
+    ]
   },
   {
     "id": "rockzy",
@@ -74,15 +132,29 @@
     "order": 5,
     "name": "Rockzy",
     "tagline": "AI Rock & Mineral Identifier",
-    "description": "Scan, collect, and explore over 8,000+ rocks and minerals with powerful AI tools.",
     "longDescription": "Scan, collect, and explore over 8,000+ rocks and minerals with powerful AI tools. Identify rocks instantly, chat with AI, and build your collection.",
     "accentHsl": "30 70% 45%",
     "logo": "rockzy-logo-new.png",
     "iosUrl": "https://apps.apple.com/us/app/rockzy-ai-rock-identifier/id6758651735",
     "androidUrl": "https://play.google.com/store/apps/details?id=com.trackzio.minerals&pcampaignid=web_share",
-    "stats": { "downloads": "Coming soon", "rating": "4.5+", "dau": "Coming soon" },
-    "features": ["AI Rock Identification", "AI Chat Assistant", "Collection Tracking", "Global Mineral Catalogue"],
-    "screenshots": ["rockzy-1.webp", "rockzy-3.webp", "rockzy-4.webp", "rockzy-6.webp", "rockzy-7.webp"]
+    "stats": {
+      "downloads": "Coming soon",
+      "rating": "4.5+",
+      "dau": "Coming soon"
+    },
+    "features": [
+      "AI Rock Identification",
+      "AI Chat Assistant",
+      "Collection Tracking",
+      "Global Mineral Catalogue"
+    ],
+    "screenshots": [
+      "rockzy-1.webp",
+      "rockzy-3.webp",
+      "rockzy-4.webp",
+      "rockzy-6.webp",
+      "rockzy-7.webp"
+    ]
   },
   {
     "id": "test-app-legal",
@@ -91,15 +163,28 @@
     "order": 6,
     "name": "Legly",
     "tagline": "Dummy app to test end-to-end legal URL flow",
-    "description": "Testing entry for app card, detail page, footer legal links, and permanent store URL rewrites.",
     "longDescription": "This is a non-production dummy app used to verify app listing rendering, detail page JSON content, FAQ/reviews, legal markdown pages, permanent store URLs, and footer linking. It intentionally reuses existing Coinzy assets to avoid adding new files.",
     "accentHsl": "210 65% 45%",
     "logo": "coinzy-logo.png",
     "iosUrl": "https://example.com/test-app-legal-ios",
     "androidUrl": "https://example.com/test-app-legal-android",
-    "stats": { "downloads": "1K+", "rating": "4.8", "dau": "120+" },
-    "features": ["Legal URL rewrite check", "Footer legal link check", "App detail FAQ check", "Validation pipeline check"],
-    "screenshots": ["coinzy-1.png", "coinzy-2.png", "coinzy-3.png", "coinzy-4.png"]
+    "stats": {
+      "downloads": "1K+",
+      "rating": "4.8",
+      "dau": "120+"
+    },
+    "features": [
+      "Legal URL rewrite check",
+      "Footer legal link check",
+      "App detail FAQ check",
+      "Validation pipeline check"
+    ],
+    "screenshots": [
+      "coinzy-1.png",
+      "coinzy-2.png",
+      "coinzy-3.png",
+      "coinzy-4.png"
+    ]
   },
   {
     "id": "test-app-legal-2",
@@ -108,14 +193,22 @@
     "order": 7,
     "name": "Lexio",
     "tagline": "Second dummy app to test dynamic legal flow",
-    "description": "Testing-only app for validating new app onboarding without manual legal page creation.",
     "longDescription": "This is a second non-production dummy app used to verify the dynamic legal route setup, app details rendering, and permanent store URL mapping. It reuses existing image assets and should be removed after QA.",
     "accentHsl": "190 60% 42%",
     "logo": "coinzy-logo.png",
     "iosUrl": "https://example.com/test-app-legal-2-ios",
     "androidUrl": "https://example.com/test-app-legal-2-android",
-    "stats": { "downloads": "128734", "rating": "4.8", "dau": "18342" },
-    "features": ["Dynamic legal page check", "Store URL rewrite check", "Footer legal visibility", "JSON pipeline check"],
+    "stats": {
+      "downloads": "128734",
+      "rating": "4.8",
+      "dau": "18342"
+    },
+    "features": [
+      "Dynamic legal page check",
+      "Store URL rewrite check",
+      "Footer legal visibility",
+      "JSON pipeline check"
+    ],
     "screenshots": [
       "coinzy-1.png",
       "coinzy-2.png",
@@ -135,15 +228,26 @@
     "published": true,
     "order": 99,
     "name": "Prevu",
-    "tagline": "Dummy app row for JSON / apps UI testing — remove before launch",
-    "description": "Reuses existing Coinzy assets only so appAssets.ts does not need new imports.",
+    "tagline": "Dummy app row for JSON / apps UI testing \u2014 remove before launch",
     "longDescription": "This entry validates apps.json and the apps detail route. It shares logo/screenshot keys with Coinzy for local testing only. Delete this object from apps.json (and remove test-app-preview from any links) before production.",
     "accentHsl": "200 70% 45%",
     "logo": "coinzy-logo.png",
     "iosUrl": "https://example.com",
     "androidUrl": "https://example.com",
-    "stats": { "downloads": "0", "rating": "—", "dau": "0" },
-    "features": ["Test feature A", "Test feature B", "Test feature C"],
-    "screenshots": ["coinzy-1.png", "coinzy-2.png", "coinzy-3.png"]
+    "stats": {
+      "downloads": "0",
+      "rating": "\u2014",
+      "dau": "0"
+    },
+    "features": [
+      "Test feature A",
+      "Test feature B",
+      "Test feature C"
+    ],
+    "screenshots": [
+      "coinzy-1.png",
+      "coinzy-2.png",
+      "coinzy-3.png"
+    ]
   }
 ]

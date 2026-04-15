@@ -42,7 +42,6 @@ export const appManifestEntrySchema = z.object({
   order: z.number().int(),
   name: z.string().min(1),
   tagline: z.string().min(1),
-  description: z.string().min(1),
   longDescription: z.string().min(1),
   accentHsl: z.string().min(1),
   logo: z.string().min(1),
@@ -99,7 +98,6 @@ export const appLegalFrontmatterSchema = z.object({
   title: z.string().min(1),
   lastUpdated: z.string().min(1),
   analyticsPage: z.string().min(1),
-  analyticsEvent: z.string().min(1),
 });
 
 export type AppLegalFrontmatter = z.infer<typeof appLegalFrontmatterSchema>;
@@ -110,6 +108,7 @@ export const teamMemberSchema = z.object({
   role: z.string().min(1),
   linkedin: z.string().url("LinkedIn must be a valid URL."),
   image: publicImagePathSchema,
+  order: z.number().int().optional(),
   published: z.boolean(),
 });
 

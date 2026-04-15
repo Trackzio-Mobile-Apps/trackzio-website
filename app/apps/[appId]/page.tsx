@@ -22,11 +22,11 @@ export function generateMetadata({ params }: Props): Metadata {
 
   return {
     title: `${app.name} | Trackzio`,
-    description: app.description,
+    description: app.longDescription,
     alternates: { canonical: `/apps/${app.id}` },
     openGraph: {
       title: `${app.name} | Trackzio`,
-      description: app.description,
+      description: app.longDescription,
       type: "website",
       url: `/apps/${app.id}`,
     },

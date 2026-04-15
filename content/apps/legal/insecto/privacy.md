@@ -2,7 +2,6 @@
 title: "Insecto AI: Bug Identifier — Privacy Policy"
 lastUpdated: "4th September 2025"
 analyticsPage: "insecto-privacy"
-analyticsEvent: "page_view_insecto_privacy"
 ---
 
 ## 1. Introduction

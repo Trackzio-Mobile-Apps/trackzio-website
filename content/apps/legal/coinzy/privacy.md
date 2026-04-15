@@ -2,7 +2,6 @@
 title: "Coinzy: AI Coin Identifier — Privacy Policy"
 lastUpdated: "12 March 2026"
 analyticsPage: "coinzy-privacy"
-analyticsEvent: "page_view_coinzy_privacy"
 ---
 
 ## 1. Introduction

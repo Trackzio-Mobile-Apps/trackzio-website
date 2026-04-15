@@ -184,7 +184,7 @@ export default function OtherAppsCarousel({ excludeAppId, accentHsl }: OtherApps
                     </div>
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 text-left flex-1 mb-5">
-                    {app.description}
+                    {app.longDescription}
                   </p>
                   <span
                     className="inline-flex items-center gap-1.5 text-sm font-semibold mt-auto"

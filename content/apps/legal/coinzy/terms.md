@@ -2,7 +2,6 @@
 title: "Coinzy: AI Coin Identifier — Terms of Service"
 lastUpdated: "12 March 2026"
 analyticsPage: "coinzy-terms"
-analyticsEvent: "page_view_coinzy_terms"
 ---
 
 ## 1. Agreement to Terms

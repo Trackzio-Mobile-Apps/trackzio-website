@@ -2,7 +2,6 @@
 title: "Habiteazy: Habit & To-Do — Privacy Policy"
 lastUpdated: "12 March 2026"
 analyticsPage: "habiteazy-privacy"
-analyticsEvent: "page_view_habiteazy_privacy"
 ---
 
 ## 1. Introduction

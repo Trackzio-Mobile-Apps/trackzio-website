@@ -2,7 +2,6 @@
 title: "Banknotes: Banknote Identification AI — Terms of Service"
 lastUpdated: "12 March 2026"
 analyticsPage: "banknotes-terms"
-analyticsEvent: "page_view_banknotes_terms"
 ---
 
 ## 1. Agreement to Terms

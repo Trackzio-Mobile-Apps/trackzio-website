@@ -2,7 +2,6 @@
 title: "[TEST] Legal Flow App 2 — Terms of Service"
 lastUpdated: "15 April 2026"
 analyticsPage: "test-app-legal-2-terms"
-analyticsEvent: "page_view_test_app_legal_2_terms"
 ---
 
 ## 1. Scope

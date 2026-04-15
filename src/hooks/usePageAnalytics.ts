@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { trackScroll50, trackPagePerformance } from "@/lib/analytics";
 import { useSitePathname } from "@/contexts/SiteRouterContext";
 
-export function usePageAnalytics(pageName: string, eventName: string) {
+/** Second arg is optional; defaults to `page_view` (e.g. legal pages only pass `analyticsPage`). */
+export function usePageAnalytics(pageName: string, eventName: string = "page_view") {
   const pathname = useSitePathname();
 
   useEffect(() => {

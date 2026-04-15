@@ -2,7 +2,6 @@
 title: "[TEST] Legal Flow App 2 — Privacy Policy"
 lastUpdated: "15 April 2026"
 analyticsPage: "test-app-legal-2-privacy"
-analyticsEvent: "page_view_test_app_legal_2_privacy"
 ---
 
 ## 1. Purpose
