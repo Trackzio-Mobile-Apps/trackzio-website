@@ -61,6 +61,49 @@ export const appsManifestSchema = z.array(appManifestEntrySchema);
 
 export type AppManifestEntry = z.infer<typeof appManifestEntrySchema>;
 
+export const appDetailReviewSchema = z.object({
+  quote: z.string().min(1),
+  author: z.string().min(1),
+  rating: z.number().min(1).max(5).optional(),
+});
+
+export const appDetailFaqSchema = z.object({
+  q: z.string().min(1),
+  a: z.string().min(1),
+});
+
+/** Per-app rich content for app detail pages (reviews, FAQ, optional labels). */
+export const appDetailBlockSchema = z.object({
+  reviews: z.array(appDetailReviewSchema),
+  faqs: z.array(appDetailFaqSchema),
+  statLabels: z
+    .object({
+      downloads: z.string().optional(),
+      rating: z.string().optional(),
+      dau: z.string().optional(),
+    })
+    .optional(),
+  reviewSummary: z
+    .object({
+      line: z.string().min(1),
+    })
+    .optional(),
+});
+
+export const appDetailsBundleSchema = z.record(z.string(), appDetailBlockSchema);
+
+export type AppDetailBlock = z.infer<typeof appDetailBlockSchema>;
+
+/** Frontmatter for `content/apps/legal/{appId}/privacy.md` and `terms.md`. */
+export const appLegalFrontmatterSchema = z.object({
+  title: z.string().min(1),
+  lastUpdated: z.string().min(1),
+  analyticsPage: z.string().min(1),
+  analyticsEvent: z.string().min(1),
+});
+
+export type AppLegalFrontmatter = z.infer<typeof appLegalFrontmatterSchema>;
+
 export const teamMemberSchema = z.object({
   slug: slugFieldSchema,
   name: z.string().min(1),

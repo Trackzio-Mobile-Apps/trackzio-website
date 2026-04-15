@@ -1,10 +1,29 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { APP_STORE_LEGAL_URLS } from "@/lib/appStoreLegalUrls";
 
-/** Next.js redirect `source` cannot contain literal `:param` patterns; handle decoded colon paths here. */
+/** Dynamic aliases generated from store URL mapping. */
+const AUTO_APP_ALIASES: Record<string, string> = Object.fromEntries(
+  Object.entries(APP_STORE_LEGAL_URLS).flatMap(([appId, legal]) => {
+    const compactId = appId.replace(/[^a-z0-9]/gi, "");
+    const decodedTerms = decodeURIComponent(legal.terms);
+    return [
+      [`/${compactId}privacy`, legal.privacy],
+      [`/${compactId}terms`, legal.terms],
+      ...(decodedTerms !== legal.terms ? [[decodedTerms, legal.terms]] : []),
+    ];
+  }),
+);
+
+/** Backward-compatible legacy aliases that do not match app ids exactly. */
+const LEGACY_OVERRIDES: Record<string, string> = {
+  "/banknoteprivacy": "/privacy-policy-banknote",
+  "/banknoteterms": "/banknote-terms",
+};
+
 const DECODED_TERMS_TO_ENCODED: Record<string, string> = {
-  "/coinzy:-terms": "/coinzy%3A-terms",
-  "/habit-eazy:-terms": "/habit-eazy%3A-terms",
+  ...AUTO_APP_ALIASES,
+  ...LEGACY_OVERRIDES,
 };
 
 export function middleware(request: NextRequest) {
@@ -17,10 +36,6 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-/**
- * Matchers cannot include `/coinzy:-terms` (path-to-regexp treats `:` specially).
- * Run only on non-static paths; the handler returns `next()` immediately except for two URLs.
- */
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

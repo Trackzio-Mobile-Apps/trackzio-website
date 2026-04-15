@@ -1,5 +1,9 @@
-import BanknotePrivacy from "@/screens/BanknotePrivacy";
+import type { GetStaticProps, NextPage } from "next";
+import AppLegalDocument from "@/screens/AppLegalDocument";
+import type { LegalPageDoc } from "@/lib/content/legalPageTypes";
+import { getAppLegalStaticProps } from "@/lib/getAppLegalStaticProps";
 
-export default function Page() {
-  return <BanknotePrivacy />;
-}
+export const getStaticProps = getAppLegalStaticProps("banknotes", "privacy");
+
+const Page: NextPage<{ doc: LegalPageDoc }> = ({ doc }) => <AppLegalDocument doc={doc} />;
+export default Page;

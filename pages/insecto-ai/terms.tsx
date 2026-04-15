@@ -1,5 +1,9 @@
-import InsectoTerms from "@/screens/InsectoTerms";
+import type { GetStaticProps, NextPage } from "next";
+import AppLegalDocument from "@/screens/AppLegalDocument";
+import type { LegalPageDoc } from "@/lib/content/legalPageTypes";
+import { getAppLegalStaticProps } from "@/lib/getAppLegalStaticProps";
 
-export default function Page() {
-  return <InsectoTerms />;
-}
+export const getStaticProps = getAppLegalStaticProps("insecto", "terms");
+
+const Page: NextPage<{ doc: LegalPageDoc }> = ({ doc }) => <AppLegalDocument doc={doc} />;
+export default Page;

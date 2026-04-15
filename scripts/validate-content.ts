@@ -9,6 +9,8 @@ import { z } from "zod";
 import {
   blogFrontmatterSchema,
   appsManifestSchema,
+  appDetailsBundleSchema,
+  appLegalFrontmatterSchema,
   teamManifestSchema,
   jobsManifestSchema,
   formatZodError,
@@ -17,6 +19,7 @@ import {
 const root = process.cwd();
 const blogsDir = path.join(root, "content/blogs");
 const appsPath = path.join(root, "content/apps/apps.json");
+const appDetailsPath = path.join(root, "content/apps/app-details.json");
 const teamPath = path.join(root, "content/team/team.json");
 const jobsPath = path.join(root, "content/jobs/jobs.json");
 const publicDir = path.join(root, "public");
@@ -205,6 +208,37 @@ function validateApps(registry: SlugRef[]) {
     registerSlugs(registry, row.slug, `apps.json → ${row.id}`);
   }
   console.log(`  • apps: ${data.length} entries`);
+
+  const appDetailsJson = parseJsonFile(appDetailsPath, "content/apps/app-details.json");
+  const details = safeParse(appDetailsBundleSchema, appDetailsJson, "content/apps/app-details.json");
+  const idSet = new Set(data.map((e) => e.id));
+  for (const id of Object.keys(details)) {
+    if (!idSet.has(id)) {
+      fail(`content/apps/app-details.json: key "${id}" is not an app id in apps.json`);
+    }
+  }
+  console.log(`  • app-details: ${Object.keys(details).length} app(s)`);
+
+  const legalSkip = new Set(["test-app-preview"]);
+  for (const row of data) {
+    if (!row.published || legalSkip.has(row.id)) continue;
+    for (const kind of ["privacy", "terms"] as const) {
+      const fileName = kind === "privacy" ? "privacy.md" : "terms.md";
+      const legalPath = path.join(root, "content/apps/legal", row.id, fileName);
+      if (!fs.existsSync(legalPath)) {
+        fail(`Missing ${kind} legal file for app "${row.id}": content/apps/legal/${row.id}/${fileName}`);
+      }
+      const rawLegal = fs.readFileSync(legalPath, "utf8");
+      const { data: legalFm } = matter(rawLegal);
+      safeParse(
+        appLegalFrontmatterSchema,
+        legalFm,
+        `content/apps/legal/${row.id}/${fileName} (frontmatter)`,
+      );
+    }
+  }
+  const legalCount = data.filter((r) => r.published && !legalSkip.has(r.id)).length;
+  console.log(`  • app-legal: ${legalCount} app(s) (privacy + terms markdown)`);
 }
 
 function validateTeam(registry: SlugRef[]) {

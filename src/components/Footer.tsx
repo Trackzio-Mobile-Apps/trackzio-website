@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { trackEvent } from '@/lib/analytics';
 import { useSitePathname } from "@/contexts/SiteRouterContext";
+import { APP_STORE_LEGAL_URLS } from "@/lib/appStoreLegalUrls";
+import { getClientApps } from "@/lib/content/apps-client";
 
 const socialLinks = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/trackzio-apps/', event: 'footer_linkedin_click', icon: (
@@ -17,38 +19,17 @@ const socialLinks = [
   )},
 ];
 
-/** Legal links keyed by `appData` app id (exact match for `/apps/[appId]`). Canonical store-style URLs. */
-const appLegalByAppId: Record<string, { label: string; privacy: string; terms: string }> = {
-  coinzy: { label: "Coinzy", privacy: "/privacy-policy-coinzy", terms: "/coinzy%3A-terms" },
-  banknotes: { label: "Banknote AI", privacy: "/privacy-policy-banknote", terms: "/banknote-terms" },
-  insecto: { label: "Insecto AI", privacy: "/privacy-policy-insecto-ai-1", terms: "/terms-for-insecto-ai" },
-  habiteazy: { label: "Habit Eazy", privacy: "/privacy-policy-habit-eazy-1", terms: "/habit-eazy%3A-terms" },
-  rockzy: { label: "Rockzy", privacy: "/privacy-policy-rockzy-ai", terms: "/rockzy-terms-of-service" },
-};
-
-type AppLegalEntry = (typeof appLegalByAppId)["coinzy"];
-
-/** When not on `/apps/[appId]`, infer app from path (canonical slugs first, then nested routes). */
-const appLegalPathSegments: { segment: string; legal: AppLegalEntry }[] = [
-  { segment: "privacy-policy-banknote", legal: appLegalByAppId.banknotes },
-  { segment: "banknote-terms", legal: appLegalByAppId.banknotes },
-  { segment: "privacy-policy-coinzy", legal: appLegalByAppId.coinzy },
-  { segment: "coinzy:", legal: appLegalByAppId.coinzy },
-  { segment: "privacy-policy-habit-eazy-1", legal: appLegalByAppId.habiteazy },
-  { segment: "habit-eazy:", legal: appLegalByAppId.habiteazy },
-  { segment: "privacy-policy-insecto-ai-1", legal: appLegalByAppId.insecto },
-  { segment: "terms-for-insecto-ai", legal: appLegalByAppId.insecto },
-  { segment: "privacy-policy-rockzy-ai", legal: appLegalByAppId.rockzy },
-  { segment: "rockzy-terms-of-service", legal: appLegalByAppId.rockzy },
-  { segment: "banknote-ai", legal: appLegalByAppId.banknotes },
-  { segment: "insecto-ai", legal: appLegalByAppId.insecto },
-  { segment: "habit-eazy", legal: appLegalByAppId.habiteazy },
-  { segment: "coinzy", legal: appLegalByAppId.coinzy },
-  { segment: "banknotes", legal: appLegalByAppId.banknotes },
-  { segment: "insecto", legal: appLegalByAppId.insecto },
-  { segment: "habiteazy", legal: appLegalByAppId.habiteazy },
-  { segment: "rockzy", legal: appLegalByAppId.rockzy },
-];
+type AppLegalEntry = { label: string; privacy: string; terms: string };
+const appNameById = new Map(getClientApps().map((a) => [a.id, a.name]));
+const appLegalByAppId: Record<string, AppLegalEntry> = Object.fromEntries(
+  Object.entries(APP_STORE_LEGAL_URLS).map(([appId, legal]) => [
+    appId,
+    {
+      label: appNameById.get(appId) ?? appId,
+      ...legal,
+    },
+  ]),
+) as Record<string, AppLegalEntry>;
 
 /** Path must be the real URL path (no query/hash), e.g. `/apps/coinzy`. */
 function getAppLegal(path: string) {
@@ -60,8 +41,18 @@ function getAppLegal(path: string) {
     return appLegalByAppId[appId] ?? null;
   }
 
-  for (const { segment, legal } of appLegalPathSegments) {
-    if (path.includes(segment)) return legal;
+  for (const [appId, legal] of Object.entries(appLegalByAppId)) {
+    const legalSegments = [
+      legal.privacy.slice(1),
+      legal.terms.slice(1),
+      decodeURIComponent(legal.terms).slice(1),
+      `${appId}/privacy-policy`,
+      `${appId}/terms`,
+      appId,
+    ];
+    if (legalSegments.some((segment) => path.includes(segment))) {
+      return legal;
+    }
   }
   return null;
 }

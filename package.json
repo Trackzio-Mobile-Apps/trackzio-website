@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "validate": "tsx scripts/validate-content.ts",
+    "write-app-details": "tsx scripts/write-app-details-json.ts",
+    "write-app-legal": "node scripts/write-app-legal-md.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },
