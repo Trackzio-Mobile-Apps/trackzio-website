@@ -10,7 +10,7 @@ readTime: "7 min"
 image: "/assets/blog/personal-growth-2.jpg"
 author: "Aayushya Aggarwal"
 featured: true
-blogOfTheWeek: true
+blogOfTheWeek: false
 ---
 
 Overthinking feels productive.

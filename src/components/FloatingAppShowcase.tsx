@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from "next/link";
-import { ArrowRight, Check, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { getClientApps } from "@/lib/content/apps-client";
 import { trackEvent } from "@/lib/analytics";
 import { imageSrc } from "@/lib/imageSrc";
@@ -70,80 +70,39 @@ function AppChipsGrid({
   selectedIndex,
   onSelect,
   compact,
-  page,
-  onPrevPage,
-  onNextPage,
 }: {
   apps: typeof showcaseApps;
   selectedIndex: number;
   onSelect: (i: number) => void;
   compact?: boolean;
-  page: number;
-  onPrevPage: () => void;
-  onNextPage: () => void;
 }) {
-  const appsPerPage = 6;
-  const totalPages = Math.max(1, Math.ceil(chipApps.length / appsPerPage));
-  const pagedApps = chipApps.slice(page * appsPerPage, page * appsPerPage + appsPerPage);
-  const n = pagedApps.length;
-
+  const n = chipApps.length;
   return (
-    <div className="w-full">
-      <div className="grid grid-cols-2 gap-2.5 sm:gap-3 w-full">
-        {pagedApps.map((chipApp, i) => {
-          const absoluteIndex = page * appsPerPage + i;
+    <div className="grid grid-cols-2 gap-2.5 sm:gap-3 w-full">
+      {chipApps.map((chipApp, i) => {
         const isLastOdd = n % 2 === 1 && i === n - 1;
         return (
           <div key={chipApp.id} className={isLastOdd ? "col-span-2 flex justify-center" : undefined}>
             <div className={isLastOdd ? "w-full max-w-[calc(50%-0.375rem)]" : "w-full"}>
               <AppChip
                 app={chipApp}
-                isSelected={selectedIndex === absoluteIndex}
-                onSelect={() => onSelect(absoluteIndex)}
+                isSelected={selectedIndex === i}
+                onSelect={() => onSelect(i)}
                 compact={compact}
               />
             </div>
           </div>
         );
-        })}
-      </div>
-      {chipApps.length > appsPerPage && (
-        <div className="mt-3 flex items-center justify-center gap-2">
-          <button
-            type="button"
-            aria-label="Previous apps"
-            onClick={onPrevPage}
-            disabled={page === 0}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border/50 text-muted-foreground disabled:opacity-40 disabled:cursor-not-allowed hover:bg-muted/50"
-          >
-            <ChevronLeft size={16} />
-          </button>
-          <span className="text-xs text-muted-foreground min-w-[48px] text-center">
-            {page + 1} / {totalPages}
-          </span>
-          <button
-            type="button"
-            aria-label="Next apps"
-            onClick={onNextPage}
-            disabled={page >= totalPages - 1}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border/50 text-muted-foreground disabled:opacity-40 disabled:cursor-not-allowed hover:bg-muted/50"
-          >
-            <ChevronRight size={16} />
-          </button>
-        </div>
-      )}
+      })}
     </div>
   );
 }
 
 export default function FloatingAppShowcase() {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [chipsPage, setChipsPage] = useState(0);
   const selected = showcaseApps[selectedIndex];
   const autoRotateRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const userInteractedRef = useRef(false);
-  const appsPerPage = 6;
-  const totalPages = Math.max(1, Math.ceil(showcaseApps.length / appsPerPage));
 
   useEffect(() => {
     autoRotateRef.current = setInterval(() => {
@@ -170,13 +129,6 @@ export default function FloatingAppShowcase() {
       }
     }, 3500);
   };
-
-  useEffect(() => {
-    setChipsPage(Math.floor(selectedIndex / appsPerPage));
-  }, [selectedIndex]);
-
-  const prevPage = () => setChipsPage((p) => Math.max(0, p - 1));
-  const nextPage = () => setChipsPage((p) => Math.min(totalPages - 1, p + 1));
 
   return (
     <section
@@ -210,9 +162,6 @@ export default function FloatingAppShowcase() {
               selectedIndex={selectedIndex}
               onSelect={handleSelect}
               compact
-              page={chipsPage}
-              onPrevPage={prevPage}
-              onNextPage={nextPage}
             />
           </div>
 
@@ -249,14 +198,7 @@ export default function FloatingAppShowcase() {
         >
           {/* Column 1: app grid — wider column, larger chips */}
           <div className="min-w-0 w-full">
-            <AppChipsGrid
-              apps={showcaseApps}
-              selectedIndex={selectedIndex}
-              onSelect={handleSelect}
-              page={chipsPage}
-              onPrevPage={prevPage}
-              onNextPage={nextPage}
-            />
+            <AppChipsGrid apps={showcaseApps} selectedIndex={selectedIndex} onSelect={handleSelect} />
           </div>
 
           {/* Column 2: logo */}
