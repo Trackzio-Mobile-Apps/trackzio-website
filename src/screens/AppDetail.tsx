@@ -12,8 +12,6 @@ import PlatformDownloadButtons from '@/components/PlatformDownloadButtons';
 import FeatureShowcase from '@/components/FeatureShowcase';
 import OtherAppsCarousel from '@/components/OtherAppsCarousel';
 import type { AppContent } from "@/lib/content/apps";
-import Link from "next/link";
-import { APP_STORE_LEGAL_URLS } from "@/lib/appStoreLegalUrls";
 import {
   Accordion,
   AccordionContent,
@@ -165,21 +163,7 @@ export default function AppDetail({ app }: AppDetailProps) {
         <FeatureShowcase features={showcaseFromContent} accentHsl={app.accentHsl} />
       )}
 
-      <section className="py-20 sm:py-24 snap-start">
-        <div className="container-site w-full">
-          <motion.div {...fadeUp} className="text-center mb-12">
-            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Features</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display">What you can do</h2>
-          </motion.div>
-          <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {app.features.map((feature) => (
-              <div key={feature} className="rounded-2xl bg-card px-6 py-5" style={{ boxShadow: "var(--shadow-card)" }}>
-                <p className="text-sm sm:text-base font-medium text-foreground">{feature}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
       {/* ── 4. Reviews — from content/apps/app-details.json */}
       {reviews.length > 0 && (
       <section className="py-20 sm:py-24 snap-start">
@@ -341,29 +325,6 @@ export default function AppDetail({ app }: AppDetailProps) {
                 </div>
               )}
             </div>
-          </div>
-        </section>
-      )}
-
-      {APP_STORE_LEGAL_URLS[app.id] && (
-        <section className="py-12 sm:py-16 border-t border-border/60">
-          <div className="container-site flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-            <span className="font-medium text-foreground/80">{app.name}</span>
-            <Link
-              href={APP_STORE_LEGAL_URLS[app.id].privacy}
-              className="underline underline-offset-4 hover:text-foreground transition-colors"
-            >
-              Privacy Policy
-            </Link>
-            <span className="text-border" aria-hidden>
-              ·
-            </span>
-            <Link
-              href={APP_STORE_LEGAL_URLS[app.id].terms}
-              className="underline underline-offset-4 hover:text-foreground transition-colors"
-            >
-              Terms &amp; Conditions
-            </Link>
           </div>
         </section>
       )}
