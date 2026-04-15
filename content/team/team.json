@@ -86,5 +86,21 @@
     "linkedin": "https://www.linkedin.com/in/vignesh217",
     "image": "/content/team/vignesh-raja.jpeg",
     "published": true
+  },
+  {
+    "slug": "nikita-nautiyal",
+    "name": "Nikita Nautiyal",
+    "role": "UI/UX Designer",
+    "linkedin": "https://www.linkedin.com/in/nikitades/",
+    "image": "/content/team/nikita-nautiyal.jpeg",
+    "published": true
+  },
+  {
+    "slug": "ashmita",
+    "name": "Ashmita",
+    "role": "Associate Product Manager",
+    "linkedin": "https://www.linkedin.com/in/ashmita-r-s",
+    "image": "/content/team/ashmita.jpg",
+    "published": true
   }
 ]

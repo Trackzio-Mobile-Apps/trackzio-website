@@ -1,5 +1,9 @@
-import CoinzyPrivacy from "@/screens/CoinzyPrivacy";
+import type { GetStaticProps, NextPage } from "next";
+import AppLegalDocument from "@/screens/AppLegalDocument";
+import type { LegalPageDoc } from "@/lib/content/legalPageTypes";
+import { getAppLegalStaticProps } from "@/lib/getAppLegalStaticProps";
 
-export default function Page() {
-  return <CoinzyPrivacy />;
-}
+export const getStaticProps = getAppLegalStaticProps("coinzy", "privacy");
+
+const Page: NextPage<{ doc: LegalPageDoc }> = ({ doc }) => <AppLegalDocument doc={doc} />;
+export default Page;

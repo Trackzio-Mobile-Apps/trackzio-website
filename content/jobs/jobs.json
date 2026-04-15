@@ -28,5 +28,15 @@
     "applyUrl": "https://forms.gle/grPC7wXqhKjQRoR66",
     "order": 3,
     "published": true
+  },
+  {
+    "slug": "test-role-cms-dummy",
+    "title": "[TEST] Dummy job listing",
+    "description": "Placeholder role for Careers / jobs.json testing. Remove this block or set published: false before launch.",
+    "location": "Remote",
+    "type": "Full-time",
+    "applyUrl": "https://example.com/apply-test",
+    "order": 4,
+    "published": true
   }
 ]

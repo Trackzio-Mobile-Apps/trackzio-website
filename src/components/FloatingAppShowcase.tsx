@@ -7,16 +7,19 @@ import { trackEvent } from "@/lib/analytics";
 import { imageSrc } from "@/lib/imageSrc";
 
 const apps = getClientApps();
+
+const showcaseBulletMatrix = [
+  ['AI-powered identification', 'Global coin database', 'Collection tracking'],
+  ['Instant banknote scanning', 'Worldwide currency coverage', 'Rarity & value insights'],
+  ['Species identification', 'Toxicity information', 'Personal catalogue'],
+  ['Streak-based motivation', 'Smart scheduling', 'Visual progress charts'],
+  ['AI rock identification', '8,000+ mineral database', 'Collection management'],
+] as const;
+
 const showcaseApps = apps.map((app, i) => ({
   ...app,
   floatDelay: i * 0.4,
-  bulletPoints: [
-    ['AI-powered identification', 'Global coin database', 'Collection tracking'],
-    ['Instant banknote scanning', 'Worldwide currency coverage', 'Rarity & value insights'],
-    ['Species identification', 'Toxicity information', 'Personal catalogue'],
-    ['Streak-based motivation', 'Smart scheduling', 'Visual progress charts'],
-    ['AI rock identification', '8,000+ mineral database', 'Collection management'],
-  ][i],
+  bulletPoints: [...(showcaseBulletMatrix[i] ?? ['App highlights', 'From apps.json', 'Add bullets in FloatingAppShowcase'])],
 }));
 
 function AppChip({
@@ -59,6 +62,39 @@ function AppChip({
         {app.name}
       </span>
     </motion.button>
+  );
+}
+
+function AppChipsGrid({
+  apps: chipApps,
+  selectedIndex,
+  onSelect,
+  compact,
+}: {
+  apps: typeof showcaseApps;
+  selectedIndex: number;
+  onSelect: (i: number) => void;
+  compact?: boolean;
+}) {
+  const n = chipApps.length;
+  return (
+    <div className="grid grid-cols-2 gap-2.5 sm:gap-3 w-full">
+      {chipApps.map((chipApp, i) => {
+        const isLastOdd = n % 2 === 1 && i === n - 1;
+        return (
+          <div key={chipApp.id} className={isLastOdd ? "col-span-2 flex justify-center" : undefined}>
+            <div className={isLastOdd ? "w-full max-w-[calc(50%-0.375rem)]" : "w-full"}>
+              <AppChip
+                app={chipApp}
+                isSelected={selectedIndex === i}
+                onSelect={() => onSelect(i)}
+                compact={compact}
+              />
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
@@ -121,27 +157,12 @@ export default function FloatingAppShowcase() {
         {/* ── Mobile & tablet: stacked — 2×2 + 1 grid (matches desktop), no horizontal scroll ── */}
         <div className="flex flex-col gap-8 lg:hidden min-w-0">
           <div className="w-full max-w-lg mx-auto px-0.5">
-            <div className="grid grid-cols-2 gap-2.5 sm:gap-3 w-full">
-              {showcaseApps.slice(0, 4).map((app, i) => (
-                <AppChip
-                  key={app.id}
-                  app={app}
-                  isSelected={selectedIndex === i}
-                  onSelect={() => handleSelect(i)}
-                  compact
-                />
-              ))}
-            </div>
-            <div className="mt-2.5 sm:mt-3 flex justify-center w-full">
-              <div className="w-full max-w-[calc(50%-0.375rem)]">
-                <AppChip
-                  app={showcaseApps[4]}
-                  isSelected={selectedIndex === 4}
-                  onSelect={() => handleSelect(4)}
-                  compact
-                />
-              </div>
-            </div>
+            <AppChipsGrid
+              apps={showcaseApps}
+              selectedIndex={selectedIndex}
+              onSelect={handleSelect}
+              compact
+            />
           </div>
 
           <div className="flex justify-center py-2">
@@ -177,25 +198,7 @@ export default function FloatingAppShowcase() {
         >
           {/* Column 1: app grid — wider column, larger chips */}
           <div className="min-w-0 w-full">
-            <div className="grid grid-cols-2 gap-3 w-full">
-              {showcaseApps.slice(0, 4).map((app, i) => (
-                <AppChip
-                  key={app.id}
-                  app={app}
-                  isSelected={selectedIndex === i}
-                  onSelect={() => handleSelect(i)}
-                />
-              ))}
-            </div>
-            <div className="mt-3 flex justify-center w-full">
-              <div className="w-full max-w-[calc(50%-0.375rem)]">
-                <AppChip
-                  app={showcaseApps[4]}
-                  isSelected={selectedIndex === 4}
-                  onSelect={() => handleSelect(4)}
-                />
-              </div>
-            </div>
+            <AppChipsGrid apps={showcaseApps} selectedIndex={selectedIndex} onSelect={handleSelect} />
           </div>
 
           {/* Column 2: logo */}

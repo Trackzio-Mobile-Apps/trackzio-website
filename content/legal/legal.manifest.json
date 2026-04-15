@@ -1,0 +1,72 @@
+{
+  "coinzy": {
+    "privacy": {
+      "title": "Coinzy – Privacy Policy",
+      "markdownFile": "coinzy/privacy.md",
+      "analyticsPage": "coinzy-privacy",
+      "analyticsEvent": "page_view_coinzy_privacy"
+    },
+    "terms": {
+      "title": "Coinzy: Terms of Service",
+      "markdownFile": "coinzy/terms.md",
+      "analyticsPage": "coinzy-terms",
+      "analyticsEvent": "page_view_coinzy_terms"
+    }
+  },
+  "banknotes": {
+    "privacy": {
+      "title": "Banknote Identification AI: Privacy Policy",
+      "markdownFile": "banknotes/privacy.md",
+      "analyticsPage": "banknote-privacy",
+      "analyticsEvent": "page_view_banknote_privacy"
+    },
+    "terms": {
+      "title": "Banknote Identification AI: Terms of Service",
+      "markdownFile": "banknotes/terms.md",
+      "analyticsPage": "banknote-terms",
+      "analyticsEvent": "page_view_banknote_terms"
+    }
+  },
+  "insecto": {
+    "privacy": {
+      "title": "Insecto AI: Bug Identifier — Privacy Policy",
+      "markdownFile": "insecto/privacy.md",
+      "analyticsPage": "insecto-privacy",
+      "analyticsEvent": "page_view_insecto_privacy"
+    },
+    "terms": {
+      "title": "Insecto AI: Bug Identifier — Terms and Conditions",
+      "markdownFile": "insecto/terms.md",
+      "analyticsPage": "insecto-terms",
+      "analyticsEvent": "page_view_insecto_terms"
+    }
+  },
+  "habiteazy": {
+    "privacy": {
+      "title": "Habit Eazy: Privacy Policy",
+      "markdownFile": "habiteazy/privacy.md",
+      "analyticsPage": "habiteazy-privacy",
+      "analyticsEvent": "page_view_habiteazy_privacy"
+    },
+    "terms": {
+      "title": "Habit Eazy: Terms and Conditions",
+      "markdownFile": "habiteazy/terms.md",
+      "analyticsPage": "habiteazy-terms",
+      "analyticsEvent": "page_view_habiteazy_terms"
+    }
+  },
+  "rockzy": {
+    "privacy": {
+      "title": "Rockzy: AI Rock Identifier – Privacy Policy",
+      "markdownFile": "rockzy/privacy.md",
+      "analyticsPage": "rockzy-privacy",
+      "analyticsEvent": "page_view_rockzy_privacy"
+    },
+    "terms": {
+      "title": "Rockzy: AI Rock Identifier — Terms of Service",
+      "markdownFile": "rockzy/terms.md",
+      "analyticsPage": "rockzy-terms",
+      "analyticsEvent": "page_view_rockzy_terms"
+    }
+  }
+}

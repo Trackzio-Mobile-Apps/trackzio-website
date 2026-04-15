@@ -2,6 +2,7 @@ import appsJson from "../../../content/apps/apps.json";
 import { appsManifestSchema } from "./schemas";
 import { appLogoMap, appScreenshotMap } from "./appAssets";
 import type { AppContent } from "./apps";
+import { getAppDetailBlock } from "./loadAppDetails";
 
 const parsed = appsManifestSchema.safeParse(appsJson);
 if (!parsed.success) {
@@ -11,11 +12,18 @@ if (!parsed.success) {
 const normalized: AppContent[] = [...parsed.data]
   .filter((a) => a.published)
   .sort((a, b) => a.order - b.order)
-  .map((a) => ({
-    ...a,
-    logo: appLogoMap[a.logo] ?? a.logo,
-    screenshots: a.screenshots.map((s) => appScreenshotMap[s] ?? s),
-  }));
+  .map((a) => {
+    const d = getAppDetailBlock(a.id);
+    return {
+      ...a,
+      logo: appLogoMap[a.logo] ?? a.logo,
+      screenshots: a.screenshots.map((s) => appScreenshotMap[s] ?? s),
+      reviews: d.reviews,
+      faqs: d.faqs,
+      statLabels: d.statLabels,
+      reviewSummary: d.reviewSummary,
+    };
+  });
 
 export function getClientApps(): AppContent[] {
   return normalized;
