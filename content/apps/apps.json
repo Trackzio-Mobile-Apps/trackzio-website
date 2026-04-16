@@ -71,7 +71,7 @@
     "published": true,
     "order": 3,
     "name": "Insecto",
-    "fullName": "Insecto - Insect Identifier",
+    "fullName": "Insecto AI: Bug Identifier",
     "tagline": "Discover insects and learn about them instantly",
     "longDescription": "Point your camera at any insect and Insecto will identify it instantly. Get detailed information about species, habitat, behavior, and whether they are beneficial or harmful.",
     "accentHsl": "78 45% 42%",
@@ -104,7 +104,7 @@
     "published": true,
     "order": 4,
     "name": "Habiteazy",
-    "fullName": "Habit Eazy - Habit To-Do Pal",
+    "fullName": "Habit Eazy - Habit & To Do Pal",
     "tagline": "Build positive habits and stay consistent",
     "longDescription": "Habiteazy makes habit building simple and rewarding. Track your streaks, set reminders, and visualize your progress with beautiful charts and motivational insights.",
     "accentHsl": "270 55% 50%",
@@ -135,7 +135,7 @@
     "published": true,
     "order": 5,
     "name": "Rockzy",
-    "fullName": "Rockzy - AI Rock Identifier",
+    "fullName": "Rockzy: AI Rock Identifier",
     "tagline": "AI Rock & Mineral Identifier",
     "longDescription": "Scan, collect, and explore over 8,000+ rocks and minerals with powerful AI tools. Identify rocks instantly, chat with AI, and build your collection.",
     "accentHsl": "30 70% 45%",
@@ -159,103 +159,6 @@
       "rockzy-4.webp",
       "rockzy-6.webp",
       "rockzy-7.webp"
-    ]
-  },
-  {
-    "id": "test-app-legal",
-    "slug": "test-app-legal",
-    "published": true,
-    "order": 6,
-    "name": "Legly",
-    "fullName": "Legly - Legal Flow Test App",
-    "tagline": "Dummy app to test end-to-end legal URL flow",
-    "longDescription": "This is a non-production dummy app used to verify app listing rendering, detail page JSON content, FAQ/reviews, legal markdown pages, permanent store URLs, and footer linking. It intentionally reuses existing Coinzy assets to avoid adding new files.",
-    "accentHsl": "210 65% 45%",
-    "logo": "coinzy-logo.png",
-    "iosUrl": "https://example.com/test-app-legal-ios",
-    "androidUrl": "https://example.com/test-app-legal-android",
-    "stats": {
-      "downloads": "1K+",
-      "rating": "4.8",
-      "dau": "120+"
-    },
-    "features": [
-      "Legal URL rewrite check",
-      "Footer legal link check",
-      "App detail FAQ check",
-      "Validation pipeline check"
-    ],
-    "screenshots": [
-      "coinzy-1.png",
-      "coinzy-2.png",
-      "coinzy-3.png",
-      "coinzy-4.png"
-    ]
-  },
-  {
-    "id": "test-app-legal-2",
-    "slug": "test-app-legal-2",
-    "published": true,
-    "order": 7,
-    "name": "Lexio",
-    "fullName": "Lexio - Dynamic Legal Flow Test App",
-    "tagline": "Second dummy app to test dynamic legal flow",
-    "longDescription": "This is a second non-production dummy app used to verify the dynamic legal route setup, app details rendering, and permanent store URL mapping. It reuses existing image assets and should be removed after QA.",
-    "accentHsl": "190 60% 42%",
-    "logo": "coinzy-logo.png",
-    "iosUrl": "https://example.com/test-app-legal-2-ios",
-    "androidUrl": "https://example.com/test-app-legal-2-android",
-    "stats": {
-      "downloads": "128734",
-      "rating": "4.8",
-      "dau": "18342"
-    },
-    "features": [
-      "Dynamic legal page check",
-      "Store URL rewrite check",
-      "Footer legal visibility",
-      "JSON pipeline check"
-    ],
-    "screenshots": [
-      "coinzy-1.png",
-      "coinzy-2.png",
-      "coinzy-3.png",
-      "coinzy-4.png",
-      "coinzy-5.png",
-      "coinzy-6.png",
-      "banknotes-4.webp",
-      "banknotes-5.webp",
-      "insecto-1.png",
-      "rockzy-1.webp"
-    ]
-  },
-  {
-    "id": "test-app-preview",
-    "slug": "test-app-preview",
-    "published": true,
-    "order": 99,
-    "name": "Prevu",
-    "fullName": "Prevu - Apps UI Test App",
-    "tagline": "Dummy app row for JSON / apps UI testing \u2014 remove before launch",
-    "longDescription": "This entry validates apps.json and the apps detail route. It shares logo/screenshot keys with Coinzy for local testing only. Delete this object from apps.json (and remove test-app-preview from any links) before production.",
-    "accentHsl": "200 70% 45%",
-    "logo": "coinzy-logo.png",
-    "iosUrl": "https://example.com",
-    "androidUrl": "https://example.com",
-    "stats": {
-      "downloads": "0",
-      "rating": "\u2014",
-      "dau": "0"
-    },
-    "features": [
-      "Test feature A",
-      "Test feature B",
-      "Test feature C"
-    ],
-    "screenshots": [
-      "coinzy-1.png",
-      "coinzy-2.png",
-      "coinzy-3.png"
     ]
   }
 ]
