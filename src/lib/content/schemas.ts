@@ -41,6 +41,7 @@ export const appManifestEntrySchema = z.object({
   published: z.boolean(),
   order: z.number().int(),
   name: z.string().min(1),
+  fullName: z.string().min(1),
   tagline: z.string().min(1),
   longDescription: z.string().min(1),
   accentHsl: z.string().min(1),

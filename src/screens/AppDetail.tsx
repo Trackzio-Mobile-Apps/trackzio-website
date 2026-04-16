@@ -125,12 +125,12 @@ export default function AppDetail({ app }: AppDetailProps) {
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
             <img
               src={imageSrc(app.logo)}
-              alt={`${app.name} logo`}
+              alt={`${app.fullName} logo`}
               className="w-20 h-20 rounded-2xl mx-auto mb-5"
               style={{ boxShadow: `0 8px 30px -8px hsl(${app.accentHsl} / 0.35)` }}
             />
             <h1 className="text-4xl sm:text-5xl font-bold font-display" style={{ color: `hsl(${app.accentHsl})` }}>
-              {app.name}
+              {app.fullName}
             </h1>
             <p className="mt-2 text-base text-muted-foreground/90 max-w-2xl mx-auto leading-relaxed">{app.longDescription}</p>
 
@@ -139,7 +139,7 @@ export default function AppDetail({ app }: AppDetailProps) {
               <PlatformDownloadButtons
                 iosUrl={app.iosUrl}
                 androidUrl={app.androidUrl}
-                appName={app.name}
+                appName={app.fullName}
                 appId={app.id}
                 accentHsl={app.accentHsl}
               />
@@ -247,7 +247,7 @@ export default function AppDetail({ app }: AppDetailProps) {
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">By the Numbers</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display">{app.name} in numbers</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold font-display">{app.fullName} in numbers</h2>
           </motion.div>
 
           <div className="grid gap-8 max-w-3xl mx-auto grid-cols-1 sm:grid-cols-3">

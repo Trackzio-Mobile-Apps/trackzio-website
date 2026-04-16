@@ -37,7 +37,7 @@ function AppChip({
     <motion.button
       type="button"
       onClick={onSelect}
-      aria-label={app.name}
+      aria-label={app.fullName}
       aria-pressed={isSelected}
       className={`flex w-full rounded-xl cursor-pointer select-none border-2 transition-colors duration-300 ${
         compact
@@ -177,7 +177,7 @@ export default function FloatingAppShowcase() {
               >
                 <img
                   src={imageSrc(selected.logo)}
-                  alt={selected.name}
+                  alt={selected.fullName}
                   className="rounded-[1.5rem] sm:rounded-[2rem] object-contain w-[min(85vw,256px)] h-[min(85vw,256px)] max-w-full"
                   style={{ filter: `drop-shadow(0 24px 48px hsl(${selected.accentHsl} / 0.3))` }}
                 />
@@ -214,7 +214,7 @@ export default function FloatingAppShowcase() {
               >
                 <img
                   src={imageSrc(selected.logo)}
-                  alt={selected.name}
+                  alt={selected.fullName}
                   className="rounded-3xl object-contain w-full max-w-[220px] xl:max-w-[260px] aspect-square"
                   style={{ filter: `drop-shadow(0 20px 40px hsl(${selected.accentHsl} / 0.28))` }}
                 />
@@ -247,7 +247,7 @@ function ContentPanel({ selected, narrow }: { selected: (typeof showcaseApps)[0]
           className={`inline-block text-xs font-bold tracking-[0.15em] uppercase px-3 py-1.5 rounded-full ${narrow ? 'mb-3' : 'mb-4'}`}
           style={{ color: `hsl(${selected.accentHsl})`, background: `hsl(${selected.accentHsl} / 0.1)` }}
         >
-          {selected.name}
+          {selected.fullName}
         </span>
 
         <h3
