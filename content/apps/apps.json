@@ -37,7 +37,7 @@
     "slug": "banknotes",
     "published": true,
     "order": 2,
-    "name": "Banknotes",
+    "name": "Banknote",
     "fullName": "Banknote Identification AI",
     "tagline": "Scan and identify banknotes from around the world",
     "longDescription": "Banknotes uses advanced image recognition to identify banknotes from around the world. Learn about currency history, security features, and exchange rates instantly.",
