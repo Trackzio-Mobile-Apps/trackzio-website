@@ -19,6 +19,8 @@ const AUTO_APP_ALIASES: Record<string, string> = Object.fromEntries(
 const LEGACY_OVERRIDES: Record<string, string> = {
   "/banknoteprivacy": "/privacy-policy-banknote",
   "/banknoteterms": "/banknote-terms",
+  "/delete-account:any-app": "/account-deletion",
+  "/delete-account%3A-any-app": "/account-deletion",
 };
 
 const DECODED_TERMS_TO_ENCODED: Record<string, string> = {
