@@ -129,8 +129,8 @@ export default function AccountDataDeletion() {
 
   return (
     <section className="py-8 sm:py-12">
-      <div className="container-site max-w-3xl">
-        <motion.div {...fadeUp} className="rounded-2xl border border-border/70 bg-card p-5 sm:p-8" style={{ boxShadow: "var(--shadow-card)" }}>
+      <div className="container-site max-w-xl">
+        <motion.div {...fadeUp} className="mx-auto w-full max-w-xl rounded-2xl border border-border/70 bg-card p-5 sm:p-8" style={{ boxShadow: "var(--shadow-card)" }}>
           <div className="pb-5 border-b border-border/70">
             <h1 className="text-3xl sm:text-4xl font-bold font-display text-foreground">Request Account and Data Deletion</h1>
             <p className="mt-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
@@ -289,7 +289,7 @@ export default function AccountDataDeletion() {
           </form>
         </motion.div>
 
-        <motion.div {...fadeUp} className="mt-8 rounded-2xl border border-border/70 bg-card p-5 sm:p-8" style={{ boxShadow: "var(--shadow-card)" }}>
+        <motion.div {...fadeUp} className="mx-auto mt-8 w-full max-w-xl rounded-2xl border border-border/70 bg-card p-5 sm:p-8" style={{ boxShadow: "var(--shadow-card)" }}>
           <h2 className="text-2xl font-bold font-display text-foreground">What happens next</h2>
           <ol className="mt-4 list-decimal pl-5 space-y-2 text-muted-foreground">
             <li>We review your request</li>
