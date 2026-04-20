@@ -319,6 +319,23 @@ export default function Help() {
           </div>
         </div>
       </section>
+
+      {/* Account Deletion CTA */}
+      <section className="py-12 sm:py-16 md:py-20 snap-start">
+        <div className="container-site max-w-2xl text-center px-1">
+          <motion.div {...fadeUp}>
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed mb-6 max-w-md mx-auto">
+            Submit a request to permanently delete your account and app data.
+            </p>
+            <a
+              href="/delete-account%3A-any-app"
+              className="inline-flex items-center justify-center gap-2 min-h-[48px] w-full max-w-sm sm:w-auto sm:max-w-none mx-auto px-6 sm:px-8 rounded-xl border border-primary bg-transparent text-primary font-semibold text-sm sm:text-base hover:bg-primary/10 transition-colors"
+            >
+              Delete my data <ArrowRight size={18} className="shrink-0" aria-hidden />
+            </a>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 }
