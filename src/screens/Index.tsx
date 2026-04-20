@@ -1,11 +1,31 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useRouter } from "next/router";
 import { motion } from 'framer-motion';
 import { trackEvent } from '@/lib/analytics';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
-import { useIsMobile } from '@/hooks/use-mobile';
 import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import FloatingAppShowcase from '@/components/FloatingAppShowcase';
+
+function getScrollStep(el: HTMLElement): number {
+  const first = el.firstElementChild as HTMLElement | null;
+  if (!first) return el.clientWidth;
+  const gap = parseFloat(getComputedStyle(el).gap) || 0;
+  return first.offsetWidth + gap;
+}
+
+function getActiveSlideIndex(el: HTMLElement, count: number): number {
+  if (count <= 1) return 0;
+  const maxScroll = el.scrollWidth - el.clientWidth;
+  if (maxScroll <= 0) return 0;
+  const center = el.scrollLeft + el.clientWidth / 2;
+  let best = 0;
+  for (let i = 0; i < el.children.length; i++) {
+    const c = el.children[i] as HTMLElement;
+    const mid = c.offsetLeft + c.offsetWidth / 2;
+    if (mid <= center) best = i;
+  }
+  return best;
+}
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
   whileInView: { opacity: 1, y: 0 },
@@ -41,11 +61,12 @@ const testimonials = [
 export default function Home() {
   usePageAnalytics('home', 'page_view_home');
   const { asPath } = useRouter();
-  const isMobile = useIsMobile();
   const carouselRef = useRef<HTMLDivElement>(null);
   const autoScrollRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   // Handle hash scroll (e.g. /#apps from redirects)
   useEffect(() => {
@@ -62,18 +83,32 @@ export default function Home() {
     return () => window.removeEventListener("hashchange", scrollToApps);
   }, [asPath]);
 
-  const updateScrollButtons = () => {
+  const updateFromScroll = useCallback(() => {
     const el = carouselRef.current;
     if (!el) return;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    if (maxScroll <= 0) {
+      setScrollProgress(0);
+      setCanScrollLeft(false);
+      setCanScrollRight(false);
+      setActiveIndex(0);
+      return;
+    }
+    setScrollProgress(el.scrollLeft / maxScroll);
     setCanScrollLeft(el.scrollLeft > 10);
-    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
-  };
+    setCanScrollRight(el.scrollLeft < maxScroll - 10);
+    setActiveIndex(getActiveSlideIndex(el, testimonials.length));
+  }, []);
+
+  const onScroll = useCallback(() => {
+    requestAnimationFrame(updateFromScroll);
+  }, [updateFromScroll]);
 
   useEffect(() => {
     const el = carouselRef.current;
     if (!el) return;
-    updateScrollButtons();
-    el.addEventListener('scroll', updateScrollButtons);
+    updateFromScroll();
+    el.addEventListener('scroll', onScroll, { passive: true });
 
     // Auto-scroll
     const startAutoScroll = () => {
@@ -82,8 +117,7 @@ export default function Home() {
         if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 10) {
           el.scrollTo({ left: 0, behavior: 'smooth' });
         } else {
-          const cardWidth = el.querySelector<HTMLElement>(':scope > div')?.offsetWidth || el.clientWidth;
-          el.scrollBy({ left: cardWidth + 20, behavior: 'smooth' });
+          el.scrollBy({ left: getScrollStep(el), behavior: 'smooth' });
         }
       }, 4000);
     };
@@ -97,22 +131,32 @@ export default function Home() {
     el.addEventListener('touchstart', pause, { passive: true });
     el.addEventListener('touchend', resume);
 
+    const onResize = () => requestAnimationFrame(updateFromScroll);
+    window.addEventListener('resize', onResize);
+
     return () => {
-      el.removeEventListener('scroll', updateScrollButtons);
+      el.removeEventListener('scroll', onScroll);
       el.removeEventListener('mouseenter', pause);
       el.removeEventListener('mouseleave', resume);
       el.removeEventListener('touchstart', pause);
       el.removeEventListener('touchend', resume);
+      window.removeEventListener('resize', onResize);
       if (autoScrollRef.current) clearInterval(autoScrollRef.current);
     };
-  }, []);
+  }, [onScroll, updateFromScroll]);
 
   const scrollCarousel = (dir: 'left' | 'right') => {
     const el = carouselRef.current;
     if (!el) return;
-    const cardWidth = el.querySelector<HTMLElement>(':scope > div')?.offsetWidth || el.clientWidth;
-    const amount = cardWidth + 20;
+    const amount = getScrollStep(el);
     el.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
+  };
+
+  const goToSlide = (index: number) => {
+    const el = carouselRef.current;
+    if (!el || index < 0 || index >= el.children.length) return;
+    const child = el.children[index] as HTMLElement;
+    el.scrollTo({ left: child.offsetLeft, behavior: 'smooth' });
   };
 
   return (
@@ -226,33 +270,36 @@ export default function Home() {
             </h2>
           </motion.div>
 
-          <div className="relative px-1 sm:px-0">
-            {canScrollLeft && (
+          <div className="relative px-1 sm:px-0 max-w-7xl mx-auto min-w-0">
+            {testimonials.length > 1 && canScrollLeft && (
               <button
                 type="button"
                 aria-label="Previous testimonials"
                 onClick={() => scrollCarousel('left')}
-                className="hidden sm:flex absolute left-0 sm:-left-2 md:-left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                className="absolute left-0 sm:left-0 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-border bg-card/95 text-muted-foreground shadow-md backdrop-blur-sm transition-colors hover:text-foreground hover:bg-card lg:-left-2"
                 style={{ boxShadow: 'var(--shadow-card)' }}
               >
-                <ChevronLeft size={18} />
+                <ChevronLeft className="h-5 w-5 shrink-0" />
               </button>
             )}
-            {canScrollRight && (
+            {testimonials.length > 1 && canScrollRight && (
               <button
                 type="button"
                 aria-label="Next testimonials"
                 onClick={() => scrollCarousel('right')}
-                className="hidden sm:flex absolute right-0 sm:-right-2 md:-right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                className="absolute right-0 sm:right-0 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-border bg-card/95 text-muted-foreground shadow-md backdrop-blur-sm transition-colors hover:text-foreground hover:bg-card lg:-right-2"
                 style={{ boxShadow: 'var(--shadow-card)' }}
               >
-                <ChevronRight size={18} />
+                <ChevronRight className="h-5 w-5 shrink-0" />
               </button>
             )}
 
             <div
               ref={carouselRef}
-              className="flex gap-4 sm:gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory snap-always scroll-smooth pb-4 -mx-1 px-1 sm:mx-0 sm:px-0"
+              role="region"
+              aria-label="User testimonials carousel"
+              aria-roledescription="carousel"
+              className="flex gap-4 sm:gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth pb-2 px-8 sm:px-10 lg:px-12"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {testimonials.map((t, i) => (
@@ -262,10 +309,9 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: Math.min(i * 0.08, 0.4) }}
-                  className={`flex-shrink-0 snap-start ${isMobile ? 'w-[min(100%,22rem)] min-[400px]:w-[min(100%,24rem)]' : ''}`}
-                  style={isMobile ? undefined : { width: 'calc(25% - 15px)', minWidth: '260px' }}
+                  className="flex shrink-0 flex-col min-h-0 snap-start w-full min-w-0 flex-[0_0_100%] lg:w-auto lg:flex-[0_0_calc((100%-3.75rem)/4)]"
                 >
-                  <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-card h-full flex flex-col min-h-[11rem] sm:min-h-0" style={{ boxShadow: 'var(--shadow-card)' }}>
+                  <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-card h-full flex flex-col min-h-[11rem] sm:min-h-0 border border-border/30" style={{ boxShadow: 'var(--shadow-card)' }}>
                     <Quote size={22} className="text-primary/25 mb-3" />
                     <p className="text-sm leading-relaxed text-foreground flex-1 font-medium">"{t.quote}"</p>
                     <div className="mt-3 flex items-center gap-3">
@@ -280,6 +326,37 @@ export default function Home() {
                 </motion.div>
               ))}
             </div>
+
+            {testimonials.length > 1 && (
+              <div className="mt-4 w-full max-w-md mx-auto shrink-0 px-3 space-y-3">
+                <div className="h-1.5 rounded-full bg-muted overflow-hidden" aria-hidden="true">
+                  <div
+                    className="h-full rounded-full transition-[width] duration-150 ease-out"
+                    style={{
+                      width: `${Math.round(scrollProgress * 100)}%`,
+                      backgroundColor: 'hsl(var(--primary))',
+                    }}
+                  />
+                </div>
+                <div className="flex flex-wrap justify-center gap-2" role="tablist" aria-label="Testimonial slides">
+                  {testimonials.map((t, i) => (
+                    <button
+                      key={`dot-${t.author}-${i}`}
+                      type="button"
+                      role="tab"
+                      aria-selected={activeIndex === i}
+                      aria-label={`Go to testimonial from ${t.author}`}
+                      onClick={() => goToSlide(i)}
+                      className="h-2.5 w-2.5 rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                      style={{
+                        backgroundColor: activeIndex === i ? 'hsl(var(--primary))' : 'hsl(var(--muted))',
+                        transform: activeIndex === i ? 'scale(1.25)' : 'scale(1)',
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
