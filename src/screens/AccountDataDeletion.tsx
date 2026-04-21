@@ -15,7 +15,7 @@ const fadeUp = {
 };
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const SUPPORT_EMAIL = "developer@trackzio.com";
+const DELETION_API_URL = process.env.NEXT_PUBLIC_ACCOUNT_DELETION_ENDPOINT;
 
 type FormState = {
   fullName: string;
@@ -86,7 +86,7 @@ export default function AccountDataDeletion() {
     return Object.keys(next).length === 0;
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!validate()) {
       toast.error("Please review the form", {
@@ -94,37 +94,63 @@ export default function AccountDataDeletion() {
       });
       return;
     }
-
+    if (!DELETION_API_URL) {
+      toast.error("Submission is not configured", {
+        description: "Set NEXT_PUBLIC_ACCOUNT_DELETION_ENDPOINT in environment variables.",
+      });
+      return;
+    }
     setIsSubmitting(true);
 
-    const fullName = formData.fullName.trim();
-    const email = formData.email.trim();
-    const reason = formData.reason.trim();
-    const appName = appNameById.get(formData.appId) ?? formData.appId;
+    try {
+      const fullName = formData.fullName.trim();
+      const email = formData.email.trim();
+      const reason = formData.reason.trim();
+      const appName = appNameById.get(formData.appId) ?? formData.appId;
 
-    trackEvent("account_deletion_request_submitted", {
-      page_name: "account_data_deletion",
-      app_id: formData.appId,
-    });
+      const response = await fetch(DELETION_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName,
+          email,
+          app: appName,
+          reason: reason || "Not provided",
+          consent: formData.consent,
+          appId: formData.appId,
+          platform: "web",
+        }),
+      });
 
-    const subject = encodeURIComponent(`Account deletion request - ${appName}`);
-    const body = encodeURIComponent(
-      `Full Name: ${fullName}\nEmail: ${email}\nApp: ${appName}\nReason: ${reason || "Not provided"}\nConsent confirmed: Yes`,
-    );
-    const mailto = `mailto:${SUPPORT_EMAIL}?subject=${subject}&body=${body}`;
+      let body: { error?: string } | null = null;
+      try {
+        body = (await response.json()) as { error?: string };
+      } catch {
+        body = null;
+      }
 
-    toast.success("Request is ready to submit", {
-      description: "Your email app will open with the request details prefilled.",
-      duration: 6000,
-    });
+      if (!response.ok) {
+        throw new Error(body?.error || "Unable to submit your request right now.");
+      }
 
-    setFormData(initialState);
-    setErrors({});
-    setIsSubmitting(false);
+      trackEvent("account_deletion_request_submitted", {
+        page_name: "account_data_deletion",
+        app_id: formData.appId,
+      });
 
-    window.setTimeout(() => {
-      window.open(mailto, "_blank", "noopener,noreferrer");
-    }, 200);
+      toast.success("Request submitted successfully", {
+        description: "We received your request and will process it within 90 days.",
+        duration: 6000,
+      });
+
+      setFormData(initialState);
+      setErrors({});
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Something went wrong while submitting.";
+      toast.error("Submission failed", { description: message });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
