@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "@/components/ui/sonner";
 import { trackEvent } from "@/lib/analytics";
 import { getClientApps } from "@/lib/content/apps-client";
@@ -16,6 +17,7 @@ const fadeUp = {
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DELETION_API_URL = process.env.NEXT_PUBLIC_ACCOUNT_DELETION_ENDPOINT;
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 type FormState = {
   fullName: string;
@@ -40,6 +42,9 @@ export default function AccountDataDeletion() {
   const [formData, setFormData] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [recaptchaError, setRecaptchaError] = useState<string | null>(null);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const apps = useMemo(() => {
     return getClientApps().map((app) => ({
@@ -74,7 +79,11 @@ export default function AccountDataDeletion() {
       next.appId = "Please select a valid app from the list.";
     }
 
-    if (reason.length > 1000) {
+    if (!reason) {
+      next.reason = "Reason is required.";
+    } else if (reason.length < 10) {
+      next.reason = "Please enter a reason (at least 10 characters).";
+    } else if (reason.length > 1000) {
       next.reason = "Reason is too long (max 1,000 characters).";
     }
 
@@ -82,8 +91,17 @@ export default function AccountDataDeletion() {
       next.consent = "You must confirm before submitting your request.";
     }
 
+    const captchaToken = recaptchaToken?.trim();
+    if (RECAPTCHA_SITE_KEY && !captchaToken) {
+      setRecaptchaError("Please complete the verification before submitting.");
+    } else {
+      setRecaptchaError(null);
+    }
+
     setErrors(next);
-    return Object.keys(next).length === 0;
+    const hasFieldErrors = Object.keys(next).length > 0;
+    const hasCaptchaError = Boolean(RECAPTCHA_SITE_KEY && !captchaToken);
+    return !hasFieldErrors && !hasCaptchaError;
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -108,18 +126,29 @@ export default function AccountDataDeletion() {
       const reason = formData.reason.trim();
       const appName = appNameById.get(formData.appId) ?? formData.appId;
 
+      const payload: Record<string, unknown> = {
+        fullName,
+        email,
+        app: appName,
+        reason,
+        consent: formData.consent,
+        appId: formData.appId,
+        platform: "web",
+      };
+      const captchaToken = recaptchaToken?.trim();
+      if (RECAPTCHA_SITE_KEY && !captchaToken) {
+        throw new Error("Missing reCAPTCHA token. Please verify and try again.");
+      }
+      if (RECAPTCHA_SITE_KEY && captchaToken) {
+        // Send both names for backend compatibility.
+        payload.recaptchaResponse = captchaToken;
+        payload.recaptchaToken = captchaToken;
+      }
+
       const response = await fetch(DELETION_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName,
-          email,
-          app: appName,
-          reason: reason || "Not provided",
-          consent: formData.consent,
-          appId: formData.appId,
-          platform: "web",
-        }),
+        body: JSON.stringify(payload),
       });
 
       let body: { error?: string } | null = null;
@@ -145,9 +174,13 @@ export default function AccountDataDeletion() {
 
       setFormData(initialState);
       setErrors({});
+      setRecaptchaToken(null);
+      recaptchaRef.current?.reset();
     } catch (error) {
       const message = error instanceof Error ? error.message : "Something went wrong while submitting.";
       toast.error("Submission failed", { description: message });
+      setRecaptchaToken(null);
+      recaptchaRef.current?.reset();
     } finally {
       setIsSubmitting(false);
     }
@@ -258,7 +291,7 @@ export default function AccountDataDeletion() {
 
             <div>
               <label htmlFor="deletion-reason" className="block text-sm font-semibold text-foreground mb-1.5">
-                Reason <span className="text-muted-foreground font-normal">(Optional)</span>
+                Reason <span className="text-destructive">*</span>
               </label>
               <textarea
                 id="deletion-reason"
@@ -269,7 +302,7 @@ export default function AccountDataDeletion() {
                   setFormData((prev) => ({ ...prev, reason: e.target.value }));
                   if (errors.reason) setErrors((prev) => ({ ...prev, reason: undefined }));
                 }}
-                placeholder="Optional: Enter your reason for deletion."
+                placeholder="Enter your reason for deletion."
                 aria-invalid={!!errors.reason}
                 aria-describedby={errors.reason ? "deletion-reason-error" : undefined}
                 className={`w-full min-h-[120px] px-4 py-3 rounded-lg bg-background border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 resize-y ${
@@ -304,6 +337,32 @@ export default function AccountDataDeletion() {
                 </p>
               )}
             </div>
+
+            {RECAPTCHA_SITE_KEY && (
+              <div>
+                <div className="flex justify-center overflow-x-auto">
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={RECAPTCHA_SITE_KEY}
+                    onChange={(token) => {
+                      setRecaptchaToken(token?.trim() ?? null);
+                      if (recaptchaError) setRecaptchaError(null);
+                    }}
+                    onExpired={() => {
+                      setRecaptchaToken(null);
+                    }}
+                    onErrored={() => {
+                      setRecaptchaToken(null);
+                    }}
+                  />
+                </div>
+                {recaptchaError && (
+                  <p className="mt-2 text-sm text-destructive text-center" role="alert">
+                    {recaptchaError}
+                  </p>
+                )}
+              </div>
+            )}
 
             <button
               type="submit"
