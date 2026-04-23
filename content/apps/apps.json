@@ -18,10 +18,13 @@
       "dau": "30K+"
     },
     "features": [
-      "AI Coin Scanner",
-      "Rich History",
+      "AI Identifier",
+      "Know Your Coin",
+      "Discover Value",
+      "Global Catalogue",
+      "Private Collections",
       "Marketplace",
-      "Rarity Analysis"
+      "Community"
     ],
     "screenshots": [
       "coinzy-1.png",
@@ -29,7 +32,8 @@
       "coinzy-3.png",
       "coinzy-4.png",
       "coinzy-5.png",
-      "coinzy-6.png"
+      "coinzy-6.png",
+      "coinzy-7.png"
     ]
   },
   {
@@ -51,18 +55,22 @@
       "dau": "7K+"
     },
     "features": [
-      "AI Banknote Scanner",
-      "Global Coverage",
-      "Rarity & Value",
-      "History & Design"
+      "AI Identifier",
+      "Know Your Banknote",
+      "Discover Value",
+      "Global Catalogue",
+      "Private Collections",
+      "Marketplace",
+      "Community"
     ],
     "screenshots": [
-      "banknotes-4.webp",
-      "banknotes-5.webp",
-      "banknotes-6.webp",
-      "banknotes-7.webp",
-      "banknotes-8.webp",
-      "banknotes-9.webp"
+      "banknotes-1.png",
+      "banknotes-2.png",
+      "banknotes-3.png",
+      "banknotes-4.png",
+      "banknotes-5.png",
+      "banknotes-6.png",
+      "banknotes-7.png"
     ]
   },
   {
@@ -84,18 +92,24 @@
       "dau": "Coming soon"
     },
     "features": [
-      "AI Identification",
-      "Explore by Category",
-      "Detailed Profiles",
-      "Build Collection"
+      "AI Identifier",
+      "Global Catalogue",
+      "Get bite advices",
+      "Community",
+      "Private Collection",
+      "AI Expert",
+      "Which Insect are you?",
+      "Dark mode"
     ],
     "screenshots": [
       "insecto-1.png",
-      "insecto-2.webp",
-      "insecto-3.webp",
-      "insecto-4.webp",
-      "insecto-5.webp",
-      "insecto-6.webp"
+      "insecto-2.png",
+      "insecto-3.png",
+      "insecto-4.png",
+      "insecto-5.png",
+      "insecto-6.png",
+      "insecto-7.png",
+      "insecto-8.png"
     ]
   },
   {
@@ -117,16 +131,24 @@
       "dau": "30K+"
     },
     "features": [
-      "Streak Tracking",
-      "Smart Scheduling",
-      "Visual Progress",
-      "Fun Companion"
+      "Productivity Boost",
+      "Track Tasks",
+      "Custom Habits",
+      "Stats & Insights",
+      "Dark mode",
+      "Timer",
+      "Widgets",
+      "Watches"
     ],
     "screenshots": [
-      "habiteazy-1.jpg",
-      "habiteazy-2.webp",
-      "habiteazy-4.jpg",
-      "habiteazy-5.jpg"
+      "habiteazy-1.png",
+      "habiteazy-2.png",
+      "habiteazy-3.png",
+      "habiteazy-4.png",
+      "habiteazy-5.png",
+      "habiteazy-6.png",
+      "habiteazy-7.png",
+      "habiteazy-8.png"
     ]
   },
   {
@@ -148,17 +170,24 @@
       "dau": "Coming soon"
     },
     "features": [
-      "AI Rock Identification",
-      "AI Chat Assistant",
-      "Collection Tracking",
-      "Global Mineral Catalogue"
+      "AI Identifier",
+      "Global Catalogue",
+      "Zodiac Stones",
+      "Private Collections",
+      "Discover Value",
+      "Know Your Coin",
+      "Community",
+      "Which Rock Are You?"
     ],
     "screenshots": [
-      "rockzy-1.webp",
-      "rockzy-3.webp",
-      "rockzy-4.webp",
-      "rockzy-6.webp",
-      "rockzy-7.webp"
+      "rockzy-1.png",
+      "rockzy-2.png",
+      "rockzy-3.png",
+      "rockzy-4.png",
+      "rockzy-5.png",
+      "rockzy-6.png",
+      "rockzy-7.png",
+      "rockzy-8.png"
     ]
   }
 ]

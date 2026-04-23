@@ -10,27 +10,38 @@ import coinzy3 from "@/assets/screenshots/coinzy-3.png";
 import coinzy4 from "@/assets/screenshots/coinzy-4.png";
 import coinzy5 from "@/assets/screenshots/coinzy-5.png";
 import coinzy6 from "@/assets/screenshots/coinzy-6.png";
-import banknotes4 from "@/assets/screenshots/banknotes-4.webp";
-import banknotes5 from "@/assets/screenshots/banknotes-5.webp";
-import banknotes6 from "@/assets/screenshots/banknotes-6.webp";
-import banknotes7 from "@/assets/screenshots/banknotes-7.webp";
-import banknotes8 from "@/assets/screenshots/banknotes-8.webp";
-import banknotes9 from "@/assets/screenshots/banknotes-9.webp";
+import coinzy7 from "@/assets/screenshots/coinzy-7.png";
+import banknotes1 from "@/assets/screenshots/banknotes-1.png";
+import banknotes2 from "@/assets/screenshots/banknotes-2.png";
+import banknotes3 from "@/assets/screenshots/banknotes-3.png";
+import banknotes4 from "@/assets/screenshots/banknotes-4.png";
+import banknotes5 from "@/assets/screenshots/banknotes-5.png";
+import banknotes6 from "@/assets/screenshots/banknotes-6.png";
+import banknotes7 from "@/assets/screenshots/banknotes-7.png";
 import insecto1 from "@/assets/screenshots/insecto-1.png";
-import insecto2 from "@/assets/screenshots/insecto-2.webp";
-import insecto3 from "@/assets/screenshots/insecto-3.webp";
-import insecto4 from "@/assets/screenshots/insecto-4.webp";
-import insecto5 from "@/assets/screenshots/insecto-5.webp";
-import insecto6 from "@/assets/screenshots/insecto-6.webp";
-import habiteazy1 from "@/assets/screenshots/habiteazy-1.jpg";
-import habiteazy2 from "@/assets/screenshots/habiteazy-2.webp";
-import habiteazy4 from "@/assets/screenshots/habiteazy-4.jpg";
-import habiteazy5 from "@/assets/screenshots/habiteazy-5.jpg";
-import rockzy1 from "@/assets/screenshots/rockzy-1.webp";
-import rockzy3 from "@/assets/screenshots/rockzy-3.webp";
-import rockzy4 from "@/assets/screenshots/rockzy-4.webp";
-import rockzy6 from "@/assets/screenshots/rockzy-6.webp";
-import rockzy7 from "@/assets/screenshots/rockzy-7.webp";
+import insecto2 from "@/assets/screenshots/insecto-2.png";
+import insecto3 from "@/assets/screenshots/insecto-3.png";
+import insecto4 from "@/assets/screenshots/insecto-4.png";
+import insecto5 from "@/assets/screenshots/insecto-5.png";
+import insecto6 from "@/assets/screenshots/insecto-6.png";
+import insecto7 from "@/assets/screenshots/insecto-7.png";
+import insecto8 from "@/assets/screenshots/insecto-8.png";
+import habiteazy1 from "@/assets/screenshots/habiteazy-1.png";
+import habiteazy2 from "@/assets/screenshots/habiteazy-2.png";
+import habiteazy3 from "@/assets/screenshots/habiteazy-3.png";
+import habiteazy4 from "@/assets/screenshots/habiteazy-4.png";
+import habiteazy5 from "@/assets/screenshots/habiteazy-5.png";
+import habiteazy6 from "@/assets/screenshots/habiteazy-6.png";
+import habiteazy7 from "@/assets/screenshots/habiteazy-7.png";
+import habiteazy8 from "@/assets/screenshots/habiteazy-8.png";
+import rockzy1 from "@/assets/screenshots/rockzy-1.png";
+import rockzy2 from "@/assets/screenshots/rockzy-2.png";
+import rockzy3 from "@/assets/screenshots/rockzy-3.png";
+import rockzy4 from "@/assets/screenshots/rockzy-4.png";
+import rockzy5 from "@/assets/screenshots/rockzy-5.png";
+import rockzy6 from "@/assets/screenshots/rockzy-6.png";
+import rockzy7 from "@/assets/screenshots/rockzy-7.png";
+import rockzy8 from "@/assets/screenshots/rockzy-8.png";
 
 export const appLogoMap: Record<string, StaticImageData> = {
   "coinzy-logo.png": coinzyLogo,
@@ -47,25 +58,36 @@ export const appScreenshotMap: Record<string, StaticImageData> = {
   "coinzy-4.png": coinzy4,
   "coinzy-5.png": coinzy5,
   "coinzy-6.png": coinzy6,
-  "banknotes-4.webp": banknotes4,
-  "banknotes-5.webp": banknotes5,
-  "banknotes-6.webp": banknotes6,
-  "banknotes-7.webp": banknotes7,
-  "banknotes-8.webp": banknotes8,
-  "banknotes-9.webp": banknotes9,
+  "coinzy-7.png": coinzy7,
+  "banknotes-1.png": banknotes1,
+  "banknotes-2.png": banknotes2,
+  "banknotes-3.png": banknotes3,
+  "banknotes-4.png": banknotes4,
+  "banknotes-5.png": banknotes5,
+  "banknotes-6.png": banknotes6,
+  "banknotes-7.png": banknotes7,
   "insecto-1.png": insecto1,
-  "insecto-2.webp": insecto2,
-  "insecto-3.webp": insecto3,
-  "insecto-4.webp": insecto4,
-  "insecto-5.webp": insecto5,
-  "insecto-6.webp": insecto6,
-  "habiteazy-1.jpg": habiteazy1,
-  "habiteazy-2.webp": habiteazy2,
-  "habiteazy-4.jpg": habiteazy4,
-  "habiteazy-5.jpg": habiteazy5,
-  "rockzy-1.webp": rockzy1,
-  "rockzy-3.webp": rockzy3,
-  "rockzy-4.webp": rockzy4,
-  "rockzy-6.webp": rockzy6,
-  "rockzy-7.webp": rockzy7,
+  "insecto-2.png": insecto2,
+  "insecto-3.png": insecto3,
+  "insecto-4.png": insecto4,
+  "insecto-5.png": insecto5,
+  "insecto-6.png": insecto6,
+  "insecto-7.png": insecto7,
+  "insecto-8.png": insecto8,
+  "habiteazy-1.png": habiteazy1,
+  "habiteazy-2.png": habiteazy2,
+  "habiteazy-3.png": habiteazy3,
+  "habiteazy-4.png": habiteazy4,
+  "habiteazy-5.png": habiteazy5,
+  "habiteazy-6.png": habiteazy6,
+  "habiteazy-7.png": habiteazy7,
+  "habiteazy-8.png": habiteazy8,
+  "rockzy-1.png": rockzy1,
+  "rockzy-2.png": rockzy2,
+  "rockzy-3.png": rockzy3,
+  "rockzy-4.png": rockzy4,
+  "rockzy-5.png": rockzy5,
+  "rockzy-6.png": rockzy6,
+  "rockzy-7.png": rockzy7,
+  "rockzy-8.png": rockzy8,
 };
