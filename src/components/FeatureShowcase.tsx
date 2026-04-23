@@ -232,8 +232,7 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
                     />
                   </div>
                   <div className="px-3 py-2 text-center shrink-0">
-                    <h3 className="font-bold text-xs text-foreground">{feature.title}</h3>
-                    <p className="text-[0.65rem] text-muted-foreground mt-0.5 leading-snug">{feature.description}</p>
+                    <h3 className="font-bold text-base text-foreground">{feature.title}</h3>
                   </div>
                 </div>
               </article>
