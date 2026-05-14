@@ -189,5 +189,44 @@
       "rockzy-7.png",
       "rockzy-8.png"
     ]
+  },
+  {
+    "id": "plantzy",
+    "slug": "plantzy",
+    "published": true,
+    "order": 6,
+    "name": "Plantzy",
+    "fullName": "Plantzy AI: Plant Care and ID",
+    "tagline": "Scan, track, identify and care for all plants",
+    "longDescription": "Plantzy uses advanced image recognition to identify plants and gives detailed suggestions on their care and growth. With a litany of smart tools integrated in the app, plant care has never been easier.",
+    "accentHsl": "174 45% 28%",
+    "logo": "plantzy-logo.png",
+    "iosUrl": null,
+    "androidUrl": null,
+    "stats": {
+      "downloads": "Coming soon",
+      "rating": "Coming soon",
+      "dau": "Coming soon"
+    },
+    "features": [
+      "AI plant identification",
+      "Global Catalogue",
+      "Diagnose your Plants",
+      "Care Schedules",
+      "Smart AI Tools",
+      "AI Expert",
+      "Plant Care Guides",
+      "Join the Community"
+    ],
+    "screenshots": [
+        "plantzy-7.png",
+      "plantzy-8.png",
+        "plantzy-6.png",
+      "plantzy-1.png",
+      "plantzy-4.png",
+      "plantzy-2.png",
+      "plantzy-3.png",
+      "plantzy-5.png"
+    ]
   }
 ]

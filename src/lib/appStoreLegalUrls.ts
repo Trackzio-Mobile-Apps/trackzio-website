@@ -27,6 +27,10 @@ export const APP_STORE_LEGAL_URLS: Record<string, { privacy: string; terms: stri
     privacy: "/privacy-policy-rockzy-ai",
     terms: "/rockzy-terms-of-service",
   },
+  plantzy: {
+    privacy: "/privacy-policy-plantzy-ai",
+    terms: "/plantzy-terms-of-service",
+  },
   "test-app-legal": {
     privacy: "/privacy-policy-test-app-legal",
     terms: "/test-app-legal-terms",
@@ -49,6 +53,7 @@ export const APP_LEGAL_IMPLEMENTATION_PATH_SEGMENTS: Record<string, readonly str
   insecto: ["insecto-ai/privacy-policy", "insecto-ai/terms"],
   habiteazy: ["habit-eazy/privacy-policy", "habit-eazy/terms"],
   rockzy: ["rockzy/privacy-policy", "rockzy/terms"],
+  plantzy: ["plantzy/privacy-policy", "plantzy/terms"],
   "test-app-legal": ["test-app-legal/privacy-policy", "test-app-legal/terms"],
   "test-app-legal-2": ["test-app-legal-2/privacy-policy", "test-app-legal-2/terms"],
 };

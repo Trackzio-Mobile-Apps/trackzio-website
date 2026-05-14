@@ -32,6 +32,7 @@ const pageViewEvents: Record<string, string> = {
   insecto: 'insecto_page_view',
   habiteazy: 'habiteazy_page_view',
   rockzy: 'rockzy_page_view',
+  plantzy: 'plantzy_page_view',
 };
 
 function reviewStars(rating?: number) {
@@ -324,6 +325,27 @@ export default function AppDetail({ app }: AppDetailProps) {
                 </div>
               )}
             </div>
+          </div>
+        </section>
+      )}
+
+      {app.id === "coinzy" && (
+        <section className="py-12 sm:py-16 border-t border-border/60 snap-start" aria-labelledby="coinzy-platform-disclaimer-heading">
+          <div className="container-site max-w-3xl mx-auto">
+            <h2
+              id="coinzy-platform-disclaimer-heading"
+              className="text-xl sm:text-2xl font-bold font-display mb-4"
+              style={{ color: `hsl(${app.accentHsl})` }}
+            >
+              Disclaimer
+            </h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Coinzy is a hobbyist platform for physical numismatics only and does not facilitate the trading, holding, or
+              exchange of Bitcoins, cryptocurrencies, or any digital assets. We do not process payments or host a marketplace,
+              as all listings are for discovery only and any resulting sales occur entirely off-platform between users. Our
+              service is strictly limited to connecting hobbyists to showcase collections, and we are not a party to or
+              responsible for any private agreements or transactions.
+            </p>
           </div>
         </section>
       )}

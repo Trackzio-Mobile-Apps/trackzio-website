@@ -360,6 +360,23 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <section className="py-12 sm:py-16 border-t border-border/60 snap-start" aria-labelledby="home-disclaimer-heading">
+        <div className="container-site max-w-3xl mx-auto px-3 sm:px-0">
+          <motion.div {...fadeUp}>
+            <h2 id="home-disclaimer-heading" className="text-xl sm:text-2xl font-bold font-display mb-4 text-primary">
+              Disclaimer
+            </h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              This platform is a hobbyist identification and discovery tool and does not provide financial services, payment
+              processing, or trading for cryptocurrencies or any digital assets. All listings for physical collectibles are for
+              showcase purposes only, with any subsequent connections or transactions occurring entirely off-platform between
+              independent users. Our identification tools for numismatics, banknotes, and nature are for educational use and
+              do not constitute professional appraisals, legal certifications, or financial valuations.
+            </p>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 }
