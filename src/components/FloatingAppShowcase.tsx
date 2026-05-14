@@ -14,6 +14,7 @@ const showcaseBulletMatrix = [
   ['Species identification', 'Toxicity information', 'Personal catalogue'],
   ['Streak-based motivation', 'Smart scheduling', 'Visual progress charts'],
   ['AI rock identification', '8,000+ mineral database', 'Collection management'],
+  ['Plant ID from photos', 'Care & watering guidance', 'Your plant collection'],
 ] as const;
 
 const showcaseApps = apps.map((app, i) => ({

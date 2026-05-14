@@ -31,6 +31,9 @@ export const appReviewsById: Record<string, { quote: string; author: string; rat
     { quote: "If you enjoy collecting minerals, this rock identifier is a must have. You can identify rocks by photo within seconds and track your collection easily.", author: "Ijaaz Ahamed" },
     { quote: "Really nice app, smooth ui and great scanning accuracy of gems, useful to identify rocks or gems using camera.", author: "Aishik Kirtaniya" },
   ],
+  plantzy: [
+    { quote: "Helps me remember watering and names the plants I pick up at the nursery.", author: "Aanya" },
+  ],
 };
 
 export const appFaqsById: Record<string, { q: string; a: string }[]> = {
@@ -130,5 +133,83 @@ export const appFaqsById: Record<string, { q: string; a: string }[]> = {
     { q: 'How accurate is identification?', a: 'Depends on image quality. AI gives multiple possible matches.' },
     { q: 'Is my data safe?', a: 'Yes, securely stored with encryption.' },
     { q: 'How to report content?', a: 'Use the report option in the app.' },
+  ],
+  plantzy: [
+    {
+      q: 'What is Plantzy AI?',
+      a: 'Plantzy AI is an all-in-one app that lets you identify plants instantly using your camera, manage your personal collection, and browse our global plants catalogue. It provides personalized care guidance and a dedicated AI chat to answer your specific gardening questions, helping you grow smarter every day.',
+    },
+    {
+      q: "Why can't I identify more plants?",
+      a: 'Free users are limited to 2 successful plant identifications per day. Once you have reached this limit, you will need to wait for it to reset every 24 hours. To remove these restrictions and enjoy unlimited identifications immediately, you can upgrade your account to Premium.',
+    },
+    {
+      q: 'How does plant identification work?',
+      a: 'Take clear photos of your plant using the Identify feature. Our AI analyzes the images and provides details such as name, species, traits, and care recommendations. Free users can identify up to the daily limit, while Premium users have unlimited access.',
+    },
+    {
+      q: 'Do I need to create an account?',
+      a: 'Plantzy AI allows you to browse as a guest; however, guest data is stored only on your local device. This means your collection may be lost if the app is deleted, the device cache is cleared, or storage is deleted. Creating an account ensures your data is securely saved and synced across all your devices.',
+    },
+    {
+      q: 'What happens to my data if I delete the app?',
+      a: 'If you have an account, your data is stored securely on our servers and restored when you sign in again. Guest data stored on the device will be lost. You can also request account deletion anytime from Settings.',
+    },
+    {
+      q: "What's the difference between free and premium?",
+      a: 'Free users have limits on identifications, plant details access, and collections, and can view 1 Plant of the Day. Premium removes these limits and provides full access to all features, including unlimited AI chat.',
+    },
+    {
+      q: 'Can I cancel my subscription?',
+      a: 'Yes, you can cancel your subscription at any time through the App Store or Google Play Store settings, depending on your device. Once canceled, your Premium access will continue until the end of your current billing period, after which your account will return to the free tier. By staying subscribed, you ensure uninterrupted access to all Premium benefits. If you choose to cancel, you can always resubscribe later at any time.',
+    },
+    {
+      q: 'How do I organise my plant collection?',
+      a: 'You can organize plants using Identified, Wishlist, Indoor and Outdoor collections. Premium users can create unlimited custom collections and categorize plants in multiple ways.',
+    },
+    {
+      q: 'How do I add plants to my collection?',
+      a: 'You can identify a plant with the camera, mark plants as Wishlist in the Global Catalogue, or manually create a new entry with details and photos.',
+    },
+    {
+      q: 'What calculators and tools are available?',
+      a: 'Plantzy AI includes specialized tools like the Sunlight (Light) Meter, Water Calculator, Pot Size Calculator, and Plant Disease Detector. These tools provide practical guidance based on your plant and environment to help with your day-to-day care decisions.',
+    },
+    {
+      q: 'How do sunlight and other meters work?',
+      a: 'The Sunlight (Light) Meter helps you check whether your plant is getting enough light. The Water Calculator helps estimate watering needs, and the Pot Size Calculator helps choose suitable pot dimensions. Use these tools with your plant details for better recommendations.',
+    },
+    {
+      q: 'What are special features in the app?',
+      a: 'Special features include Plant of the Day, AI Chat for plant questions, care reminders, diagnose disease and smart calculators. Some advanced features are limited for free users and fully unlocked with Premium.',
+    },
+    {
+      q: 'How does AI chat work?',
+      a: 'Ask AI is your smart plant assistant. You can ask questions about plant care, get help with identification, and chat for tips and learning. Free users have limited AI messages per day; Premium users have unlimited access.',
+    },
+    {
+      q: 'What is the Global Catalogue?',
+      a: 'The Global Catalogue is a searchable database of plants worldwide where you can browse details and track which plants you own, have identified, or wishlisted.',
+    },
+    {
+      q: 'What is Plant of the Day?',
+      a: 'Plant of the Day is a featured plant highlighted daily in the app, showcasing interesting details and care insights to help you discover new plants. Free users can view one Plant of the Day, while Premium users can access multiple featured items and full details without limits.',
+    },
+    {
+      q: 'How accurate is plant identification?',
+      a: 'The AI provides multiple possible matches with confidence levels. Best results require clear lighting, good focus, and clear photos of the plant.',
+    },
+    {
+      q: 'Is my personal information secure?',
+      a: 'Yes. Your data is encrypted, securely stored, and protected using industry-standard security practices. Details are available in the Privacy Policy and Terms.',
+    },
+    {
+      q: 'How do I report inappropriate content?',
+      a: 'Use the report option on the relevant content. Our team reviews reports and takes appropriate action.',
+    },
+    {
+      q: 'Can I export my collection data?',
+      a: 'Collection export is not available yet, but your data is securely stored and synced across all signed-in devices.',
+    },
   ],
 };
