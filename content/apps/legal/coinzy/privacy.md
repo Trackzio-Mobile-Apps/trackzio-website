@@ -1,55 +1,111 @@
 ---
-title: "Coinzy: AI Coin Identifier — Privacy Policy"
-lastUpdated: "12 March 2026"
+title: "Coinzy – Privacy Policy"
+lastUpdated: "17th April 2025"
 analyticsPage: "coinzy-privacy"
 ---
 
+Last Updated: 17th April 2025
+
+          
+
 ## 1. Introduction
 
-This Privacy Policy explains how Coinzy ("we," "our," or "the app") collects, uses, stores, and protects your personal information. We are committed to safeguarding your privacy and ensuring compliance with applicable regulations, including the General Data Protection Regulation (GDPR) where applicable.
+          This Privacy Policy outlines how Coinzy collects, uses, stores, and protects your personal information. We comply with GDPR and applicable laws.
+
+          
 
 ## 2. Information We Collect
 
-We may collect:
+          - Coin Images (processed via AI such as Google Gemini)
+- Personal Identifiers (Name, Email via Google Sign-In)
+- Device & Usage Data (Firebase, Crashlytics)
+- User Data (collections, metadata)
 
-- **Account data:** if you sign in (e.g. email, name, OAuth identifiers).
-- **Content you provide:** photos uploaded for identification, collections, notes, and community posts.
-- **Device and usage data:** diagnostics, crash reports, and analytics to improve stability.
-- **Approximate location** only if you choose to provide it or where needed for product features.
+          
 
-## 3. How We Use Information
+## 3. Purpose of Data
 
-We use data to provide core features, improve AI models and product quality, operate communities and marketplaces where applicable, communicate with you, and comply with law.
+          - AI coin identification
+- Personalization
+- App improvement
+- Bug tracking
 
-## 4. Third Parties
+          
 
-We may use trusted providers (e.g. cloud hosting, authentication, AI inference, analytics). We do not sell your personal data.
+## 4. Data Sharing
 
-## 5. Security
+          Shared with trusted services:
 
-We use industry-standard safeguards including encryption in transit and access controls. No method is 100% secure.
+          - AI services
+- Firebase & Crashlytics
+- Authentication providers
 
-## 6. Your Rights
+          We do not sell data.
 
-Depending on your region, you may have rights to access, correct, delete, or export your data, and to object to certain processing. Contact us using the details below.
+          
 
-## 7. Children
+## 5. Data Security
 
-The App is not directed at children under 13. We do not knowingly collect personal information from minors without appropriate consent.
+          - Encryption in transit and at rest
+- Restricted access
+- Secure infrastructure
+
+          
+
+## 6. User Rights (GDPR)
+
+          - Access, delete, correct data
+- Withdraw consent
+- Data portability
+
+          
+
+## 7. Data Retention
+
+          Stored only as long as necessary.
+
+          
 
 ## 8. International Transfers
 
-Your data may be processed in countries outside your residence. Where required, we use appropriate safeguards.
+          Data may be stored outside EEA with safeguards.
 
-## 9. Changes
+          
 
-We may update this policy. Material changes will be communicated via the App or other reasonable means.
+## 9. Children's Privacy
 
+          Not for users under 13.
 
-## Contact
+          
 
-Email: [developer@trackzio.com](mailto:developer@trackzio.com)
+## 10. User Content Ownership
 
-Company: Trackzio Mobile Application Private Limited
+          Users retain ownership. App gets limited usage rights.
 
-Address: India
+          
+
+## 11. Consent
+
+          Using the app means consent.
+
+          
+
+## 12. Changes
+
+          We may update policy.
+
+          
+
+## 13. Data Breach Protocol
+
+          Users will be notified if required.
+
+          
+
+## 14. Contact
+
+          Email: [developer@trackzio.com](mailto:developer@trackzio.com)
+
+          Company: Trackzio Mobile Application Private Limited
+
+          Address: India

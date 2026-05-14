@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { trackEvent } from '@/lib/analytics';
 import { useSitePathname } from "@/contexts/SiteRouterContext";
-import { APP_STORE_LEGAL_URLS } from "@/lib/appStoreLegalUrls";
+import {
+  APP_STORE_LEGAL_URLS,
+  APP_LEGAL_IMPLEMENTATION_PATH_SEGMENTS,
+} from "@/lib/appStoreLegalUrls";
 import { getClientApps } from "@/lib/content/apps-client";
 
 const socialLinks = [
@@ -49,6 +52,7 @@ function getAppLegal(path: string) {
       `${appId}/privacy-policy`,
       `${appId}/terms`,
       appId,
+      ...(APP_LEGAL_IMPLEMENTATION_PATH_SEGMENTS[appId] ?? []),
     ];
     if (legalSegments.some((segment) => path.includes(segment))) {
       return legal;

@@ -36,3 +36,19 @@ export const APP_STORE_LEGAL_URLS: Record<string, { privacy: string; terms: stri
     terms: "/test-app-legal-2-terms",
   },
 };
+
+/**
+ * Pages Router paths that render each app's legal docs (same as `pages/...` routes).
+ * During SSR, `router.pathname` / `router.asPath` may be these instead of the store URLs
+ * in `APP_STORE_LEGAL_URLS`; matching both avoids footer hydration mismatches.
+ * Segments are without a leading slash for use with `pathname.includes(...)`.
+ */
+export const APP_LEGAL_IMPLEMENTATION_PATH_SEGMENTS: Record<string, readonly string[]> = {
+  banknotes: ["banknote-ai/privacy-policy", "banknote-ai/terms"],
+  coinzy: ["coinzy/privacy-policy", "coinzy/terms"],
+  insecto: ["insecto-ai/privacy-policy", "insecto-ai/terms"],
+  habiteazy: ["habit-eazy/privacy-policy", "habit-eazy/terms"],
+  rockzy: ["rockzy/privacy-policy", "rockzy/terms"],
+  "test-app-legal": ["test-app-legal/privacy-policy", "test-app-legal/terms"],
+  "test-app-legal-2": ["test-app-legal-2/privacy-policy", "test-app-legal-2/terms"],
+};
