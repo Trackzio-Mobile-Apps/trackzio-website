@@ -1,74 +1,101 @@
 ---
-title: "Banknotes: Banknote Identification AI — Terms of Service"
-lastUpdated: "12 March 2026"
-analyticsPage: "banknotes-terms"
+title: "Banknote Identification AI: Terms of Service"
+lastUpdated: "14th May 2025"
+analyticsPage: "banknote-terms"
 ---
+
+Last Updated: 14th May 2025
+
+          
 
 ## 1. Agreement to Terms
 
-By using Banknotes ("the App"), you agree to these Terms of Service. If you do not agree, do not use the app.
+          By using Banknote Identification AI, you agree to be bound by these Terms of Service. If you do not agree, please refrain from using the app.
+
+          
 
 ## 2. Eligibility
 
-You must be at least 13 years old to use the App. If you are under 18, you must have parental or guardian consent.
+          You must be at least 13 years old to use Banknote Identification AI. Users under 18 must have parental or guardian consent.
+
+          
 
 ## 3. App Services
 
-The App provides the features described in the store listing and in-app, including AI-powered identification and related tools, subject to change with updates.
+          Banknote Identification AI provides AI-powered banknote identification, collection management, and estimated valuations for collectible or historical banknotes.
+
+          
 
 ## 4. User Responsibilities
 
-You are responsible for any activity under your account, keeping credentials secure, and using the App lawfully and respectfully, including any community features.
+          You are responsible for maintaining the confidentiality of your login credentials and for all activity that occurs under your account.
 
-## 5. Community Rules
+          
 
-If the App includes community features, you agree not to post illegal, harmful, abusive, or infringing content; harass others; impersonate anyone; or spam. We may remove content or restrict access to maintain safety.
+## 5. Intellectual Property
 
-## 6. Intellectual Property
+          All content, branding, and features of Banknote Identification AI are owned by Trackzio Mobile Application Private Limited and protected under intellectual property laws.
 
-Branding, app design, and features are owned by Trackzio Mobile Application Private Limited unless otherwise stated.
+          
 
-## 7. User-Generated Content
+## 6. User-Generated Content
 
-You retain ownership of content you upload. You grant us a license to use this content only to operate, maintain, and improve the service (including improving identification features), and to display community posts within the App where applicable.
+          You retain ownership of the content you upload, including images and banknote metadata. You grant us a license to use this content solely for service provision and enhancement.
 
-## 8. Accuracy of Information
+          
 
-Identification results and AI features are estimates and may be incorrect. The App is for informational and educational purposes only. You should independently verify any critical information.
+## 7. Accuracy of Information
 
-## 9. Termination
+          AI results, valuations, and identifications are estimates and may not be entirely accurate. Users should independently verify any critical information.
 
-We may suspend or terminate accounts or limit access if you violate these Terms or misuse the App.
+          
 
-## 10. Modifications
+## 8. Termination
 
-We may update the App or these Terms at any time. Continued use after changes means you accept the updated Terms.
+          We reserve the right to suspend or terminate user accounts at our discretion for violating these terms or engaging in misuse.
 
-## 11. In-App Purchases
+          
 
-Some features may require payment. Prices and features may change and will be shown at the time of purchase.
+## 9. Modifications
 
-## 12. No Refund Policy
+          We may update or modify the app or these terms at any time. Continued use of the app after changes implies acceptance.
 
-All purchases are final and non-refundable, except where refunds are required by law or platform policies.
+          
 
-## 13. Disclaimers
+## 10. In-App Purchases
 
-The App is provided "as is." We do not guarantee uninterrupted availability, accuracy, or uptime. Use is at your own risk.
+          Some features of Banknote Identification AI may require payment. Prices and features are subject to change.
 
-## 14. Limitation of Liability
+          
 
-To the maximum extent permitted by law, we are not liable for indirect, incidental, or consequential damages arising from your use of the App.
+## 11. No Refund Policy
 
-## 15. Governing Law
+          All purchases are final and non-refundable, including in the event the app is shut down. Refunds are only issued where legally required.
 
-These Terms are governed by the laws of India. Any disputes will be subject to the jurisdiction of the courts of Gujarat, India.
+          
 
+## 12. Disclaimers
 
-## Contact
+          We make no guarantees about the availability or uptime of the service. Use is at your own risk.
 
-Email: [developer@trackzio.com](mailto:developer@trackzio.com)
+          
 
-Company: Trackzio Mobile Application Private Limited
+## 13. Limitation of Liability
 
-Address: India
+          We are not liable for any indirect, incidental, or consequential damages arising from your use of the app.
+
+          
+
+## 14. Governing Law
+
+          These Terms are governed by the laws of India. Any disputes will be resolved in the jurisdiction of Gujarat High Court, India.
+
+          
+
+## 15. Contact
+
+          Email: [developer@trackzio.com](mailto:developer@trackzio.com)
+
+          Company Name: Trackzio Mobile Application Private Limited
+
+          Address: Gujarat, India

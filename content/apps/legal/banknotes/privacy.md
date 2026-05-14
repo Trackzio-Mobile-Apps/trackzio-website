@@ -1,55 +1,124 @@
 ---
-title: "Banknotes: Banknote Identification AI — Privacy Policy"
-lastUpdated: "12 March 2026"
-analyticsPage: "banknotes-privacy"
+title: "Banknote Identification AI: Privacy Policy"
+lastUpdated: "14th May 2025"
+analyticsPage: "banknote-privacy"
 ---
+
+Last Updated: 14th May 2025
+
+          
 
 ## 1. Introduction
 
-This Privacy Policy explains how Banknotes ("we," "our," or "the app") collects, uses, stores, and protects your personal information. We are committed to safeguarding your privacy and ensuring compliance with applicable regulations, including the General Data Protection Regulation (GDPR) where applicable.
+          This Privacy Policy outlines how Banknote Identification AI collects, uses, stores, and protects your personal information. We are committed to maintaining the highest level of privacy and data security in compliance with applicable regulations, including the General Data Protection Regulation (GDPR).
+
+          
 
 ## 2. Information We Collect
 
-We may collect:
+          We may collect the following types of information:
 
-- **Account data:** if you sign in (e.g. email, name, OAuth identifiers).
-- **Content you provide:** photos uploaded for identification, collections, notes, and community posts.
-- **Device and usage data:** diagnostics, crash reports, and analytics to improve stability.
-- **Approximate location** only if you choose to provide it or where needed for product features.
+          - Banknote Images: Uploaded to identify banknotes using AI (processed via Google Gemini or similar services)
+- Personal Identifiers: Email and name (collected via Google Sign-In). Optional
+- Device & Usage Data: For crash reporting and analytics (via Firebase and Crashlytics)
+- User-Generated Data: Banknote metadata, identification logs, and collection entries
 
-## 3. How We Use Information
+          
 
-We use data to provide core features, improve AI models and product quality, operate communities and marketplaces where applicable, communicate with you, and comply with law.
+## 3. Purpose of Data Collection
 
-## 4. Third Parties
+          We use the collected data to:
 
-We may use trusted providers (e.g. cloud hosting, authentication, AI inference, analytics). We do not sell your personal data.
+          - Provide AI-based banknote identification
+- Sync and personalize your banknote collection
+- Improve app functionality and user experience
+- Monitor app performance and resolve bugs
 
-## 5. Security
+          
 
-We use industry-standard safeguards including encryption in transit and access controls. No method is 100% secure.
+## 4. Data Sharing and Third Parties
 
-## 6. Your Rights
+          Some data may be shared with trusted third-party services:
 
-Depending on your region, you may have rights to access, correct, delete, or export your data, and to object to certain processing. Contact us using the details below.
+          - AI: For image recognition
+- Firebase & Crashlytics: For app analytics and crash monitoring
+- Google Sign-In: For authentication purposes
 
-## 7. Children
+          We do not sell your data under any circumstances.
 
-The App is not directed at children under 13. We do not knowingly collect personal information from minors without appropriate consent.
+          
 
-## 8. International Transfers
+## 5. Data Security
 
-Your data may be processed in countries outside your residence. Where required, we use appropriate safeguards.
+          - All data is encrypted in transit and at rest.
+- Only essential personnel and systems have access to your data.
+- We apply industry-standard firewalls and secure storage practices.
 
-## 9. Changes
+          
 
-We may update this policy. Material changes will be communicated via the App or other reasonable means.
+## 6. Your Rights Under GDPR
 
+          If you are an EU/EEA resident, you have the right to:
 
-## Contact
+          - Access, correct, or delete your data
+- Object to processing or request data portability
+- Withdraw consent at any time
+- File a complaint with a data protection authority
 
-Email: [developer@trackzio.com](mailto:developer@trackzio.com)
+          
 
-Company: Trackzio Mobile Application Private Limited
+## 7. Data Retention
 
-Address: India
+          We retain your data only as long as necessary to provide our services or as required by law. You may request deletion of your data at any time.
+
+          
+
+## 8. International Data Transfers
+
+          Your data may be processed or stored in countries outside the EEA, including the United States. We use Standard Contractual Clauses and other safeguards to ensure data protection.
+
+          
+
+## 9. Children's Privacy
+
+          Banknote Identification AI is not directed at children under the age of 13. We do not knowingly collect data from minors.
+
+          
+
+## 10. User Content Ownership
+
+          You retain ownership of all images and information you upload. You grant us a license to use the data solely for app functionality, feature enhancement, and performance improvement.
+
+          
+
+## 11. Consent and Withdrawal
+
+          By using Banknote Identification AI, you consent to this privacy policy. You may withdraw consent at any time by deleting your data or uninstalling the app.
+
+          
+
+## 12. Changes to Privacy Policy
+
+          We may update this Privacy Policy from time to time. Significant changes will be communicated via in-app notifications or email.
+
+          
+
+## 13. Data Breach Protocol
+
+          In the unlikely event of a data breach, we will notify affected users and relevant authorities in accordance with GDPR requirements.
+
+          
+
+## 14. Contact Information
+
+          Email: [developer@trackzio.com](mailto:developer@trackzio.com)
+
+          Company: Trackzio Mobile Application Private Limited
+
+          Address: India
+
+          
+
+## 15. Effective Date
+
+          This Privacy Policy is effective as of the date stated above and applies to all users of the Banknote Identification AI app.

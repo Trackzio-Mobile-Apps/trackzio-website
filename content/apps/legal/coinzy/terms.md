@@ -1,74 +1,174 @@
 ---
-title: "Coinzy: AI Coin Identifier — Terms of Service"
-lastUpdated: "12 March 2026"
+title: "Coinzy: Terms of Service"
+lastUpdated: "30th November 2025"
 analyticsPage: "coinzy-terms"
 ---
 
-## 1. Agreement to Terms
+Last Updated: 30th November 2025
 
-By using Coinzy ("the App"), you agree to these Terms of Service. If you do not agree, do not use the app.
+          Welcome to Coinzy: AI Coin Identifier ("the App"), owned and operated by Trackzio Mobile Application Private Limited ("we," "our," or "us"). By downloading, installing, or using the App, you agree to these Terms and Conditions ("Terms"). If you do not agree with these Terms, please do not use the App.
 
-## 2. Eligibility
+          
 
-You must be at least 13 years old to use the App. If you are under 18, you must have parental or guardian consent.
+## 1. Acceptance of Terms
 
-## 3. App Services
+          By accessing or using the App, you:
 
-The App provides the features described in the store listing and in-app, including AI-powered identification and related tools, subject to change with updates.
+          - Confirm that you are at least 13 years old, or if required by law, have parental or guardian consent if under 18.
+- Agree to comply with these Terms, our Privacy Policy, and any additional policies referenced within the App.
 
-## 4. User Responsibilities
+          
 
-You are responsible for any activity under your account, keeping credentials secure, and using the App lawfully and respectfully, including any community features.
+## 2. Modifications to Terms
 
-## 5. Community Rules
+          We may modify these Terms at any time. Updates will be reflected with a revised "Effective Date" above. Continued use of the App after such modifications constitutes acceptance of the updated Terms.
 
-If the App includes community features, you agree not to post illegal, harmful, abusive, or infringing content; harass others; impersonate anyone; or spam. We may remove content or restrict access to maintain safety.
+          
 
-## 6. Intellectual Property
+## 3. Description of Services
 
-Branding, app design, and features are owned by Trackzio Mobile Application Private Limited unless otherwise stated.
+          Coinzy is an AI-powered coin identification and coin collection management application. The App may:
 
-## 7. User-Generated Content
+          - Allow users to identify coins using AI-based image recognition.
+- Provide estimated values or grading insights for educational purposes.
+- Enable users to save and track coins in a personal collection or wishlist.
+- Offer subscription-based or one-time purchase options for additional features.
+- Collect certain user data, as detailed in our Privacy Policy.
 
-You retain ownership of content you upload. You grant us a license to use this content only to operate, maintain, and improve the service (including improving identification features), and to display community posts within the App where applicable.
+          Coinzy does not buy, sell, or authenticate coins and does not guarantee the accuracy of identification or valuation information.
 
-## 8. Accuracy of Information
+          
 
-Identification results and AI features are estimates and may be incorrect. The App is for informational and educational purposes only. You should independently verify any critical information.
+## 4. Purchases and Subscriptions
 
-## 9. Termination
+          
 
-We may suspend or terminate accounts or limit access if you violate these Terms or misuse the App.
+### In-App Purchases
 
-## 10. Modifications
+          Certain features or content within the App may require payment through the Google Play Store or Apple App Store.
 
-We may update the App or these Terms at any time. Continued use after changes means you accept the updated Terms.
+          
 
-## 11. In-App Purchases
+### Subscriptions
 
-Some features may require payment. Prices and features may change and will be shown at the time of purchase.
+          - Some features may be accessible through a recurring subscription plan.
+- Subscriptions renew automatically unless canceled at least 24 hours before the billing cycle ends.
+- You may manage or cancel subscriptions at any time through your app store account settings.
 
-## 12. No Refund Policy
+          
 
-All purchases are final and non-refundable, except where refunds are required by law or platform policies.
+### Refunds
 
-## 13. Disclaimers
+          All payments are non-refundable, except as required by applicable law or the policies of the respective app stores.
 
-The App is provided "as is." We do not guarantee uninterrupted availability, accuracy, or uptime. Use is at your own risk.
+          
 
-## 14. Limitation of Liability
+## 5. User Responsibilities
 
-To the maximum extent permitted by law, we are not liable for indirect, incidental, or consequential damages arising from your use of the App.
+          You agree to:
 
-## 15. Governing Law
+          - Maintain the confidentiality of your account credentials.
+- Ensure all information you provide within the App is accurate and lawful.
+- Notify us immediately if you suspect unauthorized access to your account.
 
-These Terms are governed by the laws of India. Any disputes will be subject to the jurisdiction of the courts of Gujarat, India.
+          You are solely responsible for content you upload, including coin images and notes.
 
+          
 
-## Contact
+## 6. Prohibited Activities
 
-Email: [developer@trackzio.com](mailto:developer@trackzio.com)
+          You agree not to:
 
-Company: Trackzio Mobile Application Private Limited
+          - Use the App for illegal, fraudulent, or harmful activities.
+- Upload harmful, inappropriate, or misleading content (including coin photos or descriptions).
+- Attempt to reverse engineer, modify, or disrupt the App's functionality.
+- Interfere with the App's servers, security systems, or data integrity.
 
-Address: India
+          
+
+## 7. Intellectual Property
+
+          All content, design elements, trademarks, databases, and software within the App are owned by Trackzio Mobile Application Private Limited and protected under applicable intellectual property laws.
+
+          You are granted a limited, non-exclusive, non-transferable license to use the App for personal and non-commercial purposes.
+
+          
+
+## 8. Third-Party Integrations
+
+          The App may integrate with third-party services (e.g., analytics services, authentication providers, cloud storage). Use of such features signifies your agreement to comply with the terms and policies of those third-party services.
+
+          
+
+## 9. Advertising and Marketing
+
+          The App may display promotional materials, recommendations, or informational content related to numismatics. Such inclusion does not constitute an endorsement or guarantee by Trackzio.
+
+          
+
+## 10. Analytics and Performance Monitoring
+
+          We may collect technical, diagnostic, and usage data to improve the App's performance and user experience. For more details, refer to our Privacy Policy.
+
+          
+
+## 11. Updates to the App
+
+          We may update, modify, or discontinue the App or specific features at any time without prior notice. You agree that we are not liable for any changes to availability or functionality.
+
+          
+
+## 12. Refunds and Cancellation Policy
+
+          Refund requests must be submitted directly through the Google Play Store or Apple App Store, and are governed by their respective policies.
+
+          
+
+## 13. Limitations on Free Features
+
+          Free access may include limited daily identifications, limited collection size, or limited access to advanced features. Full access may require subscription or purchase.
+
+          
+
+## 14. Beta Features
+
+          Some features may be offered as beta or experimental. These are provided "as is" without warranties, and we are not responsible for any errors or disruptions caused by their use.
+
+          
+
+## 15. Notifications
+
+          The App may send reminders, alerts, or promotional notifications. Notification settings may be managed through your device preferences.
+
+          
+
+## 16. Data Portability and Account Deletion
+
+          Users may request a copy of their data or initiate account deletion by contacting support. Data deletion procedures and timelines are outlined in our Privacy Policy.
+
+          
+
+## 17. Governing Law
+
+          These Terms shall be governed by and interpreted in accordance with the laws of India. Any disputes arising from these Terms will fall under the exclusive jurisdiction of the courts located in Gujarat, India.
+
+          
+
+## 18. Contact Us
+
+          Company: Trackzio Mobile Application Private Limited
+
+          Email: [developer@trackzio.com](mailto:developer@trackzio.com)
+
+          Website: [https://trackzio.com](https://trackzio.com)
+
+          
+
+## 19. App Store Terms
+
+          These Terms operate alongside the terms set forth by:
+
+          - Google Play Store Terms of Service
+- Apple App Store Terms of Service
+
+          Use of the App also constitutes your agreement to those platform-specific policies.

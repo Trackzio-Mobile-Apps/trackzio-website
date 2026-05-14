@@ -1,55 +1,125 @@
 ---
-title: "Habiteazy: Habit & To-Do — Privacy Policy"
-lastUpdated: "12 March 2026"
+title: "Habit Eazy: Privacy Policy"
+lastUpdated: "13th January 2025"
 analyticsPage: "habiteazy-privacy"
 ---
 
+Last Updated: 13th January 2025
+
+          
+
 ## 1. Introduction
 
-This Privacy Policy explains how Habiteazy ("we," "our," or "the app") collects, uses, stores, and protects your personal information. We are committed to safeguarding your privacy and ensuring compliance with applicable regulations, including the General Data Protection Regulation (GDPR) where applicable.
+          This Privacy Policy explains how Habit Eazy: Habit & To-Do Pal ("we," "our," or "the app") collects, uses, stores, and protects your personal information. We are committed to safeguarding your privacy in compliance with applicable regulations, including the General Data Protection Regulation (GDPR).
+
+          
 
 ## 2. Information We Collect
 
-We may collect:
+          We may collect the following types of information:
 
-- **Account data:** if you sign in (e.g. email, name, OAuth identifiers).
-- **Content you provide:** photos uploaded for identification, collections, notes, and community posts.
-- **Device and usage data:** diagnostics, crash reports, and analytics to improve stability.
-- **Approximate location** only if you choose to provide it or where needed for product features.
+          - Personal Identifiers: Name and email (if you sign in using Google, Apple, or email login). Optional.
+- Device & Usage Data: For crash reporting and analytics (via Firebase, Crashlytics, or equivalent).
+- User-Generated Data: Habits, tasks, streaks, notes, and progress data created by the user.
 
-## 3. How We Use Information
+          
 
-We use data to provide core features, improve AI models and product quality, operate communities and marketplaces where applicable, communicate with you, and comply with law.
+## 3. Purpose of Data Collection
 
-## 4. Third Parties
+          We use collected data to:
 
-We may use trusted providers (e.g. cloud hosting, authentication, AI inference, analytics). We do not sell your personal data.
+          - Provide habit tracking and task management functionality.
+- Sync and personalize your habits and progress across devices.
+- Deliver push notification reminders.
+- Enhance app performance and stability.
+- Monitor crashes, detect bugs, and improve the user experience.
 
-## 5. Security
+          
 
-We use industry-standard safeguards including encryption in transit and access controls. No method is 100% secure.
+## 4. Data Sharing and Third Parties
 
-## 6. Your Rights
+          Some data may be shared with trusted third-party services:
 
-Depending on your region, you may have rights to access, correct, delete, or export your data, and to object to certain processing. Contact us using the details below.
+          - Firebase & Crashlytics: For analytics, error reporting, and performance monitoring.
+- Authentication Providers: (Google, Apple) for login.
+- Cloud Hosting Providers: For secure storage and syncing.
 
-## 7. Children
+          We do not sell or trade your data to third parties under any circumstances.
 
-The App is not directed at children under 13. We do not knowingly collect personal information from minors without appropriate consent.
+          
 
-## 8. International Transfers
+## 5. Data Security
 
-Your data may be processed in countries outside your residence. Where required, we use appropriate safeguards.
+          - All data is encrypted in transit (SSL) and at rest.
+- Access to personal data is restricted to authorized personnel only.
+- We apply industry-standard security measures.
 
-## 9. Changes
+          
 
-We may update this policy. Material changes will be communicated via the App or other reasonable means.
+## 6. Your Rights Under GDPR
 
+          If you are an EU/EEA resident, you have the right to:
 
-## Contact
+          - Access, correct, or delete your data.
+- Request data portability.
+- Object to or restrict certain types of processing.
+- Withdraw consent at any time.
+- File a complaint with your local data protection authority.
 
-Email: [developer@trackzio.com](mailto:developer@trackzio.com)
+          
 
-Company: Trackzio Mobile Application Private Limited
+## 7. Data Retention
 
-Address: India
+          We retain your data only as long as necessary to provide app services or as required by law. You may request deletion of your account and associated data at any time.
+
+          
+
+## 8. International Data Transfers
+
+          Your data may be processed or stored outside your country of residence, including in the United States. Where applicable, we rely on Standard Contractual Clauses and other safeguards.
+
+          
+
+## 9. Children's Privacy
+
+          Habit Eazy is not directed at children under 13 years of age. We do not knowingly collect personal information from minors.
+
+          
+
+## 10. User Content Ownership
+
+          You retain full ownership of all habits, tasks, and information you create. By using the app, you grant us a limited license to process this data solely for app functionality and service improvement.
+
+          
+
+## 11. Consent and Withdrawal
+
+          By using Habit Eazy, you consent to this Privacy Policy. You may withdraw your consent at any time by deleting your data or uninstalling the app.
+
+          
+
+## 12. Changes to Privacy Policy
+
+          We may update this Privacy Policy periodically. Significant changes will be communicated via in-app notifications or email.
+
+          
+
+## 13. Data Breach Protocol
+
+          In the event of a data breach, we will promptly notify affected users and relevant authorities in line with GDPR and other applicable regulations.
+
+          
+
+## 14. Contact Information
+
+          Email: [developer@trackzio.com](mailto:developer@trackzio.com)
+
+          Company: Trackzio Mobile Application Private Limited
+
+          Address: India
+
+          
+
+## 15. Effective Date
+
+          This Privacy Policy is effective as of the date above and applies to all users of the Habit Eazy app.

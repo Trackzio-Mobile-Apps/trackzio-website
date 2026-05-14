@@ -1,74 +1,161 @@
 ---
-title: "Habiteazy: Habit & To-Do — Terms of Service"
-lastUpdated: "12 March 2026"
+title: "Habit Eazy: Terms and Conditions"
+lastUpdated: "13th January 2025"
 analyticsPage: "habiteazy-terms"
 ---
 
-## 1. Agreement to Terms
+Effective Date: 29th December 2024
 
-By using Habiteazy ("the App"), you agree to these Terms of Service. If you do not agree, do not use the app.
+          Last Updated: 13th January 2025
 
-## 2. Eligibility
+          Welcome to Habit Eazy: Habit & To-Do Pal ("the App"), owned and operated by Trackzio Mobile Application Private Limited ("we," "our," or "us"). By downloading, installing, or using the App, you agree to these Terms and Conditions ("Terms"). If you do not agree with these Terms, please do not use the App.
 
-You must be at least 13 years old to use the App. If you are under 18, you must have parental or guardian consent.
+          
 
-## 3. App Services
+## 1. Acceptance of Terms
 
-The App provides the features described in the store listing and in-app, including AI-powered identification and related tools, subject to change with updates.
+          By accessing or using the App, you:
 
-## 4. User Responsibilities
+          - Confirm that you are at least 13 years old, or if required by law, have parental or guardian consent if under 18.
+- Agree to comply with these Terms, our Privacy Policy, and any additional guidelines or policies provided in the App.
 
-You are responsible for any activity under your account, keeping credentials secure, and using the App lawfully and respectfully, including any community features.
+          
 
-## 5. Community Rules
+## 2. Modifications to Terms
 
-If the App includes community features, you agree not to post illegal, harmful, abusive, or infringing content; harass others; impersonate anyone; or spam. We may remove content or restrict access to maintain safety.
+          We reserve the right to modify these Terms at any time. Updates will be posted on this page with a revised "Effective Date." Continued use of the App after changes constitutes your acceptance of the revised Terms.
 
-## 6. Intellectual Property
+          
 
-Branding, app design, and features are owned by Trackzio Mobile Application Private Limited unless otherwise stated.
+## 3. Description of Services
 
-## 7. User-Generated Content
+          The App is a habit tracker and to-do list application designed to help users improve productivity and build better habits. The App may:
 
-You retain ownership of content you upload. You grant us a license to use this content only to operate, maintain, and improve the service (including improving identification features), and to display community posts within the App where applicable.
+          - Offer subscription-based or one-time purchase options for premium features.
+- Collect certain user data as outlined in our Privacy Policy.
 
-## 8. Accuracy of Information
+          
 
-Identification results and AI features are estimates and may be incorrect. The App is for informational and educational purposes only. You should independently verify any critical information.
+## 4. Purchases and Subscriptions
 
-## 9. Termination
+          
 
-We may suspend or terminate accounts or limit access if you violate these Terms or misuse the App.
+### In-App Purchases
 
-## 10. Modifications
+          - Certain features or functionalities of the App may require payment.
+- Payments are processed through the app store (Google Play Store or Apple App Store) associated with your device.
 
-We may update the App or these Terms at any time. Continued use after changes means you accept the updated Terms.
+          
 
-## 11. In-App Purchases
+### Subscriptions
 
-Some features may require payment. Prices and features may change and will be shown at the time of purchase.
+          - Some features may be available through a subscription plan.
+- Subscriptions will auto-renew unless canceled at least 24 hours before the end of the billing cycle.
+- You can manage subscriptions and cancel at any time through your app store account settings.
 
-## 12. No Refund Policy
+          
 
-All purchases are final and non-refundable, except where refunds are required by law or platform policies.
+### Refunds
 
-## 13. Disclaimers
+          All payments are non-refundable, except as required by applicable law or app store policies.
 
-The App is provided "as is." We do not guarantee uninterrupted availability, accuracy, or uptime. Use is at your own risk.
+          
 
-## 14. Limitation of Liability
+## 5. User Responsibilities
 
-To the maximum extent permitted by law, we are not liable for indirect, incidental, or consequential damages arising from your use of the App.
+          You are responsible for maintaining the confidentiality of your login credentials and for all activities that occur under your account. Notify us immediately of any unauthorized use of your account.
 
-## 15. Governing Law
+          
 
-These Terms are governed by the laws of India. Any disputes will be subject to the jurisdiction of the courts of Gujarat, India.
+## 6. Prohibited Activities
 
+          You agree not to:
 
-## Contact
+          - Use the App for any illegal or unauthorized purpose.
+- Attempt to reverse-engineer, duplicate, or exploit any part of the App.
+- Upload malicious code or compromise the App's security.
 
-Email: [developer@trackzio.com](mailto:developer@trackzio.com)
+          
 
-Company: Trackzio Mobile Application Private Limited
+## 7. Intellectual Property
 
-Address: India
+          All content, features, and functionality of the App (including but not limited to text, graphics, logos, and software) are owned by Trackzio Mobile Application Private Limited and are protected by intellectual property laws. You are granted a limited, non-exclusive, non-transferable license to use the App for personal purposes.
+
+          
+
+## 8. Third-Party Integrations
+
+          The App may integrate with third-party services or APIs (e.g., calendars, analytics tools). By using these features, you agree to comply with the terms of the respective third-party services.
+
+          
+
+## 9. Advertising and Marketing
+
+          The App may display advertisements or promotional content. The inclusion of such content does not constitute an endorsement or warranty by Trackzio Mobile Application Private Limited.
+
+          
+
+## 10. Analytics and Performance Monitoring
+
+          The App may collect performance and usage data for analytics purposes to improve the user experience. For details, refer to our Privacy Policy.
+
+          
+
+## 11. Updates to the App
+
+          Trackzio Mobile Application Private Limited reserves the right to update, modify, or discontinue the App (or any part of it) without prior notice.
+
+          
+
+## 12. Refunds and Cancellation Policy
+
+          Refund requests must be handled directly through the Google Play Store or Apple App Store in accordance with their respective policies.
+
+          
+
+## 13. Limitation on Free Features
+
+          Some features of the App may be available for free, but additional functionality or premium features may require payment.
+
+          
+
+## 14. Beta Features
+
+          Certain features may be available as part of a beta program and are provided on an "as is" basis without warranties of any kind. We are not responsible for any issues arising from the use of beta features.
+
+          
+
+## 15. Notifications
+
+          The App may send push notifications, reminders, or updates. Users can manage notification preferences within their device settings.
+
+          
+
+## 16. Data Portability and Account Deletion
+
+          Users can request a copy of their data or delete their account and associated data by contacting support. For more details, refer to our Privacy Policy.
+
+          
+
+## 17. Governing Law
+
+          These Terms shall be governed by the laws of India. Any disputes arising out of or related to these Terms shall be subject to the exclusive jurisdiction of the courts in Gujarat, India.
+
+          
+
+## 18. Contact Us
+
+          Company: Trackzio Mobile Application Private Limited
+
+          Email: [developer@trackzio.com](mailto:developer@trackzio.com)
+
+          Website: [https://trackzio.com](https://trackzio.com)
+
+          
+
+## 19. App Store Terms
+
+          These Terms are in addition to the terms set forth by the respective app stores:
+
+          - Google Play Store Terms of Service
+- Apple App Store Terms of Service

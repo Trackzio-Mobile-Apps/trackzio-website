@@ -9,6 +9,18 @@ import type { LegalPageDoc } from "./legalPageTypes";
 const legalRoot = path.join(process.cwd(), "content/apps/legal");
 
 /**
+ * Leading spaces on body lines make CommonMark treat paragraphs as indented code
+ * blocks (`<pre>` → monospace). Legal MD files were exported with visual indentation;
+ * trim each line so prose and lists parse as normal markdown.
+ */
+function normalizeAppLegalMarkdownBody(markdown: string): string {
+  return markdown
+    .split(/\r?\n/)
+    .map((line) => line.trimStart())
+    .join("\n");
+}
+
+/**
  * Load app legal page (privacy or terms) from markdown.
  * Used by Pages Router `getStaticProps` (server-only). Import only from server contexts.
  */
@@ -27,7 +39,9 @@ export async function getLegalPageProps(
   if (!parsed.success) {
     throw new Error(`Invalid frontmatter in ${filePath}:\n${formatZodError(parsed.error)}`);
   }
-  const html = String(await remark().use(remarkHtml).process(content));
+  const html = String(
+    await remark().use(remarkHtml).process(normalizeAppLegalMarkdownBody(content)),
+  );
   return {
     ...parsed.data,
     html,
