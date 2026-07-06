@@ -8,5 +8,18 @@
         "D3:9C:3C:76:CF:A1:8F:65:EE:AB:D6:32:13:10:79:FD:69:DD:17:AD:03:BD:C5:43:AB:D6:65:6E:05:4B:4A:57"
       ]
     }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.trackzio.banknote",
+      "sha256_cert_fingerprints": [
+        "35:D7:71:1C:E7:56:D7:D4:F7:30:67:35:37:62:85:77:2D:D6:D7:78:0A:E4:0E:D0:71:09:34:4A:67:60:B6:25"
+      ]
+    }
   }
 ]
