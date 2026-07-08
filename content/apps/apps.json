@@ -228,5 +228,44 @@
       "plantzy-3.png",
       "plantzy-5.png"
     ]
+  },
+  {
+    "id": "antiqzy",
+    "slug": "antiqzy",
+    "published": true,
+    "order": 7,
+    "name": "Antiqzy",
+    "fullName": "Antiqzy AI: Antique Identifier",
+    "tagline": "Identify antiques, vintage items, and collectibles with AI",
+    "longDescription": "Antiqzy helps you identify antiques, vintage items, and collectibles from photos. Get AI-generated insights like type, era, style, material, origin, condition indicators, and an estimated value range. Save items to collections, chat with AI, and optionally share or list items in the community/marketplace.",
+    "accentHsl": "32 60% 40%",
+    "logo": "antiqzy-logo.png",
+    "iosUrl": null,
+    "androidUrl": null,
+    "stats": {
+      "downloads": "Coming soon",
+      "rating": "Coming soon",
+      "dau": "Coming soon"
+    },
+    "features": [
+      "ai identification",
+      "collect and track",
+      "discover value of your collection",
+      "history rairty etc of your antiques",
+      "global catalogue with database of more than 100K antiques",
+      "ask ai",
+      "feed",
+      "which antique are you ! - fun element"
+    ],
+    "screenshots": [
+      "antiqzy-1.png",
+      "antiqzy-2.png",
+      "antiqzy-3.png",
+      "antiqzy-4.png",
+      "antiqzy-5.png",
+      "antiqzy-6.png",
+      "antiqzy-7.png",
+      "antiqzy-8.png"
+    ]
   }
 ]

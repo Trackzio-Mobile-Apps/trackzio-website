@@ -5,6 +5,7 @@ import insectoLogo from "@/assets/insecto-logo.png";
 import habiteazyLogo from "@/assets/habiteazy-logo.png";
 import rockzyLogo from "@/assets/rockzy-logo-new.png";
 import plantzyLogo from "@/assets/plantzy-logo.png";
+import antiqzyLogo from "@/assets/antiqzy-logo.png";
 import coinzy1 from "@/assets/screenshots/coinzy-1.png";
 import coinzy2 from "@/assets/screenshots/coinzy-2.png";
 import coinzy3 from "@/assets/screenshots/coinzy-3.png";
@@ -51,6 +52,14 @@ import plantzy5 from "@/assets/screenshots/plantzy-5.png";
 import plantzy6 from "@/assets/screenshots/plantzy-6.png";
 import plantzy7 from "@/assets/screenshots/plantzy-7.png";
 import plantzy8 from "@/assets/screenshots/plantzy-8.png";
+import antiqzy1 from "@/assets/screenshots/antiqzy-1.png";
+import antiqzy2 from "@/assets/screenshots/antiqzy-2.png";
+import antiqzy3 from "@/assets/screenshots/antiqzy-3.png";
+import antiqzy4 from "@/assets/screenshots/antiqzy-4.png";
+import antiqzy5 from "@/assets/screenshots/antiqzy-5.png";
+import antiqzy6 from "@/assets/screenshots/antiqzy-6.png";
+import antiqzy7 from "@/assets/screenshots/antiqzy-7.png";
+import antiqzy8 from "@/assets/screenshots/antiqzy-8.png";
 
 export const appLogoMap: Record<string, StaticImageData> = {
   "coinzy-logo.png": coinzyLogo,
@@ -59,6 +68,7 @@ export const appLogoMap: Record<string, StaticImageData> = {
   "habiteazy-logo.png": habiteazyLogo,
   "rockzy-logo-new.png": rockzyLogo,
   "plantzy-logo.png": plantzyLogo,
+  "antiqzy-logo.png": antiqzyLogo,
 };
 
 export const appScreenshotMap: Record<string, StaticImageData> = {
@@ -108,4 +118,12 @@ export const appScreenshotMap: Record<string, StaticImageData> = {
   "plantzy-6.png": plantzy6,
   "plantzy-7.png": plantzy7,
   "plantzy-8.png": plantzy8,
+  "antiqzy-1.png": antiqzy1,
+  "antiqzy-2.png": antiqzy2,
+  "antiqzy-3.png": antiqzy3,
+  "antiqzy-4.png": antiqzy4,
+  "antiqzy-5.png": antiqzy5,
+  "antiqzy-6.png": antiqzy6,
+  "antiqzy-7.png": antiqzy7,
+  "antiqzy-8.png": antiqzy8,
 };
