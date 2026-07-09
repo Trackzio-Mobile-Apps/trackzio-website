@@ -547,5 +547,9 @@
         "a": "Collection export is not available yet, but your data is securely stored and synced across all signed-in devices."
       }
     ]
+  },
+  "antiqzy": {
+    "reviews": [],
+    "faqs": []
   }
 }

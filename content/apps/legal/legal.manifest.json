@@ -58,5 +58,17 @@
       "markdownFile": "rockzy/terms.md",
       "analyticsPage": "rockzy-terms"
     }
+  },
+  "antiqzy": {
+    "privacy": {
+      "title": "Antiqzy AI: Antique Identifier – Privacy Policy",
+      "markdownFile": "antiqzy/privacy.md",
+      "analyticsPage": "antiqzy-privacy"
+    },
+    "terms": {
+      "title": "Antiqzy AI: Antique Identifier — Terms and Conditions",
+      "markdownFile": "antiqzy/terms.md",
+      "analyticsPage": "antiqzy-terms"
+    }
   }
 }

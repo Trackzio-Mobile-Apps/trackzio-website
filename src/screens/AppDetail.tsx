@@ -33,6 +33,7 @@ const pageViewEvents: Record<string, string> = {
   habiteazy: 'habiteazy_page_view',
   rockzy: 'rockzy_page_view',
   plantzy: 'plantzy_page_view',
+  antiqzy: 'antiqzy_page_view',
 };
 
 function reviewStars(rating?: number) {
