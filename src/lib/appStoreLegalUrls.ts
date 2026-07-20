@@ -35,6 +35,10 @@ export const APP_STORE_LEGAL_URLS: Record<string, { privacy: string; terms: stri
     privacy: "/privacy-policy-antiqzy-ai",
     terms: "/antiqzy-terms-of-service",
   },
+  shroomzy: {
+    privacy: "/privacy-policy-shroomzy-ai",
+    terms: "/shroomzy-terms-of-service",
+  },
   "test-app-legal": {
     privacy: "/privacy-policy-test-app-legal",
     terms: "/test-app-legal-terms",
@@ -59,6 +63,7 @@ export const APP_LEGAL_IMPLEMENTATION_PATH_SEGMENTS: Record<string, readonly str
   rockzy: ["rockzy/privacy-policy", "rockzy/terms"],
   plantzy: ["plantzy/privacy-policy", "plantzy/terms"],
   antiqzy: ["antiqzy/privacy-policy", "antiqzy/terms"],
+  shroomzy: ["shroomzy/privacy-policy", "shroomzy/terms"],
   "test-app-legal": ["test-app-legal/privacy-policy", "test-app-legal/terms"],
   "test-app-legal-2": ["test-app-legal-2/privacy-policy", "test-app-legal-2/terms"],
 };

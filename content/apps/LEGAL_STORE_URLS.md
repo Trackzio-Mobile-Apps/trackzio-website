@@ -15,6 +15,9 @@ These paths are **fixed** for store listings and must not change. The site imple
 | habiteazy  | `/privacy-policy-habit-eazy-1`  | `/habit-eazy%3A-terms`         |
 | insecto    | `/privacy-policy-insecto-ai-1`  | `/terms-for-insecto-ai`        |
 | rockzy     | `/privacy-policy-rockzy-ai`     | `/rockzy-terms-of-service`     |
+| plantzy    | `/privacy-policy-plantzy-ai`    | `/plantzy-terms-of-service`    |
+| antiqzy    | `/privacy-policy-antiqzy-ai`    | `/antiqzy-terms-of-service`    |
+| shroomzy   | `/privacy-policy-shroomzy-ai`   | `/shroomzy-terms-of-service`   |
 | test-app-legal | `/privacy-policy-test-app-legal` | `/test-app-legal-terms`     |
 
 Internal implementation routes (`/coinzy/privacy-policy`, `/coinzy/terms`, etc.) **redirect (301)** to the store URLs above so bookmarks still work.

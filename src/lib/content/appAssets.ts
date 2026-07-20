@@ -6,6 +6,7 @@ import habiteazyLogo from "@/assets/habiteazy-logo.png";
 import rockzyLogo from "@/assets/rockzy-logo-new.png";
 import plantzyLogo from "@/assets/plantzy-logo.png";
 import antiqzyLogo from "@/assets/antiqzy-logo.png";
+import shroomzyLogo from "@/assets/shroomzy-logo.png";
 import coinzy1 from "@/assets/screenshots/coinzy-1.png";
 import coinzy2 from "@/assets/screenshots/coinzy-2.png";
 import coinzy3 from "@/assets/screenshots/coinzy-3.png";
@@ -60,6 +61,14 @@ import antiqzy5 from "@/assets/screenshots/antiqzy-5.png";
 import antiqzy6 from "@/assets/screenshots/antiqzy-6.png";
 import antiqzy7 from "@/assets/screenshots/antiqzy-7.png";
 import antiqzy8 from "@/assets/screenshots/antiqzy-8.png";
+import shroomzy1 from "@/assets/screenshots/shroomzy-1.png";
+import shroomzy2 from "@/assets/screenshots/shroomzy-2.png";
+import shroomzy3 from "@/assets/screenshots/shroomzy-3.png";
+import shroomzy4 from "@/assets/screenshots/shroomzy-4.png";
+import shroomzy5 from "@/assets/screenshots/shroomzy-5.png";
+import shroomzy6 from "@/assets/screenshots/shroomzy-6.png";
+import shroomzy7 from "@/assets/screenshots/shroomzy-7.png";
+import shroomzy8 from "@/assets/screenshots/shroomzy-8.png";
 
 export const appLogoMap: Record<string, StaticImageData> = {
   "coinzy-logo.png": coinzyLogo,
@@ -69,6 +78,7 @@ export const appLogoMap: Record<string, StaticImageData> = {
   "rockzy-logo-new.png": rockzyLogo,
   "plantzy-logo.png": plantzyLogo,
   "antiqzy-logo.png": antiqzyLogo,
+  "shroomzy-logo.png": shroomzyLogo,
 };
 
 export const appScreenshotMap: Record<string, StaticImageData> = {
@@ -126,4 +136,12 @@ export const appScreenshotMap: Record<string, StaticImageData> = {
   "antiqzy-6.png": antiqzy6,
   "antiqzy-7.png": antiqzy7,
   "antiqzy-8.png": antiqzy8,
+  "shroomzy-1.png": shroomzy1,
+  "shroomzy-2.png": shroomzy2,
+  "shroomzy-3.png": shroomzy3,
+  "shroomzy-4.png": shroomzy4,
+  "shroomzy-5.png": shroomzy5,
+  "shroomzy-6.png": shroomzy6,
+  "shroomzy-7.png": shroomzy7,
+  "shroomzy-8.png": shroomzy8,
 };

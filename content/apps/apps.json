@@ -267,5 +267,44 @@
       "antiqzy-7.png",
       "antiqzy-8.png"
     ]
+  },
+  {
+    "id": "shroomzy",
+    "slug": "shroomzy",
+    "published": true,
+    "order": 8,
+    "name": "Shroomzy",
+    "fullName": "Shroomzy: Mushroom Identifier",
+    "tagline": "Identify mushrooms by photo with AI, maps, toxicity details and a fungi guide.",
+    "longDescription": "Shroomzy: Mushroom Identifier is an AI-powered mushroom identification app for nature lovers, mushroom hunters, foragers, students and anyone who wants to learn about fungi. Take a photo or upload one from your gallery to identify mushrooms and explore likely matches in seconds. Explore a fungi guide with edibility and toxicity details, use the mushroom map for seasonal discovery, save finds to your collection, ask AI about fungi, and share discoveries with the community.",
+    "accentHsl": "95 35% 32%",
+    "logo": "shroomzy-logo.png",
+    "iosUrl": null,
+    "androidUrl": null,
+    "stats": {
+      "downloads": "Coming soon",
+      "rating": "Coming soon",
+      "dau": "Coming soon"
+    },
+    "features": [
+      "Mushroom AI Identification",
+      "Mushroom Details",
+      "Discover 9000 + species (Global Catalogue)",
+      "Build your own collection",
+      "Safety Guide : Safe, edible or poisonous",
+      "Ask AI",
+      "Which mushroom are u?",
+      "Feed"
+    ],
+    "screenshots": [
+      "shroomzy-1.png",
+      "shroomzy-2.png",
+      "shroomzy-3.png",
+      "shroomzy-4.png",
+      "shroomzy-5.png",
+      "shroomzy-6.png",
+      "shroomzy-7.png",
+      "shroomzy-8.png"
+    ]
   }
 ]

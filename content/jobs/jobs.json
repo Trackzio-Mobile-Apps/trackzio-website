@@ -12,21 +12,11 @@
   {
     "slug": "product-intern",
     "title": "Product Intern",
-    "description": "Build and maintain cross-platform mobile experiences used by millions of users worldwide.",
-    "location": "Remote · India",
+    "description": "Work across research, design, and engineering to create exceptional mobile experiences.",
+    "location": "Bangalore, India",
     "type": "Internship",
     "applyUrl": "https://forms.gle/rUUzTSfuLh64dPbt6",
     "order": 2,
-    "published": true
-  },
-  {
-    "slug": "ui-ux-intern",
-    "title": "UI/UX Intern",
-    "description": "Design intuitive, beautiful interfaces that make complex AI features feel simple and delightful.",
-    "location": "Remote · India",
-    "type": "Internship",
-    "applyUrl": "https://forms.gle/grPC7wXqhKjQRoR66",
-    "order": 3,
     "published": true
   }
 ]
