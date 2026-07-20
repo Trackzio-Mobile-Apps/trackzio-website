@@ -70,5 +70,17 @@
       "markdownFile": "antiqzy/terms.md",
       "analyticsPage": "antiqzy-terms"
     }
+  },
+  "shroomzy": {
+    "privacy": {
+      "title": "Shroomzy: Mushroom Identifier – Privacy Policy",
+      "markdownFile": "shroomzy/privacy.md",
+      "analyticsPage": "shroomzy-privacy"
+    },
+    "terms": {
+      "title": "Shroomzy: Mushroom Identifier — Terms and Conditions",
+      "markdownFile": "shroomzy/terms.md",
+      "analyticsPage": "shroomzy-terms"
+    }
   }
 }

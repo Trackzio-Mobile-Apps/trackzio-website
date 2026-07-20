@@ -34,6 +34,7 @@ const pageViewEvents: Record<string, string> = {
   rockzy: 'rockzy_page_view',
   plantzy: 'plantzy_page_view',
   antiqzy: 'antiqzy_page_view',
+  shroomzy: 'shroomzy_page_view',
 };
 
 function reviewStars(rating?: number) {
