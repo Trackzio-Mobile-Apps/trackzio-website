@@ -4,3 +4,5 @@
 
 [build.environment]
   NODE_VERSION = "18"
+
+# Force production rebuild so Shroomzy Play URL + FAQs go live
