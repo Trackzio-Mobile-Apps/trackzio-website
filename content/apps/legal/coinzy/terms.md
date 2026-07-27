@@ -168,7 +168,7 @@ Last Updated: 30th November 2025
 
           These Terms operate alongside the terms set forth by:
 
-          - Google Play Store Terms of Service
-- Apple App Store Terms of Service
+          - [Google Play Store Terms of Service](https://play.google.com/about/play-terms/)
+          - [Apple App Store Terms of Service](https://www.apple.com/legal/internet-services/itunes/us/terms.html)
 
           Use of the App also constitutes your agreement to those platform-specific policies.

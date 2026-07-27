@@ -164,5 +164,5 @@ Website: https://trackzio.com
 
 These Terms are in addition to the terms required by the respective app stores:
 
-- Google Play Store Terms of Service
-- Apple App Store Terms of Service
+- [Google Play Store Terms of Service](https://play.google.com/about/play-terms/)
+- [Apple App Store Terms of Service](https://www.apple.com/legal/internet-services/itunes/us/terms.html)
