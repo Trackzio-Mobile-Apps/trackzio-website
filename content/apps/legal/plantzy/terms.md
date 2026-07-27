@@ -137,5 +137,5 @@ If you have any questions or concerns regarding these Terms, please contact us:
 
 These Terms are in addition to the terms required by the respective app stores:
 
-- [Google Play Store Terms of Service](https://play.google.com/about/play-terms)
+- [Google Play Store Terms of Service](https://play.google.com/about/play-terms/)
 - [Apple App Store Terms of Service](https://www.apple.com/legal/internet-services/itunes/us/terms.html)

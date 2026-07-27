@@ -99,3 +99,12 @@ Last Updated: 14th May 2025
           Company Name: Trackzio Mobile Application Private Limited
 
           Address: Gujarat, India
+
+          
+
+## 16. App Store Terms
+
+          These Terms are in addition to the terms required by the respective app stores:
+
+          - [Google Play Store Terms of Service](https://play.google.com/about/play-terms/)
+          - [Apple App Store Terms of Service](https://www.apple.com/legal/internet-services/itunes/us/terms.html)

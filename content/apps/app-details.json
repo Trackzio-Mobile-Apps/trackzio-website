@@ -623,6 +623,79 @@
   },
   "shroomzy": {
     "reviews": [],
-    "faqs": []
+    "faqs": [
+      {
+        "q": "What is Shroom AI?",
+        "a": "Shroom AI is an all-in-one app that helps you identify mushrooms instantly using your camera, organize your discoveries in personal Collections, and explore our extensive Global Mushroom Catalogue. Get answers to your mushroom-related questions through our dedicated AI chat, connect with fellow enthusiasts on the Community Feed, discover fascinating species with Mushroom of the Day, and enjoy interactive features like the \"Which Mushroom Are You?\" personality quiz. Whether you're a curious beginner or an experienced forager, Shroom AI makes exploring the world of fungi simple, educational, and enjoyable."
+      },
+      {
+        "q": "Why can't I identify more mushrooms?",
+        "a": "Free users are limited to 2 successful mushroom identifications per day. Once you have reached this limit, you will need to wait for it to reset every 24 hours. To remove these restrictions and enjoy unlimited identifications immediately, you can upgrade your account to Premium."
+      },
+      {
+        "q": "How does mushroom identification work?",
+        "a": "Simply snap or upload a clear photo of a mushroom using the Identify feature. Our AI analyzes the images and provides a list of possible matches, each with an accuracy score to help you evaluate the results. Tap on any match to view detailed information, including its common and scientific names, edibility, safety warnings, physical characteristics, habitat, distribution, look-alike species, and more. Free users can identify up to 2 mushrooms per day, while Premium users enjoy unlimited identifications."
+      },
+      {
+        "q": "Do I need to create an account?",
+        "a": "Shroom AI allows you to browse as a guest; however, guest data is stored only on your local device. This means your collection may be lost if the app is deleted, the device cache is cleared, or storage is deleted. Creating an account ensures your data is securely saved and synced across all your devices."
+      },
+      {
+        "q": "What happens to my data if I delete the app?",
+        "a": "If you have an account, your data is stored securely on our servers and restored when you sign in again. Guest data stored on the device will be lost. You can also request account deletion anytime from Settings."
+      },
+      {
+        "q": "What's the difference between free and premium?",
+        "a": "Free users can identify mushrooms, build collections, explore the Global Catalogue, use AI chat, and participate in the Community Feed with certain usage limits. Premium removes these limits and unlocks full access to detailed mushroom information, unlimited identifications, collections, AI chat, Community features, and more."
+      },
+      {
+        "q": "Can I cancel my subscription?",
+        "a": "Yes, you can cancel your subscription at any time through the App Store or Google Play Store settings, depending on your device. Once canceled, your Premium access will continue until the end of your current billing period, after which your account will return to the free tier. By staying subscribed, you ensure uninterrupted access to all Premium benefits. If you choose to cancel, you can always resubscribe later at any time."
+      },
+      {
+        "q": "How do I organise my mushroom collection?",
+        "a": "You can organize mushrooms using the built-in Owned, Identified, and Wishlist collections, as well as custom collections you create yourself. This makes it easy to track, categorize, and revisit your discoveries. Free users can create up to 2 custom collections and save up to 50 mushrooms, while Premium users have unlimited collections and storage."
+      },
+      {
+        "q": "How do I add mushrooms to my collection?",
+        "a": "You can add mushrooms to your collections by saving identification results, adding species from the Global Catalogue to your Wishlist, or organizing mushrooms within custom collections created from the Collections page. Whether you're tracking discoveries, building a wishlist, or organizing your finds, Shroom AI makes it easy to manage your personal mushroom library."
+      },
+      {
+        "q": "What is \"Which mushroom are you\"?",
+        "a": "\"Which Mushroom Are You?\" is a fun personality quiz that helps you discover your mushroom counterpart. Answer a series of relatable questions and we'll match you with a mushroom that best reflects your personality. You'll receive a personalized result, learn what makes your mushroom unique, and be able to share your match with friends."
+      },
+      {
+        "q": "What is the community Feed?",
+        "a": "The Community Feed is a space where mushroom enthusiasts can connect, share discoveries, post photos, exchange experiences, and learn from one another. Whether you've found an interesting species, want to ask a question, or simply share your passion for fungi, the Feed helps you engage with the Shroom AI community. Free users can create 1 post per day, while Premium users enjoy greater flexibility. Upgrade to Premium to enjoy a more active community experience with no restrictions."
+      },
+      {
+        "q": "How does AI chat work?",
+        "a": "Ask AI is your personal mushroom assistant. Whether you're curious about a species, need help understanding mushroom characteristics, want foraging tips, or simply wish to expand your knowledge, Ask AI is available to provide guidance and insights whenever you need it. Free users can send up to 5 messages per day to Ask AI. Upgrade to Premium for uninterrupted access and unlimited conversations with Ask AI."
+      },
+      {
+        "q": "What is the Global Catalogue?",
+        "a": "The Global Catalogue is Shroom AI's comprehensive mushroom database, giving you access to thousands of mushroom species from around the world. Browse detailed information about each species. You can also add mushrooms directly to your Wishlist to keep track of species you'd like to find, learn about, or collect in the future. Whether you're researching a mushroom, expanding your knowledge, or exploring new discoveries, the Global Catalogue is your go-to resource for learning about fungi."
+      },
+      {
+        "q": "What is Mushroom of the Day?",
+        "a": "Mushroom of the Day is your daily dose of fungal discovery. Each day, Shroom AI showcases a featured mushroom along with interesting insights to help you expand your knowledge of fungi. Free users can explore one featured mushroom per day. Upgrade to Premium to refresh and discover unlimited Mushrooms of the Day."
+      },
+      {
+        "q": "How accurate is the mushroom identification?",
+        "a": "Shroom AI uses AI to analyze your photos and provide multiple possible matches, each with a confidence score to help you evaluate the results. For the most accurate identification, ensure your photos are well-lit, in focus, and clearly show the mushroom from one or more angles. While Shroom AI can be a valuable identification tool, you should always verify edibility and safety with a qualified expert before consuming any wild mushroom."
+      },
+      {
+        "q": "Is my personal information secure?",
+        "a": "Yes. We take privacy and security seriously. Your data is securely stored and protected using industry-standard security measures. For more information about how we collect, use, and safeguard your information, please refer to our Privacy Policy and Terms of Service."
+      },
+      {
+        "q": "How do I report inappropriate content?",
+        "a": "If you come across content that violates our community guidelines, you can use the Report option available on the relevant post or content. Our team reviews all reports and takes appropriate action to help maintain a safe and welcoming community for everyone."
+      },
+      {
+        "q": "Can I export my collection data?",
+        "a": "Collection export is not currently available. However, your collections and saved mushrooms are securely stored and automatically synced across all devices where you're signed in to your Shroom AI account."
+      }
+    ]
   }
 }
