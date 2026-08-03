@@ -65,5 +65,18 @@
         "A7:78:1C:3F:AF:62:5C:7D:E8:D5:12:15:6A:5F:F8:8A:13:C1:CF:4F:4B:9A:08:CF:88:1D:CA:FC:3B:0C:6B:EB"
       ]
     }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.insect.trackzio",
+      "sha256_cert_fingerprints": [
+        "CB:C9:3C:53:A0:6F:0D:0F:05:1A:6C:FF:0B:B2:E6:2E:F3:D5:4B:7C:91:8E:43:46:01:62:5B:34:87:06:E2:C6"
+      ]
+    }
   }
 ]
