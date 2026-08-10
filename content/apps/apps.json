@@ -47,7 +47,7 @@
     "longDescription": "Banknotes uses advanced image recognition to identify banknotes from around the world. Learn about currency history, security features, and exchange rates instantly.",
     "accentHsl": "152 55% 32%",
     "logo": "banknotes-logo.png",
-    "iosUrl": "https://apps.apple.com/in/app/banknote-identification-ai/id6747063766",
+    "iosUrl": "https://apps.apple.com/us/app/banknote-identification-ai/id6747063766",
     "androidUrl": "https://play.google.com/store/apps/details?id=com.trackzio.banknote&pcampaignid=web_share",
     "stats": {
       "downloads": "40K+",
@@ -201,7 +201,7 @@
     "longDescription": "Plantzy uses advanced image recognition to identify plants and gives detailed suggestions on their care and growth. With a litany of smart tools integrated in the app, plant care has never been easier.",
     "accentHsl": "174 45% 28%",
     "logo": "plantzy-logo.png",
-    "iosUrl": null,
+    "iosUrl": "https://apps.apple.com/us/app/plantzy-ai-plant-id-and-care/id6770974717",
     "androidUrl": "https://play.google.com/store/apps/details?id=com.trackzio.plants&pcampaignid=web_share",
     "stats": {
       "downloads": "Coming soon",
@@ -241,7 +241,7 @@
     "accentHsl": "32 60% 40%",
     "logo": "antiqzy-logo.png",
     "iosUrl": null,
-    "androidUrl": null,
+    "androidUrl": "https://play.google.com/store/apps/details?id=com.trackzio.antiquevintage&pcampaignid=web_share",
     "stats": {
       "downloads": "Coming soon",
       "rating": "Coming soon",
