@@ -9,6 +9,7 @@ excerpt: "Launch day is just the beginning. The real work starts the moment real
 readTime: "7 min"
 image: "/assets/blog/product-updates-1.jpg"
 author: "Trackzio Team"
+blogOfTheWeek: true
 ---
 
 Building a product is not a one-time effort.

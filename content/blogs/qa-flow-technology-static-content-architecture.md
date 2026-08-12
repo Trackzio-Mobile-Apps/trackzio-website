@@ -1,7 +1,7 @@
 ---
 title: "Technology Behind Reliability: Static Content Architecture for Fast QA"
 slug: "qa-flow-technology-static-content-architecture"
-published: true
+published: false
 date: "2026-04-15"
 dateDisplay: "Apr 15, 2026"
 category: "Technology"

@@ -1,7 +1,7 @@
 ---
 title: "Personal Growth for Teams: Building Discipline in Content QA"
 slug: "qa-flow-personal-growth-content-discipline"
-published: true
+published: false
 date: "2026-04-15"
 dateDisplay: "Apr 15, 2026"
 category: "Personal Growth"
