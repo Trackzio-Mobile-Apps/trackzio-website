@@ -1,7 +1,7 @@
 ---
 title: "[TEST] Dummy blog post for CMS checks"
 slug: "test-cms-dummy-post"
-published: true
+published: false
 date: "2026-04-15"
 dateDisplay: "Apr 15, 2026"
 category: "Product Updates"

@@ -5,9 +5,11 @@ import { getAllBlogs, blogOfTheWeekFromList } from "@/lib/content/blogs";
 export const metadata: Metadata = {
   title: "Blog",
   description: "Updates, ideas, and stories from the Trackzio team.",
+  alternates: { canonical: "/blog" },
   openGraph: {
     title: "Insights & Stories | Trackzio Blog",
     description: "Updates, ideas, and stories from the Trackzio team.",
+    url: "/blog",
   },
 };
 

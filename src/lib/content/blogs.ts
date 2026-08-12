@@ -67,22 +67,26 @@ export function getBlogFrontmatterBySlug(slug: string): BlogFrontmatter | null {
 export function getBlogMetadata(slug: string): Metadata {
   const post = getBlogFrontmatterBySlug(slug);
   if (!post) {
-    return { title: "Not found" };
+    return { title: "Not found", robots: { index: false, follow: false } };
   }
+  const description = post.excerpt || post.title;
+  const path = `/blog/${post.slug}`;
   return {
     title: post.title,
-    description: post.excerpt || post.title,
+    description,
+    alternates: { canonical: path },
     openGraph: {
       title: post.title,
-      description: post.excerpt || post.title,
+      description,
       type: "article",
       publishedTime: post.date,
+      url: path,
       images: [{ url: post.image }],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
-      description: post.excerpt || post.title,
+      description,
       images: [post.image],
     },
   };
