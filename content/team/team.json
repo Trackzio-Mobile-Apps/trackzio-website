@@ -27,21 +27,39 @@
     "published": true
   },
   {
+    "slug": "aishik-kirtaniya",
+    "name": "Aishik Kirtaniya",
+    "role": "Android Engineer - Founding Member",
+    "linkedin": "https://in.linkedin.com/in/aishik-k-0030b516a",
+    "image": "/content/team/aishik-kirtaniya.jpg",
+    "order": 4,
+    "published": true
+  },
+  {
     "slug": "shreyans-jain",
     "name": "Shreyans Jain",
     "role": "Full Stack Engineer – Founding Member",
     "linkedin": "https://www.linkedin.com/in/shreyans-jain-8396b6245",
     "image": "/content/team/shreyans-jain.jpg",
-    "order": 4,
+    "order": 5,
     "published": true
   },
   {
     "slug": "chitvan-singhal",
     "name": "Chitvan Singhal",
     "role": "Backend Engineer – Founding Member",
-    "linkedin": "https://in.linkedin.com/in/chitvan-singhal-26550b198",
+    "linkedin": "https://www.linkedin.com/in/chitvan-singhal-26550b198",
     "image": "/content/team/chitvan-singhal.jpg",
-    "order": 5,
+    "order": 6,
+    "published": true
+  },
+  {
+    "slug": "jaya-krishna-cheemala",
+    "name": "Jaya Krishna Cheemala",
+    "role": "iOS Developer - Founding Member",
+    "linkedin": "https://www.linkedin.com/in/jayakrishna-cheemala0540",
+    "image": "/content/team/jaya-krishna.jpg",
+    "order": 7,
     "published": true
   },
   {
@@ -50,42 +68,24 @@
     "role": "Senior Software Developer",
     "linkedin": "https://www.linkedin.com/in/burhanuddin-makda-865a48103",
     "image": "/content/team/burhanuddin-makda.png",
-    "order": 6,
+    "order": 8,
     "published": true
   },
   {
     "slug": "ijaaz-ahamed",
     "name": "Ijaaz Ahamed",
-    "role": "Senior React Native Engineer",
+    "role": "Senior React Native Engineer - Founding Member",
     "linkedin": "https://www.linkedin.com/in/ijaazahamed",
     "image": "/content/team/ijaaz-ahamed.jpeg",
-    "order": 7,
+    "order": 9,
     "published": true
   },
   {
     "slug": "koppala-sai-preetham-reddy",
     "name": "Koppala Sai Preetham Reddy",
     "role": "Web Scraping and LLM Enrichment Engineer",
-    "linkedin": "https://in.linkedin.com/in/preethamkoppala",
+    "linkedin": "https://www.linkedin.com/in/preethamkoppala",
     "image": "/content/team/preetham-reddy.jpg",
-    "order": 8,
-    "published": true
-  },
-  {
-    "slug": "aishik-kirtaniya",
-    "name": "Aishik Kirtaniya",
-    "role": "Android Engineer",
-    "linkedin": "https://in.linkedin.com/in/aishik-k-0030b516a",
-    "image": "/content/team/aishik-kirtaniya.jpg",
-    "order": 9,
-    "published": true
-  },
-  {
-    "slug": "jaya-krishna-cheemala",
-    "name": "Jaya Krishna Cheemala",
-    "role": "iOS Developer",
-    "linkedin": "https://www.linkedin.com/in/jayakrishna-cheemala0540",
-    "image": "/content/team/jaya-krishna.jpg",
     "order": 10,
     "published": true
   },
@@ -99,75 +99,12 @@
     "published": true
   },
   {
-    "slug": "nikita-nautiyal",
-    "name": "Nikita Nautiyal",
-    "role": "UI/UX Designer",
-    "linkedin": "https://www.linkedin.com/in/nikitades/",
-    "image": "/content/team/nikita-nautiyal.jpeg",
-    "order": 12,
-    "published": true
-  },
-  {
-    "slug": "ashmita",
-    "name": "Ashmita",
-    "role": "Associate Product Manager",
-    "linkedin": "https://www.linkedin.com/in/ashmita-r-s",
-    "image": "/content/team/ashmita.jpg",
-    "order": 13,
-    "published": true
-  },
-  {
     "slug": "aashima-syal",
     "name": "Aashima Syal",
     "role": "Content and Social Media Manager",
     "linkedin": "https://www.linkedin.com/in/aashimasyal",
     "image": "/content/team/aashima-syal.jpg",
-    "order": 14,
-    "published": true
-  },
-  {
-    "slug": "allu-greshma",
-    "name": "Allu Greshma",
-    "role": "UI/UX Designer Intern",
-    "linkedin": "https://www.linkedin.com/in/greshma-allu-0129b32bb/",
-    "image": "/content/team/allu-greshma.jpg",
-    "order": 15,
-    "published": true
-  },
-  {
-    "slug": "ragala-ammlu",
-    "name": "Ragala Ammlu",
-    "role": "Quality Assurance Intern",
-    "linkedin": "https://in.linkedin.com/in/ammlu-ragala-963678388",
-    "image": "/content/team/ragala-ammlu.jpg",
-    "order": 16,
-    "published": true
-  },
-  {
-    "slug": "harshita-singh",
-    "name": "Harshita Singh",
-    "role": "QA Intern",
-    "linkedin": "https://www.linkedin.com/in/harshita-singh-06a9602a3",
-    "image": "/content/team/harshita-singh.jpg",
-    "order": 17,
-    "published": true
-  },
-  {
-    "slug": "varnika-sharma",
-    "name": "Varnika Sharma",
-    "role": "Full Stack Engineering Intern",
-    "linkedin": "https://www.linkedin.com/in/varnikasharma18/",
-    "image": "/content/team/varnika-sharma.jpg",
-    "order": 18,
-    "published": true
-  },
-  {
-    "slug": "unnati-gailakoti",
-    "name": "Unnati Gailakoti",
-    "role": "Content and Social Media Marketing Intern",
-    "linkedin": "https://www.linkedin.com/in/unnatigailakoti",
-    "image": "/content/team/unnati-gailakoti.jpg",
-    "order": 19,
+    "order": 12,
     "published": true
   },
   {
@@ -176,6 +113,69 @@
     "role": "Business Development Manager",
     "linkedin": "https://www.linkedin.com/in/akash-negi-31b871385",
     "image": "/content/team/akash-negi.jpg",
+    "order": 13,
+    "published": true
+  },
+  {
+    "slug": "nikita-nautiyal",
+    "name": "Nikita Nautiyal",
+    "role": "UI/UX Designer",
+    "linkedin": "https://www.linkedin.com/in/nikitades/",
+    "image": "/content/team/nikita-nautiyal.jpeg",
+    "order": 14,
+    "published": true
+  },
+  {
+    "slug": "ashmita",
+    "name": "Ashmita",
+    "role": "Associate Product Manager",
+    "linkedin": "https://www.linkedin.com/in/ashmita-r-s",
+    "image": "/content/team/ashmita.jpg",
+    "order": 15,
+    "published": true
+  },
+  {
+    "slug": "allu-greshma",
+    "name": "Allu Greshma",
+    "role": "UI/UX Designer Intern",
+    "linkedin": "https://www.linkedin.com/in/greshma-allu-0129b32bb/",
+    "image": "/content/team/allu-greshma.jpg",
+    "order": 16,
+    "published": true
+  },
+  {
+    "slug": "ragala-ammlu",
+    "name": "Ragala Ammlu",
+    "role": "Quality Assurance Intern",
+    "linkedin": "https://in.linkedin.com/in/ammlu-ragala-963678388",
+    "image": "/content/team/ragala-ammlu.jpg",
+    "order": 17,
+    "published": true
+  },
+  {
+    "slug": "harshita-singh",
+    "name": "Harshita Singh",
+    "role": "QA Intern",
+    "linkedin": "https://www.linkedin.com/in/harshita-singh-06a9602a3",
+    "image": "/content/team/harshita-singh.jpg",
+    "order": 18,
+    "published": true
+  },
+  {
+    "slug": "varnika-sharma",
+    "name": "Varnika Sharma",
+    "role": "Full Stack Engineering Intern",
+    "linkedin": "https://www.linkedin.com/in/varnikasharma18/",
+    "image": "/content/team/varnika-sharma.jpg",
+    "order": 19,
+    "published": true
+  },
+  {
+    "slug": "unnati-gailakoti",
+    "name": "Unnati Gailakoti",
+    "role": "Content and Social Media Marketing Intern",
+    "linkedin": "https://www.linkedin.com/in/unnatigailakoti",
+    "image": "/content/team/unnati-gailakoti.jpg",
     "order": 20,
     "published": true
   },
