@@ -6,8 +6,8 @@
     "order": 1,
     "name": "Coinzy",
     "fullName": "Coinzy - Coin AI Identification",
-    "tagline": "Identify coins instantly with AI",
-    "longDescription": "Coinzy uses advanced AI to identify coins from around the world. Scan any coin, explore its history, rarity, and estimated value. Build your collection and trade on the marketplace.",
+    "tagline": "Identify, value, and explore coins",
+    "longDescription": "Coinzy is our wedge into the world of coins, where we're going deeper to understand collectors, refine our model, and build the playbook for adjacent hobbies. Today, the platform brings these experiences together: identify coins from around the world with AI, explore and search a global coin catalog, discover their history, rarity, and value. Build your collection, connect with fellow collectors, buy and sell coins, and get your coins appraised by real experts right in the app.",
     "accentHsl": "174 60% 35%",
     "logo": "coinzy-logo.png",
     "iosUrl": "https://apps.apple.com/in/app/coinzy-coin-ai-identification/id6752857760",
@@ -20,6 +20,7 @@
     "features": [
       "AI Identifier",
       "Know Your Coin",
+      "Expert Appraisal",
       "Discover Value",
       "Global Catalogue",
       "Private Collections",
@@ -33,7 +34,8 @@
       "coinzy-4.png",
       "coinzy-5.png",
       "coinzy-6.png",
-      "coinzy-7.png"
+      "coinzy-7.png",
+      "coinzy-8.png"
     ]
   },
   {
@@ -43,8 +45,8 @@
     "order": 2,
     "name": "Banknote",
     "fullName": "Banknote Identification AI",
-    "tagline": "Scan and identify banknotes from around the world",
-    "longDescription": "Banknotes uses advanced image recognition to identify banknotes from around the world. Learn about currency history, security features, and exchange rates instantly.",
+    "tagline": "Identify, value, and explore banknotes",
+    "longDescription": "Banknote is our wedge into the world of banknotes, where we're going deeper to understand collectors, refine our model, and build the playbook for adjacent hobbies. Today, the platform brings these experiences together: identify banknotes from around the world with AI, explore and search a global banknote catalog, discover their history, rarity, value, and security features. Build your collection, connect with fellow collectors, and buy and sell banknotes in the app.",
     "accentHsl": "152 55% 32%",
     "logo": "banknotes-logo.png",
     "iosUrl": "https://apps.apple.com/us/app/banknote-identification-ai/id6747063766",

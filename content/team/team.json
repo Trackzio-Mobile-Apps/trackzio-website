@@ -11,7 +11,7 @@
   {
     "slug": "sayan-chakrabarti",
     "name": "Sayan Chakrabarti",
-    "role": "Lead Engineer – Backend, Founding Member",
+    "role": "Co-founder",
     "linkedin": "https://www.linkedin.com/in/sayanriju/",
     "image": "/content/team/sayan-chakrabarti.jpeg",
     "order": 2,
@@ -29,9 +29,9 @@
   {
     "slug": "shreyans-jain",
     "name": "Shreyans Jain",
-    "role": "Senior Full Stack Engineer – Founding Member",
+    "role": "Full Stack Engineer – Founding Member",
     "linkedin": "https://www.linkedin.com/in/shreyans-jain-8396b6245",
-    "image": "/content/team/shreyans-jain.png",
+    "image": "/content/team/shreyans-jain.jpg",
     "order": 4,
     "published": true
   },
@@ -114,6 +114,78 @@
     "linkedin": "https://www.linkedin.com/in/ashmita-r-s",
     "image": "/content/team/ashmita.jpg",
     "order": 13,
+    "published": true
+  },
+  {
+    "slug": "aashima-syal",
+    "name": "Aashima Syal",
+    "role": "Content and Social Media Manager",
+    "linkedin": "https://www.linkedin.com/in/aashimasyal",
+    "image": "/content/team/aashima-syal.jpg",
+    "order": 14,
+    "published": true
+  },
+  {
+    "slug": "allu-greshma",
+    "name": "Allu Greshma",
+    "role": "UI/UX Designer Intern",
+    "linkedin": "https://www.linkedin.com/in/greshma-allu-0129b32bb/",
+    "image": "/content/team/allu-greshma.jpg",
+    "order": 15,
+    "published": true
+  },
+  {
+    "slug": "ragala-ammlu",
+    "name": "Ragala Ammlu",
+    "role": "Quality Assurance Intern",
+    "linkedin": "https://in.linkedin.com/in/ammlu-ragala-963678388",
+    "image": "/content/team/ragala-ammlu.jpg",
+    "order": 16,
+    "published": true
+  },
+  {
+    "slug": "harshita-singh",
+    "name": "Harshita Singh",
+    "role": "QA Intern",
+    "linkedin": "https://www.linkedin.com/in/harshita-singh-06a9602a3",
+    "image": "/content/team/harshita-singh.jpg",
+    "order": 17,
+    "published": true
+  },
+  {
+    "slug": "varnika-sharma",
+    "name": "Varnika Sharma",
+    "role": "Full Stack Engineering Intern",
+    "linkedin": "https://www.linkedin.com/in/varnikasharma18/",
+    "image": "/content/team/varnika-sharma.jpg",
+    "order": 18,
+    "published": true
+  },
+  {
+    "slug": "unnati-gailakoti",
+    "name": "Unnati Gailakoti",
+    "role": "Content and Social Media Marketing Intern",
+    "linkedin": "https://www.linkedin.com/in/unnatigailakoti",
+    "image": "/content/team/unnati-gailakoti.jpg",
+    "order": 19,
+    "published": true
+  },
+  {
+    "slug": "akash-negi",
+    "name": "Akash Negi",
+    "role": "Business Development Manager",
+    "linkedin": "https://www.linkedin.com/in/akash-negi-31b871385",
+    "image": "/content/team/akash-negi.jpg",
+    "order": 20,
+    "published": true
+  },
+  {
+    "slug": "navneet-sindhu",
+    "name": "Navneet Sindhu",
+    "role": "Android Developer Intern",
+    "linkedin": "https://www.linkedin.com/in/nsindhu/",
+    "image": "/content/team/navneet-sindhu.jpg",
+    "order": 21,
     "published": true
   }
 ]

@@ -9,8 +9,8 @@ import { imageSrc } from "@/lib/imageSrc";
 const apps = getClientApps();
 
 const showcaseBulletMatrix = [
-  ['AI-powered identification', 'Global coin database', 'Collection tracking'],
-  ['Instant banknote scanning', 'Worldwide currency coverage', 'Rarity & value insights'],
+  ['AI-powered identification & expert appraisal', 'Global coin database', 'Collection, community & marketplace'],
+  ['AI-powered banknote identification', 'Global currency database', 'Collection, community & marketplace'],
   ['Species identification', 'Toxicity information', 'Personal catalogue'],
   ['Streak-based motivation', 'Smart scheduling', 'Visual progress charts'],
   ['AI rock identification', '8,000+ mineral database', 'Collection management'],
@@ -151,7 +151,7 @@ export default function FloatingAppShowcase() {
             Our Ecosystem
           </p>
           <h2 className="font-bold font-display leading-tight" style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)' }}>
-            Apps built for the <span className="text-primary">curious</span>
+            Tools built for the <span className="text-primary">curious</span>
           </h2>
         </motion.div>
 
@@ -262,9 +262,7 @@ function ContentPanel({ selected, narrow }: { selected: (typeof showcaseApps)[0]
         <p
           className={`text-muted-foreground leading-relaxed ${narrow ? 'mb-4 text-[0.8125rem] leading-relaxed' : 'mb-5 text-sm xl:text-[0.9375rem]'}`}
         >
-          {selected.longDescription.length > 220
-            ? selected.longDescription.slice(0, 220).trim() + '…'
-            : selected.longDescription}
+          {selected.longDescription}
         </p>
 
         <ul className={narrow ? 'space-y-2 mb-5' : 'space-y-2.5 mb-6'}>

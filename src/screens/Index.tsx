@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { motion } from 'framer-motion';
 import { trackEvent } from '@/lib/analytics';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
@@ -172,16 +173,16 @@ export default function Home() {
         <div className="container-site relative z-10 px-3 sm:px-0">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
             <p className="text-xs sm:text-sm font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase text-primary mb-4 sm:mb-6">
-              AI-Powered Mobile Apps
+              AI-Powered Tools
             </p>
 
             <h1 className="text-[clamp(1.65rem,5.5vw+0.5rem,2.5rem)] sm:text-5xl lg:text-6xl xl:text-7xl font-bold font-display leading-[1.1] sm:leading-[1.08] tracking-tight mb-5 sm:mb-6 text-foreground text-balance px-0.5">
-              AI Platforms for Collectors and{' '}
-              <span className="text-primary">Enthusiasts</span>
+              Digital Platforms for Collectibles &{' '}
+              <span className="text-primary">Hobbies</span>
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed px-1 sm:px-0">
-              Trackzio builds intelligent apps that help people identify, understand, organize, and exchange the things they care about.
+              Trackzio builds intelligent tools that help people identify, understand, organize, and exchange the things they care about.
             </p>
 
             <motion.div
@@ -190,18 +191,16 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="mt-6 sm:mt-8 flex items-stretch sm:items-center justify-center gap-4 flex-wrap"
             >
-              <a
-                href="#apps"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' });
-                  trackEvent('hero_explore_apps', { page_name: 'home' });
+              <Link
+                href="/about"
+                onClick={() => {
+                  trackEvent('hero_discover_story', { page_name: 'home' });
                 }}
                 className="inline-flex items-center justify-center gap-2 min-h-[48px] w-full max-w-[20rem] sm:w-auto sm:max-w-none px-6 sm:px-8 rounded-xl bg-primary text-primary-foreground font-semibold text-sm sm:text-base transition-all hover:opacity-90 glow group"
               >
-                Explore Our Apps
+                Discover Our Story
                 <ArrowRight size={18} className="transition-transform group-hover:translate-x-1 shrink-0" />
-              </a>
+              </Link>
             </motion.div>
           </motion.div>
         </div>
@@ -213,7 +212,7 @@ export default function Home() {
           className="absolute bottom-6 sm:bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer pb-[env(safe-area-inset-bottom,0)]"
           onClick={() => document.getElementById('apps')?.scrollIntoView({ behavior: 'smooth' })}
         >
-          <span className="text-xs tracking-[0.15em] uppercase text-foreground/50">Scroll</span>
+          <span className="text-xs tracking-[0.15em] uppercase text-foreground/50">Our Products</span>
           <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
