@@ -2,9 +2,9 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://trackzio.com";
 
 export const SITE_NAME = "Trackzio";
-export const DEFAULT_TITLE = "Trackzio — AI-Powered Apps for Curious Minds";
+export const DEFAULT_TITLE = "Trackzio — Digital Platforms for Collectibles & Hobbies";
 export const DEFAULT_DESCRIPTION =
-  "Trackzio builds intelligent mobile apps that bridge curiosity and clarity through AI. Explore Coinzy, Banknotes, Insecto, Habiteazy, and more.";
+  "Trackzio builds intelligent tools that help people identify, understand, organize, and exchange the things they care about.";
 
 /** Interim social share image until a dedicated 1200×630 OG asset is added. */
 export const DEFAULT_OG_IMAGE = "/favicon.png";

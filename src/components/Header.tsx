@@ -41,7 +41,7 @@ export default function Header() {
   const megaMenuApps = useMemo(() => buildMegaMenuApps(), []);
   const dropdownTimer = useRef<ReturnType<typeof setTimeout>>();
 
-  /** Same behavior as hero “Explore Our Apps”: go to home #apps and smooth-scroll. */
+  /** Same behavior as the home “Our Products” control: go to home #apps and smooth-scroll. */
   const navigateToAppsSection = () => {
     trackEvent("header_explore_apps", { page_name: pathname });
     setDropdownOpen(false);

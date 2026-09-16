@@ -14,6 +14,7 @@ import coinzy4 from "@/assets/screenshots/coinzy-4.png";
 import coinzy5 from "@/assets/screenshots/coinzy-5.png";
 import coinzy6 from "@/assets/screenshots/coinzy-6.png";
 import coinzy7 from "@/assets/screenshots/coinzy-7.png";
+import coinzy8 from "@/assets/screenshots/coinzy-8.png";
 import banknotes1 from "@/assets/screenshots/banknotes-1.png";
 import banknotes2 from "@/assets/screenshots/banknotes-2.png";
 import banknotes3 from "@/assets/screenshots/banknotes-3.png";
@@ -89,6 +90,7 @@ export const appScreenshotMap: Record<string, StaticImageData> = {
   "coinzy-5.png": coinzy5,
   "coinzy-6.png": coinzy6,
   "coinzy-7.png": coinzy7,
+  "coinzy-8.png": coinzy8,
   "banknotes-1.png": banknotes1,
   "banknotes-2.png": banknotes2,
   "banknotes-3.png": banknotes3,

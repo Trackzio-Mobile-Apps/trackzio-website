@@ -6,7 +6,7 @@ export default function Page() {
     <>
       <PageSeo
         title="About"
-        description="Learn about Trackzio — the team building AI-powered identification and productivity apps for curious minds."
+        description="Learn about Trackzio — the team building AI-powered platforms for collectors and hobbyists."
         path="/about"
       />
       <About />

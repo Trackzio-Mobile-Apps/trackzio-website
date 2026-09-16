@@ -16,22 +16,27 @@ const journeyBlocks = [
   {
     emoji: '🔍',
     title: 'Recognising the Problem',
-    description: 'We noticed everyday tasks — identifying coins, learning about insects, building habits — lacked simple, intelligent tools. That gap became our starting point.'
+    description: 'We saw how fragmented the experience could be for people who collect, explore, and learn about the things they love. The tools they needed were often spread across different places, leaving no single experience built around their complete journey.'
   },
   {
     emoji: '🛠️',
     title: 'Building the First Beta',
-    description: 'With a small team and big ambitions, we built our first AI-powered prototypes. Fast iterations, late nights, and a relentless focus on getting the experience right.'
+    description: 'With a small team and big ambitions, we started building focused apps that brought the tools people needed for each hobby into one platform — creating end-to-end experiences around their journey. We began with AI-powered identification and kept expanding from there. Fast iterations, late nights, and a relentless focus on getting the experience right shaped our first products.'
   },
   {
     emoji: '🌱',
     title: 'Early Users Discover the Apps',
-    description: 'Real people started using our apps and sharing them with friends. Their feedback shaped every feature, every update, every decision we made next.'
+    description: 'People started discovering and using our apps, sharing them with friends and giving us feedback along the way. Their experiences helped shape every feature, every update, and every decision we made next — teaching us more about what passionate users truly needed.'
   },
   {
     emoji: '🚀',
     title: 'Growing the Trackzio Ecosystem',
-    description: 'What started as one app became a connected ecosystem. Four apps, millions of downloads, and a vision to keep building tools that make lives easier.'
+    description: 'What started as a single mobile app has evolved into an ecosystem of eight focused platforms, now expanding across mobile and web. Today, we’re going deeper into coins and banknotes, building and refining the model around the needs of these communities. As we learn what works, we’ll create a playbook to expand into new categories, while our other platforms continue to grow organically.'
+  },
+  {
+    emoji: '🗺️',
+    title: 'The Road Ahead',
+    description: 'Our ambition is to make Trackzio a leading platform across a range of major collectibles and hobbies. Over the next five years, we see an opportunity to bring this model to roughly 9–10 categories — expanding thoughtfully based on what we learn along the way.'
   }
 ];
 
@@ -51,11 +56,8 @@ export default function About() {
             </p>
             <h1 className="text-[clamp(1.6rem,5.2vw,1.95rem)] sm:text-5xl md:text-6xl lg:text-7xl font-bold font-display leading-[1.12] sm:leading-[1.1] tracking-tight mb-4 text-balance">
               <span className="block sm:inline">Trackzio builds AI-powered platforms for</span>
-              <span className="text-gradient block sm:inline"> collectors and enthusiasts</span>
+              <span className="text-gradient block sm:inline"> collectors and hobbyists</span>
             </h1>
-            {/* <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed px-1">
-              Trackzio builds AI-powered platforms for collectors and enthusiasts.
-            </p> */}
           </motion.div>
         </div>
       </section>
@@ -71,13 +73,13 @@ export default function About() {
                   Who we <span className="text-gradient">are</span>
                 </h2>
                 <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4">
-                  Our platforms combine artificial intelligence, structured data, and thoughtful design to help people identify, understand, and organize the things they care about.
+                  We believe the things people are passionate about deserve better digital experiences. We started with AI-powered identification, helping people identify what they collect and love.
                 </p>
                 <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4">
-                  By bringing together identification technology, knowledge platforms, collection management tools, and enthusiast communities, Trackzio aims to create seamless digital ecosystems around people's interests.
+                  As we built and learned from users, we understood there was much more they needed. What began as identification tools has evolved into digital spaces that bring together the tools they need throughout their journey.
                 </p>
                 <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                  For collectors, our platforms also enable expert insights and trusted marketplaces that make discovering, evaluating, and exchanging items easier.
+                  Today, we’re building focused platforms across collectibles and hobbies, starting with coins and banknotes, and expanding into antiques, cards, vinyl, and much more.
                 </p>
               </div>
             </div>
@@ -112,7 +114,7 @@ export default function About() {
             >
               <p className="text-xs sm:text-sm font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase text-primary mb-3 sm:mb-4">Mission</p>
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold font-display leading-snug text-balance">
-                To develop AI-powered platforms that help people identify, understand, organize, and exchange the things they care about.
+                Build the tools and experiences that bring everything collectors and hobbyists need into one place.
               </h3>
             </motion.div>
           </div>
