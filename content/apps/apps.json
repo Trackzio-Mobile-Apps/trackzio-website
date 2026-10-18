@@ -7,35 +7,50 @@
     "name": "Coinzy",
     "fullName": "Coinzy - Coin AI Identification",
     "tagline": "Identify, value, and explore coins",
-    "longDescription": "Coinzy is our wedge into the world of coins, where we're going deeper to understand collectors, refine our model, and build the playbook for adjacent hobbies. Today, the platform brings these experiences together: identify coins from around the world with AI, explore and search a global coin catalog, discover their history, rarity, and value. Build your collection, connect with fellow collectors, buy and sell coins, and get your coins appraised by real experts right in the app.",
+    "longDescription": "Coinzy is our wedge into the world of coins, where we're going deeper to understand collectors, refine our model, and build the playbook for adjacent hobbies. Today, the platform brings these experiences together: identify coins from around the world with AI, explore and search a global coin catalog, discover their history, rarity, and value. Build your collection, connect with fellow collectors, buy and sell coins, and ask an experienced numismatist for a second opinion right in the app.",
     "accentHsl": "174 60% 35%",
     "logo": "coinzy-logo.png",
-    "iosUrl": "https://apps.apple.com/in/app/coinzy-coin-ai-identification/id6752857760",
-    "androidUrl": "https://play.google.com/store/apps/details?id=com.coinzy.trackzio&pcampaignid=web_share",
+    "iosUrl": "https://apps.apple.com/app/id6752857760",
+    "androidUrl": "https://play.google.com/store/apps/details?id=com.coinzy.trackzio",
+    "seoTitle": "Coinzy AI: Coin Identifier, Collection and Marketplace",
+    "seoDescription": "Scan a coin to learn its history, rarity, and estimated value. Keep your collection in one place, and buy and sell with other collectors and connect with real experts for appraisals. Free on iPhone and Android.",
+    "ogImage": "/og/coinzy.webp",
+    "heroTitle": "Everything for your coins, in one app.",
+    "heroDescription": "Identify any coin and learn its history and value, get an expert's opinion, keep your collection organized, and buy and sell with collectors and dealers on the Coinzy marketplace.",
     "stats": {
-      "downloads": "150K+",
-      "rating": "4.5+",
-      "dau": "30K+"
+      "downloads": "250K+",
+      "rating": "380K+",
+      "dau": "1,000+"
     },
     "features": [
       "AI Identifier",
       "Know Your Coin",
-      "Expert Appraisal",
       "Discover Value",
       "Global Catalogue",
       "Private Collections",
       "Marketplace",
-      "Community"
+      "Community",
+      "Connect with Experts"
+    ],
+    "featureCaptions": [
+      "Take a photo and get the coin's name, country, year, and denomination.",
+      "Read the history behind each coin and the era it comes from.",
+      "See estimated value ranges by condition, from worn to uncirculated.",
+      "Browse more than 380,000 coins from around the world.",
+      "Track what you own, what you've identified and what you want.",
+      "List coins for free and contact sellers directly by phone or email.",
+      "Share finds and see what other collectors are posting.",
+      "Ask an experienced numismatist to review your coin and get a report within 72 hours."
     ],
     "screenshots": [
-      "coinzy-1.png",
-      "coinzy-2.png",
-      "coinzy-3.png",
-      "coinzy-4.png",
-      "coinzy-5.png",
-      "coinzy-6.png",
-      "coinzy-7.png",
-      "coinzy-8.png"
+      "coinzy-1.webp",
+      "coinzy-2.webp",
+      "coinzy-4.webp",
+      "coinzy-5.webp",
+      "coinzy-6.webp",
+      "coinzy-7.webp",
+      "coinzy-8.webp",
+      "coinzy-3.webp"
     ]
   },
   {

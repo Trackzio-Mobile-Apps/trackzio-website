@@ -22,6 +22,7 @@ const normalized: AppContent[] = [...parsed.data]
       faqs: d.faqs,
       statLabels: d.statLabels,
       reviewSummary: d.reviewSummary,
+      reviewScreenshots: d.reviewScreenshots,
     };
   });
 

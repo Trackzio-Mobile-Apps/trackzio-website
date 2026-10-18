@@ -1,7 +1,7 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import type { StaticImageData } from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { imageSrc } from "@/lib/imageSrc";
+import SiteImage from "@/components/SiteImage";
 
 interface ShowcaseFeature {
   screenshot: string | StaticImageData;
@@ -223,16 +223,21 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
                       background: `linear-gradient(135deg, hsl(${accentHsl} / 0.06), hsl(${accentHsl} / 0.02))`,
                     }}
                   >
-                    <img
-                      src={imageSrc(feature.screenshot)}
+                    <SiteImage
+                      src={feature.screenshot}
                       alt={feature.title}
-                      loading="lazy"
-                      decoding="async"
-                      className="object-contain block mx-auto w-auto max-w-full max-h-[calc(100vh-220px)] h-full"
+                      sizes="(min-width: 1024px) 30vw, 80vw"
+                      className="object-contain block mx-auto"
+                      style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "calc(100vh - 300px)" }}
                     />
                   </div>
                   <div className="px-3 py-2 text-center shrink-0">
                     <h3 className="font-bold text-base text-foreground">{feature.title}</h3>
+                    {feature.description ? (
+                      <p className="mt-1 text-xs sm:text-sm text-muted-foreground leading-snug line-clamp-4">
+                        {feature.description}
+                      </p>
+                    ) : null}
                   </div>
                 </div>
               </article>

@@ -9,7 +9,7 @@
 export const APP_STORE_LEGAL_URLS: Record<string, { privacy: string; terms: string }> = {
   coinzy: {
     privacy: "/privacy-policy-coinzy",
-    terms: "/coinzy%3A-terms",
+    terms: "/coinzy-terms",
   },
   banknotes: {
     privacy: "/privacy-policy-banknote",

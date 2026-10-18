@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Clock } from "lucide-react";
 import { usePageAnalytics } from "@/hooks/usePageAnalytics";
 import type { BlogPost } from "@/lib/content/blogs";
+import SiteImage from "@/components/SiteImage";
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -51,13 +52,14 @@ export default function BlogArticle({ article }: Props) {
               <span>{article.dateDisplay}</span>
             </div>
 
-            <div className="rounded-xl overflow-hidden mb-10">
-              <img
+            <div className="relative aspect-[16/9] rounded-xl overflow-hidden mb-10 max-h-[420px]">
+              <SiteImage
                 src={article.image}
                 alt={article.title}
-                className="w-full h-auto object-cover"
-                style={{ maxHeight: "420px" }}
-                loading="eager"
+                fill
+                priority
+                sizes="(min-width: 768px) 768px, 100vw"
+                className="object-cover"
               />
             </div>
 

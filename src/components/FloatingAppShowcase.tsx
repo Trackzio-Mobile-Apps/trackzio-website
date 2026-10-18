@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Check } from 'lucide-react';
 import { getClientApps } from "@/lib/content/apps-client";
 import { trackEvent } from "@/lib/analytics";
-import { imageSrc } from "@/lib/imageSrc";
+import SiteImage from "@/components/SiteImage";
 
 const apps = getClientApps();
 
@@ -55,7 +55,12 @@ function AppChip({
       whileHover={{ scale: isSelected ? 1.02 : 1.01, opacity: 1 }}
       whileTap={{ scale: 0.98 }}
     >
-      <img src={imageSrc(app.logo)} alt="" className={`rounded-lg shrink-0 ${compact ? 'h-8 w-8 min-[400px]:h-7 min-[400px]:w-7 sm:h-8 sm:w-8' : 'h-9 w-9'}`} />
+      <SiteImage
+        src={app.logo}
+        alt=""
+        sizes="36px"
+        className={`rounded-lg shrink-0 object-cover ${compact ? 'h-8 w-8 min-[400px]:h-7 min-[400px]:w-7 sm:h-8 sm:w-8' : 'h-9 w-9'}`}
+      />
       <span
         className="font-semibold text-[11px] min-[400px]:text-xs sm:text-sm text-center leading-snug transition-colors duration-300 line-clamp-2 break-words min-[400px]:line-clamp-none min-[400px]:whitespace-nowrap"
         style={{ color: isSelected ? `hsl(${app.accentHsl})` : 'hsl(var(--foreground))' }}
@@ -176,9 +181,10 @@ export default function FloatingAppShowcase() {
                 transition={{ duration: 0.35 }}
                 className="flex items-center justify-center"
               >
-                <img
-                  src={imageSrc(selected.logo)}
+                <SiteImage
+                  src={selected.logo}
                   alt={selected.fullName}
+                  sizes="256px"
                   className="rounded-[1.5rem] sm:rounded-[2rem] object-contain w-[min(85vw,256px)] h-[min(85vw,256px)] max-w-full"
                   style={{ filter: `drop-shadow(0 24px 48px hsl(${selected.accentHsl} / 0.3))` }}
                 />
@@ -213,9 +219,10 @@ export default function FloatingAppShowcase() {
                 transition={{ duration: 0.4 }}
                 className="flex items-center justify-center"
               >
-                <img
-                  src={imageSrc(selected.logo)}
+                <SiteImage
+                  src={selected.logo}
                   alt={selected.fullName}
+                  sizes="260px"
                   className="rounded-3xl object-contain w-full max-w-[220px] xl:max-w-[260px] aspect-square"
                   style={{ filter: `drop-shadow(0 20px 40px hsl(${selected.accentHsl} / 0.28))` }}
                 />

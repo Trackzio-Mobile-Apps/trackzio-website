@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Blog from "@/screens/Blog";
 import { getAllBlogs, blogOfTheWeekFromList } from "@/lib/content/blogs";
+import { PUBLIC_ROBOTS } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Blog",
   description: "Updates, ideas, and stories from the Trackzio team.",
+  robots: PUBLIC_ROBOTS,
   alternates: { canonical: "/blog" },
   openGraph: {
     title: "Insights & Stories | Trackzio Blog",

@@ -6,19 +6,22 @@ interface PlatformDownloadButtonsProps {
   appName: string;
   appId: string;
   accentHsl?: string;
+  /** Optional text link shown under each store badge, using that store's URL. */
+  linkNote?: string;
 }
 
-export default function PlatformDownloadButtons({ iosUrl, androidUrl, appName, appId }: PlatformDownloadButtonsProps) {
+export default function PlatformDownloadButtons({ iosUrl, androidUrl, appName, appId, linkNote }: PlatformDownloadButtonsProps) {
   const handleClick = (platform: 'ios' | 'android', url: string) => {
     trackEvent(`${appId}_${platform}_download`, { app_name: appName, platform });
-    window.open(url, '_blank');
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   const btnStyle = { backgroundColor: '#064e3b', color: '#ffffff' };
 
   return (
-    <div className="flex items-center justify-center gap-3 flex-wrap">
+    <div className="flex items-center justify-center gap-6 flex-wrap">
       {androidUrl && (
+        <div className="flex flex-col items-center gap-2">
         <button
           onClick={() => handleClick('android', androidUrl)}
           className="inline-flex items-center gap-2.5 h-12 px-5 rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity"
@@ -29,8 +32,15 @@ export default function PlatformDownloadButtons({ iosUrl, androidUrl, appName, a
           </svg>
           Google Play
         </button>
+        {linkNote && (
+          <a href={androidUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-primary hover:opacity-80">
+            {linkNote}
+          </a>
+        )}
+        </div>
       )}
       {iosUrl && (
+        <div className="flex flex-col items-center gap-2">
         <button
           onClick={() => handleClick('ios', iosUrl)}
           className="inline-flex items-center gap-2.5 h-12 px-5 rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity"
@@ -41,6 +51,12 @@ export default function PlatformDownloadButtons({ iosUrl, androidUrl, appName, a
           </svg>
           App Store
         </button>
+        {linkNote && (
+          <a href={iosUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-primary hover:opacity-80">
+            {linkNote}
+          </a>
+        )}
+        </div>
       )}
     </div>
   );

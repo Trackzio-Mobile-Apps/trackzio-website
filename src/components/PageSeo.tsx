@@ -32,13 +32,21 @@ export default function PageSeo({
       <title>{title === DEFAULT_TITLE ? DEFAULT_TITLE : fullTitle}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
-      {noIndex && <meta name="robots" content="noindex, nofollow" />}
+      <meta
+        name="robots"
+        content={
+          noIndex
+            ? "noindex, nofollow"
+            : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        }
+      />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:title" content={title === DEFAULT_TITLE ? DEFAULT_TITLE : fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
       <meta property="og:image" content={image} />
+      <meta property="og:image:alt" content={title === DEFAULT_TITLE ? DEFAULT_TITLE : fullTitle} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title === DEFAULT_TITLE ? DEFAULT_TITLE : fullTitle} />
       <meta name="twitter:description" content={description} />

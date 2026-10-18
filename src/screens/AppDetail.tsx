@@ -5,8 +5,9 @@ import { motion } from 'framer-motion';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { getPlatform } from "@/lib/platformUtils";
-import { imageSrc } from "@/lib/imageSrc";
 import { QRCodeSVG } from 'qrcode.react';
+import SiteImage from "@/components/SiteImage";
+import coinzyExpert from "@/assets/screenshots/coinzy-3.webp";
 import { Quote, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import PlatformDownloadButtons from '@/components/PlatformDownloadButtons';
 import FeatureShowcase from '@/components/FeatureShowcase';
@@ -42,6 +43,13 @@ function reviewStars(rating?: number) {
   return `${"★".repeat(filled)}${"☆".repeat(5 - filled)}`;
 }
 
+function getScrollStep(el: HTMLElement): number {
+  const first = el.firstElementChild as HTMLElement | null;
+  if (!first) return el.clientWidth;
+  const gap = parseFloat(getComputedStyle(el).gap) || 0;
+  return first.offsetWidth + gap;
+}
+
 type AppDetailProps = {
   app: AppContent;
 };
@@ -53,8 +61,11 @@ export default function AppDetail({ app }: AppDetailProps) {
   const isMobile = useIsMobile();
   const [showAllFaqs, setShowAllFaqs] = useState(false);
   const reviewsRef = useRef<HTMLDivElement>(null);
+  const coinzyReviewsRef = useRef<HTMLDivElement>(null);
   const [canScrollReviewLeft, setCanScrollReviewLeft] = useState(false);
   const [canScrollReviewRight, setCanScrollReviewRight] = useState(true);
+  const [canScrollCoinzyLeft, setCanScrollCoinzyLeft] = useState(false);
+  const [canScrollCoinzyRight, setCanScrollCoinzyRight] = useState(true);
 
   const autoScrollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -103,7 +114,7 @@ export default function AppDetail({ app }: AppDetailProps) {
   const showcaseFromContent = app.screenshots.map((s, index) => ({
     screenshot: s,
     title: app.features[index] || `Feature ${index + 1}`,
-    description: app.longDescription,
+    description: app.featureCaptions?.[index] ?? "",
   }));
 
   const qrUrl = (() => {
@@ -119,6 +130,73 @@ export default function AppDetail({ app }: AppDetailProps) {
     el.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
   };
 
+  const coinzyAutoScrollRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const resumeCoinzyAutoRef = useRef<() => void>(() => {});
+
+  useEffect(() => {
+    const el = coinzyReviewsRef.current;
+    if (!el || app.id !== "coinzy") return;
+
+    const update = () => {
+      setCanScrollCoinzyLeft(el.scrollLeft > 10);
+      setCanScrollCoinzyRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+    };
+    update();
+
+    const clearAuto = () => {
+      if (coinzyAutoScrollRef.current) {
+        clearInterval(coinzyAutoScrollRef.current);
+        coinzyAutoScrollRef.current = null;
+      }
+    };
+    const startAuto = () => {
+      clearAuto();
+      coinzyAutoScrollRef.current = setInterval(() => {
+        if (el.scrollWidth <= el.clientWidth + 1) return;
+        const step = getScrollStep(el);
+        if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 10) {
+          el.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          el.scrollBy({ left: step, behavior: "smooth" });
+        }
+      }, 4000);
+    };
+    resumeCoinzyAutoRef.current = startAuto;
+
+    const pause = () => clearAuto();
+    const resume = () => startAuto();
+    el.addEventListener("scroll", update, { passive: true });
+    el.addEventListener("mouseenter", pause);
+    el.addEventListener("mouseleave", resume);
+    el.addEventListener("touchstart", pause, { passive: true });
+    el.addEventListener("touchend", resume);
+    window.addEventListener("resize", update);
+    startAuto();
+
+    return () => {
+      clearAuto();
+      resumeCoinzyAutoRef.current = () => {};
+      el.removeEventListener("scroll", update);
+      el.removeEventListener("mouseenter", pause);
+      el.removeEventListener("mouseleave", resume);
+      el.removeEventListener("touchstart", pause);
+      el.removeEventListener("touchend", resume);
+      window.removeEventListener("resize", update);
+    };
+  }, [app.id, reviews.length]);
+
+  const scrollCoinzyReviews = (dir: "left" | "right") => {
+    const el = coinzyReviewsRef.current;
+    if (!el) return;
+    if (coinzyAutoScrollRef.current) {
+      clearInterval(coinzyAutoScrollRef.current);
+      coinzyAutoScrollRef.current = null;
+    }
+    window.setTimeout(() => resumeCoinzyAutoRef.current(), 8000);
+    const step = getScrollStep(el);
+    el.scrollBy({ left: dir === "left" ? -step : step, behavior: "smooth" });
+  };
+
   return (
     <div style={{ '--app-accent': app.accentHsl } as React.CSSProperties}>
       {/* ── 1. Hero ── */}
@@ -126,16 +204,23 @@ export default function AppDetail({ app }: AppDetailProps) {
         <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at top, hsl(${app.accentHsl} / 0.08), transparent 60%)` }} />
         <div className="container-site relative">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
-            <img
-              src={imageSrc(app.logo)}
-              alt={`${app.fullName} logo`}
-              className="w-20 h-20 rounded-2xl mx-auto mb-5"
+            <span
+              className="inline-flex rounded-2xl mb-5"
               style={{ boxShadow: `0 8px 30px -8px hsl(${app.accentHsl} / 0.35)` }}
-            />
+            >
+              <SiteImage
+                src={app.logo}
+                alt={`${app.name} logo`}
+                priority
+                sizes="80px"
+                className="rounded-2xl object-cover"
+                style={{ width: "5rem", height: "5rem" }}
+              />
+            </span>
             <h1 className="text-4xl sm:text-5xl font-bold font-display" style={{ color: `hsl(${app.accentHsl})` }}>
-              {app.fullName}
+              {app.heroTitle ?? app.fullName}
             </h1>
-            <p className="mt-2 text-base text-muted-foreground/90 max-w-2xl mx-auto leading-relaxed">{app.longDescription}</p>
+            <p className="mt-2 text-base text-muted-foreground/90 max-w-2xl mx-auto leading-relaxed">{app.heroDescription ?? app.longDescription}</p>
 
             {/* Download section */}
             <div className="mt-6 flex flex-col items-center gap-4">
@@ -165,9 +250,161 @@ export default function AppDetail({ app }: AppDetailProps) {
         <FeatureShowcase features={showcaseFromContent} accentHsl={app.accentHsl} />
       )}
 
+      {app.id === "coinzy" && (
+        <section className="py-16 sm:py-20 snap-start" aria-labelledby="coinzy-expert-heading">
+          <div className="container-site grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <div>
+              <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Expert Evaluation</p>
+              <h2 id="coinzy-expert-heading" className="text-3xl sm:text-4xl font-bold font-display">
+                Not sure about a coin? Ask an expert.
+              </h2>
+              <p className="mt-4 text-base text-muted-foreground leading-relaxed">
+                Request an evaluation from an experienced numismatist in the app.
+              </p>
+              <ol className="mt-5 list-decimal space-y-1.5 pl-5 text-sm text-foreground leading-relaxed">
+                <li>Scan your coin.</li>
+                <li>Tap Expert Evaluation.</li>
+                <li>Get a report within 72 hours.</li>
+              </ol>
+              <p className="mt-5 text-sm text-muted-foreground leading-relaxed">
+                Each report covers identification, condition, rarity, history, estimated value, and a recommendation.
+              </p>
+              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                Paid per coin; price shown in the app. Reports are advisory opinions, not formal grading or certification.
+              </p>
+              <div className="mt-8">
+                <PlatformDownloadButtons
+                  iosUrl={app.iosUrl}
+                  androidUrl={app.androidUrl}
+                  appName={app.fullName}
+                  appId={app.id}
+                  accentHsl={app.accentHsl}
+                />
+              </div>
+            </div>
+            <SiteImage
+              src={coinzyExpert}
+              alt="Connect with a real human expert"
+              sizes="(min-width: 1024px) 480px, 90vw"
+              className="mx-auto w-full max-w-md"
+              style={{ width: "100%", height: "auto" }}
+            />
+          </div>
+        </section>
+      )}
+
+      {app.id === "coinzy" && reviews.length > 0 && (
+        <section className="py-20 sm:py-24 snap-start" aria-labelledby="coinzy-reviews-heading">
+          <div className="container-site w-full">
+            <motion.div {...fadeUp} className="text-center mb-12">
+              <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Reviews</p>
+              <h2 id="coinzy-reviews-heading" className="text-3xl sm:text-4xl font-bold font-display">What users say</h2>
+            </motion.div>
+
+            <div className="relative max-w-6xl mx-auto">
+              {canScrollCoinzyLeft && (
+                <button
+                  type="button"
+                  aria-label="Previous reviews"
+                  onClick={() => scrollCoinzyReviews("left")}
+                  className="absolute left-0 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card/95 text-muted-foreground shadow-md backdrop-blur-sm hover:text-foreground sm:flex"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+              )}
+              {canScrollCoinzyRight && (
+                <button
+                  type="button"
+                  aria-label="Next reviews"
+                  onClick={() => scrollCoinzyReviews("right")}
+                  className="absolute right-0 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card/95 text-muted-foreground shadow-md backdrop-blur-sm hover:text-foreground sm:flex"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              )}
+
+              <div
+                ref={coinzyReviewsRef}
+                role="region"
+                aria-label="Coinzy reviews"
+                className="flex items-stretch gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide pb-2 sm:px-12"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                {reviews.map((review) => {
+                  const card = (
+                    <>
+                      <div className="flex items-start justify-between gap-3">
+                        <p className="text-[0.7rem] font-semibold tracking-[0.14em] uppercase" style={{ color: `hsl(${app.accentHsl})` }}>
+                          {review.store}
+                        </p>
+                        {review.date && (
+                          <p className="shrink-0 text-xs text-muted-foreground">{review.date}</p>
+                        )}
+                      </div>
+                      <p className="mt-2 font-display font-bold text-foreground leading-snug">
+                        {review.title ?? review.author}
+                      </p>
+                      <div
+                        className="mt-1.5 text-sm tracking-tight text-amber-500"
+                        aria-label={`${review.rating ?? 5} out of 5 stars`}
+                      >
+                        {reviewStars(review.rating)}
+                      </div>
+                      <p className="mt-3 text-sm leading-relaxed text-foreground flex-1">{review.quote}</p>
+                      {(review.title || review.footnote) && (
+                        <div className="mt-4 flex items-end justify-between gap-3">
+                          {review.title && (
+                            <p className="text-sm font-medium text-muted-foreground">{review.author}</p>
+                          )}
+                          {review.footnote && (
+                            <p className="text-xs text-muted-foreground">{review.footnote}</p>
+                          )}
+                        </div>
+                      )}
+                    </>
+                  );
+                  const className = "flex h-full flex-col rounded-2xl border border-border/50 bg-card p-4 sm:p-5";
+                  return (
+                    <div
+                      key={`${review.store}-${review.author}-${review.date}`}
+                      className="snap-start shrink-0 w-[88%] sm:w-[calc((100%-1rem)/2)] lg:w-[calc((100%-2rem)/3)]"
+                    >
+                      {review.href ? (
+                        <a
+                          href={review.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={className}
+                          style={{ boxShadow: "var(--shadow-card)" }}
+                        >
+                          {card}
+                        </a>
+                      ) : (
+                        <article className={className} style={{ boxShadow: "var(--shadow-card)" }}>
+                          {card}
+                        </article>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="mt-12">
+              <PlatformDownloadButtons
+                iosUrl="https://apps.apple.com/us/app/coinzy-coin-ai-identification/id6752857760?see-all=reviews"
+                androidUrl={app.androidUrl}
+                appName={app.fullName}
+                appId={app.id}
+                linkNote="Read all reviews"
+              />
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── 4. Reviews — from content/apps/app-details.json */}
-      {reviews.length > 0 && (
+      {app.id !== "coinzy" && reviews.length > 0 && (
       <section className="py-20 sm:py-24 snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
@@ -342,17 +579,58 @@ export default function AppDetail({ app }: AppDetailProps) {
               Disclaimer
             </h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Coinzy is a hobbyist platform for physical numismatics only and does not facilitate the trading, holding, or
-              exchange of Bitcoins, cryptocurrencies, or any digital assets. We do not process payments or host a marketplace,
-              as all listings are for discovery only and any resulting sales occur entirely off-platform between users. Our
-              service is strictly limited to connecting hobbyists to showcase collections, and we are not a party to or
-              responsible for any private agreements or transactions.
+              Coinzy lets collectors list coins and contact each other directly. Coinzy does not handle payments or take part in any sale. Buyers and sellers agree on terms and settle payment between themselves. Coin identification and value estimates are for education and are not professional appraisals or certifications. Expert evaluations are advisory opinions based on the photos and details provided.
             </p>
           </div>
         </section>
       )}
 
       <OtherAppsCarousel excludeAppId={app.id} accentHsl={app.accentHsl} />
+
+      {app.id === "coinzy" && (
+        <section id="for-businesses" className="scroll-mt-24 py-16 sm:py-20 border-t border-border/60 snap-start" aria-labelledby="coinzy-business-heading">
+          <div className="container-site">
+            <div className="max-w-2xl">
+              <h2 id="coinzy-business-heading" className="text-3xl sm:text-4xl font-bold font-display">
+                For coin shops and dealers
+              </h2>
+              <p className="mt-3 text-base text-muted-foreground leading-relaxed">
+                Reach collectors beyond your local area, at no cost.
+              </p>
+            </div>
+            <div className="mt-10 grid gap-5 md:grid-cols-3">
+              {[
+                {
+                  title: "Free listing",
+                  text: "Send us photos and prices, and we'll list your coins for free.",
+                },
+                {
+                  title: "Seller leads",
+                  text: "We tell you when people near you want to sell coins or collections.",
+                },
+                {
+                  title: "Your sale, your way",
+                  text: "Your coins go directly in front of thousands of Coinzy users every day.",
+                },
+              ].map((card) => (
+                <div key={card.title} className="rounded-3xl bg-card p-6" style={{ boxShadow: "var(--shadow-card)" }}>
+                  <h3 className="font-display font-bold text-lg text-foreground">{card.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{card.text}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-8">
+              <a
+                href="mailto:coinzy@trackzio.com"
+                className="inline-flex items-center h-12 px-6 rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity"
+                style={{ backgroundColor: "#064e3b", color: "#ffffff" }}
+              >
+                Email us
+              </a>
+            </div>
+          </div>
+        </section>
+      )}
 
     </div>
   );

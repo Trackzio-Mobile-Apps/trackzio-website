@@ -4,14 +4,14 @@ These paths are **fixed** for store listings and must not change. The site imple
 
 - `src/lib/appStoreLegalUrls.ts` — single source of truth for footer + app detail links
 - `next.config.mjs` — `rewrites` (store URL → internal page) and `redirects` (nested route → store URL)
-- `middleware.ts` — decoded colon paths (`/coinzy:-terms`) and legacy typo URLs
+- `middleware.ts` — decoded colon paths (`/coinzy:-terms` redirects to `/coinzy-terms`) and legacy typo URLs
 
 ## Current permanent URLs
 
 | App (id)   | Privacy                         | Terms                          |
 | ---------- | ------------------------------- | ------------------------------ |
 | banknotes  | `/privacy-policy-banknote`      | `/banknote-terms`              |
-| coinzy     | `/privacy-policy-coinzy`        | `/coinzy%3A-terms`             |
+| coinzy     | `/privacy-policy-coinzy`        | `/coinzy-terms`                |
 | habiteazy  | `/privacy-policy-habit-eazy-1`  | `/habit-eazy%3A-terms`         |
 | insecto    | `/privacy-policy-insecto-ai-1`  | `/terms-for-insecto-ai`        |
 | rockzy     | `/privacy-policy-rockzy-ai`     | `/rockzy-terms-of-service`     |

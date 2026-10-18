@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { usePageAnalytics } from "@/hooks/usePageAnalytics";
 import { ArrowRight, Clock } from "lucide-react";
 import { blogCategories } from "@/lib/blogData";
+import SiteImage from "@/components/SiteImage";
 import type { BlogSummary } from "@/lib/content/blogs";
 
 type BlogProps = {
@@ -66,12 +67,14 @@ export default function Blog({ blogs, blogOfTheWeek }: BlogProps) {
               className="rounded-xl bg-card overflow-hidden flex flex-col md:flex-row cursor-pointer group block"
               style={{ boxShadow: '0 8px 32px -8px hsla(0 0% 0% / 0.1)' }}
             >
-              <div className="md:w-1/2 aspect-[16/10] md:aspect-auto overflow-hidden">
-                <img
+              <div className="relative md:w-1/2 aspect-[16/10] md:aspect-auto overflow-hidden">
+                <SiteImage
                   src={blogOfTheWeek.image}
                   alt={blogOfTheWeek.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="eager"
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
               <div className="md:w-1/2 p-8 sm:p-10 flex flex-col justify-center">
@@ -167,12 +170,13 @@ export default function Blog({ blogs, blogOfTheWeek }: BlogProps) {
               >
                 {activePreview ? (
                   <>
-                    <div className="aspect-[16/9] overflow-hidden">
-                      <img
+                    <div className="relative aspect-[16/9] overflow-hidden">
+                      <SiteImage
                         src={activePreview.image}
                         alt={activePreview.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="eager"
+                        fill
+                        sizes="(min-width: 1024px) 40vw, 100vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
                     <div className="p-6 sm:p-8 flex-1 flex flex-col">

@@ -9,9 +9,9 @@ import rockzyLogo from '@/assets/rockzy-logo-new.png';
 import banknotes1 from '@/assets/screenshots/banknotes-1.png';
 import banknotes2 from '@/assets/screenshots/banknotes-2.png';
 import banknotes3 from '@/assets/screenshots/banknotes-3.png';
-import coinzy1 from '@/assets/screenshots/coinzy-1.png';
-import coinzy2 from '@/assets/screenshots/coinzy-2.png';
-import coinzy3 from '@/assets/screenshots/coinzy-3.png';
+import coinzy1 from '@/assets/screenshots/coinzy-1.webp';
+import coinzy2 from '@/assets/screenshots/coinzy-2.webp';
+import coinzy3 from '@/assets/screenshots/coinzy-3.webp';
 import insecto1 from '@/assets/screenshots/insecto-1.png';
 import insecto2 from '@/assets/screenshots/insecto-2.jpg';
 import insecto3 from '@/assets/screenshots/insecto-3.png';
@@ -50,8 +50,8 @@ export const apps: AppInfo[] = [
     description: 'Coinzy uses advanced AI to identify coins from around the world. Scan any coin, explore its history, rarity, and estimated value. Build your collection and trade on the marketplace.',
     color: 'hsl(174, 60%, 35%)',
     accentHsl: '174 60% 35%',
-    iosUrl: 'https://apps.apple.com/in/app/coinzy-coin-ai-identification/id6752857760',
-    androidUrl: 'https://play.google.com/store/apps/details?id=com.coinzy.trackzio&pcampaignid=web_share',
+    iosUrl: 'https://apps.apple.com/app/id6752857760',
+    androidUrl: 'https://play.google.com/store/apps/details?id=com.coinzy.trackzio',
     icon: '🪙',
     logo: coinzyLogo,
     screenshots: [coinzy1, coinzy2, coinzy3],
