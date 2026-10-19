@@ -22,12 +22,21 @@ const socialLinks = [
   )},
 ];
 
-type AppLegalEntry = { label: string; privacy: string; terms: string };
+const coinzySocialLinks = [
+  { label: 'Instagram', href: 'https://www.instagram.com/coinzy_coinclub', event: 'footer_instagram_click', icon: socialLinks[1].icon },
+  { label: 'YouTube', href: 'https://www.youtube.com/@coinzy_coinclub', event: 'footer_youtube_click', icon: (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+  )},
+  { label: 'Facebook', href: 'https://www.facebook.com/people/Coinzy-AI/61573366507506/', event: 'footer_facebook_click', icon: socialLinks[2].icon },
+];
+
+type AppLegalEntry = { appId: string; label: string; privacy: string; terms: string };
 const appNameById = new Map(getClientApps().map((a) => [a.id, a.name]));
 const appLegalByAppId: Record<string, AppLegalEntry> = Object.fromEntries(
   Object.entries(APP_STORE_LEGAL_URLS).map(([appId, legal]) => [
     appId,
     {
+      appId,
       label: appNameById.get(appId) ?? appId,
       ...legal,
     },
@@ -66,6 +75,8 @@ const FEEDBACK_URL = 'https://forms.gle/pcmnfivhJZnr6Ybb9';
 export default function Footer() {
   const pathname = useSitePathname();
   const appLegal = getAppLegal(pathname);
+  const links = appLegal?.appId === "coinzy" ? coinzySocialLinks : socialLinks;
+  const socialBrand = appLegal?.appId === "coinzy" ? "Coinzy" : "Trackzio";
 
   return (
     <footer className="bg-primary" role="contentinfo">
@@ -73,13 +84,13 @@ export default function Footer() {
         {/* Top row: Social left, Buttons right */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-5">
-            {socialLinks.map(s => (
+            {links.map(s => (
               <a
                 key={s.label}
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Follow Trackzio on ${s.label}`}
+                aria-label={`Follow ${socialBrand} on ${s.label}`}
                 onClick={() => s.event && trackEvent(s.event, { page_name: pathname })}
                 className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
               >

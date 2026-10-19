@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { usePageAnalytics } from "@/hooks/usePageAnalytics";
-import { imageSrc } from "@/lib/imageSrc";
+import SiteImage from "@/components/SiteImage";
 import { getTeamMembers } from "@/lib/content/team";
 import { Linkedin } from 'lucide-react';
 
@@ -183,10 +183,12 @@ export default function About() {
                 className="group relative aspect-[3/4] max-w-md min-[480px]:max-w-none mx-auto min-[480px]:mx-0 w-full rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer transition-shadow duration-300 hover:shadow-xl focus-within:ring-2 focus-within:ring-primary/40 focus-within:ring-offset-2 focus-within:ring-offset-background"
               >
                 {member.image ? (
-                  <img
-                    src={imageSrc(member.image)}
+                  <SiteImage
+                    src={member.image}
                     alt={member.name}
-                    className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 480px) 50vw, 100vw"
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
                 ) : (
                   <div className="absolute inset-0 bg-gradient-to-br from-emerald-800 to-teal-600 transition-transform duration-500 group-hover:scale-105">

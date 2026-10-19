@@ -10,7 +10,7 @@ const appsJsonPath = path.join(process.cwd(), "content/apps/apps.json");
 export type AppContent = Omit<AppManifestEntry, "logo" | "screenshots"> & {
   logo: string | StaticImageData;
   screenshots: (string | StaticImageData)[];
-} & Pick<AppDetailBlock, "reviews" | "faqs" | "statLabels" | "reviewSummary">;
+} & Pick<AppDetailBlock, "reviews" | "faqs" | "statLabels" | "reviewSummary" | "reviewScreenshots">;
 
 function withAssets(app: AppManifestEntry): AppContent {
   const d = getAppDetailBlock(app.id);
@@ -22,6 +22,7 @@ function withAssets(app: AppManifestEntry): AppContent {
     faqs: d.faqs,
     statLabels: d.statLabels,
     reviewSummary: d.reviewSummary,
+    reviewScreenshots: d.reviewScreenshots,
   };
 }
 

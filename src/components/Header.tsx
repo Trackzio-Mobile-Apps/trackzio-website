@@ -1,19 +1,19 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { useSitePathname, useSiteNavigate } from "@/contexts/SiteRouterContext";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import { motion, AnimatePresence } from "framer-motion";
-import trackzioLogo from "@/assets/trackzio-logo.jpg";
 import { getClientApps } from "@/lib/content/apps-client";
-import { imageSrc } from "@/lib/imageSrc";
+import SiteImage from "@/components/SiteImage";
 
 function buildMegaMenuApps() {
   return getClientApps().map((app) => ({
       id: app.id,
       name: app.name,
       tagline: app.tagline,
-      logo: imageSrc(app.logo),
+      logo: app.logo,
       hasPage: true,
     }));
 }
@@ -75,7 +75,16 @@ export default function Header() {
       <div className="container-site flex h-16 items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2" aria-label="Trackzio Home">
-          <img src={imageSrc(trackzioLogo)} alt="Trackzio" className="h-8 rounded" />
+          <Image
+            src="/trackzio-logo.svg"
+            alt="Trackzio"
+            width={733}
+            height={255}
+            priority
+            unoptimized
+            className="h-8 w-auto rounded"
+            style={{ width: "auto", height: "2rem" }}
+          />
         </Link>
 
         {/* Desktop nav */}
@@ -178,7 +187,7 @@ export default function Header() {
                     }}
                     className="flex items-center gap-3 p-3 rounded-xl border border-transparent transition-all duration-150 hover:bg-muted/50 hover:border-border/40 active:scale-[0.98]"
                   >
-                    <img src={app.logo} alt={app.name} className="w-10 h-10 rounded-xl shrink-0" />
+                    <SiteImage src={app.logo} alt="" sizes="40px" className="w-10 h-10 rounded-xl shrink-0 object-cover" />
                     <div className="min-w-0">
                       <div className="text-sm font-semibold text-foreground leading-tight">{app.name}</div>
                       <p className="text-xs text-muted-foreground leading-snug mt-0.5 line-clamp-1">{app.tagline}</p>
@@ -238,7 +247,7 @@ export default function Header() {
                                 }}
                                 className="flex items-center gap-2 p-2 rounded-lg transition-colors hover:bg-muted/50"
                               >
-                                <img src={app.logo} alt={app.name} className="w-8 h-8 rounded-lg shrink-0" />
+                                <SiteImage src={app.logo} alt="" sizes="32px" className="w-8 h-8 rounded-lg shrink-0 object-cover" />
                                 <span className="text-sm font-medium text-foreground">{app.name}</span>
                               </Link>
                             ))}

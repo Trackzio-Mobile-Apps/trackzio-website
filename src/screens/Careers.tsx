@@ -5,7 +5,7 @@ import { trackEvent } from '@/lib/analytics';
 import { ArrowRight, MapPin, Users, Zap, Globe, Palette, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
 import founderPhoto from "@/assets/founder-ayushya.jpg";
-import { imageSrc } from "@/lib/imageSrc";
+import SiteImage from "@/components/SiteImage";
 import { getPublishedJobs } from "@/lib/content/jobs";
 import cultureTeamCollab from '@/assets/culture/team-collab.jpg';
 import cultureInnovation from '@/assets/culture/innovation.jpg';
@@ -109,16 +109,14 @@ export default function Careers() {
               className="relative rounded-3xl overflow-hidden aspect-[4/3]"
               style={{ boxShadow: 'var(--shadow-card)' }}
             >
-              {cultureImages.map((img, i) => (
-                <img
-                  key={i}
-                  src={imageSrc(img.src)}
-                  alt={img.alt}
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-                    i === currentSlide ? 'opacity-100' : 'opacity-0'
-                  }`}
-                />
-              ))}
+              <SiteImage
+                key={currentSlide}
+                src={cultureImages[currentSlide].src}
+                alt={cultureImages[currentSlide].alt}
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
 
               <button
                 onClick={prevSlide}
@@ -218,11 +216,13 @@ export default function Careers() {
             style={{ boxShadow: 'var(--shadow-card)' }}
           >
             <div className="shrink-0">
-              <div className="w-40 h-40 sm:w-52 sm:h-52 rounded-3xl overflow-hidden ring-4 ring-primary/10">
-                <img
-                  src={imageSrc(founderPhoto)}
+              <div className="relative w-40 h-40 sm:w-52 sm:h-52 rounded-3xl overflow-hidden ring-4 ring-primary/10">
+                <SiteImage
+                  src={founderPhoto}
                   alt="Ayushya, Founder of Trackzio"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="208px"
+                  className="object-cover"
                 />
               </div>
               <div className="text-center mt-4">

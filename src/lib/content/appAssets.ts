@@ -7,14 +7,14 @@ import rockzyLogo from "@/assets/rockzy-logo-new.png";
 import plantzyLogo from "@/assets/plantzy-logo.png";
 import antiqzyLogo from "@/assets/antiqzy-logo.png";
 import shroomzyLogo from "@/assets/shroomzy-logo.png";
-import coinzy1 from "@/assets/screenshots/coinzy-1.png";
-import coinzy2 from "@/assets/screenshots/coinzy-2.png";
-import coinzy3 from "@/assets/screenshots/coinzy-3.png";
-import coinzy4 from "@/assets/screenshots/coinzy-4.png";
-import coinzy5 from "@/assets/screenshots/coinzy-5.png";
-import coinzy6 from "@/assets/screenshots/coinzy-6.png";
-import coinzy7 from "@/assets/screenshots/coinzy-7.png";
-import coinzy8 from "@/assets/screenshots/coinzy-8.png";
+import coinzy1 from "@/assets/screenshots/coinzy-1.webp";
+import coinzy2 from "@/assets/screenshots/coinzy-2.webp";
+import coinzy3 from "@/assets/screenshots/coinzy-3.webp";
+import coinzy4 from "@/assets/screenshots/coinzy-4.webp";
+import coinzy5 from "@/assets/screenshots/coinzy-5.webp";
+import coinzy6 from "@/assets/screenshots/coinzy-6.webp";
+import coinzy7 from "@/assets/screenshots/coinzy-7.webp";
+import coinzy8 from "@/assets/screenshots/coinzy-8.webp";
 import banknotes1 from "@/assets/screenshots/banknotes-1.png";
 import banknotes2 from "@/assets/screenshots/banknotes-2.png";
 import banknotes3 from "@/assets/screenshots/banknotes-3.png";
@@ -83,14 +83,14 @@ export const appLogoMap: Record<string, StaticImageData> = {
 };
 
 export const appScreenshotMap: Record<string, StaticImageData> = {
-  "coinzy-1.png": coinzy1,
-  "coinzy-2.png": coinzy2,
-  "coinzy-3.png": coinzy3,
-  "coinzy-4.png": coinzy4,
-  "coinzy-5.png": coinzy5,
-  "coinzy-6.png": coinzy6,
-  "coinzy-7.png": coinzy7,
-  "coinzy-8.png": coinzy8,
+  "coinzy-1.webp": coinzy1,
+  "coinzy-2.webp": coinzy2,
+  "coinzy-3.webp": coinzy3,
+  "coinzy-4.webp": coinzy4,
+  "coinzy-5.webp": coinzy5,
+  "coinzy-6.webp": coinzy6,
+  "coinzy-7.webp": coinzy7,
+  "coinzy-8.webp": coinzy8,
   "banknotes-1.png": banknotes1,
   "banknotes-2.png": banknotes2,
   "banknotes-3.png": banknotes3,

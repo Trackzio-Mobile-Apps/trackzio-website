@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { remark } from "remark";
 import remarkHtml from "remark-html";
 import { blogFrontmatterSchema, formatZodError, type BlogFrontmatter } from "./schemas";
+import { PUBLIC_ROBOTS } from "@/lib/seo";
 
 const blogsDir = path.join(process.cwd(), "content/blogs");
 
@@ -74,6 +75,7 @@ export function getBlogMetadata(slug: string): Metadata {
   return {
     title: post.title,
     description,
+    robots: PUBLIC_ROBOTS,
     alternates: { canonical: path },
     openGraph: {
       title: post.title,
@@ -81,7 +83,7 @@ export function getBlogMetadata(slug: string): Metadata {
       type: "article",
       publishedTime: post.date,
       url: path,
-      images: [{ url: post.image }],
+      images: [{ url: post.image, alt: post.title }],
     },
     twitter: {
       card: "summary_large_image",

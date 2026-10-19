@@ -48,12 +48,18 @@ export const appManifestEntrySchema = z.object({
   logo: z.string().min(1),
   iosUrl: z.string().url().nullable(),
   androidUrl: z.string().url().nullable(),
+  seoTitle: z.string().min(1).optional(),
+  seoDescription: z.string().min(1).optional(),
+  ogImage: z.string().min(1).optional(),
+  heroTitle: z.string().min(1).optional(),
+  heroDescription: z.string().min(1).optional(),
   stats: z.object({
     downloads: z.string().min(1).optional(),
     rating: z.string().min(1).optional(),
     dau: z.string().min(1).optional(),
   }),
   features: z.array(z.string().min(1)).min(1),
+  featureCaptions: z.array(z.string().min(1)).optional(),
   screenshots: z.array(z.string().min(1)).min(1),
 });
 
@@ -65,6 +71,20 @@ export const appDetailReviewSchema = z.object({
   quote: z.string().min(1),
   author: z.string().min(1),
   rating: z.number().min(1).max(5).optional(),
+  title: z.string().min(1).optional(),
+  date: z.string().min(1).optional(),
+  store: z.enum(["App Store", "Google Play"]).optional(),
+  href: z.string().url().optional(),
+  footnote: z.string().min(1).optional(),
+});
+
+export const appReviewScreenshotSchema = z.object({
+  image: z.string().min(1),
+  alt: z.string().min(1),
+  href: z.string().url(),
+  label: z.string().min(1),
+  width: z.number().int().positive(),
+  height: z.number().int().positive(),
 });
 
 export const appDetailFaqSchema = z.object({
@@ -88,6 +108,7 @@ export const appDetailBlockSchema = z.object({
       line: z.string().min(1),
     })
     .optional(),
+  reviewScreenshots: z.array(appReviewScreenshotSchema).optional(),
 });
 
 export const appDetailsBundleSchema = z.record(z.string(), appDetailBlockSchema);

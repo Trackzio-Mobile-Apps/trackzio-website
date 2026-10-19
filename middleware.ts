@@ -17,6 +17,7 @@ const AUTO_APP_ALIASES: Record<string, string> = Object.fromEntries(
 
 /** Backward-compatible legacy aliases that do not match app ids exactly. */
 const LEGACY_OVERRIDES: Record<string, string> = {
+  "/coinzy:-terms": "/coinzy-terms",
   "/banknoteprivacy": "/privacy-policy-banknote",
   "/banknoteterms": "/banknote-terms",
   "/delete-account:any-app": "/account-deletion",

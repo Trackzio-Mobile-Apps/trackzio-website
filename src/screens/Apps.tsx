@@ -3,7 +3,7 @@ import Link from "next/link";
 import { motion } from 'framer-motion';
 import { getClientApps } from "@/lib/content/apps-client";
 import { trackEvent } from "@/lib/analytics";
-import { imageSrc } from "@/lib/imageSrc";
+import SiteImage from "@/components/SiteImage";
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 
@@ -70,10 +70,11 @@ export default function Apps() {
                     style={{ boxShadow: 'var(--shadow-card)' }}
                   >
                     <div className="flex items-start gap-5 mb-5">
-                      <img
-                        src={imageSrc(app.logo)}
-                        alt={app.name}
-                        className="w-16 h-16 rounded-2xl shrink-0"
+                      <SiteImage
+                        src={app.logo}
+                        alt=""
+                        sizes="64px"
+                        className="w-16 h-16 rounded-2xl shrink-0 object-cover"
                         style={{ boxShadow: `0 4px 16px -4px hsl(${app.accentHsl} / 0.25)` }}
                       />
                       <div className="min-w-0">

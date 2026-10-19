@@ -35,7 +35,7 @@ const fadeUp = {
 };
 
 const metrics = [
-  { value: '400K+', label: 'Total Downloads' },
+  { value: '400K+', label: 'Downloads across all Trackzio apps' },
   { value: '4.3+', label: 'Average Rating' },
   { value: '50K+', label: 'Active Users' },
 ];

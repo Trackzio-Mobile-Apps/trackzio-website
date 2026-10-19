@@ -6,10 +6,16 @@ import fs from "fs";
 import path from "path";
 import { appReviewsById, appFaqsById } from "../src/lib/content/appDetailContent";
 
+const dest = path.join(process.cwd(), "content/apps/app-details.json");
+const existing = fs.existsSync(dest)
+  ? (JSON.parse(fs.readFileSync(dest, "utf8")) as Record<string, Record<string, unknown>>)
+  : {};
+
 const ids = new Set([...Object.keys(appReviewsById), ...Object.keys(appFaqsById)]);
-const out: Record<string, { reviews: unknown[]; faqs: unknown[] }> = {};
+const out: Record<string, Record<string, unknown>> = {};
 for (const id of ids) {
   out[id] = {
+    ...(existing[id] ?? {}),
     reviews: appReviewsById[id] ?? [],
     faqs: appFaqsById[id] ?? [],
   };
@@ -30,6 +36,5 @@ out["test-app-preview"] = {
   ],
 };
 
-const dest = path.join(process.cwd(), "content/apps/app-details.json");
 fs.writeFileSync(dest, JSON.stringify(out, null, 2));
 console.log("Wrote", dest, `(${Object.keys(out).length} apps)`);

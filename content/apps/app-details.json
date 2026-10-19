@@ -186,26 +186,63 @@
   "coinzy": {
     "reviews": [
       {
-        "quote": "As an avid collector of US coins and currency for over 20 years, I can say I love the concept of the app and the fact that there's an included community within the app that allows us to interact amongst each other.",
-        "author": "Jaylin"
+        "title": "Actually works really well",
+        "date": "Oct 1",
+        "author": "jennell_tackettq",
+        "rating": 4,
+        "store": "App Store",
+        "href": "https://apps.apple.com/us/app/coinzy-coin-ai-identification/id6752857760?see-all=reviews",
+        "quote": "Thought it might be a scam but it actually identified my silver dollar correctly on the first try. The lighting was kind of bad in my room but the AI still managed to get it right."
       },
       {
-        "quote": "Good coin scanner.",
-        "author": "Naing"
+        "title": "Actually works well",
+        "date": "Oct 2",
+        "author": "virgen annmarie",
+        "rating": 5,
+        "store": "App Store",
+        "href": "https://apps.apple.com/us/app/coinzy-coin-ai-identification/id6752857760?see-all=reviews",
+        "quote": "Was skeptic at first but the identification is actually decent. Had this one coin I couldnt figure out for ages, took a pic and it gave me the info. Plus connecting with real human experts makes me feel safer about the prices I see. Some small bugs here and there but nothing major."
       },
       {
-        "quote": "It's very good and helps a lot.",
-        "author": "Colete"
+        "title": "Solid identification tool",
+        "date": "Oct 2",
+        "author": "AgnesGloryx",
+        "rating": 4,
+        "store": "App Store",
+        "href": "https://apps.apple.com/us/app/coinzy-coin-ai-identification/id6752857760?see-all=reviews",
+        "quote": "tried a few of these but this one feels more legit because of the real human experts. I had a rare penny and needed a second opinion, they helped a ton. the marketplace has some good deals. highly recommend for anyone starting out."
       },
       {
-        "quote": "This is a great app for coin collectors. It's helpful in cataloging the collection virtually. Also, it provides visibility on the coins that have not been collected by me yet.",
-        "author": "Ankit"
+        "date": "August 1, 2026",
+        "author": "Michael Tshabalala",
+        "rating": 5,
+        "store": "Google Play",
+        "href": "https://play.google.com/store/apps/details?id=com.coinzy.trackzio",
+        "footnote": "9 people found this review helpful",
+        "quote": "Yes we need such services to evaluate our coins,and know how is it worth or its condition so on and on. It's desirable to have it in my phone. 👍 Can it identify Stones ??? 😂"
       },
       {
-        "quote": "Accurate and awesome tool utility.",
-        "author": "Pierre"
+        "date": "June 5, 2026",
+        "author": "Cherukuri Rohith Vinay",
+        "rating": 5,
+        "store": "Google Play",
+        "href": "https://play.google.com/store/apps/details?id=com.coinzy.trackzio",
+        "quote": "Love this app! The AI scanner is quick and accurate, but the best part is the built-in community feature where you can actually interact with other coin collectors. Great UI."
+      },
+      {
+        "date": "September 22, 2025",
+        "author": "Jaylin Adams",
+        "rating": 5,
+        "store": "Google Play",
+        "href": "https://play.google.com/store/apps/details?id=com.coinzy.trackzio",
+        "quote": "As an avid collector of US coins and currency for over 20 years, I can say I love the concept of the app and the fact that there's an included community within the app that allows us to interact amongst each other, which leads me to addressing the comment from Robert, if you happen to see this my profile name in the app is OldLine Coins, feel free to reach out to me anytime and I'd be more than happy to help you with any questions you have and regarding the collecting hobby. hope I hear from u"
       }
     ],
+    "statLabels": {
+      "downloads": "Downloads",
+      "rating": "Coins in our database",
+      "dau": "Coins scanned every day"
+    },
     "faqs": [
       {
         "q": "How do I identify a coin?",

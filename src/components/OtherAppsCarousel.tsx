@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { getClientApps } from "@/lib/content/apps-client";
 import { trackEvent } from "@/lib/analytics";
-import { imageSrc } from "@/lib/imageSrc";
+import SiteImage from "@/components/SiteImage";
 
 const apps = getClientApps();
 
@@ -172,12 +172,18 @@ export default function OtherAppsCarousel({ excludeAppId, accentHsl }: OtherApps
                   style={{ boxShadow: 'var(--shadow-card)' }}
                 >
                   <div className="flex items-start gap-4 mb-4">
-                    <img
-                      src={imageSrc(app.logo)}
-                      alt={`${app.name} logo`}
-                      className="w-14 h-14 rounded-xl shrink-0"
+                    <span
+                      className="inline-flex shrink-0 rounded-xl"
                       style={{ boxShadow: `0 4px 16px -4px hsl(${app.accentHsl} / 0.25)` }}
-                    />
+                    >
+                      <SiteImage
+                        src={app.logo}
+                        alt={`${app.name} logo`}
+                        className="rounded-xl object-cover"
+                        sizes="56px"
+                        style={{ width: "3.5rem", height: "3.5rem" }}
+                      />
+                    </span>
                     <div className="min-w-0 text-left">
                       <h3 className="font-display font-bold text-lg text-foreground">{app.name}</h3>
                       <p className="text-sm text-muted-foreground leading-snug mt-0.5">{app.tagline}</p>

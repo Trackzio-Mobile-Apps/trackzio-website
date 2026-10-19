@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60 * 60 * 24 * 30,
+  },
 
   /**
    * Store / Play Console URLs — user-facing paths stay exactly these (no redirect away).
@@ -20,7 +26,7 @@ const nextConfig = {
         { source: "/privacy-policy-test-app-legal", destination: "/test-app-legal/privacy-policy" },
         { source: "/privacy-policy-test-app-legal-2", destination: "/test-app-legal-2/privacy-policy" },
         { source: "/banknote-terms", destination: "/banknote-ai/terms" },
-        { source: "/coinzy%3A-terms", destination: "/coinzy/terms" },
+        { source: "/coinzy-terms", destination: "/coinzy/terms" },
         { source: "/habit-eazy%3A-terms", destination: "/habit-eazy/terms" },
         { source: "/terms-for-insecto-ai", destination: "/insecto-ai/terms" },
         { source: "/rockzy-terms-of-service", destination: "/rockzy/terms" },
@@ -45,7 +51,8 @@ const nextConfig = {
       { source: "/banknote-ai/privacy-policy", destination: "/privacy-policy-banknote", permanent: true },
       { source: "/banknote-ai/terms", destination: "/banknote-terms", permanent: true },
       { source: "/coinzy/privacy-policy", destination: "/privacy-policy-coinzy", permanent: true },
-      { source: "/coinzy/terms", destination: "/coinzy%3A-terms", permanent: true },
+      { source: "/coinzy/terms", destination: "/coinzy-terms", permanent: true },
+      { source: "/coinzy%3A-terms", destination: "/coinzy-terms", permanent: true },
       { source: "/habit-eazy/privacy-policy", destination: "/privacy-policy-habit-eazy-1", permanent: true },
       { source: "/habit-eazy/terms", destination: "/habit-eazy%3A-terms", permanent: true },
       { source: "/insecto-ai/privacy-policy", destination: "/privacy-policy-insecto-ai-1", permanent: true },
@@ -64,7 +71,7 @@ const nextConfig = {
       { source: "/test-app-legal-2/terms", destination: "/test-app-legal-2-terms", permanent: true },
 
       // Legacy typo paths → store URLs
-      { source: "/coinzyterms", destination: "/coinzy%3A-terms", permanent: true },
+      { source: "/coinzyterms", destination: "/coinzy-terms", permanent: true },
       { source: "/coinzyprivacy", destination: "/privacy-policy-coinzy", permanent: true },
       { source: "/banknoteterms", destination: "/banknote-terms", permanent: true },
       { source: "/banknoteprivacy", destination: "/privacy-policy-banknote", permanent: true },
