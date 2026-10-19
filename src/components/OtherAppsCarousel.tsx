@@ -108,15 +108,12 @@ export default function OtherAppsCarousel({ excludeAppId, accentHsl }: OtherApps
     <section className="py-20 sm:py-24 snap-start border-t border-border/50">
       <div className="container-site w-full">
         <motion.div {...fadeUp} className="text-center mb-10 sm:mb-12">
-          <p
-            className="text-sm font-medium tracking-[0.2em] uppercase mb-3"
-            style={{ color: `hsl(${accentHsl})` }}
-          >
+          <p className="type-kicker" style={{ color: `hsl(${accentHsl})` }}>
             More from Trackzio
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold font-display text-foreground">Explore our other apps</h2>
+          <h2 className="type-title text-foreground">Explore our other apps</h2>
           {showNav && (
-            <p className="text-sm text-muted-foreground mt-3 max-w-md mx-auto leading-snug">
+            <p className="type-body mt-3 max-w-md mx-auto">
               Swipe or use arrows to browse
             </p>
           )}
@@ -168,12 +165,11 @@ export default function OtherAppsCarousel({ excludeAppId, accentHsl }: OtherApps
                       app_name: app.name,
                     })
                   }
-                  className="group flex flex-col h-full rounded-2xl bg-card border border-border/40 p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-border"
-                  style={{ boxShadow: 'var(--shadow-card)' }}
+                  className="card-hover group flex flex-col h-full rounded-2xl bg-card border border-border/40 p-6 sm:p-7"
                 >
                   <div className="flex items-start gap-4 mb-4">
                     <span
-                      className="inline-flex shrink-0 rounded-xl"
+                      className="card-hover-icon inline-flex shrink-0 rounded-xl"
                       style={{ boxShadow: `0 4px 16px -4px hsl(${app.accentHsl} / 0.25)` }}
                     >
                       <SiteImage
@@ -185,7 +181,7 @@ export default function OtherAppsCarousel({ excludeAppId, accentHsl }: OtherApps
                       />
                     </span>
                     <div className="min-w-0 text-left">
-                      <h3 className="font-display font-bold text-lg text-foreground">{app.name}</h3>
+                      <h3 className="card-hover-title font-display font-bold text-lg text-foreground">{app.name}</h3>
                       <p className="text-sm text-muted-foreground leading-snug mt-0.5">{app.tagline}</p>
                     </div>
                   </div>

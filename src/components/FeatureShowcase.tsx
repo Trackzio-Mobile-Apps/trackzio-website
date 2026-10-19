@@ -157,20 +157,14 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
     >
       <div className="flex flex-col items-center justify-between h-full w-full" style={{ maxWidth: '1200px', width: 'clamp(300px, 92%, 1200px)', maxHeight: '100%' }}>
         <div className="text-center shrink-0 mb-3 px-2">
-          <p
-            className="font-medium tracking-[0.2em] uppercase mb-1"
-            style={{ color: `hsl(${accentHsl})`, fontSize: 'clamp(0.65rem, 1vw, 0.8rem)' }}
-          >
+          <p className="type-kicker" style={{ color: `hsl(${accentHsl})` }}>
             App Showcase
           </p>
-          <h2
-            className="font-bold font-display text-foreground"
-            style={{ fontSize: 'clamp(1.25rem, 3vw, 2rem)' }}
-          >
+          <h2 className="type-title text-foreground">
             See it in action
           </h2>
           {showNav && (
-            <p className="text-[0.65rem] sm:text-xs text-muted-foreground mt-2 max-w-xs mx-auto leading-snug">
+            <p className="type-body mt-2 max-w-md mx-auto">
               Swipe or use arrows to explore
             </p>
           )}
@@ -214,8 +208,7 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
                 className="flex shrink-0 flex-col h-full min-h-0 py-1 snap-start w-full min-w-0 flex-[0_0_100%] max-lg:max-w-full lg:w-auto lg:flex-[0_0_calc((100%-2.5rem)/3)]"
               >
                 <div
-                  className="flex flex-col rounded-2xl overflow-hidden bg-card border border-border/30 min-h-0 flex-1 h-full"
-                  style={{ boxShadow: '0 4px 20px -4px rgba(0,0,0,0.06)' }}
+                  className="card-hover flex flex-col rounded-2xl overflow-hidden bg-card border border-border/30 min-h-0 flex-1 h-full"
                 >
                   <div
                     className="flex-1 min-h-0 flex items-center justify-center p-2"
@@ -232,9 +225,9 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
                     />
                   </div>
                   <div className="px-3 py-2 text-center shrink-0">
-                    <h3 className="font-bold text-base text-foreground">{feature.title}</h3>
+                    <h3 className="type-card-title card-hover-title">{feature.title}</h3>
                     {feature.description ? (
-                      <p className="mt-1 text-xs sm:text-sm text-muted-foreground leading-snug line-clamp-4">
+                      <p className="type-body mt-1 line-clamp-4">
                         {feature.description}
                       </p>
                     ) : null}

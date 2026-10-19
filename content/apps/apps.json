@@ -25,32 +25,32 @@
     "features": [
       "AI Identifier",
       "Know Your Coin",
+      "Connect with Experts",
       "Discover Value",
       "Global Catalogue",
       "Private Collections",
       "Marketplace",
-      "Community",
-      "Connect with Experts"
+      "Community"
     ],
     "featureCaptions": [
       "Take a photo and get the coin's name, country, year, and denomination.",
       "Read the history behind each coin and the era it comes from.",
+      "Ask an experienced numismatist to review your coin and get a report within 72 hours.",
       "See estimated value ranges by condition, from worn to uncirculated.",
       "Browse more than 380,000 coins from around the world.",
       "Track what you own, what you've identified and what you want.",
       "List coins for free and contact sellers directly by phone or email.",
-      "Share finds and see what other collectors are posting.",
-      "Ask an experienced numismatist to review your coin and get a report within 72 hours."
+      "Share finds and see what other collectors are posting."
     ],
     "screenshots": [
       "coinzy-1.webp",
       "coinzy-2.webp",
+      "coinzy-3.webp",
       "coinzy-4.webp",
       "coinzy-5.webp",
       "coinzy-6.webp",
       "coinzy-7.webp",
-      "coinzy-8.webp",
-      "coinzy-3.webp"
+      "coinzy-8.webp"
     ]
   },
   {

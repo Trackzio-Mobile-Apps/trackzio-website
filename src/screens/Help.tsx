@@ -290,8 +290,7 @@ export default function Help() {
                 <motion.div key={i} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: Math.min(i * 0.04, 0.3) }}>
                   <AccordionItem
                     value={`faq-${i}`}
-                    className="rounded-xl sm:rounded-2xl bg-card px-4 sm:px-6"
-                    style={{ boxShadow: 'var(--shadow-card)' }}
+                    className="card-hover rounded-xl sm:rounded-2xl bg-card px-4 sm:px-6"
                   >
                     <AccordionTrigger className="text-foreground font-medium text-left text-sm py-4 sm:py-4 [&>svg]:shrink-0">
                       {faq.q}
