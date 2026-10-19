@@ -6,6 +6,7 @@ import { trackEvent } from '@/lib/analytics';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import FloatingAppShowcase from '@/components/FloatingAppShowcase';
+import { getClientApps } from '@/lib/content/apps-client';
 
 function getScrollStep(el: HTMLElement): number {
   const first = el.firstElementChild as HTMLElement | null;
@@ -40,24 +41,21 @@ const metrics = [
   { value: '50K+', label: 'Active Users' },
 ];
 
-const testimonials = [
-  { quote: "This app makes building good habits fun and rewarding. It gamifies daily chores, turning routine tasks into small achievements that keep me motivated.", author: "Kunal" },
-  { quote: "I've used a lot of habit trackers and games, and I really like this one. It's easy to add tasks and habits and configure them to meet my needs. It doesn't have a ton of ads, and right now the premium is only about $2/month so it's affordable. This app makes it much easier to organize my life despite the chaos and lack of time.", author: "Amanda" },
-  { quote: "I love this app. Much easier to use than other apps like it. The UI is simple, making it easier to do what you want. The widget is perfect. I can't find anything wrong with it. Looking forward to future updates. Try this app. You won't be sorry.", author: "Koni" },
-  { quote: "Guys this is super cute and fantastic!", author: "Myat" },
-  { quote: "I make money in various currencies and this app is very very helpful in identifying the money that I have made in the different currencies. Good community.", author: "Kirti" },
-  { quote: "Best banknote identifier with good accuracy. A must for casual users and collectors.", author: "Chitvan" },
-  { quote: "Nice application for identification.", author: "Jaya" },
-  { quote: "As an avid collector of US coins and currency for over 20 years, I can say I love the concept of the app and the fact that there's an included community within the app that allows us to interact amongst each other.", author: "Jaylin" },
-  { quote: "Good coin scanner.", author: "Naing" },
-  { quote: "It's very good and helps a lot.", author: "Colete" },
-  { quote: "This is a great app for coin collectors. It's helpful in cataloging the collection virtually. Also, it provides visibility on the coins that have not been collected by me yet.", author: "Ankit" },
-  { quote: "Accurate and awesome tool utility.", author: "Pierre" },
-  { quote: "The app has a great UI with quick turnaround time to satisfy my curiosity.", author: "Aanish" },
-  { quote: "Decent repertoire of insects available for identifying them.", author: "Pintu" },
-  { quote: "Amazing app with such a vast library of readily available insects.", author: "Pallav" },
-  { quote: "Best app to identify insects!!!", author: "Jay" },
-];
+const reviewAppIds = ["coinzy", "banknotes", "habiteazy", "insecto"];
+
+const reviewApps = reviewAppIds
+  .map((id) => getClientApps().find((app) => app.id === id))
+  .filter((app): app is NonNullable<typeof app> => Boolean(app && app.reviews.length > 0));
+
+const allReviews = reviewApps.flatMap((app) =>
+  app.reviews.map((review) => ({
+    quote: review.quote,
+    author: review.author,
+    appId: app.id,
+    appName: app.name,
+    accentHsl: app.accentHsl,
+  })),
+);
 
 export default function Home() {
   usePageAnalytics('home', 'page_view_home');
@@ -68,6 +66,10 @@ export default function Home() {
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedAppId, setSelectedAppId] = useState("all");
+  const testimonials = selectedAppId === "all"
+    ? allReviews
+    : allReviews.filter((review) => review.appId === selectedAppId);
 
   // Handle hash scroll (e.g. /#apps from redirects)
   useEffect(() => {
@@ -99,7 +101,7 @@ export default function Home() {
     setCanScrollLeft(el.scrollLeft > 10);
     setCanScrollRight(el.scrollLeft < maxScroll - 10);
     setActiveIndex(getActiveSlideIndex(el, testimonials.length));
-  }, []);
+  }, [testimonials.length]);
 
   const onScroll = useCallback(() => {
     requestAnimationFrame(updateFromScroll);
@@ -108,6 +110,7 @@ export default function Home() {
   useEffect(() => {
     const el = carouselRef.current;
     if (!el) return;
+    el.scrollTo({ left: 0 });
     updateFromScroll();
     el.addEventListener('scroll', onScroll, { passive: true });
 
@@ -144,7 +147,7 @@ export default function Home() {
       window.removeEventListener('resize', onResize);
       if (autoScrollRef.current) clearInterval(autoScrollRef.current);
     };
-  }, [onScroll, updateFromScroll]);
+  }, [onScroll, updateFromScroll, selectedAppId]);
 
   const scrollCarousel = (dir: 'left' | 'right') => {
     const el = carouselRef.current;
@@ -231,8 +234,8 @@ export default function Home() {
       <section className="min-h-0 sm:min-h-screen flex items-center py-16 sm:py-24 lg:py-32 snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-10 sm:mb-14 md:mb-16 max-w-2xl mx-auto px-1">
-            <p className="text-xs sm:text-sm font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase text-primary mb-3 sm:mb-4">By the Numbers</p>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-balance leading-tight">
+            <p className="type-kicker">By the Numbers</p>
+            <h2 className="type-title">
             Trusted by a global userbase
             </h2>
           </motion.div>
@@ -263,10 +266,43 @@ export default function Home() {
       <section className="min-h-0 sm:min-h-screen flex items-center py-16 sm:py-24 lg:py-32 snap-start bg-section-tinted">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-10 sm:mb-14 md:mb-16 max-w-2xl mx-auto px-1">
-            <p className="text-xs sm:text-sm font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase text-primary mb-3 sm:mb-4">What People Say</p>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-balance leading-tight">
-              Loved by our users
+            <p className="type-kicker">What People Say</p>
+            <h2 className="type-title">
+              Our App Reviews
             </h2>
+            <div className="mt-6 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Filter reviews by app">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={selectedAppId === "all"}
+                onClick={() => setSelectedAppId("all")}
+                className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors ${
+                  selectedAppId === "all"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-card text-muted-foreground hover:text-foreground border border-border"
+                }`}
+              >
+                All
+              </button>
+              {reviewApps.map((app) => {
+                const selected = selectedAppId === app.id;
+                return (
+                  <button
+                    key={app.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={selected}
+                    onClick={() => setSelectedAppId(app.id)}
+                    className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors border ${
+                      selected ? "text-white border-transparent" : "bg-card text-muted-foreground hover:text-foreground border-border"
+                    }`}
+                    style={selected ? { backgroundColor: `hsl(${app.accentHsl})` } : undefined}
+                  >
+                    {app.name}
+                  </button>
+                );
+              })}
+            </div>
           </motion.div>
 
           <div className="relative px-1 sm:px-0 max-w-7xl mx-auto min-w-0">
@@ -296,14 +332,14 @@ export default function Home() {
             <div
               ref={carouselRef}
               role="region"
-              aria-label="User testimonials carousel"
+              aria-label="App reviews carousel"
               aria-roledescription="carousel"
               className="flex gap-4 sm:gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth pb-2 px-8 sm:px-10 lg:px-12"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {testimonials.map((t, i) => (
                 <motion.div
-                  key={i}
+                  key={`${t.appId}-${t.author}-${i}`}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -311,8 +347,11 @@ export default function Home() {
                   className="flex shrink-0 flex-col min-h-0 snap-start w-full min-w-0 flex-[0_0_100%] lg:w-auto lg:flex-[0_0_calc((100%-3.75rem)/4)]"
                 >
                   <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-card h-full flex flex-col min-h-[11rem] sm:min-h-0 border border-border/30" style={{ boxShadow: 'var(--shadow-card)' }}>
+                    <p className="type-kicker" style={{ color: `hsl(${t.accentHsl})` }}>
+                      {t.appName}
+                    </p>
                     <Quote size={22} className="text-primary/25 mb-3" />
-                    <p className="text-sm leading-relaxed text-foreground flex-1 font-medium">"{t.quote}"</p>
+                    <p className="type-copy flex-1 font-medium">"{t.quote}"</p>
                     <div className="mt-3 flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center font-display font-bold text-primary text-sm">
                         {t.author.charAt(0)}
@@ -344,7 +383,7 @@ export default function Home() {
                       type="button"
                       role="tab"
                       aria-selected={activeIndex === i}
-                      aria-label={`Go to testimonial from ${t.author}`}
+                      aria-label={`Go to ${t.appName} review from ${t.author}`}
                       onClick={() => goToSlide(i)}
                       className="h-2.5 w-2.5 rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                       style={{
@@ -363,10 +402,10 @@ export default function Home() {
       <section className="py-12 sm:py-16 border-t border-border/60 snap-start" aria-labelledby="home-disclaimer-heading">
         <div className="container-site max-w-3xl mx-auto px-3 sm:px-0">
           <motion.div {...fadeUp}>
-            <h2 id="home-disclaimer-heading" className="text-xl sm:text-2xl font-bold font-display mb-4 text-primary">
+            <h2 id="home-disclaimer-heading" className="type-disclaimer-title text-primary">
               Disclaimer
             </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="type-body">
               This platform is a hobbyist identification and discovery tool and does not provide financial services, payment
               processing, or trading for cryptocurrencies or any digital assets. All listings for physical collectibles are for
               showcase purposes only, with any subsequent connections or transactions occurring entirely off-platform between

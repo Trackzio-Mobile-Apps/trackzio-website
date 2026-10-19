@@ -8,7 +8,7 @@ import { getPlatform } from "@/lib/platformUtils";
 import { QRCodeSVG } from 'qrcode.react';
 import SiteImage from "@/components/SiteImage";
 import coinzyExpert from "@/assets/screenshots/coinzy-3.webp";
-import { Quote, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Quote, ChevronDown, ChevronLeft, ChevronRight, Mail, Images, Bell, Store } from 'lucide-react';
 import PlatformDownloadButtons from '@/components/PlatformDownloadButtons';
 import FeatureShowcase from '@/components/FeatureShowcase';
 import OtherAppsCarousel from '@/components/OtherAppsCarousel';
@@ -200,9 +200,9 @@ export default function AppDetail({ app }: AppDetailProps) {
   return (
     <div style={{ '--app-accent': app.accentHsl } as React.CSSProperties}>
       {/* ── 1. Hero ── */}
-      <section className="min-h-[40vh] flex items-center justify-center pt-8 pb-12 snap-start">
-        <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at top, hsl(${app.accentHsl} / 0.08), transparent 60%)` }} />
-        <div className="container-site relative">
+      <section className="relative min-h-[40vh] flex items-center justify-center pt-8 pb-12 snap-start overflow-hidden">
+        <div className="pointer-events-none absolute inset-0" style={{ background: `radial-gradient(ellipse at top, hsl(${app.accentHsl} / 0.08), transparent 60%)` }} />
+        <div className="container-site relative z-10">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
             <span
               className="inline-flex rounded-2xl mb-5"
@@ -217,10 +217,10 @@ export default function AppDetail({ app }: AppDetailProps) {
                 style={{ width: "5rem", height: "5rem" }}
               />
             </span>
-            <h1 className="text-4xl sm:text-5xl font-bold font-display" style={{ color: `hsl(${app.accentHsl})` }}>
+            <h1 className="type-page-title" style={{ color: `hsl(${app.accentHsl})` }}>
               {app.heroTitle ?? app.fullName}
             </h1>
-            <p className="mt-2 text-base text-muted-foreground/90 max-w-2xl mx-auto leading-relaxed">{app.heroDescription ?? app.longDescription}</p>
+            <p className="type-lead mt-2 max-w-2xl mx-auto">{app.heroDescription ?? app.longDescription}</p>
 
             {/* Download section */}
             <div className="mt-6 flex flex-col items-center gap-4">
@@ -254,22 +254,22 @@ export default function AppDetail({ app }: AppDetailProps) {
         <section className="py-16 sm:py-20 snap-start" aria-labelledby="coinzy-expert-heading">
           <div className="container-site grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
-              <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Expert Evaluation</p>
-              <h2 id="coinzy-expert-heading" className="text-3xl sm:text-4xl font-bold font-display">
+              <p className="type-kicker">Expert Evaluation</p>
+              <h2 id="coinzy-expert-heading" className="type-title">
                 Not sure about a coin? Ask an expert.
               </h2>
-              <p className="mt-4 text-base text-muted-foreground leading-relaxed">
+              <p className="type-lead mt-4">
                 Request an evaluation from an experienced numismatist in the app.
               </p>
-              <ol className="mt-5 list-decimal space-y-1.5 pl-5 text-sm text-foreground leading-relaxed">
+              <ol className="type-copy mt-5 list-decimal space-y-2 pl-5">
                 <li>Scan your coin.</li>
                 <li>Tap Expert Evaluation.</li>
                 <li>Get a report within 72 hours.</li>
               </ol>
-              <p className="mt-5 text-sm text-muted-foreground leading-relaxed">
+              <p className="type-body mt-5">
                 Each report covers identification, condition, rarity, history, estimated value, and a recommendation.
               </p>
-              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+              <p className="type-body mt-3">
                 Paid per coin; price shown in the app. Reports are advisory opinions, not formal grading or certification.
               </p>
               <div className="mt-8">
@@ -293,12 +293,82 @@ export default function AppDetail({ app }: AppDetailProps) {
         </section>
       )}
 
+      {app.id === "coinzy" && (
+        <section id="for-businesses" className="scroll-mt-24 border-t border-border/60 py-16 snap-start sm:py-24" aria-labelledby="coinzy-business-heading">
+          <div className="container-site">
+            <div className="mx-auto max-w-2xl text-center">
+              <h2 id="coinzy-business-heading" className="type-title">
+                For coin shops and dealers
+              </h2>
+              <p className="type-lead mt-3">
+                Reach collectors beyond your local area, at no cost.
+              </p>
+            </div>
+            <div className="mt-10 grid items-stretch gap-5 md:grid-cols-3">
+              {[
+                {
+                  title: "Free listing",
+                  text: "Send us photos and prices, and we'll list your coins for free.",
+                  icon: Images,
+                },
+                {
+                  title: "Seller leads",
+                  text: "We tell you when people near you want to sell coins or collections.",
+                  icon: Bell,
+                },
+                {
+                  title: "Your sale, your way",
+                  text: "Your coins go directly in front of thousands of Coinzy users every day.",
+                  icon: Store,
+                },
+              ].map((card) => (
+                <div
+                  key={card.title}
+                  className="flex h-full flex-col items-center rounded-3xl bg-card px-6 py-8 text-center"
+                  style={{ boxShadow: "var(--shadow-card)" }}
+                >
+                  <span
+                    className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl"
+                    style={{ backgroundColor: "hsl(168 30% 90%)", color: "#064e3b" }}
+                  >
+                    <card.icon size={22} aria-hidden="true" />
+                  </span>
+                  <h3 className="type-card-title">{card.title}</h3>
+                  <p className="type-body mt-2">{card.text}</p>
+                </div>
+              ))}
+            </div>
+            <a
+              href="mailto:coinzy@trackzio.com"
+              className="relative z-10 mx-auto mt-6 flex max-w-3xl cursor-pointer flex-col gap-4 rounded-3xl bg-card p-4 no-underline sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-5"
+              style={{ boxShadow: "var(--shadow-card)" }}
+            >
+              <span className="type-copy inline-flex min-w-0 items-center gap-3 font-medium">
+                <span
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl"
+                  style={{ backgroundColor: "hsl(168 30% 90%)", color: "#064e3b" }}
+                >
+                  <Mail size={18} aria-hidden="true" />
+                </span>
+                <span className="truncate underline-offset-4 hover:underline">Coinzy@trackzio.com</span>
+              </span>
+              <span
+                className="inline-flex h-12 shrink-0 items-center justify-center rounded-xl px-6 text-sm font-semibold"
+                style={{ backgroundColor: "#064e3b", color: "#ffffff" }}
+              >
+                Email Us
+              </span>
+            </a>
+          </div>
+        </section>
+      )}
+
       {app.id === "coinzy" && reviews.length > 0 && (
         <section className="py-20 sm:py-24 snap-start" aria-labelledby="coinzy-reviews-heading">
           <div className="container-site w-full">
             <motion.div {...fadeUp} className="text-center mb-12">
-              <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Reviews</p>
-              <h2 id="coinzy-reviews-heading" className="text-3xl sm:text-4xl font-bold font-display">What users say</h2>
+              <p className="type-kicker">Reviews</p>
+              <h2 id="coinzy-reviews-heading" className="type-title">What users say</h2>
             </motion.div>
 
             <div className="relative max-w-6xl mx-auto">
@@ -334,14 +404,14 @@ export default function AppDetail({ app }: AppDetailProps) {
                   const card = (
                     <>
                       <div className="flex items-start justify-between gap-3">
-                        <p className="text-[0.7rem] font-semibold tracking-[0.14em] uppercase" style={{ color: `hsl(${app.accentHsl})` }}>
+                        <p className="type-kicker mb-0" style={{ color: `hsl(${app.accentHsl})` }}>
                           {review.store}
                         </p>
                         {review.date && (
-                          <p className="shrink-0 text-xs text-muted-foreground">{review.date}</p>
+                          <p className="type-body shrink-0">{review.date}</p>
                         )}
                       </div>
-                      <p className="mt-2 font-display font-bold text-foreground leading-snug">
+                      <p className="type-card-title mt-2">
                         {review.title ?? review.author}
                       </p>
                       <div
@@ -350,11 +420,11 @@ export default function AppDetail({ app }: AppDetailProps) {
                       >
                         {reviewStars(review.rating)}
                       </div>
-                      <p className="mt-3 text-sm leading-relaxed text-foreground flex-1">{review.quote}</p>
+                      <p className="type-copy mt-3 flex-1">{review.quote}</p>
                       {(review.title || review.footnote) && (
                         <div className="mt-4 flex items-end justify-between gap-3">
                           {review.title && (
-                            <p className="text-sm font-medium text-muted-foreground">{review.author}</p>
+                            <p className="type-body font-medium">{review.author}</p>
                           )}
                           {review.footnote && (
                             <p className="text-xs text-muted-foreground">{review.footnote}</p>
@@ -408,10 +478,10 @@ export default function AppDetail({ app }: AppDetailProps) {
       <section className="py-20 sm:py-24 snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
-            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">Reviews</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display">What users say</h2>
+            <p className="type-kicker">Reviews</p>
+            <h2 className="type-title">What users say</h2>
               {app.reviewSummary?.line && (
-                <p className="mt-3 text-sm text-muted-foreground max-w-xl mx-auto">{app.reviewSummary.line}</p>
+                <p className="type-body mt-3 max-w-xl mx-auto">{app.reviewSummary.line}</p>
               )}
           </motion.div>
 
@@ -461,7 +531,7 @@ export default function AppDetail({ app }: AppDetailProps) {
                       >
                         {reviewStars(r.rating)}
                     </div>
-                    <p className="text-sm leading-relaxed text-foreground flex-1 font-medium">"{r.quote}"</p>
+                    <p className="type-copy flex-1 font-medium">"{r.quote}"</p>
                     <div className="mt-5 flex items-center gap-3">
                       <div
                         className="w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm"
@@ -470,7 +540,7 @@ export default function AppDetail({ app }: AppDetailProps) {
                         {r.author.charAt(0)}
                       </div>
                       <div>
-                        <div className="font-semibold text-foreground text-sm">— {r.author}</div>
+                        <div className="type-copy font-semibold">— {r.author}</div>
                       </div>
                     </div>
                   </div>
@@ -486,8 +556,8 @@ export default function AppDetail({ app }: AppDetailProps) {
       <section className="min-h-[60vh] flex items-center py-20 sm:py-24 snap-start">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-16">
-            <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">By the Numbers</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display">{app.fullName} in numbers</h2>
+            <p className="type-kicker">By the Numbers</p>
+            <h2 className="type-title">{app.fullName} in numbers</h2>
           </motion.div>
 
           <div className="grid gap-8 max-w-3xl mx-auto grid-cols-1 sm:grid-cols-3">
@@ -513,8 +583,8 @@ export default function AppDetail({ app }: AppDetailProps) {
                 transition={{ delay: i * 0.1 }}
                 className="text-center"
               >
-                <div className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display text-gradient mb-2">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+                <div className="type-stat text-gradient mb-2">{stat.value}</div>
+                <div className="type-body">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -527,8 +597,8 @@ export default function AppDetail({ app }: AppDetailProps) {
           <div className="container-site w-full flex justify-center">
             <div className="w-full max-w-xl">
               <motion.div {...fadeUp} className="text-center mb-16">
-                <p className="text-sm font-medium tracking-[0.2em] uppercase text-primary mb-3">FAQ</p>
-                <h2 className="text-3xl sm:text-4xl font-bold font-display">Frequently asked questions</h2>
+                <p className="type-kicker">FAQ</p>
+                <h2 className="type-title">Frequently asked questions</h2>
               </motion.div>
 
               <Accordion type="single" collapsible className="space-y-3">
@@ -545,8 +615,8 @@ export default function AppDetail({ app }: AppDetailProps) {
                       className="rounded-2xl bg-card px-6"
                       style={{ boxShadow: 'var(--shadow-card)' }}
                     >
-                      <AccordionTrigger className="text-foreground font-medium text-left text-sm">{faq.q}</AccordionTrigger>
-                      <AccordionContent className="text-muted-foreground text-sm leading-relaxed">{faq.a}</AccordionContent>
+                      <AccordionTrigger className="type-copy text-left font-medium">{faq.q}</AccordionTrigger>
+                      <AccordionContent className="type-body">{faq.a}</AccordionContent>
                     </AccordionItem>
                   </motion.div>
                 ))}
@@ -573,12 +643,12 @@ export default function AppDetail({ app }: AppDetailProps) {
           <div className="container-site max-w-3xl mx-auto">
             <h2
               id="coinzy-platform-disclaimer-heading"
-              className="text-xl sm:text-2xl font-bold font-display mb-4"
+              className="type-disclaimer-title"
               style={{ color: `hsl(${app.accentHsl})` }}
             >
               Disclaimer
             </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="type-body">
               Coinzy lets collectors list coins and contact each other directly. Coinzy does not handle payments or take part in any sale. Buyers and sellers agree on terms and settle payment between themselves. Coin identification and value estimates are for education and are not professional appraisals or certifications. Expert evaluations are advisory opinions based on the photos and details provided.
             </p>
           </div>
@@ -586,51 +656,6 @@ export default function AppDetail({ app }: AppDetailProps) {
       )}
 
       <OtherAppsCarousel excludeAppId={app.id} accentHsl={app.accentHsl} />
-
-      {app.id === "coinzy" && (
-        <section id="for-businesses" className="scroll-mt-24 py-16 sm:py-20 border-t border-border/60 snap-start" aria-labelledby="coinzy-business-heading">
-          <div className="container-site">
-            <div className="max-w-2xl">
-              <h2 id="coinzy-business-heading" className="text-3xl sm:text-4xl font-bold font-display">
-                For coin shops and dealers
-              </h2>
-              <p className="mt-3 text-base text-muted-foreground leading-relaxed">
-                Reach collectors beyond your local area, at no cost.
-              </p>
-            </div>
-            <div className="mt-10 grid gap-5 md:grid-cols-3">
-              {[
-                {
-                  title: "Free listing",
-                  text: "Send us photos and prices, and we'll list your coins for free.",
-                },
-                {
-                  title: "Seller leads",
-                  text: "We tell you when people near you want to sell coins or collections.",
-                },
-                {
-                  title: "Your sale, your way",
-                  text: "Your coins go directly in front of thousands of Coinzy users every day.",
-                },
-              ].map((card) => (
-                <div key={card.title} className="rounded-3xl bg-card p-6" style={{ boxShadow: "var(--shadow-card)" }}>
-                  <h3 className="font-display font-bold text-lg text-foreground">{card.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{card.text}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-8">
-              <a
-                href="mailto:coinzy@trackzio.com"
-                className="inline-flex items-center h-12 px-6 rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity"
-                style={{ backgroundColor: "#064e3b", color: "#ffffff" }}
-              >
-                Email us
-              </a>
-            </div>
-          </div>
-        </section>
-      )}
 
     </div>
   );
