@@ -208,8 +208,7 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
                 className="flex shrink-0 flex-col h-full min-h-0 py-1 snap-start w-full min-w-0 flex-[0_0_100%] max-lg:max-w-full lg:w-auto lg:flex-[0_0_calc((100%-2.5rem)/3)]"
               >
                 <div
-                  className="flex flex-col rounded-2xl overflow-hidden bg-card border border-border/30 min-h-0 flex-1 h-full"
-                  style={{ boxShadow: '0 4px 20px -4px rgba(0,0,0,0.06)' }}
+                  className="card-hover flex flex-col rounded-2xl overflow-hidden bg-card border border-border/30 min-h-0 flex-1 h-full"
                 >
                   <div
                     className="flex-1 min-h-0 flex items-center justify-center p-2"
@@ -226,7 +225,7 @@ export default function FeatureShowcase({ features, accentHsl }: FeatureShowcase
                     />
                   </div>
                   <div className="px-3 py-2 text-center shrink-0">
-                    <h3 className="type-card-title">{feature.title}</h3>
+                    <h3 className="type-card-title card-hover-title">{feature.title}</h3>
                     {feature.description ? (
                       <p className="type-body mt-1 line-clamp-4">
                         {feature.description}

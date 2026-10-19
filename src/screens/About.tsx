@@ -99,8 +99,8 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 lg:gap-8 max-w-5xl mx-auto">
             <motion.div
               {...fadeUp}
-              className="rounded-xl sm:rounded-2xl bg-card p-6 sm:p-8 md:p-10 border border-border"
-              style={{ boxShadow: '0 4px 24px -4px rgba(40, 54, 24, 0.08)' }}
+              whileHover={{ y: -6 }}
+              className="card-hover card-hover-motion rounded-xl sm:rounded-2xl bg-card p-6 sm:p-8 md:p-10 border border-border"
             >
               <p className="text-xs sm:text-sm font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase text-primary mb-3 sm:mb-4">Vision</p>
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold font-display leading-snug text-balance">
@@ -109,8 +109,8 @@ export default function About() {
             </motion.div>
             <motion.div
               {...fadeUp}
-              className="rounded-xl sm:rounded-2xl bg-card p-6 sm:p-8 md:p-10 border border-border"
-              style={{ boxShadow: '0 4px 24px -4px rgba(40, 54, 24, 0.08)' }}
+              whileHover={{ y: -6 }}
+              className="card-hover card-hover-motion rounded-xl sm:rounded-2xl bg-card p-6 sm:p-8 md:p-10 border border-border"
             >
               <p className="text-xs sm:text-sm font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase text-primary mb-3 sm:mb-4">Mission</p>
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold font-display leading-snug text-balance">

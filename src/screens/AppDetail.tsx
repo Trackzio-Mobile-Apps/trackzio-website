@@ -324,36 +324,34 @@ export default function AppDetail({ app }: AppDetailProps) {
               ].map((card) => (
                 <div
                   key={card.title}
-                  className="flex h-full flex-col items-center rounded-3xl bg-card px-6 py-8 text-center"
-                  style={{ boxShadow: "var(--shadow-card)" }}
+                  className="card-hover flex h-full flex-col items-center rounded-3xl bg-card px-6 py-8 text-center"
                 >
                   <span
-                    className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl"
+                    className="card-hover-icon mb-4 flex h-12 w-12 items-center justify-center rounded-2xl"
                     style={{ backgroundColor: "hsl(168 30% 90%)", color: "#064e3b" }}
                   >
                     <card.icon size={22} aria-hidden="true" />
                   </span>
-                  <h3 className="type-card-title">{card.title}</h3>
+                  <h3 className="type-card-title card-hover-title">{card.title}</h3>
                   <p className="type-body mt-2">{card.text}</p>
                 </div>
               ))}
             </div>
             <a
               href="mailto:coinzy@trackzio.com"
-              className="relative z-10 mx-auto mt-6 flex max-w-3xl cursor-pointer flex-col gap-4 rounded-3xl bg-card p-4 no-underline sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-5"
-              style={{ boxShadow: "var(--shadow-card)" }}
+              className="card-hover group relative z-10 mx-auto mt-6 flex max-w-3xl flex-col gap-4 rounded-3xl bg-card p-4 no-underline sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-5"
             >
               <span className="type-copy inline-flex min-w-0 items-center gap-3 font-medium">
                 <span
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl"
+                  className="card-hover-icon flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl"
                   style={{ backgroundColor: "hsl(168 30% 90%)", color: "#064e3b" }}
                 >
                   <Mail size={18} aria-hidden="true" />
                 </span>
-                <span className="truncate underline-offset-4 hover:underline">Coinzy@trackzio.com</span>
+                <span className="truncate underline-offset-4 transition-colors duration-300 group-hover:text-primary group-hover:underline">Coinzy@trackzio.com</span>
               </span>
               <span
-                className="inline-flex h-12 shrink-0 items-center justify-center rounded-xl px-6 text-sm font-semibold"
+                className="inline-flex h-12 shrink-0 items-center justify-center rounded-xl px-6 text-sm font-semibold transition-transform duration-300 group-hover:scale-105"
                 style={{ backgroundColor: "#064e3b", color: "#ffffff" }}
               >
                 Email Us
@@ -433,7 +431,7 @@ export default function AppDetail({ app }: AppDetailProps) {
                       )}
                     </>
                   );
-                  const className = "flex h-full flex-col rounded-2xl border border-border/50 bg-card p-4 sm:p-5";
+                  const className = "card-hover flex h-full flex-col rounded-2xl border border-border/50 bg-card p-4 sm:p-5";
                   return (
                     <div
                       key={`${review.store}-${review.author}-${review.date}`}
@@ -445,12 +443,11 @@ export default function AppDetail({ app }: AppDetailProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           className={className}
-                          style={{ boxShadow: "var(--shadow-card)" }}
                         >
                           {card}
                         </a>
                       ) : (
-                        <article className={className} style={{ boxShadow: "var(--shadow-card)" }}>
+                        <article className={className}>
                           {card}
                         </article>
                       )}
@@ -522,7 +519,7 @@ export default function AppDetail({ app }: AppDetailProps) {
                   className="flex-shrink-0 snap-start"
                   style={{ width: 'calc(25% - 15px)', minWidth: '260px' }}
                 >
-                  <div className="p-6 rounded-3xl bg-card h-full flex flex-col" style={{ boxShadow: 'var(--shadow-card)' }}>
+                  <div className="card-hover p-6 rounded-3xl bg-card h-full flex flex-col">
                     <Quote size={22} className="mb-3" style={{ color: `hsl(${app.accentHsl} / 0.25)` }} />
                       <div
                         className="mb-3 text-sm tracking-tight font-medium"
@@ -612,8 +609,7 @@ export default function AppDetail({ app }: AppDetailProps) {
                   >
                     <AccordionItem
                       value={`faq-${faqs.indexOf(faq)}`}
-                      className="rounded-2xl bg-card px-6"
-                      style={{ boxShadow: 'var(--shadow-card)' }}
+                      className="card-hover rounded-2xl bg-card px-6"
                     >
                       <AccordionTrigger className="type-copy text-left font-medium">{faq.q}</AccordionTrigger>
                       <AccordionContent className="type-body">{faq.a}</AccordionContent>

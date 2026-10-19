@@ -66,19 +66,18 @@ export default function Apps() {
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                 >
                   <div
-                    className="block p-8 sm:p-10 rounded-3xl bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group h-full"
-                    style={{ boxShadow: 'var(--shadow-card)' }}
+                    className="card-hover block p-8 sm:p-10 rounded-3xl bg-card h-full"
                   >
                     <div className="flex items-start gap-5 mb-5">
                       <SiteImage
                         src={app.logo}
                         alt=""
                         sizes="64px"
-                        className="w-16 h-16 rounded-2xl shrink-0 object-cover"
+                        className="card-hover-icon w-16 h-16 rounded-2xl shrink-0 object-cover"
                         style={{ boxShadow: `0 4px 16px -4px hsl(${app.accentHsl} / 0.25)` }}
                       />
                       <div className="min-w-0">
-                        <h3 className="font-display font-bold text-lg text-foreground mb-1">{app.name}</h3>
+                        <h3 className="card-hover-title font-display font-bold text-lg text-foreground mb-1">{app.name}</h3>
                         <p className="text-sm text-muted-foreground leading-relaxed">{app.tagline}</p>
                       </div>
                     </div>

@@ -346,7 +346,7 @@ export default function Home() {
                   transition={{ delay: Math.min(i * 0.08, 0.4) }}
                   className="flex shrink-0 flex-col min-h-0 snap-start w-full min-w-0 flex-[0_0_100%] lg:w-auto lg:flex-[0_0_calc((100%-3.75rem)/4)]"
                 >
-                  <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-card h-full flex flex-col min-h-[11rem] sm:min-h-0 border border-border/30" style={{ boxShadow: 'var(--shadow-card)' }}>
+                  <div className="card-hover p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-card h-full flex flex-col min-h-[11rem] sm:min-h-0 border border-border/30">
                     <p className="type-kicker" style={{ color: `hsl(${t.accentHsl})` }}>
                       {t.appName}
                     </p>

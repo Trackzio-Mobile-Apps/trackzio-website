@@ -89,13 +89,13 @@ export default function Careers() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="rounded-2xl bg-card p-6 flex flex-col"
-                  style={{ boxShadow: 'var(--shadow-card)' }}
+                  whileHover={{ y: -6 }}
+                  className="card-hover card-hover-motion rounded-2xl bg-card p-6 flex flex-col"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                  <div className="card-hover-icon w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                     <block.icon size={20} className="text-primary" />
                   </div>
-                  <h3 className="font-display font-bold text-sm text-foreground mb-2">{block.title}</h3>
+                  <h3 className="card-hover-title font-display font-bold text-sm text-foreground mb-2">{block.title}</h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">{block.description}</p>
                 </motion.div>
               ))}
@@ -163,8 +163,8 @@ export default function Careers() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="rounded-2xl bg-card p-7 flex flex-col"
-                style={{ boxShadow: 'var(--shadow-card)' }}
+                whileHover={{ y: -6 }}
+                className="card-hover card-hover-motion rounded-2xl bg-card p-7 flex flex-col"
               >
                 <div className="flex items-start justify-between gap-3 mb-4">
                   <h3 className="text-lg font-bold font-display text-foreground">{role.title}</h3>

@@ -64,8 +64,7 @@ export default function Blog({ blogs, blogOfTheWeek }: BlogProps) {
             <p className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-6">Blog of the Week</p>
             <Link
               href={`/blog/${blogOfTheWeek.slug}`}
-              className="rounded-xl bg-card overflow-hidden flex flex-col md:flex-row cursor-pointer group block"
-              style={{ boxShadow: '0 8px 32px -8px hsla(0 0% 0% / 0.1)' }}
+              className="card-hover rounded-xl bg-card overflow-hidden flex flex-col md:flex-row group block"
             >
               <div className="relative md:w-1/2 aspect-[16/10] md:aspect-auto overflow-hidden">
                 <SiteImage
@@ -165,7 +164,7 @@ export default function Blog({ blogs, blogOfTheWeek }: BlogProps) {
 
               <Link
                 href={activePreview ? `/blog/${activePreview.slug}` : "#"}
-                className="lg:w-[62%] bg-card rounded-xl overflow-hidden flex flex-col cursor-pointer group block"
+                className="card-hover lg:w-[62%] bg-card rounded-xl overflow-hidden flex flex-col group block"
                 style={{ boxShadow: '0 4px 20px -6px hsla(0 0% 0% / 0.08)' }}
               >
                 {activePreview ? (
