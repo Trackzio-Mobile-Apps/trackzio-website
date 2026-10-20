@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: hsl(168 55% 18%);
+        color: white;
+        font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+      }
+      main {
+        width: 1200px;
+        height: 630px;
+        padding: 72px 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background:
+          radial-gradient(circle at 88% 18%, hsl(168 45% 32% / 0.9), transparent 34%),
+          linear-gradient(145deg, hsl(168 55% 24%), hsl(168 50% 16%) 70%);
+      }
+      .kicker {
+        font-size: 22px;
+        letter-spacing: 0.28em;
+        font-weight: 600;
+        text-transform: uppercase;
+        opacity: 0.8;
+      }
+      h1 {
+        margin-top: 28px;
+        max-width: 920px;
+        font-size: 76px;
+        line-height: 0.98;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+      }
+      .apps {
+        display: flex;
+        gap: 14px;
+        margin-top: 36px;
+      }
+      .apps span {
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 999px;
+        padding: 10px 18px;
+        font-size: 22px;
+        font-weight: 600;
+      }
+      .line {
+        font-size: 28px;
+        font-weight: 500;
+        opacity: 0.92;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div>
+        <p class="kicker">Trackzio Partner Network</p>
+        <h1>Shops, dealers, experts and clubs</h1>
+        <div class="apps">
+          <span>Coinzy</span>
+          <span>Banknote</span>
+          <span>Antiqzy</span>
+          <span>Rockzy</span>
+        </div>
+      </div>
+      <p class="line">Free to list. No minimum listings.</p>
+    </main>
+  </body>
+</html>

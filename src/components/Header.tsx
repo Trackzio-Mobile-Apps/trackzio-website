@@ -22,6 +22,7 @@ const navItems = [
   { label: "Home", href: "/", event: "" },
   { label: "Our Apps", href: "/#apps", event: "header_explore_apps", hasDropdown: true },
   { label: "About Us", href: "/about", event: "header_About us_apps" },
+  { label: "Partners", href: "/partners", event: "header_partners" },
   { label: "Blog", href: "/blog", event: "header_blog_apps" },
   { label: "Careers", href: "/careers", event: "header_career_apps" },
   { label: "Help Center", href: "/help", event: "header_help center_apps" },
@@ -88,7 +89,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
+        <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
           {navItems.map((item) => (
             <div
               key={item.href}
@@ -144,7 +145,7 @@ export default function Header() {
           </button>
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden p-2 text-muted-foreground hover:text-primary"
+            className="lg:hidden p-2 text-muted-foreground hover:text-primary"
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
           >
@@ -161,7 +162,7 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden md:block fixed w-[min(92vw,520px)] rounded-2xl border border-border/30 z-50 overflow-hidden"
+            className="hidden lg:block fixed w-[min(92vw,520px)] rounded-2xl border border-border/30 z-50 overflow-hidden"
             style={{
               left: '25%',
               transform: 'translateX(-50%)',
@@ -208,7 +209,7 @@ export default function Header() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden overflow-hidden border-t border-border/40 bg-background"
+            className="lg:hidden overflow-hidden border-t border-border/40 bg-background"
             aria-label="Mobile navigation"
           >
             <div className="container-site py-4 flex flex-col gap-1">

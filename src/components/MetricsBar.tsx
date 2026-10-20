@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
+import { COMPANY_ACTIVE_USERS, COMPANY_AVERAGE_RATING, COMPANY_DOWNLOADS } from '@/lib/companyMetrics';
 
 const metrics = [
-  { value: '400K+', label: 'Total Downloads' },
-  { value: '4.3+', label: 'Average Rating' },
-  { value: '50K+', label: 'Active Users' },
+  { value: COMPANY_DOWNLOADS, label: 'Total Downloads' },
+  { value: COMPANY_AVERAGE_RATING, label: 'Average Rating' },
+  { value: COMPANY_ACTIVE_USERS, label: 'Active Users' },
 ];
 
 export default function MetricsBar() {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from 'react';
+import Link from "next/link";
 import { motion } from 'framer-motion';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -8,7 +9,8 @@ import { getPlatform } from "@/lib/platformUtils";
 import { QRCodeSVG } from 'qrcode.react';
 import SiteImage from "@/components/SiteImage";
 import coinzyExpert from "@/assets/screenshots/coinzy-3.webp";
-import { Quote, ChevronDown, ChevronLeft, ChevronRight, Mail, Images, Bell, Store } from 'lucide-react';
+import { Quote, ChevronDown, ChevronLeft, ChevronRight, Images, Bell, Store } from 'lucide-react';
+import { APP_PARTNER_CATEGORY } from "@/lib/partnerForm";
 import PlatformDownloadButtons from '@/components/PlatformDownloadButtons';
 import FeatureShowcase from '@/components/FeatureShowcase';
 import OtherAppsCarousel from '@/components/OtherAppsCarousel';
@@ -337,26 +339,16 @@ export default function AppDetail({ app }: AppDetailProps) {
                 </div>
               ))}
             </div>
-            <a
-              href="mailto:coinzy@trackzio.com"
-              className="card-hover group relative z-10 mx-auto mt-6 flex max-w-3xl flex-col gap-4 rounded-3xl bg-card p-4 no-underline sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-5"
-            >
-              <span className="type-copy inline-flex min-w-0 items-center gap-3 font-medium">
-                <span
-                  className="card-hover-icon flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl"
-                  style={{ backgroundColor: "hsl(168 30% 90%)", color: "#064e3b" }}
-                >
-                  <Mail size={18} aria-hidden="true" />
-                </span>
-                <span className="truncate underline-offset-4 transition-colors duration-300 group-hover:text-primary group-hover:underline">Coinzy@trackzio.com</span>
-              </span>
-              <span
-                className="inline-flex h-12 shrink-0 items-center justify-center rounded-xl px-6 text-sm font-semibold transition-transform duration-300 group-hover:scale-105"
+            <div className="mt-8 flex justify-center">
+              <Link
+                href="/partners?category=coins"
+                onClick={() => window.scrollTo(0, 0)}
+                className="inline-flex h-12 items-center justify-center rounded-xl px-6 text-sm font-semibold"
                 style={{ backgroundColor: "#064e3b", color: "#ffffff" }}
               >
-                Email Us
-              </span>
-            </a>
+                Partner with us
+              </Link>
+            </div>
           </div>
         </section>
       )}
@@ -519,28 +511,44 @@ export default function AppDetail({ app }: AppDetailProps) {
                   className="flex-shrink-0 snap-start"
                   style={{ width: 'calc(25% - 15px)', minWidth: '260px' }}
                 >
-                  <div className="card-hover p-6 rounded-3xl bg-card h-full flex flex-col">
-                    <Quote size={22} className="mb-3" style={{ color: `hsl(${app.accentHsl} / 0.25)` }} />
-                      <div
-                        className="mb-3 text-sm tracking-tight font-medium"
-                        style={{ color: `hsl(${app.accentHsl})` }}
-                        aria-label={`${r.rating ?? 5} out of 5 stars`}
-                      >
-                        {reviewStars(r.rating)}
-                    </div>
-                    <p className="type-copy flex-1 font-medium">"{r.quote}"</p>
-                    <div className="mt-5 flex items-center gap-3">
-                      <div
-                        className="w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm"
-                        style={{ color: `hsl(${app.accentHsl})`, background: `hsl(${app.accentHsl} / 0.1)` }}
-                      >
-                        {r.author.charAt(0)}
-                      </div>
-                      <div>
-                        <div className="type-copy font-semibold">— {r.author}</div>
-                      </div>
-                    </div>
-                  </div>
+                  {(() => {
+                    const card = (
+                      <>
+                        <Quote size={22} className="mb-3" style={{ color: `hsl(${app.accentHsl} / 0.25)` }} />
+                        <div className="mb-3 flex items-center justify-between gap-3">
+                          <div
+                            className="text-sm tracking-tight font-medium"
+                            style={{ color: `hsl(${app.accentHsl})` }}
+                            aria-label={`${r.rating ?? 5} out of 5 stars`}
+                          >
+                            {reviewStars(r.rating)}
+                          </div>
+                          {r.date && <p className="text-xs text-muted-foreground">{r.date}</p>}
+                        </div>
+                        <p className="type-copy flex-1 font-medium">"{r.quote}"</p>
+                        <div className="mt-5 flex items-center gap-3">
+                          <div
+                            className="w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm"
+                            style={{ color: `hsl(${app.accentHsl})`, background: `hsl(${app.accentHsl} / 0.1)` }}
+                          >
+                            {r.author.charAt(0)}
+                          </div>
+                          <div className="min-w-0">
+                            <div className="type-copy font-semibold">— {r.author}</div>
+                            {r.store && <p className="text-xs text-muted-foreground">{r.store}</p>}
+                          </div>
+                        </div>
+                      </>
+                    );
+                    const className = "card-hover p-6 rounded-3xl bg-card h-full flex flex-col";
+                    return r.href ? (
+                      <a href={r.href} target="_blank" rel="noopener noreferrer" className={className}>
+                        {card}
+                      </a>
+                    ) : (
+                      <div className={className}>{card}</div>
+                    );
+                  })()}
                 </motion.div>
               ))}
             </div>
@@ -647,6 +655,27 @@ export default function AppDetail({ app }: AppDetailProps) {
             <p className="type-body">
               Coinzy lets collectors list coins and contact each other directly. Coinzy does not handle payments or take part in any sale. Buyers and sellers agree on terms and settle payment between themselves. Coin identification and value estimates are for education and are not professional appraisals or certifications. Expert evaluations are advisory opinions based on the photos and details provided.
             </p>
+          </div>
+        </section>
+      )}
+
+      {APP_PARTNER_CATEGORY[app.id] && app.id !== "coinzy" && (
+        <section className="border-t border-border/60 py-16 snap-start sm:py-20" aria-labelledby="partner-with-us-heading">
+          <div className="container-site">
+            <div className="mx-auto max-w-2xl text-center">
+              <h2 id="partner-with-us-heading" className="type-title">Partner with us</h2>
+              <p className="type-lead mt-3">
+                List for free and reach collectors on {app.name}.
+              </p>
+              <Link
+                href={`/partners?category=${APP_PARTNER_CATEGORY[app.id]}`}
+                onClick={() => window.scrollTo(0, 0)}
+                className="mt-8 inline-flex h-12 items-center justify-center rounded-xl px-6 text-sm font-semibold text-white"
+                style={{ backgroundColor: `hsl(${app.accentHsl})` }}
+              >
+                Partner with us
+              </Link>
+            </div>
           </div>
         </section>
       )}
