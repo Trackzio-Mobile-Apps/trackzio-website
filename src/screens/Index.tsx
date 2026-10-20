@@ -7,6 +7,7 @@ import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { ArrowRight, Quote, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import FloatingAppShowcase from '@/components/FloatingAppShowcase';
 import { getClientApps } from '@/lib/content/apps-client';
+import { homeMetrics } from '@/lib/companyMetrics';
 
 function getScrollStep(el: HTMLElement): number {
   const first = el.firstElementChild as HTMLElement | null;
@@ -35,11 +36,7 @@ const fadeUp = {
   transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] as const },
 };
 
-const metrics = [
-  { value: '400K+', label: 'Downloads across all Trackzio apps' },
-  { value: '4.3+', label: 'Average Rating' },
-  { value: '50K+', label: 'Active Users' },
-];
+const metrics = homeMetrics;
 
 const reviewAppIds = ["coinzy", "banknotes", "habiteazy", "insecto"];
 

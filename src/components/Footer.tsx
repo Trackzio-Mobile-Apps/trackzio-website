@@ -99,13 +99,20 @@ export default function Footer() {
             ))}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-end">
             <Link
               href="/help"
               onClick={() => window.scrollTo(0, 0)}
               className="inline-flex items-center h-9 px-5 rounded-xl bg-primary-foreground text-primary text-sm font-semibold transition-opacity hover:opacity-90"
             >
               Get in Touch
+            </Link>
+            <Link
+              href="/partners"
+              onClick={() => window.scrollTo(0, 0)}
+              className="inline-flex items-center h-9 px-5 rounded-xl bg-primary-foreground text-primary text-sm font-semibold transition-opacity hover:opacity-90"
+            >
+              Become a partner
             </Link>
             <a
               href={FEEDBACK_URL}
