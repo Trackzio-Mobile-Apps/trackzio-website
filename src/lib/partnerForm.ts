@@ -136,7 +136,7 @@ export const PARTNER_STEPS = [
   },
   {
     title: "Talk to us",
-    text: "We'll reply within 2 business days and set up a short call.",
+    text: "We'll reply within 2-5 business days and set up a short call.",
   },
   {
     title: "Go live",
@@ -392,5 +392,5 @@ export function validatePartnerApplication(
 }
 
 export function thanksMessage(firstName: string): string {
-  return `Thanks, ${firstName}. We've got your application and will reply within 2 business days.`;
+  return `Thanks, ${firstName}. We've got your application and will reply within 2-5 business days.`;
 }

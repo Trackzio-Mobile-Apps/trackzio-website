@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { trackEvent } from "@/lib/analytics";
 import { COUNTRIES, detectBrowserCountry, getCountry } from "@/lib/countries";
@@ -7,12 +8,15 @@ import {
   EXPERIENCE_OPTIONS,
   PARTNER_TYPES,
   SELL_TODAY_OPTIONS,
+  firstNameFrom,
   thanksMessage,
   validatePartnerApplication,
   type PartnerApplicationInput,
   type PartnerField,
   type PartnerFieldErrors,
 } from "@/lib/partnerForm";
+
+const PARTNER_API_URL = process.env.NEXT_PUBLIC_PARTNER_APPLICATION_ENDPOINT;
 
 const inputClass = (invalid: boolean) =>
   `w-full h-11 min-h-[44px] rounded-xl border bg-muted px-4 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 sm:text-sm ${
@@ -54,7 +58,6 @@ export default function PartnerForm({ initialCategory }: { initialCategory: stri
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [firstName, setFirstName] = useState<string | null>(null);
-  const startedAt = useRef(Date.now());
 
   useEffect(() => {
     let cancelled = false;
@@ -114,6 +117,10 @@ export default function PartnerForm({ initialCategory }: { initialCategory: stri
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitError(null);
+    if (form.fax?.trim()) {
+      setFirstName(firstNameFrom(form.fullName) || "there");
+      return;
+    }
     const result = validatePartnerApplication(form);
     if (!result.ok) {
       setErrors(result.errors);
@@ -121,13 +128,37 @@ export default function PartnerForm({ initialCategory }: { initialCategory: stri
       trackEvent("partner_application_error", { page_name: "partners", reason: "validation" });
       return;
     }
+    if (!PARTNER_API_URL) {
+      setSubmitError("Set NEXT_PUBLIC_PARTNER_APPLICATION_ENDPOINT in environment variables.");
+      trackEvent("partner_application_error", { page_name: "partners", reason: "save" });
+      return;
+    }
 
+    const application = result.application;
     setIsSubmitting(true);
     try {
-      const response = await fetch("/api/partner-application", {
+      const response = await fetch(PARTNER_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, startedAt: startedAt.current }),
+        body: JSON.stringify({
+          fullName: application.fullName,
+          email: application.email,
+          phone: application.phone,
+          country: application.country,
+          cityState: application.cityState,
+          businessName: application.businessName,
+          partnerTypes: application.partnerTypes,
+          categories: application.categories,
+          apps: application.apps,
+          years: application.years,
+          website: application.website,
+          specialties: application.specialties,
+          memberships: application.memberships,
+          sellToday: application.sellToday,
+          notes: application.notes,
+          consent: true,
+          platform: "web",
+        }),
       });
       const body = (await response.json().catch(() => null)) as {
         ok?: boolean;
@@ -294,23 +325,26 @@ export default function PartnerForm({ initialCategory }: { initialCategory: stri
           Phone <span className="text-destructive">*</span>
         </label>
         <div className="flex flex-col gap-2 sm:flex-row">
-          <select
-            id="partner-phone-country"
-            name="phone-country"
-            autoComplete="tel-country-code"
-            value={form.phoneCountry}
-            onChange={(event) => setField("phoneCountry", event.target.value)}
-            aria-invalid={!!errors.phoneCountry}
-            aria-describedby={errors.phoneCountry ? "partner-phone-country-error" : undefined}
-            className={`${inputClass(!!errors.phoneCountry)} w-full px-3 sm:w-56 sm:shrink-0`}
-          >
-            <option value="">Code</option>
-            {COUNTRIES.map((country) => (
-              <option key={country.code} value={country.code}>
-                +{country.dial} {country.name}
-              </option>
-            ))}
-          </select>
+          <div className="relative w-full sm:w-56 sm:shrink-0">
+            <select
+              id="partner-phone-country"
+              name="phone-country"
+              autoComplete="tel-country-code"
+              value={form.phoneCountry}
+              onChange={(event) => setField("phoneCountry", event.target.value)}
+              aria-invalid={!!errors.phoneCountry}
+              aria-describedby={errors.phoneCountry ? "partner-phone-country-error" : undefined}
+              className={`${inputClass(!!errors.phoneCountry)} appearance-none pr-10`}
+            >
+              <option value="">Code</option>
+              {COUNTRIES.map((country) => (
+                <option key={country.code} value={country.code}>
+                  +{country.dial} {country.name}
+                </option>
+              ))}
+            </select>
+            <ChevronDown aria-hidden className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          </div>
           <input
             id="partner-phone"
             type="tel"

@@ -580,7 +580,11 @@
   },
   "plantzy": {
     "reviews": [
-     
+      {
+        "quote": "Helps me remember watering and names the plants I pick up at the nursery.",
+        "author": "Aanya",
+        "rating": 5
+      }
     ],
     "faqs": [
       {

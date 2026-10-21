@@ -38,11 +38,7 @@ const fadeUp = {
 
 const metrics = homeMetrics;
 
-const reviewAppIds = ["coinzy", "banknotes", "habiteazy", "insecto"];
-
-const reviewApps = reviewAppIds
-  .map((id) => getClientApps().find((app) => app.id === id))
-  .filter((app): app is NonNullable<typeof app> => Boolean(app && app.reviews.length > 0));
+const reviewApps = getClientApps().filter((app) => app.reviews.length > 0);
 
 const allReviews = reviewApps.flatMap((app) =>
   app.reviews.map((review) => ({
