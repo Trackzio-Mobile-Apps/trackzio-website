@@ -90,6 +90,7 @@ export default function AppDetailsPage({ params }: Props) {
       url: path,
       iosUrl: app.iosUrl,
       androidUrl: app.androidUrl,
+      rating: app.stats.rating,
       image: contentImageUrl(app.logo),
       screenshots: app.screenshots.slice(0, 4).map((shot) => contentImageUrl(shot)),
       featureList: app.features,
