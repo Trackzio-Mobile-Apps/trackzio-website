@@ -7,8 +7,9 @@
  * Give it a public Function URL with CORS enabled.
  * Put that URL in NEXT_PUBLIC_PARTNER_APPLICATION_ENDPOINT.
  *
- * Lambda environment variable:
+ * Lambda environment variables:
  *   GOOGLE_SERVICE_ACCOUNT_JSON — the service account key JSON
+ *   RECAPTCHA_SECRET — secret key for the same reCAPTCHA entry as the site key
  */
 
 const crypto = require("crypto");
@@ -177,6 +178,21 @@ async function appendApplication(token, spreadsheetId, row) {
   );
 }
 
+async function verifyRecaptcha(token) {
+  const secret = text(process.env.RECAPTCHA_SECRET);
+  if (!secret) {
+    throw new Error("RECAPTCHA_SECRET is not set.");
+  }
+  if (!token) return false;
+  const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ secret, response: token }),
+  });
+  const data = await response.json().catch(() => ({}));
+  return Boolean(response.ok && data.success);
+}
+
 function submittedAt() {
   const parts = new Intl.DateTimeFormat("en-GB", {
     timeZone: "Asia/Kolkata",
@@ -263,6 +279,16 @@ exports.handler = async (event) => {
   const application = applicationRow(body);
   if (!application.ok) {
     return respond(400, { error: "Please check the form and try again.", errors: application.errors });
+  }
+
+  const captchaToken = text(body.recaptchaToken) || text(body.recaptchaResponse);
+  try {
+    const passed = await verifyRecaptcha(captchaToken);
+    if (!passed) {
+      return respond(400, { error: "Please complete the verification and try again." });
+    }
+  } catch {
+    return respond(503, { error: "We couldn't save your application. Please try again." });
   }
 
   const spreadsheetId = text(process.env.SPREADSHEET_ID) || PARTNER_SPREADSHEET_ID;

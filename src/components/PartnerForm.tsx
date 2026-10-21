@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
+import ReCAPTCHA from "react-google-recaptcha";
 import { trackEvent } from "@/lib/analytics";
-import { COUNTRIES, detectBrowserCountry, getCountry } from "@/lib/countries";
+import { COUNTRIES, detectBrowserCountry, getCountry, getCountryByName } from "@/lib/countries";
+import { matchRegion, regionsForCountry } from "@/lib/regions";
 import {
   DEAL_OPTIONS,
   EXPERIENCE_OPTIONS,
@@ -17,6 +19,11 @@ import {
 } from "@/lib/partnerForm";
 
 const PARTNER_API_URL = process.env.NEXT_PUBLIC_PARTNER_APPLICATION_ENDPOINT;
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+
+function joinLocation(city: string, region: string): string {
+  return [city.trim(), region.trim()].filter(Boolean).join(", ");
+}
 
 const inputClass = (invalid: boolean) =>
   `w-full h-11 min-h-[44px] rounded-xl border bg-muted px-4 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 sm:text-sm ${
@@ -52,38 +59,189 @@ const emptyInput = (initialCategory: string): PartnerApplicationInput => ({
   fax: "",
 });
 
+function LocationFields({
+  country,
+  city,
+  region,
+  cityState,
+  message,
+  onCity,
+  onRegion,
+  onCityState,
+}: {
+  country: string;
+  city: string;
+  region: string;
+  cityState: string;
+  message?: string;
+  onCity: (value: string) => void;
+  onRegion: (value: string) => void;
+  onCityState: (value: string) => void;
+}) {
+  const regions = regionsForCountry(country);
+  if (regions.length === 0) {
+    return (
+      <div>
+        <label htmlFor="partner-city" className="mb-1.5 block text-sm font-medium text-foreground">
+          City and state
+        </label>
+        <input
+          id="partner-city"
+          name="city"
+          autoComplete="address-level2"
+          value={cityState}
+          onChange={(event) => onCityState(event.target.value)}
+          aria-invalid={!!message}
+          aria-describedby={message ? "partner-city-error" : undefined}
+          className={inputClass(!!message)}
+        />
+        <FieldError id="partner-city-error" message={message} />
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <div>
+        <label htmlFor="partner-region" className="mb-1.5 block text-sm font-medium text-foreground">
+          State or region
+        </label>
+        <div className="relative">
+          <select
+            id="partner-region"
+            name="region"
+            autoComplete="address-level1"
+            value={region}
+            onChange={(event) => onRegion(event.target.value)}
+            className={`${inputClass(false)} appearance-none pr-10`}
+          >
+            <option value="">Choose a state</option>
+            {regions.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+          <ChevronDown aria-hidden className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        </div>
+      </div>
+      <div className="sm:col-span-2">
+        <label htmlFor="partner-city" className="mb-1.5 block text-sm font-medium text-foreground">
+          City
+        </label>
+        <input
+          id="partner-city"
+          name="city"
+          autoComplete="address-level2"
+          value={city}
+          onChange={(event) => onCity(event.target.value)}
+          aria-invalid={!!message}
+          aria-describedby={message ? "partner-city-error" : undefined}
+          className={inputClass(!!message)}
+        />
+        <FieldError id="partner-city-error" message={message} />
+      </div>
+    </>
+  );
+}
+
 export default function PartnerForm({ initialCategory }: { initialCategory: string }) {
   const [form, setForm] = useState<PartnerApplicationInput>(() => emptyInput(initialCategory));
   const [errors, setErrors] = useState<PartnerFieldErrors>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [firstName, setFirstName] = useState<string | null>(null);
+  const [city, setCity] = useState("");
+  const [region, setRegion] = useState("");
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [recaptchaError, setRecaptchaError] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const locationEdited = useRef(false);
 
   useEffect(() => {
     let cancelled = false;
 
-    async function detectCountry() {
-      let code: string | null = null;
+    const fillLocation = (
+      next: { countryCode?: string | null; city?: string; region?: string },
+      overwrite: boolean,
+    ) => {
+      if (cancelled || locationEdited.current) return;
+      const match = next.countryCode ? getCountry(next.countryCode) : null;
+      const regionList = match ? regionsForCountry(match.name) : [];
+      const regionName = matchRegion(regionList, next.region || "");
+      const cityName = (next.city || "").trim();
+      const place = joinLocation(cityName, regionName || next.region || "");
+      setForm((current) => ({
+        ...current,
+        phoneCountry: overwrite || !current.phoneCountry ? match?.code || current.phoneCountry : current.phoneCountry,
+        country: overwrite || !current.country ? match?.name || current.country : current.country,
+        cityState: overwrite || !current.cityState ? place || current.cityState : current.cityState,
+      }));
+      if (regionName && (overwrite || !region)) setRegion(regionName);
+      if (cityName && (overwrite || !city)) setCity(cityName);
+    };
+
+    async function detectLocation() {
+      let countryCode: string | null = null;
+      let detectedCity = "";
+      let detectedRegion = "";
       try {
         const response = await fetch("/api/visitor-country");
         if (response.ok) {
-          const data = (await response.json()) as { country?: unknown };
-          if (typeof data.country === "string") code = data.country.toUpperCase();
+          const data = (await response.json()) as { country?: unknown; city?: unknown; region?: unknown };
+          if (typeof data.country === "string") countryCode = data.country.toUpperCase();
+          if (typeof data.city === "string") detectedCity = data.city;
+          if (typeof data.region === "string") detectedRegion = data.region;
         }
       } catch {
-        code = null;
+        countryCode = null;
       }
-      if (!code || !getCountry(code)) code = detectBrowserCountry();
-      const match = code ? getCountry(code) : null;
-      if (cancelled || !match) return;
-      setForm((current) => ({
-        ...current,
-        phoneCountry: current.phoneCountry || match.code,
-        country: current.country || match.name,
-      }));
+      if (!countryCode || !getCountry(countryCode)) countryCode = detectBrowserCountry();
+      fillLocation({ countryCode, city: detectedCity, region: detectedRegion }, false);
+      if (cancelled || detectedCity || detectedRegion || !navigator.geolocation) return;
+
+      const position = await new Promise<GeolocationPosition | null>((resolve) => {
+        navigator.geolocation.getCurrentPosition(
+          (value) => resolve(value),
+          () => resolve(null),
+          { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 },
+        );
+      });
+      if (cancelled || !position) return;
+      try {
+        const lookup = new URL("https://api.bigdatacloud.net/data/reverse-geocode-client");
+        lookup.searchParams.set("latitude", String(position.coords.latitude));
+        lookup.searchParams.set("longitude", String(position.coords.longitude));
+        lookup.searchParams.set("localityLanguage", "en");
+        const response = await fetch(lookup);
+        if (!response.ok) return;
+        const data = (await response.json()) as {
+          countryCode?: unknown;
+          countryName?: unknown;
+          city?: unknown;
+          locality?: unknown;
+          principalSubdivision?: unknown;
+        };
+        const locatedCode =
+          typeof data.countryCode === "string" && getCountry(data.countryCode)
+            ? data.countryCode
+            : typeof data.countryName === "string"
+              ? getCountryByName(data.countryName)?.code
+              : countryCode;
+        fillLocation(
+          {
+            countryCode: locatedCode,
+            city: typeof data.city === "string" && data.city ? data.city : typeof data.locality === "string" ? data.locality : "",
+            region: typeof data.principalSubdivision === "string" ? data.principalSubdivision : "",
+          },
+          true,
+        );
+      } catch {
+        return;
+      }
     }
 
-    void detectCountry();
+    void detectLocation();
     return () => {
       cancelled = true;
     };
@@ -122,8 +280,11 @@ export default function PartnerForm({ initialCategory }: { initialCategory: stri
       return;
     }
     const result = validatePartnerApplication(form);
-    if (!result.ok) {
-      setErrors(result.errors);
+    const captchaToken = recaptchaToken?.trim() || "";
+    const missingCaptcha = Boolean(RECAPTCHA_SITE_KEY && !captchaToken);
+    setRecaptchaError(missingCaptcha ? "Please complete the verification before submitting." : null);
+    if (!result.ok || missingCaptcha) {
+      if (!result.ok) setErrors(result.errors);
       setSubmitError("Please check the highlighted fields and try again.");
       trackEvent("partner_application_error", { page_name: "partners", reason: "validation" });
       return;
@@ -135,6 +296,10 @@ export default function PartnerForm({ initialCategory }: { initialCategory: stri
     }
 
     const application = result.application;
+    const resetCaptcha = () => {
+      setRecaptchaToken(null);
+      recaptchaRef.current?.reset();
+    };
     setIsSubmitting(true);
     try {
       const response = await fetch(PARTNER_API_URL, {
@@ -158,6 +323,7 @@ export default function PartnerForm({ initialCategory }: { initialCategory: stri
           notes: application.notes,
           consent: true,
           platform: "web",
+          ...(captchaToken ? { recaptchaToken: captchaToken, recaptchaResponse: captchaToken } : {}),
         }),
       });
       const body = (await response.json().catch(() => null)) as {
@@ -170,6 +336,7 @@ export default function PartnerForm({ initialCategory }: { initialCategory: stri
       if (!response.ok || !body?.ok) {
         if (body?.errors) setErrors(body.errors);
         setSubmitError(body?.error || "We couldn't save your application. Please try again.");
+        resetCaptcha();
         trackEvent("partner_application_error", { page_name: "partners", reason: "save" });
         return;
       }
@@ -182,6 +349,7 @@ export default function PartnerForm({ initialCategory }: { initialCategory: stri
       setFirstName(body.firstName || result.application.firstName);
     } catch {
       setSubmitError("We couldn't save your application. Please try again.");
+      resetCaptcha();
       trackEvent("partner_application_error", { page_name: "partners", reason: "network" });
     } finally {
       setIsSubmitting(false);
@@ -367,41 +535,62 @@ export default function PartnerForm({ initialCategory }: { initialCategory: stri
           <label htmlFor="partner-country" className="mb-1.5 block text-sm font-medium text-foreground">
             Country <span className="text-destructive">*</span>
           </label>
-          <select
-            id="partner-country"
-            name="country"
-            autoComplete="country-name"
-            value={form.country}
-            onChange={(event) => setField("country", event.target.value)}
-            aria-invalid={!!errors.country}
-            aria-describedby={errors.country ? "partner-country-error" : undefined}
-            className={inputClass(!!errors.country)}
-          >
-            <option value="">Choose a country</option>
-            {COUNTRIES.map((country) => (
-              <option key={country.code} value={country.name}>
-                {country.name}
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              id="partner-country"
+              name="country"
+              autoComplete="country-name"
+              value={form.country}
+              onChange={(event) => {
+                const name = event.target.value;
+                const selected = getCountryByName(name);
+                locationEdited.current = true;
+                setCity("");
+                setRegion("");
+                setForm((current) => ({
+                  ...current,
+                  country: name,
+                  cityState: "",
+                  phoneCountry: selected?.code || current.phoneCountry,
+                }));
+                if (errors.country) setErrors((current) => ({ ...current, country: undefined }));
+              }}
+              aria-invalid={!!errors.country}
+              aria-describedby={errors.country ? "partner-country-error" : undefined}
+              className={`${inputClass(!!errors.country)} appearance-none pr-10`}
+            >
+              <option value="">Choose a country</option>
+              {COUNTRIES.map((country) => (
+                <option key={country.code} value={country.name}>
+                  {country.name}
+                </option>
+              ))}
+            </select>
+            <ChevronDown aria-hidden className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          </div>
           <FieldError id="partner-country-error" message={errors.country} />
         </div>
-        <div>
-          <label htmlFor="partner-city" className="mb-1.5 block text-sm font-medium text-foreground">
-            City and state
-          </label>
-          <input
-            id="partner-city"
-            name="city"
-            autoComplete="address-level2"
-            value={form.cityState}
-            onChange={(event) => setField("cityState", event.target.value)}
-            aria-invalid={!!errors.cityState}
-            aria-describedby={errors.cityState ? "partner-city-error" : undefined}
-            className={inputClass(!!errors.cityState)}
-          />
-          <FieldError id="partner-city-error" message={errors.cityState} />
-        </div>
+        <LocationFields
+          country={form.country}
+          city={city}
+          region={region}
+          cityState={form.cityState}
+          message={errors.cityState}
+          onCity={(value) => {
+            locationEdited.current = true;
+            setCity(value);
+            setField("cityState", joinLocation(value, region));
+          }}
+          onRegion={(value) => {
+            locationEdited.current = true;
+            setRegion(value);
+            setField("cityState", joinLocation(city, value));
+          }}
+          onCityState={(value) => {
+            locationEdited.current = true;
+            setField("cityState", value);
+          }}
+        />
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
@@ -553,6 +742,28 @@ export default function PartnerForm({ initialCategory }: { initialCategory: stri
         </label>
         <FieldError id="partner-consent-error" message={errors.consent} />
       </div>
+
+      {RECAPTCHA_SITE_KEY && (
+        <div>
+          <div className="flex justify-center overflow-x-auto">
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={RECAPTCHA_SITE_KEY}
+              onChange={(token) => {
+                setRecaptchaToken(token?.trim() ?? null);
+                if (recaptchaError) setRecaptchaError(null);
+              }}
+              onExpired={() => setRecaptchaToken(null)}
+              onErrored={() => setRecaptchaToken(null)}
+            />
+          </div>
+          {recaptchaError && (
+            <p className="mt-2 text-center text-sm text-destructive" role="alert">
+              {recaptchaError}
+            </p>
+          )}
+        </div>
+      )}
 
       {submitError && (
         <p className="text-sm text-destructive" role="alert">
