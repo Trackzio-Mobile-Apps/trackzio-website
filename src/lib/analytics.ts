@@ -17,9 +17,6 @@ export function trackEvent(eventName: string, params: EventParams = {}) {
     timestamp: Date.now(),
   };
 
-  // Log for debugging
-  console.log(`[Analytics] ${eventName}`, entry.params);
-
   // Store in memory queue
   eventQueue.push(entry);
   if (eventQueue.length > MAX_QUEUE) eventQueue.shift();

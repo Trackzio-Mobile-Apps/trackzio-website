@@ -52,7 +52,7 @@ describe("partner application", () => {
       sellToday: ["Physical shop", "eBay"],
     });
     expect(thanksMessage(result.application.firstName)).toBe(
-      "Thanks, Mary. We've got your application and will reply within 2 business days.",
+      "Thanks, Mary. We've got your application and will reply within 2-5 business days.",
     );
   });
 

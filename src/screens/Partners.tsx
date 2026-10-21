@@ -54,7 +54,7 @@ export default function Partners({ initialCategory }: { initialCategory: string 
               href="#apply"
               className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-2xl bg-primary px-6 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 glow sm:w-auto"
             >
-              Apply to partner
+              Apply to Partner
             </a>
             <p className="mt-3 text-sm text-muted-foreground">Free to list. No minimum listings.</p>
           </motion.div>
@@ -119,19 +119,6 @@ export default function Partners({ initialCategory }: { initialCategory: string 
                 </motion.article>
               );
             })}
-            <div className="col-span-2 flex lg:col-span-4 lg:justify-center">
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -6 }}
-                className="card-hover card-hover-motion flex w-full items-center justify-center rounded-3xl border-2 border-dashed border-primary/30 bg-card/60 px-5 py-8 text-center sm:px-6 lg:w-[calc((100%-3rem)/4)]"
-              >
-                <p className="text-sm font-medium leading-relaxed text-foreground sm:text-base">
-                  More collector apps coming. Partners hear first.
-                </p>
-              </motion.div>
-            </div>
           </div>
         </div>
       </section>
@@ -202,7 +189,7 @@ export default function Partners({ initialCategory }: { initialCategory: string 
       <section id="apply" className="scroll-mt-24 py-16 sm:py-24">
         <div className="container-site max-w-3xl">
           <motion.div {...fadeUp} className="mb-8 text-center sm:text-left">
-            <h2 className="type-title">Apply to partner</h2>
+            <h2 className="type-title">Apply to Partner</h2>
           </motion.div>
           <div className="rounded-3xl border border-border/70 bg-card p-4 sm:p-8" style={{ boxShadow: "var(--shadow-card)" }}>
             <PartnerForm initialCategory={initialCategory} />
