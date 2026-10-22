@@ -4,7 +4,9 @@
  * service account. The first submission creates a "Partner applications" tab.
  *
  * Deploy this file as an AWS Lambda (Node.js 18 or 20). Handler: index.handler
- * Give it a public Function URL with CORS enabled.
+ * Give it a public Function URL. Set CORS on the Function URL only:
+ *   https://trackzio.com and https://www.trackzio.com, method POST, header content-type.
+ * This file does not send Access-Control-Allow-Origin. A second copy conflicts in the browser.
  * Put that URL in NEXT_PUBLIC_PARTNER_APPLICATION_ENDPOINT.
  *
  * Lambda environment variable:
@@ -35,18 +37,12 @@ const HEADERS = [
   "Notes",
 ];
 
-const CORS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "Content-Type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-};
-
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function respond(statusCode, payload) {
   return {
     statusCode,
-    headers: { ...CORS, "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   };
 }
@@ -243,7 +239,7 @@ function applicationRow(body) {
 exports.handler = async (event) => {
   const method = methodOf(event).toUpperCase();
   if (method === "OPTIONS") {
-    return { statusCode: 200, headers: CORS, body: "" };
+    return { statusCode: 200, headers: {}, body: "" };
   }
   if (method !== "POST") {
     return respond(405, { error: "Please use the application form." });
