@@ -36,9 +36,19 @@ export function middleware(request: NextRequest) {
     url.pathname = target;
     return NextResponse.redirect(url, 301);
   }
+
+  if (request.nextUrl.pathname === "/api/visitor-country") {
+    const headers = new Headers(request.headers);
+    const geo = request.geo;
+    if (geo?.country) headers.set("x-visitor-country", geo.country);
+    if (geo?.city) headers.set("x-visitor-city", geo.city);
+    if (geo?.region) headers.set("x-visitor-region", geo.region);
+    return NextResponse.next({ request: { headers } });
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)", "/api/visitor-country"],
 };

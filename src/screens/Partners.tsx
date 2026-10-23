@@ -54,7 +54,7 @@ export default function Partners({ initialCategory }: { initialCategory: string 
               href="#apply"
               className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-2xl bg-primary px-6 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 glow sm:w-auto"
             >
-              Apply to Partner
+              Become a partner
             </a>
             <p className="mt-3 text-sm text-muted-foreground">Free to list. No minimum listings.</p>
           </motion.div>
@@ -119,6 +119,16 @@ export default function Partners({ initialCategory }: { initialCategory: string 
                 </motion.article>
               );
             })}
+            <motion.article
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: NETWORK_APPS.length * 0.06 }}
+              className="flex h-full flex-col justify-center rounded-3xl border border-dashed border-primary/40 bg-transparent p-4 sm:p-6"
+            >
+              <h3 className="type-card-title text-base sm:text-lg">More collector apps coming</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">Partners hear first.</p>
+            </motion.article>
           </div>
         </div>
       </section>
@@ -189,7 +199,7 @@ export default function Partners({ initialCategory }: { initialCategory: string 
       <section id="apply" className="scroll-mt-24 py-16 sm:py-24">
         <div className="container-site max-w-3xl">
           <motion.div {...fadeUp} className="mb-8 text-center sm:text-left">
-            <h2 className="type-title">Apply to Partner</h2>
+            <h2 className="type-title">Become a partner</h2>
           </motion.div>
           <div className="rounded-3xl border border-border/70 bg-card p-4 sm:p-8" style={{ boxShadow: "var(--shadow-card)" }}>
             <PartnerForm initialCategory={initialCategory} />

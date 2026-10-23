@@ -4,7 +4,9 @@
  * service account. The first submission creates a "Partner applications" tab.
  *
  * Deploy this file as an AWS Lambda (Node.js 18 or 20). Handler: index.handler
- * Give it a public Function URL with CORS enabled.
+ * Give it a public Function URL. Set CORS on the Function URL only:
+ *   https://trackzio.com and https://www.trackzio.com, method POST, header content-type.
+ * This file does not send Access-Control-Allow-Origin. A second copy conflicts in the browser.
  * Put that URL in NEXT_PUBLIC_PARTNER_APPLICATION_ENDPOINT.
  *
  * Lambda environment variable:
@@ -35,18 +37,12 @@ const HEADERS = [
   "Notes",
 ];
 
-const CORS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "Content-Type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-};
-
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function respond(statusCode, payload) {
   return {
     statusCode,
-    headers: { ...CORS, "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   };
 }
@@ -203,13 +199,22 @@ function applicationRow(body) {
   const categories = list(body.categories);
 
   if (fullName.length < 2) errors.fullName = "Please enter your full name.";
-  if (!email || !EMAIL_PATTERN.test(email)) errors.email = "Please enter a valid email.";
+  else if (fullName.length > 60) errors.fullName = "Please enter a shorter name.";
+  if (!email) errors.email = "Please enter your email.";
+  else if (email.length > 254 || !EMAIL_PATTERN.test(email)) errors.email = "Please enter a valid email.";
   if (!phone) errors.phone = "Please enter your phone number.";
   if (!country) errors.country = "Please choose your country.";
   if (!years) errors.years = "Please choose your years of experience.";
   if (!partnerTypes) errors.partnerTypes = "Please choose how you want to partner.";
   if (!categories) errors.categories = "Please choose what you deal in.";
   if (body.consent !== true) errors.consent = "Please agree so we can contact you about this application.";
+  if (text(body.businessName).length > 100) errors.businessName = "Please enter a shorter business or page name.";
+  if (text(body.cityState).length > 80) errors.cityState = "Please enter a shorter city and state.";
+  // The form limits typing to 200 characters, then adds https:// when needed.
+  if (text(body.website).length > 220) errors.website = "Please enter a shorter link.";
+  if (text(body.specialties).length > 150) errors.specialties = "Please keep specialties to 150 characters.";
+  if (text(body.memberships).length > 150) errors.memberships = "Please keep memberships to 150 characters.";
+  if (text(body.notes).length > 500) errors.notes = "Please keep this to 500 characters.";
 
   if (Object.keys(errors).length > 0) {
     return { ok: false, errors };
@@ -240,10 +245,11 @@ function applicationRow(body) {
   };
 }
 
+exports.applicationRow = applicationRow;
 exports.handler = async (event) => {
   const method = methodOf(event).toUpperCase();
   if (method === "OPTIONS") {
-    return { statusCode: 200, headers: CORS, body: "" };
+    return { statusCode: 200, headers: {}, body: "" };
   }
   if (method !== "POST") {
     return respond(405, { error: "Please use the application form." });

@@ -156,7 +156,18 @@ export const partnerQuote: {
 } | null = null;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const NOTES_MAX = 500;
+
+export const PARTNER_FIELD_LIMITS = {
+  fullName: 60,
+  businessName: 100,
+  email: 254,
+  cityState: 80,
+  website: 200,
+  specialties: 150,
+  memberships: 150,
+  notes: 500,
+  otherDetail: 150,
+} as const;
 
 export type PartnerField =
   | "partnerTypes"
@@ -173,6 +184,9 @@ export type PartnerField =
   | "specialties"
   | "memberships"
   | "notes"
+  | "partnerTypeOther"
+  | "categoryOther"
+  | "sellTodayOther"
   | "consent";
 
 export type PartnerFieldErrors = Partial<Record<PartnerField, string>>;
@@ -193,6 +207,9 @@ export type PartnerApplicationInput = {
   memberships: string;
   sellToday: string[];
   notes: string;
+  partnerTypeOther: string;
+  categoryOther: string;
+  sellTodayOther: string;
   consent: boolean;
   /** Honeypot. Must stay empty. */
   fax?: string;
@@ -240,6 +257,18 @@ function clean(value: string): string {
   return value.replace(/\s+/g, " ").trim();
 }
 
+function otherChoice(detail: string): string {
+  return `Other: ${clean(detail)}`;
+}
+
+function checkOtherDetail(selected: boolean, detail: string, emptyMessage: string): string | undefined {
+  if (!selected) return undefined;
+  const text = clean(detail);
+  if (!text) return emptyMessage;
+  if (text.length > PARTNER_FIELD_LIMITS.otherDetail) return "Please keep this to 150 characters.";
+  return undefined;
+}
+
 function normalizeWebsite(value: string): string | null {
   const trimmed = value.trim();
   if (!trimmed) return null;
@@ -271,27 +300,53 @@ export function validatePartnerApplication(
 ): { ok: true; application: PartnerApplication } | { ok: false; errors: PartnerFieldErrors } {
   const errors: PartnerFieldErrors = {};
 
-  const partnerTypes = PARTNER_TYPES.filter((type) => input.partnerTypes.includes(type.id)).map((type) => type.label);
+  const partnerTypeOther = clean(input.partnerTypeOther);
+  const categoryOther = clean(input.categoryOther);
+  const sellTodayOther = clean(input.sellTodayOther);
+  const wantsOtherPartner = input.partnerTypes.includes("other");
+  const dealsInOther = input.categories.includes("other");
+  const sellsSomewhereElse = input.partnerTypes.includes("shop") && input.sellToday.includes("Other");
+
+  const partnerTypes = PARTNER_TYPES.filter((type) => input.partnerTypes.includes(type.id)).map((type) =>
+    type.id === "other" && partnerTypeOther ? otherChoice(partnerTypeOther) : type.label,
+  );
   if (input.partnerTypes.length === 0 || partnerTypes.length !== input.partnerTypes.length) {
     errors.partnerTypes = "Please choose how you want to partner.";
   }
+  const partnerTypeOtherError = checkOtherDetail(
+    wantsOtherPartner,
+    input.partnerTypeOther,
+    "Please tell us how you want to partner.",
+  );
+  if (partnerTypeOtherError) errors.partnerTypeOther = partnerTypeOtherError;
 
-  const categories = DEAL_OPTIONS.filter((deal) => input.categories.includes(deal.id)).map((deal) => deal.label);
+  const categories = DEAL_OPTIONS.filter((deal) => input.categories.includes(deal.id)).map((deal) =>
+    deal.id === "other" && categoryOther ? otherChoice(categoryOther) : deal.label,
+  );
   if (input.categories.length === 0 || categories.length !== input.categories.length) {
     errors.categories = "Please choose what you deal in.";
   }
+  const categoryOtherError = checkOtherDetail(dealsInOther, input.categoryOther, "Please tell us what else you deal in.");
+  if (categoryOtherError) errors.categoryOther = categoryOtherError;
+
+  const sellTodayOtherError = checkOtherDetail(
+    sellsSomewhereElse,
+    input.sellTodayOther,
+    "Please tell us where else you sell.",
+  );
+  if (sellTodayOtherError) errors.sellTodayOther = sellTodayOtherError;
 
   const fullName = clean(input.fullName);
   if (fullName.length < 2) {
     errors.fullName = "Please enter your full name.";
-  } else if (fullName.length > 100) {
+  } else if (fullName.length > PARTNER_FIELD_LIMITS.fullName) {
     errors.fullName = "Please enter a shorter name.";
   }
 
   const email = input.email.trim().toLowerCase();
   if (!email) {
     errors.email = "Please enter your email.";
-  } else if (email.length > 254 || !EMAIL_PATTERN.test(email)) {
+  } else if (email.length > PARTNER_FIELD_LIMITS.email || !EMAIL_PATTERN.test(email)) {
     errors.email = "Please enter a valid email.";
   }
 
@@ -314,7 +369,9 @@ export function validatePartnerApplication(
 
   const websiteRaw = input.website.trim();
   const website = websiteRaw ? normalizeWebsite(websiteRaw) : null;
-  if (websiteRaw && !website) {
+  if (websiteRaw.length > PARTNER_FIELD_LIMITS.website) {
+    errors.website = "Please enter a shorter link.";
+  } else if (websiteRaw && !website) {
     errors.website = "Please enter a valid link.";
   }
 
@@ -323,27 +380,27 @@ export function validatePartnerApplication(
   }
 
   const businessName = clean(input.businessName);
-  if (businessName.length > 150) {
+  if (businessName.length > PARTNER_FIELD_LIMITS.businessName) {
     errors.businessName = "Please enter a shorter business or page name.";
   }
 
   const cityState = clean(input.cityState);
-  if (cityState.length > 120) {
+  if (cityState.length > PARTNER_FIELD_LIMITS.cityState) {
     errors.cityState = "Please enter a shorter city and state.";
   }
 
   const specialties = clean(input.specialties);
-  if (specialties.length > 300) {
-    errors.specialties = "Please keep specialties to 300 characters.";
+  if (specialties.length > PARTNER_FIELD_LIMITS.specialties) {
+    errors.specialties = "Please keep specialties to 150 characters.";
   }
 
   const memberships = clean(input.memberships);
-  if (memberships.length > 300) {
-    errors.memberships = "Please keep memberships to 300 characters.";
+  if (memberships.length > PARTNER_FIELD_LIMITS.memberships) {
+    errors.memberships = "Please keep memberships to 150 characters.";
   }
 
   const notes = input.notes.trim();
-  if (notes.length > NOTES_MAX) {
+  if (notes.length > PARTNER_FIELD_LIMITS.notes) {
     errors.notes = "Please keep this to 500 characters.";
   }
 
@@ -362,7 +419,9 @@ export function validatePartnerApplication(
 
   const isShop = input.partnerTypes.includes("shop");
   const sellToday = isShop
-    ? SELL_TODAY_OPTIONS.filter((option) => input.sellToday.includes(option))
+    ? SELL_TODAY_OPTIONS.filter((option) => input.sellToday.includes(option)).map((option) =>
+        option === "Other" && sellTodayOther ? otherChoice(sellTodayOther) : option,
+      )
     : [];
 
   const nameParts = fullName.split(" ");
@@ -394,3 +453,6 @@ export function validatePartnerApplication(
 export function thanksMessage(firstName: string): string {
   return `Thanks, ${firstName}. We've got your application and will reply within 2-5 business days.`;
 }
+
+export const PARTNER_SENT_TOAST = "Application sent. We'll reply within 2 business days.";
+export const PARTNER_SEND_FAILED_TOAST = "Couldn't send. Please try again.";
