@@ -34,6 +34,9 @@ function toInput(body: unknown): PartnerApplicationInput {
     memberships: asString(record.memberships),
     sellToday: asStringArray(record.sellToday),
     notes: asString(record.notes),
+    partnerTypeOther: asString(record.partnerTypeOther),
+    categoryOther: asString(record.categoryOther),
+    sellTodayOther: asString(record.sellTodayOther),
     consent: record.consent === true,
     fax: asString(record.fax),
   };

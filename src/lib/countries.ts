@@ -221,6 +221,17 @@ export function getCountryByName(name: string): Country | null {
   return BY_NAME.get(name) ?? null;
 }
 
+/** Match a typed search against the country name, ISO code, or calling code. */
+export function matchesPhoneCountry(country: Country, raw: string): boolean {
+  const query = raw.trim().toLowerCase().replace(/^\+/, "");
+  if (!query) return true;
+  return (
+    country.name.toLowerCase().includes(query) ||
+    country.code.toLowerCase().startsWith(query) ||
+    country.dial.startsWith(query)
+  );
+}
+
 const TIMEZONE_COUNTRY: Record<string, string> = {
   "Asia/Kolkata": "IN",
   "Asia/Calcutta": "IN",
