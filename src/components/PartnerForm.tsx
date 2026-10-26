@@ -516,6 +516,7 @@ export default function PartnerForm({ initialCategory }: { initialCategory: stri
     setSubmitError(null);
     if (form.fax?.trim()) {
       setFirstName(firstNameFrom(form.fullName) || "there");
+      window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
     const result = validatePartnerApplication(form);
@@ -536,6 +537,7 @@ export default function PartnerForm({ initialCategory }: { initialCategory: stri
     const application = result.application;
     submittingRef.current = true;
     setIsSubmitting(true);
+    let sent = false;
     try {
       const response = await fetch(PARTNER_API_URL, {
         method: "POST",
@@ -582,6 +584,7 @@ export default function PartnerForm({ initialCategory }: { initialCategory: stri
       });
       toast.success(PARTNER_SENT_TOAST);
       setFirstName(body.firstName || result.application.firstName);
+      sent = true;
     } catch {
       setSubmitError(PARTNER_SEND_FAILED_TOAST);
       toast.error(PARTNER_SEND_FAILED_TOAST);
@@ -590,6 +593,7 @@ export default function PartnerForm({ initialCategory }: { initialCategory: stri
       submittingRef.current = false;
       setIsSubmitting(false);
     }
+    if (sent) window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   if (firstName) {

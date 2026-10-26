@@ -16,6 +16,19 @@ function getScrollStep(el: HTMLElement): number {
   return first.offsetWidth + gap;
 }
 
+function visibleReviewDots(count: number, active: number) {
+  const size = 7;
+  if (count <= size) {
+    return Array.from({ length: count }, (_, index) => ({ index, more: false }));
+  }
+  const start = Math.max(0, Math.min(active - 3, count - size));
+  return Array.from({ length: size }, (_, offset) => {
+    const index = start + offset;
+    const more = (offset === 0 && start > 0) || (offset === size - 1 && start + size < count);
+    return { index, more };
+  });
+}
+
 function getActiveSlideIndex(el: HTMLElement, count: number): number {
   if (count <= 1) return 0;
   const maxScroll = el.scrollWidth - el.clientWidth;
@@ -106,6 +119,8 @@ export default function Home() {
     el.scrollTo({ left: 0 });
     updateFromScroll();
     el.addEventListener('scroll', onScroll, { passive: true });
+    const resizeObserver = new ResizeObserver(() => updateFromScroll());
+    resizeObserver.observe(el);
 
     // Auto-scroll
     const startAutoScroll = () => {
@@ -132,6 +147,7 @@ export default function Home() {
     window.addEventListener('resize', onResize);
 
     return () => {
+      resizeObserver.disconnect();
       el.removeEventListener('scroll', onScroll);
       el.removeEventListener('mouseenter', pause);
       el.removeEventListener('mouseleave', resume);
@@ -256,7 +272,7 @@ export default function Home() {
       </section>
 
       {/* ── Section 4: Testimonials — Tinted background ── */}
-      <section className="min-h-0 sm:min-h-screen flex items-center py-16 sm:py-24 lg:py-32 snap-start bg-section-tinted">
+      <section className="scroll-mt-20 py-16 sm:py-24 lg:py-32 snap-start bg-section-tinted">
         <div className="container-site w-full">
           <motion.div {...fadeUp} className="text-center mb-10 sm:mb-14 md:mb-16 max-w-2xl mx-auto px-1">
             <p className="type-kicker">What People Say</p>
@@ -272,7 +288,7 @@ export default function Home() {
                 className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors ${
                   selectedAppId === "all"
                     ? "bg-primary text-primary-foreground"
-                    : "bg-card text-muted-foreground hover:text-foreground border border-border"
+                    : "bg-card text-foreground hover:border-primary/40 border border-border shadow-sm"
                 }`}
               >
                 All
@@ -287,7 +303,7 @@ export default function Home() {
                     aria-selected={selected}
                     onClick={() => setSelectedAppId(app.id)}
                     className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors border ${
-                      selected ? "text-white border-transparent" : "bg-card text-muted-foreground hover:text-foreground border-border"
+                      selected ? "text-white border-transparent shadow-sm" : "bg-card text-foreground hover:border-primary/40 border-border shadow-sm"
                     }`}
                     style={selected ? { backgroundColor: `hsl(${app.accentHsl})` } : undefined}
                   >
@@ -299,23 +315,25 @@ export default function Home() {
           </motion.div>
 
           <div className="relative px-1 sm:px-0 max-w-7xl mx-auto min-w-0">
-            {testimonials.length > 1 && canScrollLeft && (
+            {testimonials.length > 1 && (
               <button
                 type="button"
                 aria-label="Previous testimonials"
                 onClick={() => scrollCarousel('left')}
-                className="absolute left-0 sm:left-0 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-border bg-card/95 text-muted-foreground shadow-md backdrop-blur-sm transition-colors hover:text-foreground hover:bg-card lg:-left-2"
+                disabled={!canScrollLeft}
+                className="absolute left-1 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-md transition-colors hover:bg-card disabled:pointer-events-none disabled:opacity-40 sm:left-0 sm:h-10 sm:w-10"
                 style={{ boxShadow: 'var(--shadow-card)' }}
               >
                 <ChevronLeft className="h-5 w-5 shrink-0" />
               </button>
             )}
-            {testimonials.length > 1 && canScrollRight && (
+            {testimonials.length > 1 && (
               <button
                 type="button"
                 aria-label="Next testimonials"
                 onClick={() => scrollCarousel('right')}
-                className="absolute right-0 sm:right-0 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-border bg-card/95 text-muted-foreground shadow-md backdrop-blur-sm transition-colors hover:text-foreground hover:bg-card lg:-right-2"
+                disabled={!canScrollRight}
+                className="absolute right-1 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-md transition-colors hover:bg-card disabled:pointer-events-none disabled:opacity-40 sm:right-0 sm:h-10 sm:w-10"
                 style={{ boxShadow: 'var(--shadow-card)' }}
               >
                 <ChevronRight className="h-5 w-5 shrink-0" />
@@ -359,32 +377,35 @@ export default function Home() {
             </div>
 
             {testimonials.length > 1 && (
-              <div className="mt-4 w-full max-w-md mx-auto shrink-0 px-3 space-y-3">
-                <div className="h-1.5 rounded-full bg-muted overflow-hidden" aria-hidden="true">
+              <div className="mt-5 flex flex-col items-center gap-3">
+                <div className="h-1 w-40 overflow-hidden rounded-full bg-foreground/15 sm:w-56" aria-hidden="true">
                   <div
-                    className="h-full rounded-full transition-[width] duration-150 ease-out"
-                    style={{
-                      width: `${Math.round(scrollProgress * 100)}%`,
-                      backgroundColor: 'hsl(var(--primary))',
-                    }}
+                    className="h-full rounded-full bg-primary transition-[width] duration-150 ease-out"
+                    style={{ width: `${Math.round(scrollProgress * 100)}%` }}
                   />
                 </div>
-                <div className="flex flex-wrap justify-center gap-2" role="tablist" aria-label="Testimonial slides">
-                  {testimonials.map((t, i) => (
-                    <button
-                      key={`dot-${t.author}-${i}`}
-                      type="button"
-                      role="tab"
-                      aria-selected={activeIndex === i}
-                      aria-label={`Go to ${t.appName} review from ${t.author}`}
-                      onClick={() => goToSlide(i)}
-                      className="h-2.5 w-2.5 rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                      style={{
-                        backgroundColor: activeIndex === i ? 'hsl(var(--primary))' : 'hsl(var(--muted))',
-                        transform: activeIndex === i ? 'scale(1.25)' : 'scale(1)',
-                      }}
-                    />
-                  ))}
+                <div className="flex items-center justify-center" role="tablist" aria-label="Testimonial slides">
+                  {visibleReviewDots(testimonials.length, activeIndex).map(({ index, more }) => {
+                    const review = testimonials[index];
+                    const selected = activeIndex === index;
+                    return (
+                      <button
+                        key={`dot-${review.author}-${index}`}
+                        type="button"
+                        role="tab"
+                        aria-selected={selected}
+                        aria-label={`Go to ${review.appName} review from ${review.author}`}
+                        onClick={() => goToSlide(index)}
+                        className="flex h-6 w-6 items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                      >
+                        <span
+                          className={`rounded-full transition-all duration-200 ${
+                            selected ? "h-2 w-5 bg-primary" : more ? "h-1.5 w-1.5 bg-foreground/25" : "h-2 w-2 bg-foreground/35"
+                          }`}
+                        />
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             )}

@@ -56,7 +56,6 @@ export default function Partners({ initialCategory }: { initialCategory: string 
             >
               Become a partner
             </a>
-            <p className="mt-3 text-sm text-muted-foreground">Free to list. No minimum listings.</p>
           </motion.div>
         </div>
       </section>
