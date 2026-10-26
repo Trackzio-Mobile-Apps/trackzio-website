@@ -56,7 +56,6 @@ export default function Partners({ initialCategory }: { initialCategory: string 
             >
               Become a partner
             </a>
-            <p className="mt-3 text-sm text-muted-foreground">Free to list. No minimum listings.</p>
           </motion.div>
         </div>
       </section>
@@ -119,16 +118,6 @@ export default function Partners({ initialCategory }: { initialCategory: string 
                 </motion.article>
               );
             })}
-            <motion.article
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: NETWORK_APPS.length * 0.06 }}
-              className="flex h-full flex-col justify-center rounded-3xl border border-dashed border-primary/40 bg-transparent p-4 sm:p-6"
-            >
-              <h3 className="type-card-title text-base sm:text-lg">More collector apps coming</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">Partners hear first.</p>
-            </motion.article>
           </div>
         </div>
       </section>

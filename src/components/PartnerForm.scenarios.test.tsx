@@ -208,7 +208,7 @@ describe("partner form scenarios", () => {
     fireEvent.click(screen.getByRole("checkbox", { name: /I agree/ }));
     fireEvent.click(screen.getByRole("button", { name: "Send application" }));
 
-    expect(await screen.findByText("Thanks, Anita. We've got your application and will reply within 2 business days.")).toBeInTheDocument();
+    expect(await screen.findByText("Thanks, Anita. We've got your application and will reply within 2-5 business days.")).toBeInTheDocument();
     expect(toast.success).toHaveBeenCalledWith("Application sent. We'll reply within 2 business days.");
     expect(screen.queryByLabelText(/Full name/)).not.toBeInTheDocument();
 
