@@ -209,7 +209,7 @@ describe("partner form scenarios", () => {
     fireEvent.click(screen.getByRole("button", { name: "Send application" }));
 
     expect(await screen.findByText("Thanks, Anita. We've got your application and will reply within 2-5 business days.")).toBeInTheDocument();
-    expect(toast.success).toHaveBeenCalledWith("Application sent. We'll reply within 2 business days.");
+    expect(toast.success).toHaveBeenCalledWith("Application sent. We'll reply within 2-5 business days.");
     expect(screen.queryByLabelText(/Full name/)).not.toBeInTheDocument();
 
     const submitCall = vi.mocked(fetch).mock.calls.find((call) => call[0] === "https://partner.example/apply");
