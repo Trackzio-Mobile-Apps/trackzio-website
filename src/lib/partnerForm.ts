@@ -454,5 +454,5 @@ export function thanksMessage(firstName: string): string {
   return `Thanks, ${firstName}. We've got your application and will reply within 2-5 business days.`;
 }
 
-export const PARTNER_SENT_TOAST = "Application sent. We'll reply within 2 business days.";
+export const PARTNER_SENT_TOAST = "Application sent. We'll reply within 2-5 business days.";
 export const PARTNER_SEND_FAILED_TOAST = "Couldn't send. Please try again.";
