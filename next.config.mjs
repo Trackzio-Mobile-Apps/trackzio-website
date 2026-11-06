@@ -41,6 +41,7 @@ const nextConfig = {
 
   async redirects() {
     return [
+      { source: "/webapp/coinzy", destination: "http://coinzyai.com/", permanent: true },
       { source: "/apps", destination: "/#apps", permanent: false },
       { source: "/apps/banknote-ai", destination: "/apps/banknotes", permanent: true },
       { source: "/apps/habit-eazy", destination: "/apps/habiteazy", permanent: true },
